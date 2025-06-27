@@ -11,6 +11,7 @@ import {
   TemplateRef,
   untracked,
 } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { OverlaySizeConfig } from '@angular/cdk/overlay';
 import { distinctUntilChanged, map, merge, of, switchMap } from 'rxjs';
@@ -23,7 +24,6 @@ import {
   X_POPOVER_POSITION_OPTIONS,
   X_POPOVER_PROVIDERS,
 } from './providers';
-import { isPlatformServer } from '@angular/common';
 
 @Directive({
   selector: '[x-popover]:not(ng-template)',
@@ -49,7 +49,8 @@ export class XPopover {
   readonly position = input(this.#position.position, { alias: 'x-popover-position' });
   readonly align = input(this.#position.align, { alias: 'x-popover-align' });
   readonly offset = input(this.#position.offset, { alias: 'x-popover-offset' });
-  readonly width = input(this.#opt.width, { alias: 'x-popover-width' });
+  readonly fixed = input(this.#position.fixed, { alias: 'x-popover-fixed' });
+  readonly stretch = input(this.#opt.stretch, { alias: 'x-popover-stretch' });
   readonly minWidth = input(this.#opt.minWidth, { alias: 'x-popover-min-width' });
   readonly maxWidth = input(this.#opt.minWidth, { alias: 'x-popover-max-width' });
   readonly minHeight = input(this.#opt.minHeight, { alias: 'x-popover-min-height' });
@@ -58,12 +59,12 @@ export class XPopover {
   readonly content = computed(() => this.inputContent() || this.childContent());
   readonly open = toSignal(this.#overlay.openChanges, { requireSync: true });
 
-  readonly #manualHandler$ = toObservable(this.manual);
+  readonly #manual$ = toObservable(this.manual);
 
   readonly rules = toSignal(
-    toObservable(this.width).pipe(
+    toObservable(this.stretch).pipe(
       switchMap(width =>
-        width === 'inherit'
+        width === 'fit'
           ? fromResizeObserver(this.#el).pipe(
               map(() => ({
                 width: this.#el.offsetWidth,
@@ -113,7 +114,7 @@ export class XPopover {
       });
     });
 
-    merge(this.#manualHandler$, this.#close$)
+    merge(this.#manual$, this.#close$)
       .pipe(distinctUntilChanged(), takeUntilDestroyed())
       .subscribe(open => this.toggle(open));
   }

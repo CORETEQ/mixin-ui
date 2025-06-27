@@ -1,9 +1,9 @@
 import { InjectionToken } from '@angular/core';
 
-export type XPopoverWidth = 'auto' | 'inherit';
+export type XPopoverStretch = 'auto' | 'fit';
 
 export interface XPopoverOptions {
-  readonly width: XPopoverWidth;
+  readonly stretch: XPopoverStretch;
   readonly minWidth?: number;
   readonly maxWidth?: number;
   readonly minHeight?: number;
@@ -12,7 +12,7 @@ export interface XPopoverOptions {
 }
 
 const defaultOptions: XPopoverOptions = {
-  width: 'inherit',
+  stretch: 'fit',
   maxHeight: 360,
 };
 

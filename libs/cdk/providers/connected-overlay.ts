@@ -40,7 +40,7 @@ export interface XConnectedOverlayPosition {
   readonly position: XOverlayPosition;
   readonly align: XOverlayAlign;
   readonly offset: number;
-  readonly fixedPosition: boolean;
+  readonly fixed: boolean;
 }
 
 export interface XConnectedOverlayOptions extends XConnectedOverlayPosition {
@@ -52,7 +52,7 @@ const defaultOptions: XConnectedOverlayOptions = {
   position: 'bottom',
   align: 'start',
   offset: 4,
-  fixedPosition: false,
+  fixed: false,
   hasBackdrop: false,
 };
 
@@ -155,7 +155,7 @@ export class XConnectedOverlay {
         .withFlexibleDimensions(false)
         .withPush(false)
         .withViewportMargin(opt.offset)
-        .withLockedPosition(opt.fixedPosition)
+        .withLockedPosition(opt.fixed)
         .withPositions(mapPositions(opt)),
     });
   }
@@ -222,7 +222,7 @@ function mapPositions({
   position,
   align,
   offset,
-  fixedPosition,
+  fixed,
 }: XConnectedOverlayPosition): ConnectedPosition[] {
   if (direction === 'horizontal' && (position === 'top' || position === 'bottom')) {
     console.warn(
@@ -240,7 +240,7 @@ function mapPositions({
 
   positions.push(createPosition(position, align, offset));
 
-  if (fixedPosition) {
+  if (fixed) {
     return positions;
   }
 

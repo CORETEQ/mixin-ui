@@ -32,7 +32,7 @@ import { X_LISTBOX_ACCESSOR, XListboxAccessor } from '@mixin-ui/kit/components/l
       directive: XPopover,
       inputs: [
         'x-popover-open: open',
-        'x-popover-width: popoverWidth',
+        'x-popover-stretch: popoverWidth',
         'x-popover-min-width: popoverMinWidth',
         'x-popover-max-width: popoverMaxWidth',
       ],

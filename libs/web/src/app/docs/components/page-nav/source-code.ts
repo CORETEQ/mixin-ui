@@ -23,7 +23,7 @@ import { XIcon } from '@mixin-ui/kit';
 })
 export class SourceCode {
   readonly #router = inject(Router);
-  readonly #pagesUrl = 'https://github.com/vs-borodin/test/tree/main/libs/kit';
+  readonly #pagesUrl = 'https://github.com/CORETEQ/mixin-ui/tree/main/libs/kit';
 
   readonly href = toSignal(
     fromRouterEvent(NavigationEnd).pipe(

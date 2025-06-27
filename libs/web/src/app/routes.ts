@@ -9,6 +9,11 @@ export const ROUTES: Route[] = [
     redirectTo: 'installation',
   },
   {
+    path: 'components',
+    pathMatch: 'full',
+    redirectTo: 'components/accordion',
+  },
+  {
     path: '',
     component: DocsLayout,
     data: { root: true },

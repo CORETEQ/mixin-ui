@@ -56,11 +56,6 @@
 
   <h3>Direction</h3>
   <p>
-    <!--    The <code>x-popover-direction</code> parameter determines in which directions the system can search for a place for-->
-    <!--    the popover.-->
-    <!--    This only takes effect if <code>x-popover-lock-position</code> is set to false. In that case, the system will-->
-    <!--    attempt to find the-->
-    <!--    most suitable placement based on available space.-->
     The <code>x-popover-direction</code> parameter specifies the axis along which the popover may be repositioned if it
     cannot fit on its preferred side. Possible values are:
   </p>
@@ -72,7 +67,7 @@
   </ul>
 
   <p>
-    To lock the popover in place and disable any repositioning, set <code>x-popover-lock-position</code> to true.
+    To lock the popover in place and disable any repositioning, set <code>x-popover-fixed</code> to true.
   </p>
 
   <docs-snippet>
@@ -154,7 +149,8 @@
     <docs-input name="x-popover-position" type="enum" default="bottom" />
     <docs-input name="x-popover-align" type="enum" default="start" />
     <docs-input name="x-popover-offset" type="number" default="4" />
-    <docs-input name="x-popover-width" type="enum" default="inherit" />
+    <docs-input name="x-popover-fixed" type="boolean" default="false" />
+    <docs-input name="x-popover-stretch" type="enum" default="fit" />
     <docs-input name="x-popover-min-width" type="number" />
     <docs-input name="x-popover-max-width" type="number" />
     <docs-input name="x-popover-min-height" type="number" />
