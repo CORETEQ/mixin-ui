@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { filter, fromEvent, map, of, switchMap } from 'rxjs';
-import { eventSelf } from '@mixin-ui/cdk';
 import { X_SLOT } from '@mixin-ui/kit/directives';
 
 @Component({
@@ -35,13 +34,12 @@ export class XCollapsible {
   readonly open = input(false, { transform: booleanAttribute });
   readonly shown = toSignal(
     toObservable(this.open).pipe(
-      switchMap(value =>
-        value
-          ? of(value)
+      switchMap(open =>
+        open
+          ? of(true)
           : fromEvent<TransitionEvent>(this.#el, 'transitionend').pipe(
-              eventSelf(),
-              filter(e => e.propertyName === 'grid-template-rows'),
-              map(() => value)
+              filter(e => e.target === e.currentTarget && e.propertyName === 'grid-template-rows'),
+              map(() => false)
             )
       )
     )
