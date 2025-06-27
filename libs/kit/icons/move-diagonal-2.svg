@@ -5,11 +5,11 @@
   viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"
-  stroke-width="2"
+  stroke-width="1.5"
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M19 13v6h-6" />
-  <path d="M5 11V5h6" />
-  <path d="m5 5 14 14" />
+  <path d="M19 13v6h-6"  vector-effect="non-scaling-stroke"/>
+  <path d="M5 11V5h6"  vector-effect="non-scaling-stroke"/>
+  <path d="m5 5 14 14"  vector-effect="non-scaling-stroke"/>
 </svg>
