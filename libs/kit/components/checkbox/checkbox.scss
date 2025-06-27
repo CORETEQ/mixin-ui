@@ -1,0 +1,171 @@
+// options
+@mixin size($size) {
+  &:where(.x-size-#{$size}) {
+    @content;
+  }
+}
+
+@mixin radius($radius) {
+  &:where(.x-radius-#{$radius}) {
+    @content;
+  }
+}
+
+// states
+@mixin hover {
+  @media (hover: hover) {
+    &:where(:hover:not(:disabled)) {
+      @content;
+    }
+  }
+}
+
+@mixin active {
+  &:where(:active:not(:disabled)) {
+    @content;
+  }
+}
+
+@mixin checked {
+  &:where(.x-checked, .x-indeterminate) {
+    @content;
+  }
+}
+
+@mixin disabled {
+  &:where(:disabled) {
+    @content;
+  }
+}
+
+@mixin focus-visible {
+  &:where(:focus-visible) {
+    @content;
+  }
+}
+
+@mixin invalid {
+  &:where(.ng-invalid.ng-touched) {
+    @content;
+  }
+}
+
+.x-checkbox {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  inline-size: var(--x-size);
+  block-size: var(--x-size);
+  color: transparent;
+  background-color: var(--x-bg, var(--x-white));
+  outline: 1.5px solid transparent;
+  outline-offset: 1.5px;
+  box-shadow: inset 0 0 0 1px var(--x-gray-400), rgb(27 31 35 / 4%) 0 1px 0;
+  border-radius: var(--x-radius);
+  transition-timing-function: ease-in-out;
+  transition-duration: 100ms;
+  transition-property: background-color, color, opacity, box-shadow;
+  cursor: pointer;
+
+  // states
+  @include hover {
+    background-color: var(--x-gray-100);
+    box-shadow: inset 0 0 0 1px var(--x-gray-500);
+  }
+
+  @include active {
+    background-color: var(--x-gray-200);
+  }
+
+  @include invalid {
+    background-color: var(--x-red-200);
+    box-shadow: inset 0 0 0 1px var(--x-red-600);
+  }
+
+  @include disabled {
+    background-color: var(--x-gray-200);
+    box-shadow: inset 0 0 0 1px var(--x-gray-400);
+    cursor: var(--x-cursor-disabled);
+  }
+
+  @include checked {
+    color: var(--x-white);
+    background-color: var(--x-accent-600);
+    box-shadow: inset 0 0 0 1px var(--x-accent-600);
+
+    @include active {
+      background-color: var(--x-accent-700);
+      box-shadow: inset 0 0 0 1px var(--x-accent-700);
+    }
+
+    @include invalid {
+      background-color: var(--x-red-700);
+      box-shadow: inset 0 0 0 1px var(--x-red-700);
+    }
+
+    @include disabled {
+      opacity: 0.6;
+    }
+
+    .x-checkbox-icon {
+      --x-icon-color: var(--x-white);
+
+      transform: scale(1);
+    }
+  }
+
+  @include focus-visible {
+    outline-color: var(--x-accent-500);
+  }
+
+  // sizes
+  @include size(sm) {
+    --x-size: 1rem;
+    --x-icon-size: 0.875rem;
+  }
+
+  @include size(md) {
+    --x-size: 1.25rem;
+    --x-icon-size: 1rem;
+  }
+
+  @include size(lg) {
+    --x-size: 1.5rem;
+    --x-icon-size: 1.125rem;
+  }
+
+  // radii
+  @include radius(none) {
+    --x-radius: var(--x-radius-none);
+  }
+
+  @include radius(sm) {
+    --x-radius: var(--x-radius-sm);
+  }
+
+  @include radius(md) {
+    --x-radius: var(--x-radius-md);
+  }
+
+  @include radius(lg) {
+    --x-radius: var(--x-radius-lg);
+  }
+
+  @include radius(full) {
+    --x-radius: var(--x-radius-full);
+  }
+}
+
+.x-checkbox-icon {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  inline-size: 100%;
+  block-size: 100%;
+  transform: scale(0);
+  transition: transform 150ms ease-in-out;
+}

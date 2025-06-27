@@ -1,0 +1,21 @@
+name: 'Install'
+description: 'Sets up Node.js and runs install'
+
+runs:
+  using: composite
+  steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9.12.0
+
+    - name: Use Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        registry-url: 'https://registry.npmjs.org'
+        node-version: 20
+        cache: 'pnpm'
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install

@@ -1,0 +1,50 @@
+.docs-code {
+  display: block;
+  inline-size: 100%;
+  padding: 0.75rem 0;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #E2E2E2;
+  border-radius: 0.625rem;
+
+  pre {
+    background: transparent !important;
+  }
+
+  code {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--docs-code-font-family), monospace;
+    font-size: 14px;
+
+    .line {
+      display: block;
+      height: 22px;
+      padding: 0 1.125rem;
+      line-height: 22px;
+    }
+  }
+
+  &.with-numbers {
+    pre {
+      counter-reset: codeblock-line;
+
+      .line {
+        counter-increment: codeblock-line;
+
+        &::before {
+          display: inline-block;
+          inline-size: 1rem;
+          margin-left: -0.125rem;
+          color: #B8B8B8;
+          text-align: end;
+          content: counter(codeblock-line);
+        }
+
+        > span:first-child {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+}

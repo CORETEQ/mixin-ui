@@ -1,0 +1,23 @@
+<ng-content select="input[x-control]" />
+<ng-content />
+
+@if (step(); as step) {
+  <x-group class="x-input-suffix x-number-spin-buttons">
+    <button x-icon-btn
+            tabindex="-1"
+            [size]="size()"
+            [disabled]="minusDisabled()"
+            (pointerdown)="onSpin($event)"
+            (click)="minus(step)">
+      <x-icon [src]="decrementIcon()" />
+    </button>
+    <button x-icon-btn
+            tabindex="-1"
+            [size]="size()"
+            [disabled]="plusDisabled()"
+            (pointerdown)="onSpin($event)"
+            (click)="plus(step)">
+      <x-icon [src]="incrementIcon()" />
+    </button>
+  </x-group>
+}

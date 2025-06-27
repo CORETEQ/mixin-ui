@@ -1,0 +1,15 @@
+.x-collapsible {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 250ms ease-in-out 1ms, opacity 250ms ease-in-out 1ms;
+
+  &.x-opened {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+}
+
+.x-collapsible-content {
+  overflow: hidden;
+}

@@ -1,0 +1,53 @@
+name: '🐞 Bug report'
+description: 'Describe the issue to help us improve'
+labels: [bug]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue! Please fill out the details below to help us resolve it more quickly.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A brief description of the issue.
+    validations:
+      required: true
+
+  - type: input
+    id: onyx-version
+    attributes:
+      label: Onyx UI version
+      placeholder: 0.x.x
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      description: Select the browser where the issue occurred.
+      options:
+        - Google Chrome
+        - Mozilla Firefox
+        - Microsoft Edge
+        - Safari
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: operating_system
+    attributes:
+      label: Operating system
+      description: Select the operating system where the issue occurred.
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - iOS
+        - Android
+    validations:
+      required: true

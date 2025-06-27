@@ -1,0 +1,8 @@
+@if (shown()) {
+  <div class="x-collapsible-content">
+    @if (slot(); as lazy) {
+      <ng-container *ngTemplateOutlet="lazy" />
+    }
+    <ng-content />
+  </div>
+}

@@ -1,0 +1,27 @@
+// options
+@mixin radius($radius) {
+  &:where(.x-radius-#{$radius}) {
+    @content;
+  }
+}
+
+.x-accordion {
+  display: inline-flex;
+  flex-direction: column;
+
+  @include radius(sm) {
+    --x-radius: var(--x-radius-sm);
+  }
+
+  @include radius(md) {
+    --x-radius: var(--x-radius-md);
+  }
+
+  @include radius(lg) {
+    --x-radius: var(--x-radius-lg);
+  }
+
+  @include radius(none) {
+    --x-radius: var(--x-radius-none);
+  }
+}

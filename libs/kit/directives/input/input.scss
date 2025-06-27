@@ -1,0 +1,325 @@
+// options
+@mixin variant($size) {
+  &:where(.x-variant-#{$size}) {
+    @content;
+  }
+}
+
+@mixin size($size) {
+  &:where(.x-size-#{$size}) {
+    @content;
+  }
+}
+
+@mixin radius($radius) {
+  &:where(.x-radius-#{$radius}) {
+    @content;
+  }
+}
+
+// states
+@mixin hover {
+  @media (hover: hover) {
+    &:where(:hover) {
+      @content;
+    }
+  }
+}
+
+@mixin focus {
+  &:where(.x-focused, .x-overlay-opened) {
+    @content;
+  }
+}
+
+@mixin readonly {
+  &:where(.x-readonly, :has(> input:read-only)) {
+    @content;
+  }
+}
+
+@mixin disabled {
+  &:where(.x-disabled, :has(> input:disabled), :has(> select:disabled)) {
+    @content;
+  }
+}
+
+@mixin invalid {
+  &:where(.x-invalid) {
+    @content;
+  }
+}
+
+%placeholder {
+  color: var(--x-placeholder-color);
+  opacity: 1;
+  user-select: none;
+}
+
+@mixin reset {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  text-transform: inherit;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  appearance: none;
+  transition: none;
+  cursor: inherit;
+  -webkit-tap-highlight-color: transparent;
+
+  &::placeholder {
+    @extend %placeholder;
+  }
+
+  &::selection {
+    background: var(--x-selection-color);
+  }
+
+  /* stylelint-disable-next-line */
+  &::-moz-selection {
+    background: var(--x-selection-color);
+  }
+
+  // Firefox
+  &:invalid {
+    box-shadow: none;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: inherit !important;
+    transition: background-color 600000s 0s;
+  }
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+}
+
+.x-input {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: var(--x-block-size);
+  padding: 0 var(--x-padding);
+  color: var(--x-text-color);
+  background-color: var(--x-bg-color);
+  outline: none;
+  border-radius: var(--x-radius);
+  cursor: text;
+
+  &::before {
+    position: absolute;
+    z-index: 1;
+    inset: 0;
+    box-shadow: inset 0 0 0 var(--x-border-width, 1px) var(--x-border-color);
+    border-radius: inherit;
+    transition-timing-function: ease-in-out;
+    transition-duration: 100ms;
+    transition-property: box-shadow;
+    content: '';
+    pointer-events: none;
+  }
+
+  @include variant(outline) {
+    --x-text-color: var(--x-gray-950);
+    --x-bg-color: var(--x-white);
+    --x-border-color: oklch(87% .006 286.286deg);
+    --x-placeholder-color: var(--x-gray-500);
+    --x-spinner-color: var(--x-accent-600);
+    --x-autofill-color: var(--x-accent-100);
+    --x-selection-color: var(--x-accent-200);
+    --x-icon-color: var(--x-gray-600);
+
+    transition-timing-function: ease-in-out;
+    transition-duration: 150ms;
+    transition-property: background-color;
+
+    @include focus {
+      --x-border-color: var(--x-accent-500);
+      --x-border-width: 1.5px;
+    }
+
+    @include invalid {
+      --x-border-color: oklch(64% .237 25.331deg);
+      --x-selection-color: var(--x-red-200);
+
+      @include focus {
+        --x-bg-color: var(--x-white);
+        --x-border-color: oklch(64% .237 25.331deg);
+        --x-border-width: 1.5px;
+      }
+    }
+
+    @include readonly {
+      --x-bg-color: var(--x-gray-50);
+    }
+
+    @include disabled {
+      opacity: 0.6;
+      cursor: var(--x-cursor-disabled);
+    }
+  }
+
+  // sizes
+  @include size(md) {
+    --x-block-size: var(--x-size-md);
+    --x-padding: 0.5rem;
+    --x-icon-size: 1rem;
+
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  @include size(lg) {
+    --x-block-size: var(--x-size-lg);
+    --x-padding: 0.625rem;
+
+    font-size: 0.935rem;
+    line-height: 1.25rem;
+  }
+
+  @include size(xl) {
+    --x-block-size: var(--x-size-xl);
+    --x-padding: 0.75rem;
+
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  // radii
+  @include radius(none) {
+    --x-radius: var(--x-radius-none);
+  }
+
+  @include radius(sm) {
+    --x-radius: var(--x-radius-sm);
+  }
+
+  @include radius(md) {
+    --x-radius: var(--x-radius-md);
+  }
+
+  @include radius(lg) {
+    --x-radius: var(--x-radius-lg);
+  }
+
+  @include radius(full) {
+    --x-radius: var(--x-radius-full);
+  }
+
+  &:where(:has(.x-input-prefix)) {
+    padding-inline-start: 0;
+  }
+
+  &:where(:has(.x-input-suffix)) {
+    padding-inline-end: 0;
+  }
+
+  &:has(textarea) {
+    padding-block: 0.375rem;
+  }
+
+  &:has(select) {
+    cursor: pointer;
+  }
+
+  &:has(:-webkit-autofill) {
+    background-color: var(--x-autofill-color);
+  }
+
+  input,
+  textarea,
+  select {
+    @include reset;
+  }
+
+  input {
+    &:where([type='password']:not(:placeholder-shown)) {
+      font-weight: 700;
+    }
+  }
+
+  textarea {
+    overflow: auto;
+    white-space: pre-wrap;
+    vertical-align: top;
+    word-wrap: break-word;
+    word-break: normal;
+    resize: none;
+    -webkit-overflow-scrolling: touch;
+    text-size-adjust: none;
+  }
+
+  select {
+    cursor: pointer;
+
+    &:has(option[value=""]:checked) {
+      @extend %placeholder;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    option {
+      color: initial;
+      background: initial;
+    }
+  }
+
+  > input, textarea, select {
+    display: flex;
+    inline-size: 100%;
+  }
+}
+
+.x-input-prefix,
+.x-input-suffix {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-inline-size: var(--x-block-size);
+  overflow: hidden;
+  color: var(--x-icon-color);
+  cursor: inherit;
+
+  &:where(:has(:focus-visible:not(input, button))) {
+    z-index: 5;
+    box-shadow: inset 0 0 0 1.5px var(--x-accent-500);
+  }
+}
+
+.x-input-prefix {
+  order: -1;
+  border-start-start-radius: var(--x-radius);
+  border-end-start-radius: var(--x-radius);
+}
+
+.x-input-suffix {
+  border-start-end-radius: var(--x-radius);
+  border-end-end-radius: var(--x-radius);
+}
+
+.x-input-placeholder {
+  @extend %placeholder;
+}

@@ -1,0 +1,28 @@
+<docs-page>
+  <p>Used to display additional information when a user focuses or hovers over an element.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet>
+    <app-tooltip-basic-example />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>API</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="x-tooltip" type="XOutlet" default="null" />
+    <docs-input name="x-tooltip-on" type="hover | focus" default="hover" />
+    <docs-input name="x-tooltip-variant" type="dark | light" default="dark" />
+    <docs-input name="x-tooltip-position" type="enum" default="top" />
+    <docs-input name="x-tooltip-with-arrow" type="boolean" default="true" />
+    <docs-input name="x-tooltip-offset" type="number" default="8" />
+    <docs-input name="x-tooltip-open-delay" type="number" default="300" />
+    <docs-input name="x-tooltip-close-delay" type="number" default="100" />
+  </docs-api-table>
+</docs-page>

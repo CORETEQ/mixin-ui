@@ -1,0 +1,23 @@
+@keyframes x-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.x-spinner {
+  --x-size: var(--x-spinner-size, 1rem);
+
+  display: inline-block;
+  inline-size: var(--x-size);
+  block-size: var(--x-size);
+  border-width: var(--x-spinner-thickness, calc(var(--x-size) / 7));
+  border-style: solid;
+  border-color: var(--x-spinner-color, currentcolor);
+  border-inline-start-color: var(--x-spinner-track-color, transparent);
+  border-radius: 50%;
+  animation: x-spin 0.75s linear infinite;
+}

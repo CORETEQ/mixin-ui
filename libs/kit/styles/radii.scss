@@ -1,0 +1,7 @@
+:root {
+  --x-radius-none: none;
+  --x-radius-sm: calc(0.25rem * var(--x-scale, 1));
+  --x-radius-md: calc(0.375rem * var(--x-scale, 1));
+  --x-radius-lg: calc(0.5rem * var(--x-scale, 1));
+  --x-radius-full: 9999px;
+}

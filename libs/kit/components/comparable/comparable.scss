@@ -1,0 +1,47 @@
+.x-comparable {
+  position: relative;
+  display: grid;
+  touch-action: none;
+}
+
+.x-comparable-start,
+.x-comparable-end {
+  display: grid;
+  grid-area: 1 / 1;
+  place-content: center;
+}
+
+.x-comparable-start {
+  mask: linear-gradient(to right, #000 0, var(--x-offset, 50%), transparent 0);
+}
+
+.x-comparable-end {
+  mask: linear-gradient(to right, transparent 0, var(--x-offset, 50%), #000 0);
+}
+
+.x-comparable-handle {
+  position: absolute;
+  top: 0;
+  left: var(--x-offset);
+  z-index: 30;
+  inline-size: 0.125rem;
+  block-size: 100%;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.x-comparable-thumb {
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  background-color: #fff;
+  box-shadow: rgb(9 30 66 / 25%) 0 4px 8px -2px,
+  rgb(9 30 66 / 8%) 0 0 0 1px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}

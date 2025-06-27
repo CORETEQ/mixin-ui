@@ -1,0 +1,11 @@
+@let $ = content();
+
+<div class="x-popover-wrapper x-scrollable">
+  @if ($.type === 'component') {
+    <ng-container *ngComponentOutlet="$.outlet; injector: injector" />
+  } @else if ($.type === 'template') {
+    <ng-container *ngTemplateOutlet="$.outlet; context: { $implicit: close }; injector: injector" />
+  } @else {
+    {{ $.outlet }}
+  }
+</div>

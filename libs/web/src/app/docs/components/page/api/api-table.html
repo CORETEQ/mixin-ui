@@ -1,0 +1,30 @@
+<table class="docs-table">
+  <thead>
+  <tr>
+    @for (header of headers(); track header; let index = $index) {
+      <th [style.width.%]="index | map: headerWidth">
+        {{ header | titlecase }}
+      </th>
+    }
+  </tr>
+  </thead>
+  <tbody>
+    @for (item of items(); track $index) {
+      <tr>
+        @for (member of item.members(); track $index) {
+          <td [class.empty]="!member.content">
+            <div class="d-inline-flex flex-items-center gap-x-1">
+              @let $ = member.content | typedOutlet;
+
+              @if ($.type === 'template') {
+                <ng-container *ngTemplateOutlet="$.outlet" />
+              } @else {
+                <div class="d-block" [innerHTML]="member.content"></div>
+              }
+            </div>
+          </td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

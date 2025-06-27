@@ -1,0 +1,333 @@
+// options
+@mixin variant($variant) {
+  &:where(.x-variant-#{$variant}) {
+    @content;
+  }
+}
+
+@mixin size($size) {
+  &:where(.x-size-#{$size}) {
+    @content;
+  }
+}
+
+@mixin radius($radius) {
+  &:where(.x-radius-#{$radius}) {
+    @content;
+  }
+}
+
+// states
+@mixin hover {
+  @media (hover: hover) {
+    &:where(:hover:not(:disabled)) {
+      @content;
+    }
+  }
+}
+
+@mixin active {
+  &:where(:active:not(:disabled), .x-overlay-opened:not(:disabled)) {
+    @content;
+  }
+}
+
+@mixin focus-visible {
+  &:where(:focus-visible) {
+    @content;
+  }
+}
+
+// modifiers
+@mixin contrast {
+  &:where(.x-contrast) {
+    @content;
+  }
+}
+
+.x-btn {
+  --x-icon-color: currentcolor;
+
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--x-gap, 0.5rem);
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  block-size: var(--x-block-size);
+  padding: 0 var(--x-padding);
+  color: var(--x-color);
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: top;
+  background-color: var(--x-track-bg);
+  outline: 1.5px solid transparent;
+  outline-offset: 1px;
+  border: 1px solid transparent;
+  border-radius: var(--x-radius);
+  appearance: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+
+  &:where(button) {
+    cursor: pointer;
+  }
+
+  // variants
+  @include variant(solid) {
+    --x-color: var(--x-white);
+    --x-track-bg: var(--x-accent-600);
+
+    @include hover {
+      --x-track-bg: var(--x-accent-700);
+    }
+
+    @include active {
+      --x-track-bg: var(--x-accent-700);
+    }
+
+    @include contrast {
+      --x-track-bg: var(--x-accent-900);
+
+      @include hover {
+        --x-track-bg: var(--x-accent-950);
+      }
+
+      @include active {
+        --x-track-bg: var(--x-accent-950);
+      }
+    }
+  }
+
+  @include variant(outline) {
+    --x-color: var(--x-accent-950);
+    --x-track-bg: var(--x-white);
+
+    box-shadow: rgb(27 31 35 / 4%) 0 1px 0;
+    border-color: var(--x-accent-400);
+
+    @include hover {
+      --x-track-bg: var(--x-accent-50);
+    }
+
+    @include active {
+      --x-track-bg: var(--x-accent-100);
+    }
+
+    @include contrast {
+      border-color: var(--x-accent-500);
+
+      @include hover {
+        --x-track-bg: var(--x-accent-100);
+      }
+
+      @include active {
+        --x-track-bg: var(--x-accent-100);
+      }
+    }
+  }
+
+  @include variant(surface) {
+    --x-color: var(--x-accent-950);
+    --x-track-bg: var(--x-accent-200);
+
+    box-shadow: rgb(27 31 35 / 4%) 0 1px 0;
+    border-color: var(--x-accent-400);
+
+    @include hover {
+      --x-track-bg: var(--x-accent-300);
+    }
+
+    @include active {
+      --x-track-bg: var(--x-accent-300);
+    }
+
+    @include contrast {
+      --x-track-bg: var(--x-accent-50);
+
+      border-color: var(--x-accent-500);
+
+      @include hover {
+        --x-track-bg: var(--x-accent-100);
+      }
+
+      @include active {
+        --x-track-bg: var(--x-accent-100);
+      }
+    }
+  }
+
+  @include variant(subtle) {
+    --x-color: var(--x-accent-950);
+    --x-track-bg: var(--x-accent-200);
+
+    @include hover {
+      --x-color: var(--x-accent-950);
+      --x-track-bg: var(--x-accent-300);
+    }
+
+    @include active {
+      --x-color: var(--x-accent-950);
+      --x-track-bg: var(--x-accent-300);
+    }
+
+    @include contrast {
+      --x-color: var(--x-gray-950);
+    }
+  }
+
+  @include variant(ghost) {
+    --x-color: var(--x-accent-950);
+
+    @include hover {
+      --x-color: var(--x-accent-950);
+      --x-track-bg: var(--x-accent-200);
+    }
+
+    @include active {
+      --x-color: var(--x-accent-950);
+      --x-track-bg: var(--x-accent-200);
+    }
+
+    @include contrast {
+      --x-color: var(--x-gray-950);
+    }
+  }
+
+  @include variant(plain) {
+    --x-color: var(--x-accent-950);
+
+    @include hover {
+      --x-color: var(--x-accent-950);
+    }
+
+    @include active {
+      --x-color: var(--x-accent-950);
+    }
+
+    @include contrast {
+      --x-color: var(--x-gray-950);
+    }
+  }
+
+  @include focus-visible {
+    outline-color: var(--x-accent-500);
+  }
+
+  @include size(xs) {
+    --x-block-size: var(--x-size-xs);
+    --x-padding: 0.5rem;
+    --x-gap: 0.375rem;
+    --x-spinner-size: 0.5rem;
+    --x-spinner-thickness: 1.5px;
+
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  @include size(sm) {
+    --x-block-size: var(--x-size-sm);
+    --x-padding: 0.625rem;
+    --x-spinner-size: 0.675rem;
+    --x-spinner-thickness: 1.5px;
+
+    font-size: 0.815rem;
+    line-height: 1rem;
+  }
+
+  @include size(md) {
+    --x-block-size: var(--x-size-md);
+    --x-padding: 0.75rem;
+    --x-spinner-size: 0.75rem;
+    --x-spinner-thickness: 2px;
+
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  @include size(lg) {
+    --x-block-size: var(--x-size-lg);
+    --x-padding: 0.875rem;
+    --x-spinner-size: 0.875rem;
+    --x-spinner-thickness: 2px;
+
+    font-size: 0.935rem;
+    line-height: 1.25rem;
+  }
+
+  @include size(xl) {
+    --x-block-size: var(--x-size-xl);
+    --x-padding: 1rem;
+    --x-spinner-size: 1rem;
+    --x-spinner-thickness: 2.5px;
+
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  @include radius(none) {
+    --x-radius: var(--x-radius-none);
+  }
+
+  @include radius(sm) {
+    --x-radius: var(--x-radius-sm);
+  }
+
+  @include radius(md) {
+    --x-radius: var(--x-radius-md);
+  }
+
+  @include radius(lg) {
+    --x-radius: var(--x-radius-lg);
+  }
+
+  @include radius(full) {
+    --x-radius: var(--x-radius-full);
+  }
+
+  &:where(.x-loading) {
+    opacity: 0.9;
+    cursor: var(--x-cursor-loading);
+
+    &:where(:has(.x-btn-spinner.x-full)) {
+      -webkit-text-fill-color: transparent;
+
+      .x-icon {
+        opacity: 0;
+      }
+    }
+  }
+
+  &:where(:disabled) {
+    opacity: 0.6;
+    cursor: var(--x-cursor-disabled);
+  }
+
+  &:where(.x-block) {
+    display: flex;
+    inline-size: 100%;
+  }
+
+  &:where(.x-vertical) {
+    flex-direction: column;
+    block-size: auto;
+    padding: calc(var(--x-padding) / 1.5) var(--x-padding);
+  }
+
+  &:where(.x-icon-only) {
+    inline-size: var(--x-block-size);
+    min-inline-size: var(--x-block-size);
+    padding: 0;
+  }
+}
+
+.x-btn-spinner {
+  display: grid;
+  place-items: center;
+
+  &:where(.x-full) {
+    position: absolute;
+    inset: 0;
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "@mixin-ui/kit",
+  "version": "0.0.1",
+  "description": "Mixin UI components kit",
+  "keywords": [
+    "angular",
+    "kit",
+    "component"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0"
+  }
+}

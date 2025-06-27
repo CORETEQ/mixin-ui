@@ -1,0 +1,23 @@
+<div class="flex gap-3">
+  <button x-btn [disabled]="open()" (click)="open.set(true)">
+    {{ open() ? 'Popover is open' : 'Open popover' }}
+  </button>
+
+  <x-select class="w-[10rem]"
+            placeholder="Size"
+            popoverWidth="auto"
+            [(open)]="open"
+            [popoverMinWidth]="200"
+  >
+    <x-listbox *x-popover>
+      @for (option of sizes; track option.value) {
+        <x-option [value]="option.value">
+          <div class="flex justify-between items-center w-full">
+            {{ option.label }}
+            <span class="font-medium">{{ option.value }}</span>
+          </div>
+        </x-option>
+      }
+    </x-listbox>
+  </x-select>
+</div>

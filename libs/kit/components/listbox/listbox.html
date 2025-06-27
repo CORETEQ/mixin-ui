@@ -1,0 +1,15 @@
+@if (empty()) {
+  <div class="x-listbox-empty">
+    @let $ = emptyContent() | typedOutlet;
+
+    @if ($.type === 'component') {
+      <ng-container *ngComponentOutlet="$.outlet" />
+    } @else if ($.type === 'template') {
+      <ng-container *ngTemplateOutlet="$.outlet" />
+    } @else {
+      {{ $.outlet }}
+    }
+  </div>
+}
+
+<ng-content />

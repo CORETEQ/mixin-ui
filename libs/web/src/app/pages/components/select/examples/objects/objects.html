@@ -1,0 +1,17 @@
+<x-select placeholder="Select" [(ngModel)]="value">
+  <span *x-value="let value" class="flex items-center gap-2">
+    <span class="fi fi-{{value.value}}"></span>
+    {{ value.label }}
+  </span>
+
+  <x-listbox *x-popover [compareFn]="compareFn">
+    @for (option of options; track option.value) {
+      <x-option [value]="option">
+        <span class="flex items-center gap-2">
+          <span class="fi fi-{{option.value}}"></span>
+          {{ option.label }}
+        </span>
+      </x-option>
+    }
+  </x-listbox>
+</x-select>

@@ -1,0 +1,16 @@
+<button x-btn
+        x-popover-width="auto"
+        x-popover-align="center"
+        [x-popover-min-width]="300"
+        [x-popover-max-width]="300"
+        [x-popover]="content"
+        [(x-popover-open)]="open"
+        (click)="open.set(!open())">
+  Show popover
+</button>
+
+<ng-template #content>
+  <div class="flex font-sm p-3">
+    Naruto is a Japanese manga series written and illustrated by Masashi Kishimoto.
+  </div>
+</ng-template>

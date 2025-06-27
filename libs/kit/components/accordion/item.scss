@@ -1,0 +1,72 @@
+$border-width: 1px;
+
+.x-accordion-item {
+  display: block;
+  margin-block-end: -$border-width;
+  overflow: hidden;
+  color: var(--x-gray-12);
+  border: $border-width solid var(--x-gray-6);
+
+  &:first-of-type {
+    border-top-left-radius: var(--x-radius);
+    border-top-right-radius: var(--x-radius);
+  }
+
+  &:last-of-type {
+    border-bottom-right-radius: var(--x-radius);
+    border-bottom-left-radius: var(--x-radius);
+  }
+}
+
+.x-accordion-label {
+  display: flex;
+  align-items: center;
+  margin-block-end: -$border-width;
+  padding: 0.75rem 1rem;
+  border-block-end: $border-width solid var(--x-gray-6);
+  user-select: none; // https://github.com/whatwg/html/issues/3191
+  cursor: pointer;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::marker {
+    content: none;
+  }
+
+  &:hover,
+  details[open] & {
+    background-color: var(--x-gray-2);
+  }
+}
+
+.x-accordion-label-text {
+  overflow: hidden;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &:has(+ .x-accordion-label-icon) {
+    margin-inline-end: 0.25rem;
+  }
+}
+
+.x-accordion-label-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-inline-start: auto;
+}
+
+.x-accordion-icon-animate {
+  transition: rotate 200ms ease-in-out;
+
+  details[open] & {
+    rotate: 180deg;
+  }
+}
+
+.x-accordion-content {
+  display: block;
+  padding: 1rem;
+}
