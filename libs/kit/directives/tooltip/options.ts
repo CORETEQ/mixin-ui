@@ -1,11 +1,11 @@
 import { InjectionToken, ValueProvider } from '@angular/core';
-import { XOverlayPosition } from '@mixin-ui/cdk';
+import { XPopoverPosition } from '@mixin-ui/cdk';
 
 export type XTooltipEvent = 'hover' | 'focus';
 
 export interface XTooltipOptions {
   readonly on: XTooltipEvent;
-  readonly position: XOverlayPosition;
+  readonly position: XPopoverPosition;
   readonly variant: 'dark' | 'light';
   readonly withArrow: boolean;
   readonly offset: number;

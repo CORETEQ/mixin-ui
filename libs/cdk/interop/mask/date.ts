@@ -14,9 +14,6 @@ type Block = {
   };
 };
 
-/**
- * Mapping of date-fns tokens to IMask block configurations
- */
 const BLOCKS = {
   yyyy: { from: 1900, to: 2100 },
   yy: { from: 0, to: 99 },

@@ -27,7 +27,7 @@
 }
 
 @mixin checked {
-  &:where(.x-checked, .x-indeterminate) {
+  &:where([data-state='checked'], [data-state='indeterminate']) {
     @content;
   }
 }

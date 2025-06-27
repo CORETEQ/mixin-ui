@@ -15,7 +15,7 @@ import { isPlatformServer } from '@angular/common';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { OverlaySizeConfig } from '@angular/cdk/overlay';
 import { distinctUntilChanged, map, merge, of, switchMap } from 'rxjs';
-import { fromResizeObserver, XConnectedOverlayPosition, XOutlet } from '@mixin-ui/cdk';
+import { fromResizeObserver, XOutlet, XPopoverPositionOptions } from '@mixin-ui/cdk';
 import { XPopoverContainer } from './container';
 import { X_POPOVER_OPTIONS } from './options';
 import {
@@ -29,10 +29,7 @@ import {
   selector: '[x-popover]:not(ng-template)',
   exportAs: 'x-popover',
   providers: X_POPOVER_PROVIDERS,
-  host: {
-    '[class.x-overlay-opened]': 'open()',
-    '[attr.aria-expanded]': 'open()',
-  },
+  host: { '[class.x-overlay-opened]': 'open()' },
 })
 export class XPopover {
   readonly #opt = inject(X_POPOVER_OPTIONS);
@@ -55,7 +52,6 @@ export class XPopover {
   readonly maxWidth = input(this.#opt.minWidth, { alias: 'x-popover-max-width' });
   readonly minHeight = input(this.#opt.minHeight, { alias: 'x-popover-min-height' });
   readonly maxHeight = input(this.#opt.maxHeight, { alias: 'x-popover-max-height' });
-  readonly hasBackdrop = input(this.#opt.hasBackdrop, { alias: 'x-popover-has-backdrop' });
   readonly content = computed(() => this.inputContent() || this.childContent());
   readonly open = toSignal(this.#overlay.openChanges, { requireSync: true });
 
@@ -104,10 +100,11 @@ export class XPopover {
       const position = this.position();
       const align = this.align();
       const offset = this.offset();
+      const fixed = this.fixed();
 
       untracked(() => {
         if (content) {
-          this.updatePosition({ direction, position, align, offset });
+          this.updatePosition({ direction, position, align, offset, fixed });
         } else {
           this.toggle(false);
         }
@@ -126,11 +123,11 @@ export class XPopover {
   toggle(open: boolean): void {
     if (open && this.content()) {
       this.#overlay.open(XPopoverContainer, {
-        hasBackdrop: this.hasBackdrop(),
         direction: this.direction(),
         position: this.position(),
         align: this.align(),
         offset: this.offset(),
+        fixed: this.fixed(),
       });
     } else if (!open) {
       this.#overlay.close();
@@ -142,7 +139,7 @@ export class XPopover {
     this.#overlay.updateSize(value);
   }
 
-  updatePosition(position?: Partial<XConnectedOverlayPosition>): void {
+  updatePosition(position?: Partial<XPopoverPositionOptions>): void {
     this.#overlay.updatePosition(position);
   }
 

@@ -57,7 +57,7 @@ export interface XMask<TRaw, TOpt extends Record<string, any>> {
    * Indicates whether the current mask value satisfies all validation rules.
    * For example, in a date mask it would be true when a complete valid date is entered.
    */
-  get isComplete(): boolean;
+  get completed(): boolean;
 }
 
 export const X_MASK = new InjectionToken<XMask<any, Record<string, any>>>('MASK');
@@ -73,7 +73,7 @@ class NoopMask implements XMask<any, Record<string, any>> {
   valueChanges = EMPTY;
   maskedValue = '';
   rawValue = null;
-  isComplete = false;
+  completed = false;
 }
 
 export function provideMask<TRaw, TOpt extends Record<string, any>>(

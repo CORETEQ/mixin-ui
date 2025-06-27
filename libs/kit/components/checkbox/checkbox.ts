@@ -23,8 +23,7 @@ import { X_CHECKBOX_OPTIONS } from './options';
     type: 'button',
     role: 'checkbox',
     '[class]': '`x-checkbox x-size-${size()} x-radius-${radius()}`',
-    '[class.x-checked]': 'checked()',
-    '[class.x-indeterminate]': 'indeterminate()',
+    '[attr.data-state]': 'state()',
     '[attr.data-main-color]': 'color()',
     '[attr.aria-checked]': 'ariaChecked()',
     '[attr.aria-required]': 'required()',
@@ -47,12 +46,17 @@ export class XCheckbox {
   readonly required = this.#cva.required;
   readonly ariaChecked = computed(() => (this.indeterminate() ? 'mixed' : String(this.checked())));
 
-  readonly icon = computed(() => {
-    if (this.indeterminate()) {
-      return this.#opt.iconIndeterminate;
-    }
-    return this.checked() ? this.#opt.iconOn : null;
-  });
+  readonly state = computed(() =>
+    this.indeterminate() ? 'indeterminate' : this.checked() ? 'checked' : 'unchecked'
+  );
+
+  readonly icon = computed(() =>
+    this.indeterminate()
+      ? this.#opt.iconIndeterminate
+      : this.checked()
+      ? this.#opt.iconChecked
+      : null
+  );
 
   constructor() {
     if (this.#ngc instanceof NgModel) {

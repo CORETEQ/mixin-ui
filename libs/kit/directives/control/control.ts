@@ -15,6 +15,12 @@ import { EMPTY_FN, X_MASK } from '@mixin-ui/cdk';
 
 export const X_CONTROL_ID = new InjectionToken<string>('CONTROL_ID');
 
+export const X_CONTROL_ROOT = new InjectionToken<XControlRoot>('');
+
+export interface XControlRoot {
+  onInput(): void;
+}
+
 @Directive({
   selector: 'input:not([type=checkbox])[x-control]',
   exportAs: 'x-control',
@@ -26,12 +32,13 @@ export const X_CONTROL_ID = new InjectionToken<string>('CONTROL_ID');
     },
   ],
   host: {
-    '[type]': '`text`',
+    type: 'text',
     '[attr.id]': 'id()',
     '(blur)': 'onTouched();',
   },
 })
 export class XControl<T> implements ControlValueAccessor {
+  readonly #id = inject(X_CONTROL_ID, { optional: true });
   readonly #mask = inject(X_MASK, { optional: true });
   readonly #injector = inject(INJECTOR);
   readonly #el = inject(ElementRef).nativeElement;
@@ -40,7 +47,7 @@ export class XControl<T> implements ControlValueAccessor {
   protected onChange = EMPTY_FN;
   protected onTouched = EMPTY_FN;
 
-  readonly id = input(inject(X_CONTROL_ID, { optional: true }));
+  readonly id = input(this.#id);
 
   constructor() {
     this.#mask?.init(this.#el);
@@ -56,8 +63,7 @@ export class XControl<T> implements ControlValueAccessor {
     if (this.#mask) {
       this.#mask.setValue(modelValue);
     } else {
-      const normalizedValue = modelValue == null ? '' : modelValue;
-      this.#r2.setProperty(this.#el, 'value', normalizedValue);
+      this.#r2.setProperty(this.#el, 'value', modelValue == null ? '' : modelValue);
     }
   }
 
@@ -69,8 +75,8 @@ export class XControl<T> implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    this.#r2.setProperty(this.#el, 'disabled', isDisabled);
+  setDisabledState(disabled: boolean): void {
+    this.#r2.setProperty(this.#el, 'disabled', disabled);
   }
 
   private get control(): NgControl | null {

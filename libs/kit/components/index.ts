@@ -1,5 +1,6 @@
 export * from '@mixin-ui/kit/components/accordion';
 export * from '@mixin-ui/kit/components/button';
+export * from '@mixin-ui/kit/components/calendar';
 export * from '@mixin-ui/kit/components/checkbox';
 export * from '@mixin-ui/kit/components/collapsible';
 export * from '@mixin-ui/kit/components/comparable';

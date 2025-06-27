@@ -4,7 +4,6 @@ import {
   computed,
   contentChild,
   Directive,
-  effect,
   ElementRef,
   inject,
   input,

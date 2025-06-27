@@ -13,15 +13,15 @@ import {
 } from 'rxjs';
 import {
   isPureEscape,
-  overlay,
+  popover,
   relatedTo,
-  XConnectedOverlay,
-  XConnectedOverlayPosition,
+  XPopoverManager,
+  XPopoverPositionOptions,
 } from '@mixin-ui/cdk';
 
-export const X_OVERLAY = new InjectionToken<XConnectedOverlay>('OVERLAY');
+export const X_OVERLAY = new InjectionToken<XPopoverManager>('OVERLAY');
 
-export const X_POPOVER_POSITION_OPTIONS = new InjectionToken<XConnectedOverlayPosition>(
+export const X_POPOVER_POSITION_OPTIONS = new InjectionToken<XPopoverPositionOptions>(
   'POPOVER_POSITION_OPTIONS'
 );
 
@@ -30,7 +30,7 @@ export const X_POPOVER_CLOSE = new InjectionToken<Observable<boolean>>('OVERLAY_
 export const X_POPOVER_PROVIDERS: Provider[] = [
   {
     provide: X_OVERLAY,
-    useFactory: overlay,
+    useFactory: popover,
   },
   {
     provide: X_POPOVER_CLOSE,

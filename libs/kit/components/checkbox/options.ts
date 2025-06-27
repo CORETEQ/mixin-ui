@@ -4,7 +4,7 @@ import { XColor, XUnion } from '@mixin-ui/kit/types';
 export interface XCheckboxOptions {
   readonly size: XUnion<'sm' | 'md' | 'lg'>;
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
-  readonly iconOn: string;
+  readonly iconChecked: string;
   readonly iconIndeterminate: string;
   readonly color?: XColor;
 }
@@ -12,7 +12,7 @@ export interface XCheckboxOptions {
 const defaultOptions: XCheckboxOptions = {
   size: 'md',
   radius: 'sm',
-  iconOn: 'check',
+  iconChecked: 'check',
   iconIndeterminate: 'minus',
 };
 

@@ -14,7 +14,7 @@ import {
 } from 'rxjs';
 import {
   isPureEscape,
-  overlay,
+  popover,
   provideFocusMonitor,
   relatedTo,
   X_FOCUS_MONITOR,
@@ -29,7 +29,7 @@ import { X_TOOLTIP_OPTIONS, XTooltipEvent } from './options';
   providers: [provideFocusMonitor()],
 })
 export class XTooltip {
-  readonly #overlay = overlay();
+  readonly #overlay = popover();
   readonly #opt = inject(X_TOOLTIP_OPTIONS);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
   readonly #focusChanges = inject(X_FOCUS_MONITOR);
@@ -86,6 +86,7 @@ export class XTooltip {
         offset: this.offset(),
         direction: 'both',
         align: 'center',
+        fixed: false,
       });
     } else if (!open) {
       this.#overlay.close();

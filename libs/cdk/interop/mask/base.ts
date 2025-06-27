@@ -38,7 +38,7 @@ export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<
     return this.#mask?.value || '';
   }
 
-  get isComplete(): boolean {
+  get completed(): boolean {
     return !!this.#mask?.masked?.isComplete;
   }
 
