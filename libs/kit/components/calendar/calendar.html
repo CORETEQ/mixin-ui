@@ -1,1 +1,81 @@
-Hello world
+<div class="calendar-header">
+  <button
+    x-icon-btn
+    (click)="navigatePrevious()"
+  >
+  </button>
+
+  <div class="header-title">
+    <button
+      type="button"
+      class="mode-button"
+      (click)="toggleSelectionMode()"
+    >
+      {{ headerTitle() }}
+    </button>
+  </div>
+
+  <button
+    x-icon-btn
+    (click)="navigateNext()"
+  >
+  </button>
+</div>
+
+<div class="calendar-content">
+  @switch (selectionMode()) {
+    @case ('days') {
+      <div class="weekdays">
+        @for (day of weekdays; track day) {
+          <div class="weekday">{{ day }}</div>
+        }
+      </div>
+      <div class="days-grid">
+        @for (day of daysInMonth(); track day.date.getTime()) {
+          <button
+            type="button"
+            class="day-cell"
+            [class.selected]="isDateSelected(day.date)"
+            [class.disabled]="day.disabled"
+            [disabled]="day.disabled"
+            (click)="selectDate(day.date)"
+          >
+            {{ day.date | map: format: 'd' }}
+          </button>
+        }
+      </div>
+    }
+    @case ('months') {
+      <div class="months-grid">
+        @for (month of monthsInYear(); track month.date.getTime()) {
+          <button
+            type="button"
+            class="month-cell"
+            [class.selected]="isMonthSelected(month.date)"
+            [class.disabled]="month.disabled"
+            [disabled]="month.disabled"
+            (click)="selectMonth(month.date)"
+          >
+            {{ month.date | map: format: 'MMM' }}
+          </button>
+        }
+      </div>
+    }
+    @case ('years') {
+      <div class="years-grid">
+        @for (year of yearsInDecade(); track year.date.getTime()) {
+          <button
+            type="button"
+            class="year-cell"
+            [class.selected]="isYearSelected(year.date)"
+            [class.disabled]="year.disabled"
+            [disabled]="year.disabled"
+            (click)="selectYear(year.date)"
+          >
+            {{ year.date | map: format: 'yyyy' }}
+          </button>
+        }
+      </div>
+    }
+  }
+</div>

@@ -62,8 +62,8 @@ const adapter = (options: XDateMaskOptions): FactoryArg => {
 
   return {
     mask: Date,
-    lazy: !options.showPlaceholder,
-    placeholderChar: options.placeholderChar,
+    lazy: !options.showFiller,
+    placeholderChar: options.fillerChar,
     pattern: options.pattern,
     autofix: options.autofix,
     min: options.min,

@@ -2,14 +2,10 @@ import { FactoryProvider, inject, InjectionToken } from '@angular/core';
 import { X_NUMBER_MASK_OPTIONS, XNumberMaskOptions } from '@mixin-ui/cdk';
 
 export interface XInputNumberOptions extends XNumberMaskOptions {
-  readonly incrementIcon: string;
-  readonly decrementIcon: string;
   readonly step: number;
 }
 
 const defaultOptions: Omit<XInputNumberOptions, keyof XNumberMaskOptions> = {
-  incrementIcon: 'plus',
-  decrementIcon: 'minus',
   step: 1,
 };
 

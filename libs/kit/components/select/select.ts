@@ -12,7 +12,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { createCva, relatedTo, watch } from '@mixin-ui/cdk';
 import { X_SLOT, XInput, XPopover, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
-import { X_LISTBOX_ACCESSOR, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
+import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -21,13 +21,12 @@ import { X_LISTBOX_ACCESSOR, XListboxAccessor } from '@mixin-ui/kit/components/l
   styleUrl: './select.scss',
   templateUrl: './select.html',
   imports: [XIcon, XSlotsPipe, NgTemplateOutlet],
-  providers: [
-    {
-      provide: X_LISTBOX_ACCESSOR,
-      useExisting: forwardRef(() => XSelectRoot),
-    },
-  ],
+  providers: [provideListboxAccessor(forwardRef(() => XSelectRoot))],
   hostDirectives: [
+    {
+      directive: XInput,
+      inputs: ['variant', 'size', 'radius', 'color'],
+    },
     {
       directive: XPopover,
       inputs: [
@@ -37,10 +36,6 @@ import { X_LISTBOX_ACCESSOR, XListboxAccessor } from '@mixin-ui/kit/components/l
         'x-popover-max-width: popoverMaxWidth',
       ],
       outputs: ['x-popover-openChange: openChange'],
-    },
-    {
-      directive: XInput,
-      inputs: ['variant', 'size', 'radius', 'color'],
     },
   ],
   host: {

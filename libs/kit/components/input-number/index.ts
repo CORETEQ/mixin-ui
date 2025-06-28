@@ -1,2 +1,2 @@
-export * from './input-number';
+export * from './number';
 export * from './options';

@@ -293,20 +293,15 @@
 
 .x-input-prefix,
 .x-input-suffix {
+  position: relative;
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   min-inline-size: var(--x-block-size);
-  overflow: hidden;
   color: var(--x-icon-color);
   cursor: inherit;
-
-  &:where(:has(:focus-visible:not(input, button))) {
-    z-index: 5;
-    box-shadow: inset 0 0 0 1.5px var(--x-accent-500);
-  }
 }
 
 .x-input-prefix {

@@ -21,7 +21,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-number',
-  templateUrl: './input-number.html',
+  templateUrl: './number.html',
   imports: [XButton, XIcon, XGroup],
   providers: [
     provideMask(X_NUMBER_MASK_FACTORY),
@@ -74,9 +74,9 @@ export class XNumber implements XControlAccessor<number | null> {
   /** Add trailing zeros to match decimalScale (12.5 → 12.50) */
   readonly padDecimals = input(this.#opt.padDecimals, { transform: booleanAttribute });
 
+  /** Step value for incrementing/decrementing the number (default is 1) */
   readonly step = input(this.#opt.step, { transform: numberAttribute });
-  readonly incrementIcon = input(this.#opt.incrementIcon);
-  readonly decrementIcon = input(this.#opt.decrementIcon);
+
   readonly disabled = computed(() => this.#input.state()?.disabled);
   readonly enabled = computed(
     () => !this.#input.state()?.disabled && !this.#input.state()?.readOnly
@@ -122,7 +122,7 @@ export class XNumber implements XControlAccessor<number | null> {
     }
   }
 
-  onControlInit(el: HTMLElement): void {
+  onControlInit(el: HTMLInputElement): void {
     this.#mask.init(el);
   }
 

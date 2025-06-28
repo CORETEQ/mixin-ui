@@ -1,9 +1,15 @@
 import { FactoryProvider, inject, InjectionToken } from '@angular/core';
 import { X_DATE_MASK_OPTIONS, XDateMaskOptions } from '@mixin-ui/cdk';
 
-export interface XInputDateOptions extends XDateMaskOptions {}
+export interface XInputDateOptions extends XDateMaskOptions {
+  readonly popoverOnFocus: boolean;
+  readonly multiple: boolean;
+}
 
-const defaultOptions: Omit<XInputDateOptions, keyof XDateMaskOptions> = {};
+const defaultOptions: Omit<XInputDateOptions, keyof XDateMaskOptions> = {
+  popoverOnFocus: true,
+  multiple: false,
+};
 
 const defaultOptionsFactory = () => ({
   ...inject(X_DATE_MASK_OPTIONS),

@@ -9,6 +9,7 @@ export * from '@mixin-ui/kit/components/group';
 export * from '@mixin-ui/kit/components/icon';
 export * from '@mixin-ui/kit/directives/input';
 export * from '@mixin-ui/kit/components/input-date';
+export * from '@mixin-ui/kit/components/input-mask';
 export * from '@mixin-ui/kit/components/input-number';
 export * from '@mixin-ui/kit/components/input-text';
 export * from '@mixin-ui/kit/components/listbox';

@@ -148,12 +148,29 @@ export const X_NUMBER_MASK_OPTIONS = new InjectionToken<XNumberMaskOptions>(
 
 // Date
 export interface XDateMaskOptions {
+  /** Minimum allowed date value */
   readonly min: Date;
+
+  /** Maximum allowed date value */
   readonly max: Date;
+
+  /**
+   * Date format pattern using characters: d, M, y,
+   * For example, 'dd/MM/yyyy' for dates like '25/12/2024'
+   */
   readonly pattern: string;
+
+  /**
+   * Automatically fix invalid date parts when possible,
+   * For example, converting '33' to '03' for days
+   */
   readonly autofix: boolean;
-  readonly showPlaceholder: boolean;
-  readonly placeholderChar: string;
+
+  /** Show filler characters for empty positions */
+  readonly showFiller: boolean;
+
+  /** Character to use as a filler for empty positions */
+  readonly fillerChar: string;
 }
 
 const defaultDateOptions: XDateMaskOptions = {
@@ -161,8 +178,8 @@ const defaultDateOptions: XDateMaskOptions = {
   max: new Date(2100, 11, 31),
   pattern: 'dd/MM/yyyy',
   autofix: true,
-  showPlaceholder: false,
-  placeholderChar: '_',
+  showFiller: false,
+  fillerChar: '_',
 };
 
 export const X_DATE_MASK_OPTIONS = new InjectionToken<XDateMaskOptions>('DATE_FORMATTER_OPTIONS', {

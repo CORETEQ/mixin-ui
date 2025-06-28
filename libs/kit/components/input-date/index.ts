@@ -1,2 +1,2 @@
-export * from './input-date';
+export * from './date';
 export * from './options';

@@ -1,4 +1,4 @@
-import { InjectionToken, Signal } from '@angular/core';
+import { ExistingProvider, InjectionToken, Signal, Type } from '@angular/core';
 
 export interface XListboxAccessor<T = any> {
   readonly value: Signal<T | readonly T[] | null>;
@@ -7,3 +7,12 @@ export interface XListboxAccessor<T = any> {
 }
 
 export const X_LISTBOX_ACCESSOR = new InjectionToken<XListboxAccessor>('LISTBOX_ACCESSOR');
+
+export function provideListboxAccessor<T>(
+  useExisting: Type<XListboxAccessor<T>>
+): ExistingProvider {
+  return {
+    provide: X_LISTBOX_ACCESSOR,
+    useExisting,
+  };
+}

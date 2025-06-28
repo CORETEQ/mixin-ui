@@ -13,7 +13,7 @@ import {
   XInput,
   XPopover,
 } from '@mixin-ui/kit/directives';
-import { X_LISTBOX_ACCESSOR, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
+import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -25,10 +25,7 @@ import { Subject } from 'rxjs';
   imports: [],
   providers: [
     provideControlAccessor(forwardRef(() => XComboboxRoot)),
-    {
-      provide: X_LISTBOX_ACCESSOR,
-      useExisting: forwardRef(() => XComboboxRoot),
-    },
+    provideListboxAccessor(forwardRef(() => XComboboxRoot)),
   ],
   hostDirectives: [
     {
