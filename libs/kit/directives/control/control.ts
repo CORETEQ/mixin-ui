@@ -3,23 +3,15 @@ import {
   ElementRef,
   forwardRef,
   inject,
-  InjectionToken,
   INJECTOR,
-  input,
+  OnDestroy,
   Renderer2,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, NgModel } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { fromEvent } from 'rxjs';
-import { EMPTY_FN, X_MASK } from '@mixin-ui/cdk';
-
-export const X_CONTROL_ID = new InjectionToken<string>('CONTROL_ID');
-
-export const X_CONTROL_ROOT = new InjectionToken<XControlRoot>('');
-
-export interface XControlRoot {
-  onInput(): void;
-}
+import { fromEvent, map, Observable } from 'rxjs';
+import { EMPTY_FN } from '@mixin-ui/cdk';
+import { X_CONTROL_ACCESSOR } from './providers';
 
 @Directive({
   selector: 'input:not([type=checkbox])[x-control]',
@@ -33,35 +25,30 @@ export interface XControlRoot {
   ],
   host: {
     type: 'text',
-    '[attr.id]': 'id()',
     '(blur)': 'onTouched();',
   },
 })
-export class XControl<T> implements ControlValueAccessor {
-  readonly #id = inject(X_CONTROL_ID, { optional: true });
-  readonly #mask = inject(X_MASK, { optional: true });
+export class XControl<T> implements ControlValueAccessor, OnDestroy {
+  readonly #accessor = inject(X_CONTROL_ACCESSOR, { optional: true });
   readonly #injector = inject(INJECTOR);
-  readonly #el = inject(ElementRef).nativeElement;
+  readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
   readonly #r2 = inject(Renderer2);
 
   protected onChange = EMPTY_FN;
   protected onTouched = EMPTY_FN;
 
-  readonly id = input(this.#id);
-
   constructor() {
-    this.#mask?.init(this.#el);
-
-    (this.#mask ? this.#mask.valueChanges : fromEvent(this.#el, 'input'))
-      .pipe(takeUntilDestroyed())
-      .subscribe(value => this.onChange(value));
+    if (this.#accessor?.onControlInit) {
+      this.#accessor.onControlInit(this.#el);
+    }
+    this.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => this.onChange(value));
   }
 
   writeValue(value: T | null): void {
     const modelValue = this.control instanceof NgModel ? this.control.model : value;
 
-    if (this.#mask) {
-      this.#mask.setValue(modelValue);
+    if (this.#accessor) {
+      this.#accessor.setValue(modelValue);
     } else {
       this.#r2.setProperty(this.#el, 'value', modelValue == null ? '' : modelValue);
     }
@@ -77,6 +64,20 @@ export class XControl<T> implements ControlValueAccessor {
 
   setDisabledState(disabled: boolean): void {
     this.#r2.setProperty(this.#el, 'disabled', disabled);
+  }
+
+  ngOnDestroy(): void {
+    if (this.#accessor?.onControlDestroy) {
+      this.#accessor.onControlDestroy();
+    }
+  }
+
+  private get valueChanges(): Observable<T> {
+    if (this.#accessor) {
+      return this.#accessor.valueChanges;
+    } else {
+      return fromEvent(this.#el, 'input').pipe(map(() => this.#el.value));
+    }
   }
 
   private get control(): NgControl | null {

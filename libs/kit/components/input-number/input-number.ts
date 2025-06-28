@@ -4,13 +4,14 @@ import {
   Component,
   computed,
   effect,
+  forwardRef,
   inject,
   input,
   numberAttribute,
   ViewEncapsulation,
 } from '@angular/core';
 import { injectMask, provideMask, X_NUMBER_MASK_FACTORY, XNumberMaskOptions } from '@mixin-ui/cdk';
-import { XInput } from '@mixin-ui/kit/directives';
+import { provideControlAccessor, XControlAccessor, XInput } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { XGroup } from '@mixin-ui/kit/components/group';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
@@ -23,8 +24,9 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
   templateUrl: './input-number.html',
   imports: [XButton, XIcon, XGroup],
   providers: [
-    provideButtonOptions({ variant: 'outline', color: 'gray', radius: 'none' }),
     provideMask(X_NUMBER_MASK_FACTORY),
+    provideControlAccessor(forwardRef(() => XNumber)),
+    provideButtonOptions({ variant: 'outline', color: 'gray', radius: 'none' }),
   ],
   hostDirectives: [
     {
@@ -38,21 +40,40 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
     '(keydown.arrowUp)': '$event.preventDefault(); step() && plus(step())',
   },
 })
-export class XNumber {
+export class XNumber implements XControlAccessor<number | null> {
   readonly #opt = inject(X_INPUT_NUMBER_OPTIONS);
   readonly #input = inject(XInput);
   readonly #mask = injectMask<number | null, XNumberMaskOptions>();
 
   readonly size = this.#input.size;
+
+  /** Minimum allowed value */
   readonly min = input(this.#opt.min);
+
+  /** Maximum allowed value */
   readonly max = input(this.#opt.max);
+
+  /** Text prefix (e.g., "$") */
   readonly prefix = input(this.#opt.prefix);
+
+  /** Text suffix (e.g., "%") */
   readonly suffix = input(this.#opt.suffix);
+
+  /** Thousands separator character */
   readonly thousandsSeparator = input(this.#opt.thousandsSeparator);
+
+  /** Decimal separator character */
   readonly decimalSeparator = input(this.#opt.decimalSeparator);
+
+  /** Number of decimal places to display */
   readonly decimalScale = input(this.#opt.decimalScale, { transform: numberAttribute });
+
+  /** Remove leading zeros (000123 → 123) */
   readonly normalizeZeros = input(this.#opt.normalizeZeros, { transform: booleanAttribute });
+
+  /** Add trailing zeros to match decimalScale (12.5 → 12.50) */
   readonly padDecimals = input(this.#opt.padDecimals, { transform: booleanAttribute });
+
   readonly step = input(this.#opt.step, { transform: numberAttribute });
   readonly incrementIcon = input(this.#opt.incrementIcon);
   readonly decrementIcon = input(this.#opt.decrementIcon);
@@ -62,6 +83,8 @@ export class XNumber {
   );
   readonly plusDisabled = computed(() => !this.enabled() || this.normalizedValue >= this.max());
   readonly minusDisabled = computed(() => !this.enabled() || this.normalizedValue <= this.min());
+
+  readonly valueChanges = this.#mask.valueChanges;
 
   constructor() {
     effect(() =>
@@ -83,6 +106,10 @@ export class XNumber {
     return this.#mask.rawValue || 0;
   }
 
+  setValue(value: number | null): void {
+    this.#mask.setValue(value);
+  }
+
   plus(step = 1): void {
     if (this.enabled()) {
       this.#mask.setValue(Math.min(this.max(), this.normalizedValue + step));
@@ -93,6 +120,14 @@ export class XNumber {
     if (this.enabled()) {
       this.#mask.setValue(Math.max(this.min(), this.normalizedValue - step));
     }
+  }
+
+  onControlInit(el: HTMLElement): void {
+    this.#mask.init(el);
+  }
+
+  onControlDestroy(): void {
+    this.#mask.destroy();
   }
 
   protected onSpin(e: PointerEvent): void {

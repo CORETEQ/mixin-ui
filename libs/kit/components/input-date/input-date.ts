@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   effect,
+  forwardRef,
   inject,
   input,
   ViewEncapsulation,
@@ -14,7 +15,12 @@ import {
   X_DATE_MASK_FACTORY,
   XDateMaskOptions,
 } from '@mixin-ui/cdk';
-import { XInput, XPopover } from '@mixin-ui/kit/directives';
+import {
+  provideControlAccessor,
+  XControlAccessor,
+  XInput,
+  XPopover,
+} from '@mixin-ui/kit/directives';
 import { X_INPUT_DATE_OPTIONS } from './options';
 
 @Component({
@@ -22,7 +28,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-date',
   templateUrl: './input-date.html',
-  providers: [provideMask(X_DATE_MASK_FACTORY)],
+  providers: [provideMask(X_DATE_MASK_FACTORY), provideControlAccessor(forwardRef(() => XDate))],
   hostDirectives: [
     {
       directive: XInput,
@@ -34,11 +40,11 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   ],
   host: {
     class: 'x-date',
-    '(focusin)': 'onFocusIn($event)',
+    '(focusin)': 'onFocusIn()',
     '(focusout)': 'onFocusOut($event)',
   },
 })
-export class XDate {
+export class XDate implements XControlAccessor<Date | null> {
   readonly #opt = inject(X_INPUT_DATE_OPTIONS);
   readonly #mask = injectMask<Date | null, XDateMaskOptions>();
   readonly #popover = inject(XPopover, { self: true });
@@ -49,6 +55,8 @@ export class XDate {
   readonly pattern = input(this.#opt.pattern);
   readonly showPlaceholder = input(this.#opt.showPlaceholder, { transform: booleanAttribute });
   readonly placeholderChar = input(this.#opt.placeholderChar);
+
+  readonly valueChanges = this.#mask.valueChanges;
 
   constructor() {
     effect(() =>
@@ -63,7 +71,19 @@ export class XDate {
     );
   }
 
-  protected onFocusIn(e: FocusEvent): void {
+  setValue(value: Date | null): void {
+    this.#mask.setValue(value);
+  }
+
+  onControlInit(el: HTMLElement): void {
+    this.#mask.init(el);
+  }
+
+  onControlDestroy(): void {
+    this.#mask.destroy();
+  }
+
+  protected onFocusIn(): void {
     this.#popover.toggle(true);
   }
 
