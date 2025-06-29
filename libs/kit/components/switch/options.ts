@@ -4,8 +4,8 @@ import { XColor, XUnion } from '@mixin-ui/kit/types';
 export interface XSwitchOptions {
   readonly size: XUnion<'sm' | 'md' | 'lg'>;
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
-  readonly iconOn?: string;
-  readonly iconOff?: string;
+  readonly iconChecked?: string;
+  readonly iconUnchecked?: string;
   readonly color?: XColor;
 }
 
@@ -14,7 +14,7 @@ const defaultOptions: XSwitchOptions = {
   radius: 'full',
 };
 
-export const X_SWITCH_OPTIONS = new InjectionToken('CHECKBOX_OPTIONS', {
+export const X_SWITCH_OPTIONS = new InjectionToken('SWITCH_OPTIONS', {
   factory: () => defaultOptions,
 });
 

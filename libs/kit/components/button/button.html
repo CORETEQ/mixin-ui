@@ -1,7 +1,8 @@
 @if (loading()) {
   <div role="status"
        aria-live="polite"
-       [class]="`x-btn-spinner ${!withLoadingText() && `x-full`}`">
+       class="x-btn-spinner"
+       [class.x-full]="!withLoadingText()">
     <x-spinner />
   </div>
 }

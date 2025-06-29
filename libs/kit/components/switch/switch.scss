@@ -21,7 +21,7 @@
 }
 
 @mixin checked {
-  &:where(.x-checked) {
+  &:where([data-state='checked']) {
     @content;
   }
 }
@@ -29,22 +29,21 @@
 .x-switch {
   --x-track-bg: var(--x-gray-300);
   --t-thumb-bg: var(--x-white);
+  --t-thumb-radius: 50%;
 
   position: relative;
   display: inline-block;
   flex-shrink: 0;
   box-sizing: border-box;
-  inline-size: 2.75rem;
-  block-size: 1.5rem;
+  inline-size: calc(var(--x-size) * 2);
+  block-size: var(--x-size);
   overflow: hidden;
   vertical-align: middle;
   background-color: var(--x-track-bg);
   outline: 0.125rem solid transparent;
   outline-offset: 0.125rem;
   border-radius: var(--x-radius);
-  transition-timing-function: ease-in-out;
-  transition-duration: 150ms;
-  transition-property: background-color;
+  transition: background-color 150ms ease-in-out;
   cursor: pointer;
 
   @include hover {
@@ -53,46 +52,48 @@
 
   @include checked {
     --x-track-bg: var(--x-accent-600);
+    --x-track-offset: calc(var(--x-size) / 2);
 
     @include hover {
       --x-track-bg: var(--x-accent-700);
     }
-
-    .x-switch-track {
-      transform: translateX(0.575rem);
-    }
   }
 
   @include size(sm) {
-
+    --x-size: 1rem;
   }
 
   @include size(md) {
-
+    --x-size: 1.25rem;
   }
 
   @include size(lg) {
-
+    --x-size: 1.5rem;
   }
 
   @include radius(none) {
     --x-radius: var(--x-radius-none);
+    --t-thumb-radius: var(--x-radius-none);
   }
 
   @include radius(sm) {
     --x-radius: var(--x-radius-sm);
+    --t-thumb-radius: var(--x-radius-sm);
   }
 
   @include radius(md) {
     --x-radius: var(--x-radius-md);
+    --t-thumb-radius: var(--x-radius-md);
   }
 
   @include radius(lg) {
     --x-radius: var(--x-radius-lg);
+    --t-thumb-radius: var(--x-radius-lg);
   }
 
   @include radius(full) {
     --x-radius: var(--x-radius-full);
+    --t-thumb-radius: 50%;
   }
 }
 
@@ -102,19 +103,21 @@
   justify-content: center;
   inline-size: 100%;
   block-size: 100%;
-  transform: translateX(-0.575rem);
-  transition-timing-function: ease-in-out;
-  transition-duration: 150ms;
-  transition-property: transform;
+  translate: var(--x-track-offset, -25%) 0;
+  transition: translate 150ms ease-in-out;
 }
 
 .x-switch-thumb {
+  position: relative;
+  display: flex;
   flex-shrink: 0;
-  inline-size: 1.25rem;
-  block-size: 1.25rem;
-  margin: 0.125rem 0;
+  align-items: center;
+  justify-content: center;
+  block-size: 100%;
+  aspect-ratio: 1 / 1;
+  scale: 0.75;
   color: var(--x-track-bg);
   font-size: 1.25rem;
   background-color: var(--t-thumb-bg);
-  border-radius: 50%;
+  border-radius: var(--t-thumb-radius);
 }

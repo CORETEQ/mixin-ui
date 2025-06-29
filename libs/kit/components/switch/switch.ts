@@ -1,12 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   inject,
   input,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgControl, NgModel } from '@angular/forms';
 import { createCva } from '@mixin-ui/cdk';
+import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_SWITCH_OPTIONS } from './options';
 
 @Component({
@@ -15,12 +17,12 @@ import { X_SWITCH_OPTIONS } from './options';
   selector: 'button[x-switch]',
   styleUrl: './switch.scss',
   templateUrl: './switch.html',
-  imports: [],
+  imports: [XIcon],
   host: {
     type: 'button',
     role: 'switch',
     '[class]': '`x-switch x-size-${size()} x-radius-${radius()}`',
-    '[class.x-checked]': 'checked()',
+    '[attr.data-state]': 'state()',
     '[attr.data-main-color]': 'color()',
     '(blur)': 'markAsTouched()',
     '(click)': 'toggle()',
@@ -35,8 +37,12 @@ export class XSwitch {
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
   readonly color = input(this.#opt.color);
+  readonly iconChecked = input(this.#opt.iconChecked);
+  readonly iconUnchecked = input(this.#opt.iconUnchecked);
   readonly checked = this.#cva.value;
   readonly required = this.#cva.required;
+  readonly state = computed(() => (this.checked() ? 'checked' : 'unchecked'));
+  readonly icon = computed(() => (this.checked() ? this.iconChecked() : this.iconUnchecked()));
 
   constructor() {
     if (this.#ngc instanceof NgModel) {

@@ -34,9 +34,9 @@ export class XPopoverContainer {
   readonly close = () => this.#popover.toggle(false);
 
   constructor() {
-    afterNextRender(() => {
-      getFocusableElement(this.#el)?.focus();
-    });
+    // afterNextRender(() => {
+    //   getFocusableElement(this.#el)?.focus();
+    // });
 
     this.#overlay.keydownEvents
       .pipe(filter(isPureEscape), takeUntilDestroyed())

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { XControl, XText } from '@mixin-ui/kit';
+import { XText } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-input-text-radii-example',
   templateUrl: './radii.html',
-  imports: [XControl, XText],
+  imports: [XText],
 })
 export class InputTextRadiiExample {}

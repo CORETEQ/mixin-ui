@@ -35,10 +35,11 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-date',
   templateUrl: './date.html',
+  imports: [XButton, XIcon],
   providers: [
     provideMask(X_DATE_MASK_FACTORY),
-    provideControlAccessor(forwardRef(() => XDate)),
-    provideCalendarAccessor(forwardRef(() => XDate)),
+    provideControlAccessor(forwardRef(() => XDateRoot)),
+    provideCalendarAccessor(forwardRef(() => XDateRoot)),
   ],
   hostDirectives: [
     {
@@ -61,9 +62,8 @@ import { X_INPUT_DATE_OPTIONS } from './options';
     '(focusin)': 'onFocusIn($event)',
     '(focusout)': 'onFocusOut($event)',
   },
-  imports: [XButton, XIcon],
 })
-export class XDate implements XControlAccessor<Date | null>, XCalendarAccessor {
+export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccessor {
   readonly #opt = inject(X_INPUT_DATE_OPTIONS);
   readonly #mask = injectMask<Date | null, XDateMaskOptions>();
   readonly #input = inject(XInput, { self: true });

@@ -1,7 +1,7 @@
 @Component({
   template: `
     <x-text>
-      <input x-control [(ngModel)]="value" />
+      <input [(ngModel)]="value" />
     </x-text>
   `
 })

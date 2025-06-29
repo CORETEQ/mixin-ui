@@ -1,3 +1,10 @@
 .x-calendar {
+  display: block;
+  padding: 0.25rem;
+}
 
+.x-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
 }

@@ -39,7 +39,7 @@
 }
 
 @mixin disabled {
-  &:where(.x-disabled, :has(> input:disabled), :has(> select:disabled)) {
+  &:where(.x-disabled) {
     @content;
   }
 }
@@ -300,6 +300,7 @@
   justify-content: center;
   box-sizing: border-box;
   min-inline-size: var(--x-block-size);
+  overflow: hidden;
   color: var(--x-icon-color);
   cursor: inherit;
 }

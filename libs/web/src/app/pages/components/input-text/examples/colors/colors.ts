@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
-import { XColor, XControl, XText } from '@mixin-ui/kit';
+import { XColor, XText } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-input-text-colors-example',
   templateUrl: './colors.html',
-  imports: [XControl, XText, TitleCasePipe],
+  imports: [XText, TitleCasePipe],
 })
 export class InputTextColorExample {
   readonly colors: readonly XColor[] = [

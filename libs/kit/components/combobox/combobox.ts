@@ -7,6 +7,7 @@ import {
   linkedSignal,
   ViewEncapsulation,
 } from '@angular/core';
+import { Subject } from 'rxjs';
 import {
   provideControlAccessor,
   XControlAccessor,
@@ -14,7 +15,6 @@ import {
   XPopover,
 } from '@mixin-ui/kit/directives';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
-import { Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -52,7 +52,7 @@ export class XComboboxRoot<T>
   readonly valueChanges = new Subject<T | readonly T[] | null>();
 
   setValue(value: T | readonly T[] | null): void {
-    this.value.set(value);
+    // this.value.set(value);
   }
 
   select(values: readonly T[]): void {

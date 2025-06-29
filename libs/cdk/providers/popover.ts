@@ -51,7 +51,7 @@ export function popover(injector?: Injector): XPopoverManager {
   return runInInjectionContext(injector || inject(Injector), () => new XPopoverManager());
 }
 
-export class XPopoverManager {
+class XPopoverManager {
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
   readonly #cdk = inject(Overlay);
   readonly #vcr = inject(ViewContainerRef);
@@ -71,8 +71,6 @@ export class XPopoverManager {
   );
 
   readonly keydownEvents = this.#ref$.pipe(switchMap(overlayRef => overlayRef.keydownEvents()));
-
-  readonly backdropEvents = this.#ref$.pipe(switchMap(overlayRef => overlayRef.backdropClick()));
 
   readonly outsidePointerEvents = this.#ref$.pipe(
     switchMap(overlayRef =>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { XControl, XIcon, XText } from '@mixin-ui/kit';
+import { XIcon, XText } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-input-text-sizes-example',
   templateUrl: './sizes.html',
-  imports: [XControl, XText, XIcon],
+  imports: [XText, XIcon],
 })
 export class InputTextSizesExample {}

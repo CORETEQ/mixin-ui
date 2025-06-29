@@ -25,7 +25,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
   imports: [XButton, XIcon, XGroup],
   providers: [
     provideMask(X_NUMBER_MASK_FACTORY),
-    provideControlAccessor(forwardRef(() => XNumber)),
+    provideControlAccessor(forwardRef(() => XNumberRoot)),
     provideButtonOptions({ variant: 'outline', color: 'gray', radius: 'none' }),
   ],
   hostDirectives: [
@@ -40,7 +40,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
     '(keydown.arrowUp)': '$event.preventDefault(); step() && plus(step())',
   },
 })
-export class XNumber implements XControlAccessor<number | null> {
+export class XNumberRoot implements XControlAccessor<number | null> {
   readonly #opt = inject(X_INPUT_NUMBER_OPTIONS);
   readonly #input = inject(XInput);
   readonly #mask = injectMask<number | null, XNumberMaskOptions>();
@@ -106,10 +106,6 @@ export class XNumber implements XControlAccessor<number | null> {
     return this.#mask.rawValue || 0;
   }
 
-  setValue(value: number | null): void {
-    this.#mask.setValue(value);
-  }
-
   plus(step = 1): void {
     if (this.enabled()) {
       this.#mask.setValue(Math.min(this.max(), this.normalizedValue + step));
@@ -120,6 +116,10 @@ export class XNumber implements XControlAccessor<number | null> {
     if (this.enabled()) {
       this.#mask.setValue(Math.max(this.min(), this.normalizedValue - step));
     }
+  }
+
+  setValue(value: number | null): void {
+    this.#mask.setValue(value);
   }
 
   onControlInit(el: HTMLInputElement): void {

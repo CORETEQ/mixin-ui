@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { XInput } from '@mixin-ui/kit/directives';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'x-textarea',
+  selector: 'textarea[x-textarea]',
   styleUrl: './textarea.scss',
   templateUrl: './textarea.html',
   hostDirectives: [
@@ -14,9 +14,7 @@ import { XInput } from '@mixin-ui/kit/directives';
     },
   ],
   host: {
-    '[class]': '`x-textarea`',
+    class: 'x-textarea',
   },
 })
-export class XTextarea {
-  readonly placeholder = input<string>();
-}
+export class XTextarea {}

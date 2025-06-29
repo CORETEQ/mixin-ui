@@ -29,7 +29,7 @@ import {
   subMonths,
   subYears,
 } from 'date-fns';
-import { XButton } from '@mixin-ui/kit/components/button';
+import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
 import { X_CALENDAR_ACCESSOR } from './providers';
 import { XMapPipe } from '@mixin-ui/cdk';
 
@@ -42,6 +42,7 @@ export type CalendarSelectionMode = 'days' | 'months' | 'years';
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
   imports: [XButton, XMapPipe],
+  providers: [provideButtonOptions({ variant: 'subtle', color: 'gray' })],
   host: {
     class: 'x-calendar',
   },

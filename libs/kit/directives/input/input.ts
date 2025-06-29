@@ -50,7 +50,7 @@ class XInputStyles {}
 })
 export class XInput {
   readonly #opt = inject(X_INPUT_OPTIONS);
-  readonly #hostControl = inject(NgControl, { self: true, optional: true });
+  readonly #selfControl = inject(NgControl, { self: true, optional: true });
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
 
   readonly #mo$ = fromMutationObserver(this.#el, {
@@ -64,7 +64,7 @@ export class XInput {
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
   readonly color = input(this.#opt.color);
-  readonly control = computed(() => this.childControl()?.control || this.#hostControl?.control);
+  readonly control = computed(() => this.childControl()?.control || this.#selfControl?.control);
 
   readonly focusableEl = toSignal(
     this.#mo$.pipe(
