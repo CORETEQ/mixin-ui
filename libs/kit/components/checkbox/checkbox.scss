@@ -137,7 +137,7 @@
     --x-icon-size: 1.125rem;
   }
 
-  // radii
+  // sizes
   @include radius(none) {
     --x-radius: var(--x-radius-none);
   }

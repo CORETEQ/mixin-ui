@@ -204,7 +204,7 @@
     line-height: 1.5rem;
   }
 
-  // radii
+  // sizes
   @include radius(none) {
     --x-radius: var(--x-radius-none);
   }

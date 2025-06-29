@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-textarea-basic-example',
+  selector: 'app-input-mask-basic-example',
   templateUrl: './basic.html',
   imports: [],
 })
-export class TextareaBasicExample {}
+export class InputMaskBasicExample {}

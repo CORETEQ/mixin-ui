@@ -1,10 +1,58 @@
+// states
+@mixin hover {
+  @media (hover: hover) {
+    &:where(:hover:not(.x-disabled)) {
+      @content;
+    }
+  }
+}
+
+@mixin disabled {
+  &:where(.x-disabled) {
+    @content;
+  }
+}
+
 .x-calendar {
   display: block;
-  padding: 0.25rem;
+  padding: 0.75rem;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.x-calendar-weekdays {
+  font-weight: 500;
 }
 
 .x-calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 0.25rem;
+}
+
+.x-calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  background-color: transparent;
+  border-radius: 0.375rem;
+  cursor: pointer;
+
+  @include hover {
+    background-color: var(--x-gray-200);
+  }
+
+  @include disabled {
+    opacity: 0.6;
+    cursor: var(--x-cursor-disabled);
+  }
 }

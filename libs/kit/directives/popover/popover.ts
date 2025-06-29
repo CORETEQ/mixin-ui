@@ -19,7 +19,7 @@ import { fromResizeObserver, XOutlet, XPopoverPositionOptions } from '@mixin-ui/
 import { XPopoverContainer } from './container';
 import { X_POPOVER_OPTIONS } from './options';
 import {
-  X_OVERLAY,
+  X_POPOVER,
   X_POPOVER_CLOSE,
   X_POPOVER_POSITION_OPTIONS,
   X_POPOVER_PROVIDERS,
@@ -33,7 +33,7 @@ import {
 })
 export class XPopover {
   readonly #opt = inject(X_POPOVER_OPTIONS);
-  readonly #overlay = inject(X_OVERLAY);
+  readonly #overlay = inject(X_POPOVER);
   readonly #position = inject(X_POPOVER_POSITION_OPTIONS);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
   readonly #parent = inject(XPopover, { skipSelf: true, optional: true });

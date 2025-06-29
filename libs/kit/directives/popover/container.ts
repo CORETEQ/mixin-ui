@@ -13,7 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { getFocusableElement, isPureEscape, typedOutlet } from '@mixin-ui/cdk';
 import { XPopover } from './popover';
-import { X_OVERLAY } from './providers';
+import { X_POPOVER } from './providers';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -27,7 +27,7 @@ import { X_OVERLAY } from './providers';
 export class XPopoverContainer {
   readonly #popover = inject(XPopover);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
-  readonly #overlay = inject(X_OVERLAY);
+  readonly #overlay = inject(X_POPOVER);
 
   readonly injector = inject(INJECTOR);
   readonly content = computed(() => typedOutlet(this.#popover.content()));

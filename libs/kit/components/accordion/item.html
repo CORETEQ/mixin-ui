@@ -10,15 +10,13 @@
       <ng-content />
     </span>
 
-    @if (withIcon()) {
-      <span class="x-accordion-label-icon">
-        @if ($.icon) {
-          <ng-container *ngTemplateOutlet="$.icon; context: { $implicit: open() }" />
-        } @else {
-          <x-icon class="x-accordion-icon-animate" src="chevron-down" />
-        }
-      </span>
-    }
+    <span class="x-accordion-label-icon">
+      @if ($.icon) {
+        <ng-container *ngTemplateOutlet="$.icon; context: { $implicit: open() }" />
+      } @else {
+        <x-icon class="x-accordion-icon-animate" src="chevron-down" />
+      }
+    </span>
   </summary>
 </details>
 
@@ -29,7 +27,7 @@
     </div>
   } @else {
     <div class="x-accordion-content">
-      <ng-content select="[x-slot='content']:not(ng-template)" />
+      <ng-content select="[x-slot='content']" />
     </div>
   }
 </x-collapsible>

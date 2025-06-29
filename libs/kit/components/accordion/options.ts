@@ -5,14 +5,12 @@ export interface XAccordionOptions {
   readonly size: XUnion<'sm' | 'md' | 'lg'>;
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg'>;
   readonly multiple: boolean;
-  readonly withIcon: boolean;
 }
 
 const defaultOptions: XAccordionOptions = {
   size: 'md',
   radius: 'lg',
   multiple: false,
-  withIcon: true,
 };
 
 export const X_ACCORDION_OPTIONS = new InjectionToken<XAccordionOptions>('ACCORDION_OPTIONS', {

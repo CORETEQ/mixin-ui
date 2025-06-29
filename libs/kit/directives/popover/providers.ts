@@ -19,7 +19,7 @@ import {
   XPopoverPositionOptions,
 } from '@mixin-ui/cdk';
 
-export const X_OVERLAY = new InjectionToken<XPopoverManager>('OVERLAY');
+export const X_POPOVER = new InjectionToken<XPopoverManager>('OVERLAY');
 
 export const X_POPOVER_POSITION_OPTIONS = new InjectionToken<XPopoverPositionOptions>(
   'POPOVER_POSITION_OPTIONS'
@@ -29,14 +29,14 @@ export const X_POPOVER_CLOSE = new InjectionToken<Observable<boolean>>('OVERLAY_
 
 export const X_POPOVER_PROVIDERS: Provider[] = [
   {
-    provide: X_OVERLAY,
+    provide: X_POPOVER,
     useFactory: popover,
   },
   {
     provide: X_POPOVER_CLOSE,
     useFactory: (
       el = inject(ElementRef).nativeElement,
-      overlay = inject(X_OVERLAY),
+      overlay = inject(X_POPOVER),
       modality = inject(InputModalityDetector)
     ) =>
       overlay.openChanges.pipe(
@@ -70,7 +70,7 @@ export const X_POPOVER_PROVIDERS: Provider[] = [
   },
   {
     provide: X_POPOVER_POSITION_OPTIONS,
-    useFactory: (hasParentOverlay = inject(X_OVERLAY, { skipSelf: true, optional: true })) => ({
+    useFactory: (hasParentOverlay = inject(X_POPOVER, { skipSelf: true, optional: true })) => ({
       direction: hasParentOverlay ? 'horizontal' : 'vertical',
       position: hasParentOverlay ? 'end' : 'bottom',
       align: 'start',

@@ -1,11 +1,10 @@
-$border-width: 1px;
-
 .x-accordion-item {
+  position: relative;
   display: block;
-  margin-block-end: -$border-width;
+  margin-block-end: -1px;
   overflow: hidden;
-  color: var(--x-gray-12);
-  border: $border-width solid var(--x-gray-6);
+  color: var(--x-gray-950);
+  border: 1px solid var(--x-gray-400);
 
   &:first-of-type {
     border-top-left-radius: var(--x-radius);
@@ -19,11 +18,15 @@ $border-width: 1px;
 }
 
 .x-accordion-label {
+  position: relative;
   display: flex;
   align-items: center;
-  margin-block-end: -$border-width;
-  padding: 0.75rem 1rem;
-  border-block-end: $border-width solid var(--x-gray-6);
+  block-size: var(--x-size, 2rem);
+  margin-block-end: -1px;
+  padding: 0 var(--x-padding, 1rem);
+  background: transparent;
+  outline: none;
+  border-block-end: 1px solid var(--x-gray-400);
   user-select: none; // https://github.com/whatwg/html/issues/3191
   cursor: pointer;
 
@@ -37,7 +40,11 @@ $border-width: 1px;
 
   &:hover,
   details[open] & {
-    background-color: var(--x-gray-2);
+    background-color: var(--x-gray-50);
+  }
+
+  &:focus-visible {
+
   }
 }
 
@@ -68,5 +75,5 @@ $border-width: 1px;
 
 .x-accordion-content {
   display: block;
-  padding: 1rem;
+  padding: var(--x-padding, 1rem);
 }

@@ -25,21 +25,21 @@
 <div class="calendar-content">
   @switch (selectionMode()) {
     @case ('days') {
-      <div class="weekdays">
+      <div class="x-calendar-days x-calendar-weekdays">
         @for (day of weekdays; track day) {
-          <div class="weekday">{{ day }}</div>
+          <div class="x-calendar-day">{{ day }}</div>
         }
       </div>
+
       <div class="x-calendar-days">
         @for (day of daysInMonth(); track day.date.getTime()) {
           <button
             type="button"
-            class="day-cell"
+            class="x-calendar-day"
             [class.selected]="isDateSelected(day.date)"
             [class.disabled]="day.disabled"
             [disabled]="day.disabled"
-            (click)="selectDate(day.date)"
-          >
+            (click)="selectDate(day.date)">
             {{ day.date | map: format: 'd' }}
           </button>
         }
