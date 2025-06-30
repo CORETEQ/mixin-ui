@@ -19,13 +19,13 @@ body {
   font-feature-settings: "liga" 1, "kern" 1;
 }
 
-.docs-layout {
+.app-layout {
   display: flex;
   flex-direction: column;
   background: #fff;
 }
 
-.docs-header {
+.app-header {
   position: sticky;
   top: 0;
   z-index: 50;
@@ -39,7 +39,7 @@ body {
   -webkit-backdrop-filter: saturate(180%) blur(5px); /* Safari */
 }
 
-.docs-container-wrapper {
+.app-container {
   display: block;
   inline-size: 100%;
   max-inline-size: 1400px;
@@ -104,13 +104,49 @@ body {
   }
 }
 
+.docs-logo {
+  &:hover {
+    .docs-logo-shape {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.docs-logo-shape {
+  transition: transform 0.3s ease;
+}
+
 .docs-logo-text {
+
   block-size: 30px;
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 30px;
   font-weight: 400;
   line-height: 26px;
-  -webkit-font-smoothing: subpixel-antialiased
+  -webkit-font-smoothing: subpixel-antialiased;
+  color: #09090B;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(45deg, #09090B, #707070);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradient 3s ease infinite;
+  }
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
 }
 
 .docs-content {
@@ -118,6 +154,7 @@ body {
   flex: 1 1 0;
   grid-template-columns: 15rem minmax(0, 1fr) 15rem;
   gap: 3rem;
+  margin: 0 auto;
 }
 
 .docs-subtitle {
@@ -327,7 +364,7 @@ body {
 }
 
 @media (width <= 767px) {
-  .docs-container-wrapper {
+  .app-container {
     border: none;
   }
 

@@ -28,6 +28,7 @@ import { XButton, XIcon, XTooltip } from '@mixin-ui/kit';
 })
 export class DocsSnippet {
   readonly withHeader = input(false, { transform: booleanAttribute });
+  readonly showButtons = input(true, { transform: booleanAttribute });
   readonly activeIndex = model<number>(0);
   readonly align = input<'start' | 'center' | 'end'>('center');
   readonly justify = input<'start' | 'center' | 'end'>('center');

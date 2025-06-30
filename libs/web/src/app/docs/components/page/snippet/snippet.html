@@ -16,25 +16,27 @@
       </button>
     }
 
-    <div class="flex gap-0.5 ml-auto">
-      <button x-icon
-              x-tooltip="Very soon..."
-              size="sm"
-              color="gray"
-              variant="ghost"
-              class="!text-[#707070] !cursor-not-allowed hover:!text-[#09090B]">
-        <x-icon src="stackblitz" size="16" />
-      </button>
+    @if (showButtons()) {
+      <div class="flex gap-0.5 ml-auto">
+        <button x-icon
+                x-tooltip="Very soon..."
+                size="sm"
+                color="gray"
+                variant="ghost"
+                class="!text-[#707070] !cursor-not-allowed hover:!text-[#09090B]">
+          <x-icon src="stackblitz" size="16" />
+        </button>
 
-      <button x-icon
-              x-tooltip="Very soon..."
-              size="sm"
-              color="gray"
-              variant="ghost"
-              class="!text-[#707070] !cursor-not-allowed hover:!text-[#09090B]">
-        <x-icon src="sun-medium" size="16" />
-      </button>
-    </div>
+        <button x-icon
+                x-tooltip="Very soon..."
+                size="sm"
+                color="gray"
+                variant="ghost"
+                class="!text-[#707070] !cursor-not-allowed hover:!text-[#09090B]">
+          <x-icon src="sun-medium" size="16" />
+        </button>
+      </div>
+    }
   </div>
 }
 

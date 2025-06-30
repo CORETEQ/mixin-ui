@@ -64,6 +64,7 @@ export class XCalendar {
   protected readonly format = format;
   protected readonly dayDisabled = dayDisabled;
   protected readonly daySelected = daySelected;
+  protected readonly dayAdjacent = dayAdjacent;
   protected readonly monthDisabled = monthDisabled;
   protected readonly yearDisabled = yearDisabled;
 
@@ -233,6 +234,10 @@ export class XCalendar {
 
 function daySelected(date: Date, value: Date | null): boolean {
   return value ? isSameDay(date, value) : false;
+}
+
+function dayAdjacent(date: Date, value: Date | null): boolean {
+  return value ? !isSameMonth(date, value) : false;
 }
 
 function dayDisabled(date: Date, min: Date | null, max: Date | null): boolean {

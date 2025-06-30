@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { DocsLogo } from './logo';
 import { RouterLink } from '@angular/router';
+import { DocsLogo } from './logo';
 
 @Component({
-  selector: 'docs-header',
+  selector: 'app-header',
   templateUrl: './header.html',
   imports: [DocsLogo, RouterLink],
-  host: { class: 'docs-header' },
+  host: { class: 'app-header' },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DocsHeader {}
+export class Header {}

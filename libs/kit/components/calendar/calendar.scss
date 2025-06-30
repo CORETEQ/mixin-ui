@@ -73,4 +73,8 @@
     opacity: 0.6;
     cursor: var(--x-cursor-disabled);
   }
+
+  &.x-adjacent {
+    opacity: 0.6;
+  }
 }

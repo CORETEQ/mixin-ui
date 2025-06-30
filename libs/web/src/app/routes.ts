@@ -1,12 +1,12 @@
 import { Route } from '@angular/router';
 import { group, page, section } from './docs/providers';
-import { DocsLayout } from './docs/components';
+import { DocsWrapper } from './docs/components';
+import Landing from './landing';
 
 export const ROUTES: Route[] = [
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'installation',
+    component: Landing,
   },
   {
     path: 'components',
@@ -15,7 +15,7 @@ export const ROUTES: Route[] = [
   },
   {
     path: '',
-    component: DocsLayout,
+    component: DocsWrapper,
     data: { root: true },
     children: [
       section({
@@ -44,7 +44,7 @@ export const ROUTES: Route[] = [
             children: [
               page({
                 path: 'colors',
-                title: 'Color system',
+                title: 'Color palette',
                 loadComponent: () => import('./pages/colors'),
               }),
               page({

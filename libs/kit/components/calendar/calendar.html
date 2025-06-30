@@ -36,12 +36,14 @@
       <div class="x-calendar-days">
         @for (day of daysInMonth(); track day.getTime()) {
           @let selected = day | map: daySelected: value();
+          @let adjacent = day | map: dayAdjacent: value();
           @let disabled = day | map: dayDisabled: min() : max();
 
           <button
             type="button"
             class="x-calendar-day"
             [class.x-selected]="selected"
+            [class.x-adjacent]="adjacent"
             [class.x-disabled]="disabled"
             (click)="selectDay(day)">
             {{ day | map: format: 'd' }}
