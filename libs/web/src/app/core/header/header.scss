@@ -1,0 +1,27 @@
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  inline-size: 100%;
+  background: hsl(0deg 0% 100% / 100%);
+  border-style: solid;
+  border-color: #E5E5E5;
+  border-bottom-width: 1px;
+  //backdrop-filter: saturate(180%) blur(5px);
+  /* stylelint-disable-next-line */
+  //-webkit-backdrop-filter: saturate(180%) blur(5px); /* Safari */
+}
+
+.app-header-version {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 12px;
+  color: var(--x-gray-600);
+  font-size: 13.5px;
+  font-weight: 500;
+  border: 1px solid #dadada;
+  border-radius: 9999px;
+}

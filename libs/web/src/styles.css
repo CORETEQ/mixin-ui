@@ -25,20 +25,6 @@ body {
   background: #fff;
 }
 
-.app-header {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  inline-size: 100%;
-  background: hsl(0deg 0% 100% / 80%);
-  border-style: solid;
-  border-color: #E5E5E5;
-  border-bottom-width: 1px;
-  backdrop-filter: saturate(180%) blur(5px);
-  /* stylelint-disable-next-line */
-  -webkit-backdrop-filter: saturate(180%) blur(5px); /* Safari */
-}
-
 .app-container {
   display: block;
   inline-size: 100%;
@@ -105,11 +91,15 @@ body {
 }
 
 .docs-logo {
-  &:hover {
-    .docs-logo-shape {
-      transform: rotate(360deg);
-    }
-  }
+  /* &:hover { */
+
+  /*  .docs-logo-shape { */
+
+  /*    transform: rotate(360deg); */
+
+  /*  } */
+
+  /* } */
 }
 
 .docs-logo-shape {
@@ -117,22 +107,20 @@ body {
 }
 
 .docs-logo-text {
-
   block-size: 30px;
+  color: #09090B;
   font-family: 'Kumbh Sans', sans-serif;
   font-size: 30px;
   font-weight: 400;
   line-height: 26px;
-  -webkit-font-smoothing: subpixel-antialiased;
-  color: #09090B;
   transition: background 0.3s ease;
+  -webkit-font-smoothing: subpixel-antialiased;
 
   &:hover {
+    color: transparent;
     background: linear-gradient(45deg, #09090B, #707070);
     background-size: 200% 200%;
-    -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
     animation: gradient 3s ease infinite;
   }
 
@@ -140,9 +128,11 @@ body {
     0% {
       background-position: 0% 50%;
     }
+
     50% {
       background-position: 100% 50%;
     }
+
     100% {
       background-position: 0% 50%;
     }

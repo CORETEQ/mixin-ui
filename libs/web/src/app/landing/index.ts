@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { DocsSnippet } from '@/docs/components';
-import { XIcon } from '@mixin-ui/kit';
+import { Hero } from './hero';
+import { Footer } from './footer';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -8,7 +8,6 @@ import { XIcon } from '@mixin-ui/kit';
   selector: 'app-landing',
   styleUrl: './index.scss',
   templateUrl: './index.html',
-  imports: [DocsSnippet, XIcon],
-  host: { class: 'app-container' },
+  imports: [Hero, Footer],
 })
 export default class Landing {}
