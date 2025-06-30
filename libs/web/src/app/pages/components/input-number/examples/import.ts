@@ -1,1 +1,1 @@
-import { XInputNumber } from '@mixin-ui/kit';
+import { XNumber } from '@mixin-ui/kit';

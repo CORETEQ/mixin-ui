@@ -3,7 +3,7 @@
 
 @if (step(); as step) {
   <x-group class="x-input-suffix x-number-spin-buttons">
-    <button x-icon-btn
+    <button x-icon
             tabindex="-1"
             [size]="size()"
             [disabled]="minusDisabled()"
@@ -11,7 +11,7 @@
             (click)="minus(step)">
       <x-icon src="minus" />
     </button>
-    <button x-icon-btn
+    <button x-icon
             tabindex="-1"
             [size]="size()"
             [disabled]="plusDisabled()"

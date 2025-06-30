@@ -1,1 +1,1 @@
-import { XInputText } from '@mixin-ui/kit';
+import { XText } from '@mixin-ui/kit';

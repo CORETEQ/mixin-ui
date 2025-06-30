@@ -31,6 +31,7 @@ import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/componen
       directive: XPopover,
       inputs: [
         'x-popover-open: open',
+        'x-popover-fixed: popoverFixed',
         'x-popover-stretch: popoverStretch',
         'x-popover-min-width: popoverMinWidth',
         'x-popover-max-width: popoverMaxWidth',
@@ -42,6 +43,7 @@ import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/componen
     role: 'combobox',
     class: 'x-select',
     '[attr.tabindex]': 'tabIndex()',
+    '[attr.aria-expanded]': 'open()',
     '(keydown.arrowDown)': '$event.preventDefault(); togglePopover(true)',
     '(click)': 'togglePopover(!open())',
     '(blur)': 'onBlur($event)',
@@ -53,7 +55,6 @@ export class XSelectRoot<T> implements XListboxAccessor<T> {
   readonly slots = contentChildren(X_SLOT);
   readonly placeholder = input<string>();
   readonly multiple = input(false);
-  readonly open = this.#popover.open;
   readonly tabIndex = computed(() => (this.disabled() ? null : '0'));
 
   readonly #cva = createCva<T | readonly T[] | null>({
@@ -63,6 +64,7 @@ export class XSelectRoot<T> implements XListboxAccessor<T> {
 
   readonly value = this.#cva.value;
   readonly disabled = this.#cva.disabled;
+  readonly open = this.#popover.open;
 
   readonly hasValue = computed(() => {
     const value = this.value();

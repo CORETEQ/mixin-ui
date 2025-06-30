@@ -1,1 +1,1 @@
-import { XInputDate } from '@mixin-ui/kit';
+import { XDate } from '@mixin-ui/kit';

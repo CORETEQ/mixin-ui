@@ -17,7 +17,7 @@ import { X_BUTTON_OPTIONS } from './options';
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'button[x-btn], button[x-icon-btn], a[x-btn], a[x-icon-btn]',
+  selector: 'button[x-btn], button[x-icon], a[x-btn], a[x-icon]',
   exportAs: 'x-btn',
   styleUrl: './button.scss',
   templateUrl: './button.html',
@@ -37,7 +37,7 @@ export class XButton {
   readonly #opt = inject(X_BUTTON_OPTIONS);
   readonly #el = inject(ElementRef).nativeElement;
 
-  readonly iconOnly = this.#el.matches('[x-icon-btn]');
+  readonly iconOnly = this.#el.matches('[x-icon]');
   readonly type = input(this.#opt.type);
   readonly variant = input(this.#opt.variant);
   readonly color = input(this.#opt.color);

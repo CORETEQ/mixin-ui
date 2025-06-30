@@ -2,7 +2,7 @@
   template: `
     <x-group>
       <button x-btn>Button</button>
-      <button x-icon-btn>
+      <button x-icon>
         <x-icon src="chevron-down" />
       </button>
     </x-group>
