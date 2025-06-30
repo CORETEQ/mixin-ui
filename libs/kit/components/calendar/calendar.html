@@ -24,7 +24,7 @@
   </button>
 </div>
 
-<div class="calendar-content">
+<div class="x-calendar-content">
   @switch (mode()) {
     @case ('days') {
       <div class="x-calendar-days">
@@ -34,48 +34,51 @@
       </div>
 
       <div class="x-calendar-days">
-        @for (day of daysInMonth(); track day.date.getTime()) {
-          @let selected = day.date | map: isDateSelected;
+        @for (day of daysInMonth(); track day.getTime()) {
+          @let selected = day | map: daySelected: value();
+          @let disabled = day | map: dayDisabled: min() : max();
 
           <button
             type="button"
             class="x-calendar-day"
             [class.x-selected]="selected"
-            [class.x-disabled]="day.disabled"
-            (click)="selectDate(day.date)">
-            {{ day.date | map: format: 'd' }}
+            [class.x-disabled]="disabled"
+            (click)="selectDay(day)">
+            {{ day | map: format: 'd' }}
           </button>
         }
       </div>
     }
     @case ('months') {
-      <div class="months-grid">
-        @for (month of monthsInYear(); track month.date.getTime()) {
+      <div class="x-calendar-months">
+        @for (month of monthsInYear(); track month.getTime()) {
+          @let disabled = month | map: monthDisabled: min() : max();
+
           <button
             type="button"
             class="month-cell"
-            [class.selected]="isMonthSelected(month.date)"
-            [class.disabled]="month.disabled"
-            [disabled]="month.disabled"
-            (click)="selectMonth(month.date)"
+            [class.x-selected]="isMonthSelected(month)"
+            [class.x-disabled]="disabled"
+            (click)="selectMonth(month)"
           >
-            {{ month.date | map: format: 'MMM' }}
+            {{ month | map: format: 'MMM' }}
           </button>
         }
       </div>
     }
     @case ('years') {
-      <div class="years-grid">
-        @for (year of yearsInDecade(); track year.date.getTime()) {
+      <div class="x-calendar-years">
+        @for (year of yearsInDecade(); track year.getTime()) {
+          @let disabled = year | map: yearDisabled: min() : max();
+
           <button
             type="button"
             class="year-cell"
-            [class.selected]="isYearSelected(year.date)"
-            [class.disabled]="year.disabled"
-            [disabled]="year.disabled"
-            (click)="selectYear(year.date)"
+            [class.x-selected]="isYearSelected(year)"
+            [class.x-disabled]="disabled"
+            (click)="selectYear(year)"
           >
-            {{ year.date | map: format: 'yyyy' }}
+            {{ year | map: format: 'yyyy' }}
           </button>
         }
       </div>

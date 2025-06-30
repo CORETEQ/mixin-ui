@@ -3,6 +3,7 @@ import {
   Component,
   computed,
   inject,
+  input,
   linkedSignal,
   model,
   ViewEncapsulation,
@@ -33,6 +34,7 @@ import { X_LANGUAGE } from '@mixin-ui/kit/providers';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_CALENDAR_ACCESSOR } from './providers';
+import { X_CALENDAR_OPTIONS } from './options';
 
 export type CalendarSelectionMode = 'days' | 'months' | 'years';
 
@@ -47,22 +49,27 @@ export type CalendarSelectionMode = 'days' | 'months' | 'years';
   host: { class: 'x-calendar' },
 })
 export class XCalendar {
+  readonly #opt = inject(X_CALENDAR_OPTIONS);
   readonly #accessor = inject(X_CALENDAR_ACCESSOR);
   readonly #language = inject(X_LANGUAGE);
 
-  readonly month = linkedSignal(() => this.value() || new Date());
   readonly mode = model<CalendarSelectionMode>('days');
+  readonly startOfWeek = input(this.#opt.startOfWeek);
+
+  readonly month = linkedSignal(() => this.value() || new Date());
   readonly value = this.#accessor.value;
   readonly min = this.#accessor.min;
   readonly max = this.#accessor.max;
 
   protected readonly format = format;
+  protected readonly dayDisabled = dayDisabled;
+  protected readonly daySelected = daySelected;
+  protected readonly monthDisabled = monthDisabled;
+  protected readonly yearDisabled = yearDisabled;
 
-  protected readonly isDateSelected = (date: Date) => {
-    return this.value() ? isSameDay(this.value()!, date) : false;
-  };
-
-  readonly weekdays = computed(() => this.#language()['dayNamesMin']);
+  readonly weekdays = computed(() =>
+    orderWeekdays(this.#language()['dayNamesMin'], this.startOfWeek())
+  );
 
   readonly headerTitle = computed(() => {
     const currentMonth = this.month();
@@ -85,24 +92,16 @@ export class XCalendar {
 
   readonly daysInMonth = computed(() => {
     const month = this.month();
-    const start = startOfWeek(startOfMonth(month));
-    const end = endOfWeek(endOfMonth(month));
-
-    return eachDayOfInterval({ start, end }).map(date => ({
-      date,
-      disabled: this.isDateDisabled(date),
-    }));
+    const start = startOfWeek(startOfMonth(month), { weekStartsOn: this.startOfWeek() });
+    const end = endOfWeek(endOfMonth(month), { weekStartsOn: this.startOfWeek() });
+    return eachDayOfInterval({ start, end });
   });
 
   readonly monthsInYear = computed(() => {
     const year = this.month().getFullYear();
     const start = startOfYear(new Date(year, 0, 1));
     const end = endOfYear(start);
-
-    return eachMonthOfInterval({ start, end }).map(date => ({
-      date,
-      disabled: this.isMonthDisabled(date),
-    }));
+    return eachMonthOfInterval({ start, end });
   });
 
   readonly yearsInDecade = computed(() => {
@@ -110,11 +109,7 @@ export class XCalendar {
     const decade = Math.floor(currentYear / 10) * 10;
     const start = new Date(decade, 0, 1);
     const end = new Date(decade + 9, 11, 31);
-
-    return eachYearOfInterval({ start, end }).map(date => ({
-      date,
-      disabled: this.isYearDisabled(date),
-    }));
+    return eachYearOfInterval({ start, end });
   });
 
   navigatePrevious(): void {
@@ -183,16 +178,16 @@ export class XCalendar {
     this.mode.set(newMode);
   }
 
-  selectDate(date: Date): void {
-    if (this.isDateDisabled(date)) {
+  selectDay(day: Date): void {
+    if (this.dayDisabled(day, this.min(), this.max())) {
       return;
     }
 
-    this.updateValue(date);
+    this.updateValue(day);
   }
 
   selectMonth(date: Date): void {
-    if (this.isMonthDisabled(date)) {
+    if (this.monthDisabled(date, this.min(), this.max())) {
       return;
     }
 
@@ -202,7 +197,7 @@ export class XCalendar {
   }
 
   selectYear(date: Date): void {
-    if (this.isYearDisabled(date)) {
+    if (this.yearDisabled(date, this.min(), this.max())) {
       return;
     }
 
@@ -234,49 +229,32 @@ export class XCalendar {
   private updateValue(date: Date | null): void {
     this.#accessor.selectDate(date);
   }
+}
 
-  private isDateDisabled(date: Date): boolean {
-    const minDate = this.min();
-    const maxDate = this.max();
+function daySelected(date: Date, value: Date | null): boolean {
+  return value ? isSameDay(date, value) : false;
+}
 
-    if (minDate && isBefore(date, minDate)) {
-      return true;
-    }
+function dayDisabled(date: Date, min: Date | null, max: Date | null): boolean {
+  return (!!min && isBefore(date, min)) || (!!max && isAfter(date, max));
+}
 
-    if (maxDate && isAfter(date, maxDate)) {
-      return true;
-    }
+function monthDisabled(date: Date, min: Date | null, max: Date | null): boolean {
+  return (
+    (!!min && isBefore(endOfMonth(date), startOfMonth(min))) ||
+    (!!max && isAfter(startOfMonth(date), endOfMonth(max)))
+  );
+}
 
-    return false;
-  }
+function yearDisabled(date: Date, min: Date | null, max: Date | null): boolean {
+  return (
+    (!!min && isBefore(endOfYear(date), startOfYear(min))) ||
+    (!!max && isAfter(startOfYear(date), endOfYear(max)))
+  );
+}
 
-  private isMonthDisabled(date: Date): boolean {
-    const minDate = this.min();
-    const maxDate = this.max();
-
-    if (minDate && isBefore(endOfMonth(date), startOfMonth(minDate))) {
-      return true;
-    }
-
-    if (maxDate && isAfter(startOfMonth(date), endOfMonth(maxDate))) {
-      return true;
-    }
-
-    return false;
-  }
-
-  private isYearDisabled(date: Date): boolean {
-    const minDate = this.min();
-    const maxDate = this.max();
-
-    if (minDate && isBefore(endOfYear(date), startOfYear(minDate))) {
-      return true;
-    }
-
-    if (maxDate && isAfter(startOfYear(date), endOfYear(maxDate))) {
-      return true;
-    }
-
-    return false;
-  }
+function orderWeekdays(tuple: readonly string[], startIndex: number): readonly string[] {
+  const length = tuple.length;
+  const index = ((startIndex % length) + length) % length;
+  return [...tuple.slice(index), ...tuple.slice(0, index)];
 }

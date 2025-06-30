@@ -3,6 +3,7 @@ export * from '@mixin-ui/kit/components/button';
 export * from '@mixin-ui/kit/components/calendar';
 export * from '@mixin-ui/kit/components/checkbox';
 export * from '@mixin-ui/kit/components/collapsible';
+export * from '@mixin-ui/kit/components/combobox';
 export * from '@mixin-ui/kit/components/comparable';
 export * from '@mixin-ui/kit/components/field';
 export * from '@mixin-ui/kit/components/group';

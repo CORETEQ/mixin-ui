@@ -14,4 +14,4 @@ import { XInput } from '@mixin-ui/kit/directives';
   ],
   host: { class: 'x-text' },
 })
-export class XText {}
+export class XTextRoot {}

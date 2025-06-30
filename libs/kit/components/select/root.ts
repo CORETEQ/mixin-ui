@@ -18,8 +18,8 @@ import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/componen
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-select',
-  styleUrl: './select.scss',
-  templateUrl: './select.html',
+  styleUrl: './root.scss',
+  templateUrl: './root.html',
   imports: [XIcon, XSlotsPipe, NgTemplateOutlet],
   providers: [provideListboxAccessor(forwardRef(() => XSelectRoot))],
   hostDirectives: [
