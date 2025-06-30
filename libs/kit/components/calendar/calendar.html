@@ -1,8 +1,9 @@
-<div class="calendar-header">
+<div class="x-calendar-header">
   <button
     x-icon-btn
     (click)="navigatePrevious()"
   >
+    <x-icon src="chevron-left" />
   </button>
 
   <div class="header-title">
@@ -19,26 +20,28 @@
     x-icon-btn
     (click)="navigateNext()"
   >
+    <x-icon src="chevron-right" />
   </button>
 </div>
 
 <div class="calendar-content">
-  @switch (selectionMode()) {
+  @switch (mode()) {
     @case ('days') {
-      <div class="x-calendar-days x-calendar-weekdays">
+      <div class="x-calendar-days">
         @for (day of weekdays; track day) {
-          <div class="x-calendar-day">{{ day }}</div>
+          <div class="x-calendar-weekday">{{ day }}</div>
         }
       </div>
 
       <div class="x-calendar-days">
         @for (day of daysInMonth(); track day.date.getTime()) {
+          @let selected = day.date | map: isDateSelected;
+
           <button
             type="button"
             class="x-calendar-day"
-            [class.selected]="isDateSelected(day.date)"
-            [class.disabled]="day.disabled"
-            [disabled]="day.disabled"
+            [class.x-selected]="selected"
+            [class.x-disabled]="day.disabled"
             (click)="selectDate(day.date)">
             {{ day.date | map: format: 'd' }}
           </button>

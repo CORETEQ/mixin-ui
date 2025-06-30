@@ -20,8 +20,8 @@ import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/componen
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-combobox',
-  styleUrl: './combobox.scss',
-  templateUrl: './combobox.html',
+  styleUrl: './root.scss',
+  templateUrl: './root.html',
   imports: [],
   providers: [
     provideControlAccessor(forwardRef(() => XComboboxRoot)),

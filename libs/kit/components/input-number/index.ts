@@ -1,2 +1,2 @@
-export * from './number';
+export * from './root';
 export * from './options';

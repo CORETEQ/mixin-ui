@@ -13,7 +13,7 @@ import { generateId } from '@mixin-ui/cdk';
 import { X_SLOT, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { XCollapsible } from '@mixin-ui/kit/components/collapsible';
-import { XAccordionRoot } from './accordion';
+import { XAccordionRoot } from './root';
 
 @Component({
   encapsulation: ViewEncapsulation.None,

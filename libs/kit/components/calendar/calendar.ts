@@ -3,9 +3,8 @@ import {
   Component,
   computed,
   inject,
-  input,
+  linkedSignal,
   model,
-  output,
   ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -29,9 +28,10 @@ import {
   subMonths,
   subYears,
 } from 'date-fns';
-import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
-import { X_CALENDAR_ACCESSOR } from './providers';
 import { XMapPipe } from '@mixin-ui/cdk';
+import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
+import { XIcon } from '@mixin-ui/kit/components/icon';
+import { X_CALENDAR_ACCESSOR } from './providers';
 
 export type CalendarSelectionMode = 'days' | 'months' | 'years';
 
@@ -41,29 +41,30 @@ export type CalendarSelectionMode = 'days' | 'months' | 'years';
   selector: 'x-calendar',
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
-  imports: [XButton, XMapPipe],
-  providers: [provideButtonOptions({ variant: 'subtle', color: 'gray' })],
+  imports: [XButton, XMapPipe, XIcon],
+  providers: [provideButtonOptions({ variant: 'ghost', color: 'gray', size: 'md' })],
   host: {
     class: 'x-calendar',
   },
 })
 export class XCalendar {
-  readonly #accessor = inject(X_CALENDAR_ACCESSOR, { optional: true });
+  readonly #accessor = inject(X_CALENDAR_ACCESSOR);
+
+  readonly month = linkedSignal(() => this.value() || new Date());
+  readonly mode = model<CalendarSelectionMode>('days');
+  readonly value = this.#accessor.value;
+  readonly min = this.#accessor.min;
+  readonly max = this.#accessor.max;
 
   protected readonly format = format;
 
-  readonly month = input<Date>(new Date());
-  readonly selectionMode = input<CalendarSelectionMode>('days');
-  readonly min = input<Date | null>(null);
-  readonly max = input<Date | null>(null);
-  readonly multiple = input<boolean>(false);
-  readonly monthChange = output<Date>();
-  readonly selectionModeChange = output<CalendarSelectionMode>();
-  readonly value = model<Date | Date[] | null>(null);
+  protected readonly isDateSelected = (date: Date) => {
+    return this.value() ? isSameDay(this.value()!, date) : false;
+  };
 
   readonly headerTitle = computed(() => {
     const currentMonth = this.month();
-    const mode = this.selectionMode();
+    const mode = this.mode();
 
     switch (mode) {
       case 'days':
@@ -118,7 +119,7 @@ export class XCalendar {
 
   navigatePrevious(): void {
     const currentMonth = this.month();
-    const mode = this.selectionMode();
+    const mode = this.mode();
 
     let newMonth: Date;
 
@@ -136,12 +137,12 @@ export class XCalendar {
         return;
     }
 
-    this.monthChange.emit(newMonth);
+    this.month.set(newMonth);
   }
 
   navigateNext(): void {
     const currentMonth = this.month();
-    const mode = this.selectionMode();
+    const mode = this.mode();
 
     let newMonth: Date;
 
@@ -159,11 +160,11 @@ export class XCalendar {
         return;
     }
 
-    this.monthChange.emit(newMonth);
+    this.month.set(newMonth);
   }
 
   toggleSelectionMode(): void {
-    const currentMode = this.selectionMode();
+    const currentMode = this.mode();
     let newMode: CalendarSelectionMode;
 
     switch (currentMode) {
@@ -179,7 +180,7 @@ export class XCalendar {
       default:
         newMode = 'days';
     }
-    this.selectionModeChange.emit(newMode);
+    this.mode.set(newMode);
   }
 
   selectDate(date: Date): void {
@@ -196,8 +197,8 @@ export class XCalendar {
     }
 
     this.updateValue(date);
-    this.monthChange.emit(date);
-    this.selectionModeChange.emit('days');
+    this.month.set(date);
+    this.mode.set('days');
   }
 
   selectYear(date: Date): void {
@@ -206,47 +207,12 @@ export class XCalendar {
     }
 
     this.updateValue(date);
-    this.monthChange.emit(date);
-    this.selectionModeChange.emit('months');
+    this.month.set(date);
+    this.mode.set('months');
   }
 
-  private updateValue(date: Date): void {
-    const currentValue = this.value();
-    const isMultiple = this.multiple();
-
-    if (!isMultiple) {
-      this.value.set(date);
-      return;
-    }
-
-    if (!currentValue || !Array.isArray(currentValue)) {
-      this.value.set([date]);
-      return;
-    }
-
-    const existingIndex = currentValue.findIndex(d => isSameDay(d, date));
-    if (existingIndex >= 0) {
-      // Remove if already selected
-      const newValue = currentValue.filter((_, index) => index !== existingIndex);
-      this.value.set(newValue.length > 0 ? newValue : null);
-    } else {
-      // Add to selection
-      this.value.set([...currentValue, date]);
-    }
-  }
-
-  isDateSelected(date: Date): boolean {
-    const currentValue = this.value();
-
-    if (!currentValue) {
-      return false;
-    }
-
-    if (Array.isArray(currentValue)) {
-      return currentValue.some(d => isSameDay(d, date));
-    }
-
-    return isSameDay(currentValue, date);
+  private updateValue(date: Date | null): void {
+    this.#accessor?.selectDate(date);
   }
 
   isMonthSelected(date: Date): boolean {
@@ -254,10 +220,6 @@ export class XCalendar {
 
     if (!currentValue) {
       return false;
-    }
-
-    if (Array.isArray(currentValue)) {
-      return currentValue.some(d => isSameMonth(d, date));
     }
 
     return isSameMonth(currentValue, date);
@@ -268,10 +230,6 @@ export class XCalendar {
 
     if (!currentValue) {
       return false;
-    }
-
-    if (Array.isArray(currentValue)) {
-      return currentValue.some(d => isSameYear(d, date));
     }
 
     return isSameYear(currentValue, date);

@@ -21,7 +21,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-number',
-  templateUrl: './number.html',
+  templateUrl: './root.html',
   imports: [XButton, XIcon, XGroup],
   providers: [
     provideMask(X_NUMBER_MASK_FACTORY),

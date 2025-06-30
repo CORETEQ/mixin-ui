@@ -10,6 +10,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, Subject } from 'rxjs';
 import {
   injectMask,
@@ -34,7 +35,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-date',
-  templateUrl: './date.html',
+  templateUrl: './root.html',
   imports: [XButton, XIcon],
   providers: [
     provideMask(X_DATE_MASK_FACTORY),
@@ -68,15 +69,12 @@ export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccess
   readonly #mask = injectMask<Date | null, XDateMaskOptions>();
   readonly #input = inject(XInput, { self: true });
   readonly #popover = inject(XPopover, { self: true });
-  readonly #calendarChanges$ = new Subject<Date | null>();
+  readonly #calendarChanges = new Subject<Date | null>();
 
   readonly size = this.#input.size;
   readonly open = this.#popover.open;
   readonly popoverContent = contentChild(XPopoverContent);
   readonly value = signal<Date | null>(null);
-
-  /** Enable multiple date selection mode */
-  readonly multiple = input(this.#opt.multiple, { transform: booleanAttribute });
 
   /** Show calendar popover when input field receives focus (defaults to true) */
   readonly popoverOnFocus = input(this.#opt.popoverOnFocus, { transform: booleanAttribute });
@@ -105,7 +103,7 @@ export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccess
   /** Character to use as a filler for empty positions */
   readonly fillerChar = input(this.#opt.fillerChar);
 
-  readonly valueChanges = merge(this.#mask.valueChanges, this.#calendarChanges$);
+  readonly valueChanges = merge(this.#mask.valueChanges, this.#calendarChanges);
 
   constructor() {
     effect(() =>
@@ -118,15 +116,19 @@ export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccess
         fillerChar: this.fillerChar(),
       })
     );
+
+    this.#mask.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => this.value.set(value));
+    this.#calendarChanges.pipe(takeUntilDestroyed()).subscribe(value => this.#mask.setValue(value));
   }
 
   togglePopover(open: boolean): void {
     this.#popover.toggle(open);
   }
 
-  select(value: Date | null): void {
+  selectDate(value: Date | null): void {
     this.value.set(value);
-    this.#calendarChanges$.next(value);
+    this.#calendarChanges.next(value);
+    this.togglePopover(false);
   }
 
   setValue(value: Date | null): void {

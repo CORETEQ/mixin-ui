@@ -7,6 +7,12 @@
   }
 }
 
+@mixin selected {
+  &:where(.x-selected) {
+    @content;
+  }
+}
+
 @mixin disabled {
   &:where(.x-disabled) {
     @content;
@@ -15,24 +21,30 @@
 
 .x-calendar {
   display: block;
-  padding: 0.75rem;
+  padding: 1rem;
 }
 
-.calendar-header {
+.x-calendar-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.5rem;
 }
 
-.x-calendar-weekdays {
-  font-weight: 500;
-}
-
 .x-calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 0.25rem;
+}
+
+.x-calendar-weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2rem;
+  block-size: 2rem;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .x-calendar-day {
@@ -49,6 +61,12 @@
 
   @include hover {
     background-color: var(--x-gray-200);
+  }
+
+  @include selected {
+    color: var(--x-white);
+    font-weight: 500;
+    background-color: var(--x-accent-600);
   }
 
   @include disabled {
