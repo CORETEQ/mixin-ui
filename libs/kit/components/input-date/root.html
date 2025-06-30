@@ -4,9 +4,6 @@
 @if (popoverContent()) {
   <span class="x-input-suffix">
     <button x-icon-btn
-            color="gray"
-            radius="none"
-            variant="outline"
             [size]="size()"
             (pointerdown)="$event.preventDefault()"
             (click)="togglePopover(!open())">

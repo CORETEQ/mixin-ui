@@ -28,7 +28,7 @@
   @switch (mode()) {
     @case ('days') {
       <div class="x-calendar-days">
-        @for (day of weekdays; track day) {
+        @for (day of weekdays(); track day) {
           <div class="x-calendar-weekday">{{ day }}</div>
         }
       </div>

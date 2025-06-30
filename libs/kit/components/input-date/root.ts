@@ -21,13 +21,14 @@ import {
 } from '@mixin-ui/cdk';
 import {
   provideControlAccessor,
+  providePopoverOptions,
   XControlAccessor,
   XInput,
   XPopover,
   XPopoverContent,
 } from '@mixin-ui/kit/directives';
 import { provideCalendarAccessor, XCalendarAccessor } from '@mixin-ui/kit/components/calendar';
-import { XButton } from '@mixin-ui/kit/components/button';
+import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_INPUT_DATE_OPTIONS } from './options';
 
@@ -41,6 +42,8 @@ import { X_INPUT_DATE_OPTIONS } from './options';
     provideMask(X_DATE_MASK_FACTORY),
     provideControlAccessor(forwardRef(() => XDateRoot)),
     provideCalendarAccessor(forwardRef(() => XDateRoot)),
+    provideButtonOptions({ color: 'gray', radius: 'none', variant: 'outline' }),
+    providePopoverOptions({ stretch: 'auto' }),
   ],
   hostDirectives: [
     {

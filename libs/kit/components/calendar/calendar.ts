@@ -29,6 +29,7 @@ import {
   subYears,
 } from 'date-fns';
 import { XMapPipe } from '@mixin-ui/cdk';
+import { X_LANGUAGE } from '@mixin-ui/kit/providers';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_CALENDAR_ACCESSOR } from './providers';
@@ -43,12 +44,11 @@ export type CalendarSelectionMode = 'days' | 'months' | 'years';
   templateUrl: './calendar.html',
   imports: [XButton, XMapPipe, XIcon],
   providers: [provideButtonOptions({ variant: 'ghost', color: 'gray', size: 'md' })],
-  host: {
-    class: 'x-calendar',
-  },
+  host: { class: 'x-calendar' },
 })
 export class XCalendar {
   readonly #accessor = inject(X_CALENDAR_ACCESSOR);
+  readonly #language = inject(X_LANGUAGE);
 
   readonly month = linkedSignal(() => this.value() || new Date());
   readonly mode = model<CalendarSelectionMode>('days');
@@ -61,6 +61,8 @@ export class XCalendar {
   protected readonly isDateSelected = (date: Date) => {
     return this.value() ? isSameDay(this.value()!, date) : false;
   };
+
+  readonly weekdays = computed(() => this.#language()['dayNamesMin']);
 
   readonly headerTitle = computed(() => {
     const currentMonth = this.month();
@@ -81,12 +83,10 @@ export class XCalendar {
     }
   });
 
-  weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
   readonly daysInMonth = computed(() => {
-    const currentMonth = this.month();
-    const start = startOfWeek(startOfMonth(currentMonth));
-    const end = endOfWeek(endOfMonth(currentMonth));
+    const month = this.month();
+    const start = startOfWeek(startOfMonth(month));
+    const end = endOfWeek(endOfMonth(month));
 
     return eachDayOfInterval({ start, end }).map(date => ({
       date,
@@ -95,8 +95,8 @@ export class XCalendar {
   });
 
   readonly monthsInYear = computed(() => {
-    const currentYear = this.month().getFullYear();
-    const start = startOfYear(new Date(currentYear, 0, 1));
+    const year = this.month().getFullYear();
+    const start = startOfYear(new Date(year, 0, 1));
     const end = endOfYear(start);
 
     return eachMonthOfInterval({ start, end }).map(date => ({
@@ -211,10 +211,6 @@ export class XCalendar {
     this.mode.set('months');
   }
 
-  private updateValue(date: Date | null): void {
-    this.#accessor?.selectDate(date);
-  }
-
   isMonthSelected(date: Date): boolean {
     const currentValue = this.value();
 
@@ -233,6 +229,10 @@ export class XCalendar {
     }
 
     return isSameYear(currentValue, date);
+  }
+
+  private updateValue(date: Date | null): void {
+    this.#accessor.selectDate(date);
   }
 
   private isDateDisabled(date: Date): boolean {

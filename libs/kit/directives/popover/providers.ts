@@ -75,7 +75,17 @@ export const X_POPOVER_PROVIDERS: Provider[] = [
       position: hasParentOverlay ? 'end' : 'bottom',
       align: 'start',
       offset: 4,
-      fixedPosition: false,
+      fixed: false,
     }),
   },
 ];
+
+export function providePopoverPosition(options: Partial<XPopoverPositionOptions>): Provider {
+  return {
+    provide: X_POPOVER_POSITION_OPTIONS,
+    useFactory: (defaultOpt = inject(X_POPOVER_POSITION_OPTIONS, { skipSelf: true })) => ({
+      ...defaultOpt,
+      ...options,
+    }),
+  };
+}

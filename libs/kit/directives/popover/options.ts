@@ -1,9 +1,8 @@
-import { InjectionToken } from '@angular/core';
-import { XPopoverPositionOptions } from '@mixin-ui/cdk';
+import { InjectionToken, ValueProvider } from '@angular/core';
 
 export type XPopoverStretch = 'auto' | 'fit';
 
-export interface XPopoverOptions extends XPopoverPositionOptions {
+export interface XPopoverOptions {
   readonly stretch: XPopoverStretch;
   readonly minWidth?: number;
   readonly maxWidth?: number;
@@ -12,11 +11,6 @@ export interface XPopoverOptions extends XPopoverPositionOptions {
 }
 
 const defaultOptions: XPopoverOptions = {
-  direction: 'vertical',
-  position: 'bottom',
-  align: 'start',
-  offset: 4,
-  fixed: false,
   stretch: 'fit',
   maxHeight: 360,
 };
@@ -24,3 +18,10 @@ const defaultOptions: XPopoverOptions = {
 export const X_POPOVER_OPTIONS = new InjectionToken<XPopoverOptions>('POPOVER_OPTIONS', {
   factory: () => defaultOptions,
 });
+
+export function providePopoverOptions(options: Partial<XPopoverOptions>): ValueProvider {
+  return {
+    provide: X_POPOVER_OPTIONS,
+    useValue: { ...defaultOptions, ...options },
+  };
+}

@@ -4,7 +4,7 @@
   <div class="docs-separator"></div>
 
   <docs-snippet withHeader>
-    <app-input-date-basic-example class="d-block w-[18rem]" />
+    <app-input-date-basic-example class="d-block w-[15rem]" />
   </docs-snippet>
 
   <h2>Import</h2>
@@ -27,5 +27,13 @@
     <docs-input name="showFiller" type="boolean" default="false" />
     <docs-input name="fillerChar" type="string" default="_" />
     <docs-input name="popoverOnFocus" type="boolean" default="true" />
+    <docs-input name="popoverStretch" type="enum" default="auto" />
+    <docs-input name="popoverMinWidth" type="number" />
+    <docs-input name="popoverMaxWidth" type="number" />
+  </docs-api-table>
+
+  <h3>Models</h3>
+  <docs-api-table>
+    <docs-input name="open" prop="model" type="boolean" default="false" />
   </docs-api-table>
 </docs-page>
