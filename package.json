@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build:web": "nx build web"
+    "build:web": "nx build cdk && nx build kit && nx build web"
   },
   "private": true,
   "engines": {
