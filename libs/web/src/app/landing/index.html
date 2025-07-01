@@ -1,8 +1,85 @@
 <div class="app-container">
   <app-hero />
 
-  <div class="py-10 px-6 flex items-center justify-center">
-    Benefits
+  <div class="py-10 px-6 flex flex-col items-center justify-center benefits">
+    <div class="h2 flex flex-col items-center justify-center">
+      Built for developers
+      <div class="highlight">By developers</div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-4 mt-10 w-full px-12">
+      <div class="card">
+        <div class="card-title">🧩 Modular and fully-treeshakable</div>
+      </div>
+      <div class="card">
+        <div class="card-title">🧙 Agnostic</div>
+      </div>
+      <div class="card">
+        <div class="card-title">🦋 Customizable</div>
+      </div>
+      <div class="card">
+        <div class="card-title">🛠 Well engineered</div>
+      </div>
+      <div class="card">
+        <div class="card-title">📦 SSR Friendly</div>
+      </div>
+      <div class="card">
+        <div class="card-title"> 🏗 Maintained!</div>
+      </div>
+    </div>
   </div>
 </div>
 <app-footer />
+
+<style>
+  .benefits {
+    border-top: 1px dashed #E5E5E5;
+  }
+
+  .h2 {
+    font-size: 44px;
+    line-height: 56px;
+    font-weight: 600;
+  }
+
+  .highlight {
+    position: relative;
+    background: linear-gradient(90deg, #ff9100, #ff8000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    &::before {
+      position: absolute;
+      content: "";
+      width: calc(100% + 20px);
+      height: 100%;
+      left: 0;
+      transform: translateX(-10px);
+      --mix-background: color-mix(in srgb, #f6990e 10%, transparent);
+      background: var(--mix-background, #F6990EFF);
+      --bg-currentcolor: var(--mix-background, #F6990EFF);
+      border-start-start-radius: 0.5rem;
+      border-end-start-radius: 0.5rem;
+      pointer-events: none;
+      bottom: calc(0.125rem * -1);
+      inset-inline-start: 0;
+      border-inline-end-width: 2px;
+      border-color: currentcolor;
+      color: var(--x-accent-500);
+    }
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+
+    .card-title {
+      font-weight: 500;
+    }
+  }
+</style>

@@ -90,18 +90,6 @@ body {
   }
 }
 
-.docs-logo {
-  /* &:hover { */
-
-  /*  .docs-logo-shape { */
-
-  /*    transform: rotate(360deg); */
-
-  /*  } */
-
-  /* } */
-}
-
 .docs-logo-shape {
   transition: transform 0.3s ease;
 }
@@ -123,19 +111,19 @@ body {
     background-clip: text;
     animation: gradient 3s ease infinite;
   }
+}
 
-  @keyframes gradient {
-    0% {
-      background-position: 0% 50%;
-    }
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
 
-    50% {
-      background-position: 100% 50%;
-    }
+  50% {
+    background-position: 100% 50%;
+  }
 
-    100% {
-      background-position: 0% 50%;
-    }
+  100% {
+    background-position: 0% 50%;
   }
 }
 

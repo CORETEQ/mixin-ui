@@ -33,7 +33,6 @@
     </div>
   </div>
 
-
   <div class="block w-full relative">
     <div class="app-hero-preview">
       <div class="app-hero-preview-header">
@@ -43,8 +42,26 @@
           <div></div>
         </div>
       </div>
+
       <div class="app-hero-preview-content">
-        <iframe src="http://localhost:4201" title="Preview"></iframe>
+        @if (showIframe()) {
+          <iframe class="animate__animated animate__fadeIn"
+                  src="http://localhost:4201" title="Preview">
+          </iframe>
+        }
+
+        @if (!showIframe()) {
+          <button type="button" class="app-primary-btn app-hero-preview-play-btn"
+                  [class.loading]="loading()"
+                  (click)="show()">
+            @if (loading()) {
+              <x-icon src="mixin" class="app-btn-loader" size="32" raw />
+            } @else {
+              <x-icon src="play" />
+              Try the demo
+            }
+          </button>
+        }
       </div>
     </div>
   </div>

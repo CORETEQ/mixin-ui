@@ -18,6 +18,7 @@ export default defineConfig(({ mode }) => {
       outDir: '../../dist/./libs/web/client',
       reportCompressedSize: true,
       target: ['es2020'],
+      cssCodeSplit: false,
     },
     optimizeDeps: {
       include: ['@angular/forms'],

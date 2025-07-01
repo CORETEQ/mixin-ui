@@ -181,6 +181,11 @@ export const ROUTES: Route[] = [
                 loadComponent: () => import('./pages/services/dialog'),
               }),
               page({
+                path: 'theme',
+                title: 'Theme',
+                loadComponent: () => import('./pages/services/theme'),
+              }),
+              page({
                 path: 'toaster',
                 title: 'Toaster',
                 loadComponent: () => import('./pages/services/toaster'),

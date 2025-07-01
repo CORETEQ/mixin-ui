@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Hero } from './hero';
 import { Footer } from './footer';
+
+import test from './test?raw&lang=ts';
+import { Hero } from './hero';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -8,6 +10,8 @@ import { Footer } from './footer';
   selector: 'app-landing',
   styleUrl: './index.scss',
   templateUrl: './index.html',
-  imports: [Hero, Footer],
+  imports: [Footer, Hero],
 })
-export default class Landing {}
+export default class Landing {
+  test = test;
+}

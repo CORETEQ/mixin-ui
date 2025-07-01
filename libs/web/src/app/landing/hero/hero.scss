@@ -21,7 +21,7 @@
   align-items: center;
   justify-content: center;
   height: 2.25rem;
-  margin-bottom: 2rem;
+  margin-block-end: 2rem;
   padding: 0 1.125rem 0 1rem;
   color: #5C5C5C;
   font-size: 15px;
@@ -69,21 +69,6 @@
 .app-hero-animated-decor {
   animation-name: wheel-spin;
   animation-duration: 6s;
-
-  @keyframes wheel-spin {
-    0% {
-      transform: rotate(0deg);
-    }
-
-    37.5% {
-      transform: rotate(1800deg);
-      animation-timing-function: ease-out;
-    }
-
-    100% {
-      transform: rotate(1800deg);
-    }
-  }
 }
 
 .app-hero-description {
@@ -113,12 +98,6 @@
   box-shadow: rgb(17 12 46 / 15%) 0 48px 100px 0;
   border: 1px solid #E2E2E2;
   border-radius: 0.75rem;
-
-  @keyframes rotate-hue {
-    to {
-      filter: hue-rotate(1turn);
-    }
-  }
 }
 
 .app-hero-preview-header {
@@ -162,17 +141,24 @@
 .app-hero-preview-content {
   position: relative;
   display: flex;
+  align-items: center;
+  justify-content: center;
   block-size: 100%;
   overflow: hidden;
-  background-color: #fff;
+  background: linear-gradient(#000 1px, #0000 0),
+  linear-gradient(90deg, #000, #0000, #000),
+  linear-gradient(in oklch longer hue -2deg, #a00, #a00);
+  background-size:
+    100% 2px,
+    100% 100%,
+    100% 100%;
   -webkit-font-smoothing: subpixel-antialiased;
 
   iframe {
-    position: absolute;
-    inset: 0;
     display: block;
+    align-self: flex-start;
     inline-size: 100%;
-    block-size: calc(100% - 2.5rem)
+    block-size: calc(100% - 40px);
   }
 }
 
@@ -181,14 +167,52 @@
   overflow: hidden;
   white-space: nowrap;
   animation: typing 1s forwards;
+}
 
-  @keyframes typing {
-    from {
-      inline-size: 0
-    }
+.app-hero-preview-play-btn {
+  inline-size: fit-content;
+  color: black;
+  background: #fff !important;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+  transition-property: width, padding, border-radius, color, overflow;
 
-    to {
-      inline-size: 100%;
-    }
+  &.loading {
+    width: 44px;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .app-btn-loader {
+    animation-name: wheel-spin;
+    animation-duration: 6s;
+  }
+}
+
+
+@keyframes typing {
+  from {
+    inline-size: 0
+  }
+
+  to {
+    inline-size: 100%;
+  }
+}
+
+@keyframes wheel-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  37.5% {
+    transform: rotate(1800deg);
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    transform: rotate(1800deg);
   }
 }

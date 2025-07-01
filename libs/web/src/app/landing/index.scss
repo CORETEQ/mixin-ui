@@ -24,8 +24,7 @@
   background-size: 200%;
   background-clip: padding-box, border-box, border-box;
   background-origin: border-box;
-  box-shadow: var(--tw-shadow);
-  border: calc(0.08 * 1rem) solid transparent;
+  border: 1.25px solid transparent;
   border-radius: 0.75rem;
   transition: background-color 0.2s;
   animation: rainbow 3s linear infinite;
@@ -76,11 +75,6 @@
       transform: translate3d(0.25rem, 0, 0);
     }
   }
-}
-
-.app-primary-btn:disabled {
-  opacity: 0.5;
-  pointer-events: none;
 }
 
 @keyframes rainbow {

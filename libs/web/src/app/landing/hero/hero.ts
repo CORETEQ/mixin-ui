@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation } from '@angular/core';
 import { XIcon } from '@mixin-ui/kit';
 import { RouterLink } from '@angular/router';
 
@@ -10,4 +10,16 @@ import { RouterLink } from '@angular/router';
   templateUrl: './hero.html',
   imports: [XIcon, RouterLink],
 })
-export class Hero {}
+export class Hero {
+  readonly showIframe = signal(false);
+
+  readonly loading = signal(false);
+
+  show(): void {
+    this.loading.set(true);
+    setTimeout(() => {
+      this.showIframe.set(true);
+      this.loading.set(false);
+    }, 800);
+  }
+}

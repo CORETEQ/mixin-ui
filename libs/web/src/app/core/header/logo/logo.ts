@@ -7,6 +7,5 @@ import { RouterLink } from '@angular/router';
   selector: 'docs-logo',
   templateUrl: './logo.html',
   imports: [RouterLink],
-  host: { class: 'docs-logo' },
 })
 export class DocsLogo {}
