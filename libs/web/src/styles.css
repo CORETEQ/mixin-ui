@@ -90,10 +90,6 @@ body {
   }
 }
 
-.docs-logo-shape {
-  transition: transform 0.3s ease;
-}
-
 .docs-logo-text {
   block-size: 30px;
   color: #09090B;
