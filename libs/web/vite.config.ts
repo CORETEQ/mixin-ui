@@ -28,6 +28,9 @@ export default defineConfig(({ mode }) => {
         allow: ['.'],
       },
     },
+    ssr: {
+      noExternal: ['gsap', '@gsap/shockingly'],
+    },
     css: {
       preprocessorOptions: {
         scss: {

@@ -1,30 +1,70 @@
 <div class="app-container">
   <app-hero />
 
-  <div class="py-10 px-6 flex flex-col items-center justify-center benefits">
+  <div class="py-14 pt-12 px-6 flex flex-col items-center justify-center benefits">
     <div class="h2 flex flex-col items-center justify-center">
       Built for developers
       <div class="highlight">By developers</div>
     </div>
-
-    <div class="grid grid-cols-3 gap-4 mt-10 w-full px-12">
+    <div class="grid grid-cols-3 gap-4 mt-12 w-full px-12">
       <div class="card">
-        <div class="card-title">🧩 Modular and fully-treeshakable</div>
+        <div class="card-title">
+          <span>🧩</span>
+          Fully-treeshakable
+        </div>
       </div>
       <div class="card">
-        <div class="card-title">🧙 Agnostic</div>
+        <div class="card-title">
+          <span>🧙</span>
+          Agnostic
+        </div>
       </div>
       <div class="card">
-        <div class="card-title">🦋 Customizable</div>
+        <div class="card-title">
+          <span>🦋</span>
+          Customizable
+        </div>
       </div>
       <div class="card">
-        <div class="card-title">🛠 Well engineered</div>
+        <div class="card-title">
+          <span>🛠</span>
+          Well engineered
+        </div>
       </div>
       <div class="card">
-        <div class="card-title">📦 SSR Friendly</div>
+        <div class="card-title">
+          <span>📦</span>
+          SSR Friendly
+        </div>
       </div>
       <div class="card">
-        <div class="card-title"> 🏗 Maintained!</div>
+        <div class="card-title">
+          <span>📱</span>
+          Mobile Friendly
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          <span>⚡</span>
+          High Performance
+        </div>
+      </div>
+<!--      <div class="card">-->
+<!--        <div class="card-title">-->
+<!--          <span>🔒</span>-->
+<!--          Secure-->
+<!--        </div>-->
+<!--      </div>-->
+      <div class="card">
+        <div class="card-title">
+          <span>🏗</span>
+          Maintained !
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">
+          Maintained !
+        </div>
       </div>
     </div>
   </div>
@@ -44,7 +84,7 @@
 
   .highlight {
     position: relative;
-    background: linear-gradient(90deg, #ff9100, #ff8000);
+    background: linear-gradient(90deg, #ffae00, #ff9100);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -52,7 +92,7 @@
     &::before {
       position: absolute;
       content: "";
-      width: calc(100% + 20px);
+      width: calc(100% + 16px);
       height: 100%;
       left: 0;
       transform: translateX(-10px);
@@ -66,7 +106,7 @@
       inset-inline-start: 0;
       border-inline-end-width: 2px;
       border-color: currentcolor;
-      color: var(--x-accent-500);
+      color: #fea602;
     }
   }
 
@@ -74,12 +114,42 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding: 12px;
-    border: 1px solid #E5E5E5;
-    border-radius: 8px;
+    padding: 16px;
+    background: white;
+    border: 1px solid #e4e4e4;
+    border-radius: 12px;
+    position: relative;
+
+    &:last-child {
+      border-color: transparent;
+      box-shadow: none;
+      -webkit-text-fill-color: transparent;
+      --pattern-fg: color-mix(in oklab, #3D3D3D 12%, transparent);
+
+      background-image: repeating-linear-gradient(315deg, var(--pattern-fg) 0, var(--pattern-fg) 1px, transparent 0, transparent 50%);
+      background-size: 10px 10px;
+      background-attachment: fixed;
+    }
 
     .card-title {
-      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 24px;
+      padding-right: 12px;
+      color: #5C5C5C;
+    }
+  }
+
+  @keyframes rotate-hue {
+    to {
+      filter: hue-rotate(1turn);
     }
   }
 </style>

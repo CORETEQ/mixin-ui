@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal, ViewEncapsulation } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core';
 import { XIcon } from '@mixin-ui/kit';
 import { RouterLink } from '@angular/router';
+import gsap from 'gsap';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -20,5 +27,17 @@ export class Hero {
       this.showPreview.set(true);
       this.loading.set(false);
     }, 800);
+  }
+
+  constructor() {
+    afterNextRender(() => {
+      const circle = document.getElementById('mixin-circle');
+
+      const loadingAnimation = gsap.to(circle, {
+        rotation: 1800, // 5 оборотов (360 * 5)
+        duration: 2, // Общая длительность анимации
+        ease: 'power2.out', // Эквивалент ease-out
+      });
+    });
   }
 }

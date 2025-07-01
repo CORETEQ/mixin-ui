@@ -47,8 +47,8 @@ body {
   padding: 0 0.625rem 1.5rem;
   overflow: auto;
   scrollbar-width: none;
-  border-style: dashed;
-  border-color: #E5E5E5;
+  border-style: solid;
+  border-color: rgba(229, 229, 229, 0.75);
   border-right-width: 1px;
 }
 
@@ -90,10 +90,6 @@ body {
   }
 }
 
-.docs-logo-shape {
-  transition: transform 0.3s ease;
-}
-
 .docs-logo-text {
   block-size: 30px;
   color: #09090B;
@@ -131,7 +127,7 @@ body {
   display: grid;
   flex: 1 1 0;
   grid-template-columns: 15rem minmax(0, 1fr) 15rem;
-  gap: 3rem;
+  gap: 3.125rem;
   margin: 0 auto;
 }
 
@@ -177,6 +173,12 @@ body {
   display: block;
   flex: 1 1 0;
 
+  > .docs-code {
+    &:has(+ h3) {
+      margin-bottom: 2rem;
+    }
+  }
+
   > h1 {
     margin-bottom: 0.825rem;
     font-size: 2rem;
@@ -194,11 +196,15 @@ body {
   }
 
   > h3 {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     font-size: 18px;
     font-weight: 600;
     line-height: 26px;
     letter-spacing: -.01em;
+
+    &:has(+ .docs-api-table) {
+      margin-bottom: 0.75rem;
+    }
   }
 
   > p {
