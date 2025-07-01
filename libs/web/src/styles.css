@@ -2,7 +2,7 @@
 @import 'tailwindcss';
 
 :root {
-  --docs-code-font-family: "Geist Mono", ui-monospace, sfmono-regular, "Roboto Mono", menlo, monaco, "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace;
+  --docs-code-font-family: ui-monospace, sfmono-regular, "Roboto Mono", menlo, monaco, "Liberation Mono", "DejaVu Sans Mono", "Courier New", monospace;
 }
 
 html, body {
@@ -174,7 +174,7 @@ body {
   flex: 1 1 0;
 
   > .docs-code {
-    &:has(+ h3) {
+    &:has(+ h3, + p) {
       margin-bottom: 2rem;
     }
   }
@@ -202,7 +202,7 @@ body {
     line-height: 26px;
     letter-spacing: -.01em;
 
-    &:has(+ .docs-api-table) {
+    &:has(+ .docs-api-table, + .docs-code) {
       margin-bottom: 0.75rem;
     }
   }
@@ -210,7 +210,7 @@ body {
   > p {
     display: block;
     color: #707070;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 28px;
     letter-spacing: -.01em;

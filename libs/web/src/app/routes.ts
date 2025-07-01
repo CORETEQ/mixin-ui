@@ -192,6 +192,17 @@ export const ROUTES: Route[] = [
               }),
             ],
           }),
+          group({
+            path: 'utils',
+            title: 'Utils',
+            children: [
+              page({
+                path: 'operators',
+                title: 'Operators',
+                loadComponent: () => import('./pages/utils/operators'),
+              }),
+            ],
+          }),
         ],
       }),
     ],
