@@ -50,7 +50,7 @@ export const ROUTES: Route[] = [
               page({
                 path: 'dark-mode',
                 title: 'Dark mode',
-                loadComponent: () => import('./pages/installation'),
+                loadComponent: () => import('./pages/colors'),
               }),
             ],
           }),

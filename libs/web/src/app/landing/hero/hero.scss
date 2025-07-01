@@ -1,13 +1,14 @@
 .app-hero-section {
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  row-gap: 5rem;
   align-items: center;
   justify-content: center;
   padding: 5rem 4.5rem 4rem;
 }
 
 .app-hero-title {
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,18 +32,18 @@
   box-shadow: rgb(0 0 0 / 5%) 0 1px 2px 0;
   border: 1px solid #E0E1E7;
   border-radius: 1rem;
+}
 
-  .app-hero-subtitle-link {
-    margin-left: -0.2rem;
-    text-decoration: underline;
-    text-decoration-color: #b3b3b3;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.15em;
-    text-decoration-style: dotted;
+.app-hero-subtitle-link {
+  margin-inline-start: -0.2rem;
+  text-decoration: underline;
+  text-decoration-color: #b3b3b3;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  text-decoration-style: dotted;
 
-    &:hover {
-      color: #09090B;
-    }
+  &:hover {
+    color: #09090B;
   }
 }
 
@@ -66,12 +67,6 @@
   border-radius: 1rem;
 }
 
-.app-hero-animated-decor {
-  transition: transform 0.1s ease-out;
-  animation-name: wheel-spin;
-  animation-duration: 6s;
-}
-
 .app-hero-description {
   max-inline-size: 40rem;
   margin-top: 2.5rem;
@@ -80,24 +75,14 @@
   line-height: 1.75rem;
 }
 
-.arrow {
-  position: absolute;
-  right: -120px;
-  bottom: 50px;
-  z-index: 10;
-  width: 160px;
-  height: 160px;
-  fill: #ffc400;
-}
-
 .app-hero-preview {
   position: relative;
+  z-index: 2;
   inline-size: 100%;
   block-size: 44rem;
   overflow: hidden;
   background-color: #fff;
-  //box-shadow: rgb(17 12 46 / 15%) 0 48px 100px 0;
-  border: 1px solid #E2E2E2;
+  border: 1px solid #dadada;
   border-radius: 0.75rem;
 }
 
@@ -109,6 +94,27 @@
   min-block-size: 2.5rem;
   padding: 0 0.5rem;
   border-bottom: 1px solid #dcdcdc;
+}
+
+.app-hero-preview-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: 100%;
+  background: linear-gradient(#000 1px, #0000 0),
+  linear-gradient(90deg, #000, #0000, #000),
+  linear-gradient(in oklch longer hue -2deg, #a00, #a00);
+  background-size: 100% 2px,
+  100% 100%,
+  100% 100%;
+
+  > iframe {
+    display: block;
+    align-self: flex-start;
+    inline-size: 100%;
+    block-size: calc(100% - 40px);
+  }
 }
 
 .app-hero-preview-dots {
@@ -139,32 +145,29 @@
   }
 }
 
-.app-hero-preview-content {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  block-size: 100%;
-  background: linear-gradient(#000 1px, #0000 0),
-  linear-gradient(90deg, #000, #0000, #000),
-  linear-gradient(in oklch longer hue -2deg, #a00, #a00);
-  background-size: 100% 2px,
-  100% 100%,
-  100% 100%;
-
-  > iframe {
-    display: block;
-    align-self: flex-start;
-    inline-size: 100%;
-    block-size: calc(100% - 40px);
-  }
+.typed-out {
+  inline-size: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1s forwards 150ms;
 }
 
-.typed-out {
-  //inline-size: 0;
-  //overflow: hidden;
-  //white-space: nowrap;
-  //animation: typing 1s forwards 250ms;
+.app-hero-preview-shadow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  inline-size: 100%;
+  block-size: 100%;
+  background: radial-gradient(
+      ellipse 100% 100% at center,
+      rgb(17 12 46 / 10%) 0%,
+      rgb(17 12 46 / 10%) 30%,
+      rgb(17 12 46 / 10%) 60%,
+      transparent 100%
+  );
+  filter: blur(55px);
+  transform: translate(-50%, -40%);
 }
 
 .app-hero-preview-play-btn {
@@ -223,4 +226,14 @@
   100% {
     transform: rotate(1800deg);
   }
+}
+
+.arrow {
+  position: absolute;
+  top: -155px;
+  right: -10px;
+  z-index: 100;
+  width: 220px;
+  height: 200px;
+  fill: #ffa700;
 }

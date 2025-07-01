@@ -25,4 +25,9 @@
   background-color: #fff;
   border: 1px solid #dadada;
   border-radius: var(--x-radius-full);
+  cursor: default;
+
+  &:hover {
+    color: #09090B;
+  }
 }

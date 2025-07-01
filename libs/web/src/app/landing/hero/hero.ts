@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { XIcon } from '@mixin-ui/kit';
 import { RouterLink } from '@angular/router';
+import gsap from 'gsap';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -30,59 +31,13 @@ export class Hero {
 
   constructor() {
     afterNextRender(() => {
-      const circle = document.getElementById('mixin-circle')!;
+      const circle = document.getElementById('mixin-circle');
 
-      let lastScrollY = window.scrollY;
-      let currentRotation = 0;
-      let isAnimating = false;
-      const rotationSensitivity = 0.5;
-
-      circle.addEventListener('animationend', () => {
-        circle.style.animationDuration = '0ms';
+      const loadingAnimation = gsap.to(circle, {
+        rotation: 1800, // 5 оборотов (360 * 5)
+        duration: 2, // Общая длительность анимации
+        ease: 'power2.out', // Эквивалент ease-out
       });
-
-      function updateRotation() {
-        const currentScrollY = window.scrollY;
-        const scrollDelta = currentScrollY - lastScrollY;
-
-        currentRotation += scrollDelta * rotationSensitivity;
-        circle.style.transform = `rotate(${currentRotation}deg)`;
-        lastScrollY = currentScrollY;
-      }
-
-      function onScroll() {
-        if (!isAnimating) {
-          requestAnimationFrame(() => {
-            updateRotation();
-            isAnimating = false;
-          });
-          isAnimating = true;
-        }
-      }
-
-      // Оптимизированное событие скролла
-      let scrollTimeout: any;
-
-      window.addEventListener(
-        'scroll',
-        () => {
-          onScroll();
-
-          // Добавляем небольшое затухание после остановки скролла
-          clearTimeout(scrollTimeout);
-
-          scrollTimeout = setTimeout(() => {
-            circle.style.transition = 'transform 0.3s ease-out';
-            setTimeout(() => {
-              circle.style.transition = 'transform 0.1s ease-out';
-            }, 300);
-          }, 150);
-        },
-        { passive: true }
-      );
-
-      // Инициализация
-      updateRotation();
     });
   }
 }
