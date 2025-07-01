@@ -12,7 +12,6 @@ import { RouterLink } from '@angular/router';
 })
 export class Hero {
   readonly showIframe = signal(false);
-
   readonly loading = signal(false);
 
   show(): void {
