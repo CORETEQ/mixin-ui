@@ -2,10 +2,11 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@mixin-ui/kit": ["dist/libs/kit/src"],
-      "@mixin-ui/kit/*": ["dist/libs/kit/src/*"],
-      "@mixin-ui/cdk": ["dist/libs/cdk/src"],
-      "@mixin-ui/cdk/*": ["dist/libs/cdk/src/*"]
+      "@mixin-ui/cdk": ["dist/libs/cdk"],
+      "@mixin-ui/cdk/*": ["dist/libs/cdk/*"],
+      "@mixin-ui/kit": ["dist/libs/kit"],
+      "@mixin-ui/kit/*": ["dist/libs/kit/*"],
+      "@/docs/*": ["libs/web/src/app/docs/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

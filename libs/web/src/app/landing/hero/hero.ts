@@ -11,13 +11,13 @@ import { RouterLink } from '@angular/router';
   imports: [XIcon, RouterLink],
 })
 export class Hero {
-  readonly showIframe = signal(false);
+  readonly showPreview = signal(false);
   readonly loading = signal(false);
 
   show(): void {
     this.loading.set(true);
     setTimeout(() => {
-      this.showIframe.set(true);
+      this.showPreview.set(true);
       this.loading.set(false);
     }, 800);
   }

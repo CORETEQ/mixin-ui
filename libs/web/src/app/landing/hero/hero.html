@@ -44,13 +44,13 @@
       </div>
 
       <div class="app-hero-preview-content">
-        @if (showIframe()) {
+        @if (showPreview()) {
           <iframe class="animate__animated animate__fadeIn"
-                  src="/preview" title="Preview">
+                  src="/app/mixin-ui/dist/preview/browser/index.html" title="Preview">
           </iframe>
         }
 
-        @if (!showIframe()) {
+        @if (!showPreview()) {
           <button type="button" class="app-primary-btn app-hero-preview-play-btn"
                   [class.loading]="loading()"
                   (click)="show()">

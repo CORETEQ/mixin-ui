@@ -1,1 +1,1 @@
-export * from './clampt';
+export * from './clamp';

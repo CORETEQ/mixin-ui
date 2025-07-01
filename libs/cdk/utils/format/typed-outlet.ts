@@ -1,5 +1,5 @@
 import { TemplateRef, Type as Component } from '@angular/core';
-import { isComponent, isTemplate } from '@mixin-ui/cdk/utils';
+import { isComponent, isTemplate } from '../types';
 
 type Type = 'component' | 'template' | 'value';
 

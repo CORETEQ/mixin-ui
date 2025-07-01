@@ -152,7 +152,6 @@
     100% 2px,
     100% 100%,
     100% 100%;
-  -webkit-font-smoothing: subpixel-antialiased;
 
   iframe {
     display: block;
@@ -166,11 +165,11 @@
   inline-size: 0;
   overflow: hidden;
   white-space: nowrap;
-  animation: typing 1s forwards;
+  animation: typing 1s forwards 250ms;
 }
 
 .app-hero-preview-play-btn {
-  inline-size: fit-content;
+  width: auto;
   color: black;
   background: #fff !important;
   transition-timing-function: ease-in-out;

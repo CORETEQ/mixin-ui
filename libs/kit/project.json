@@ -6,32 +6,19 @@
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nx/angular:package",
-      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "outputs": ["{workspaceRoot}/dist/libs/{projectRoot}"],
       "options": {
-        "project": "libs/kit/ng-package.json"
+        "tsConfig": "tsconfig.prod.json",
+        "project": "{projectRoot}/ng-package.json"
       },
-      "configurations": {
-        "production": {
-          "tsConfig": "tsconfig.prod.json"
+      "dependsOn": [
+        {
+          "target": "build",
+          "params": "ignore",
+          "dependencies": true
         }
-      },
-      "defaultConfiguration": "production"
-    },
-    "nx-release-publish": {
-      "options": {
-        "packageRoot": "{workspaceRoot}/dist/{projectRoot}"
-      }
-    },
-    "test": {
-      "executor": "@nx/vite:test",
-      "outputs": ["{options.reportsDirectory}"],
-      "options": {
-        "reportsDirectory": "../../coverage/kit"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
+      ]
     }
   }
 }
