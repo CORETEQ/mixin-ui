@@ -1,77 +1,42 @@
 <div class="app-container">
   <app-hero />
+  <app-features />
 
-  <div class="py-14 pt-12 px-6 flex flex-col items-center justify-center benefits">
-    <div class="h2 flex flex-col items-center justify-center">
-      Built for developers
-      <div class="highlight">By developers</div>
-    </div>
-    <div class="grid grid-cols-3 gap-4 mt-12 w-full px-12">
-      <div class="card">
-        <div class="card-title">
-          <span>🧩</span>
-          Fully-treeshakable
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">
-          <span>🧙</span>
-          Agnostic
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">
-          <span>🦋</span>
-          Customizable
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">
-          <span>🛠</span>
-          Well engineered
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">
-          <span>📦</span>
-          SSR Friendly
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">
-          <span>📱</span>
-          Mobile Friendly
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">
-          <span>⚡</span>
-          High Performance
-        </div>
-      </div>
-<!--      <div class="card">-->
-<!--        <div class="card-title">-->
-<!--          <span>🔒</span>-->
-<!--          Secure-->
-<!--        </div>-->
-<!--      </div>-->
-      <div class="card">
-        <div class="card-title">
-          <span>🏗</span>
-          Maintained !
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title">
-          Maintained !
-        </div>
-      </div>
-    </div>
-  </div>
+<!--  <div class="relative flex flex-col items-center gap-4 pt-4 pb-14 px-12">-->
+<!--    <div class="line"></div>-->
+
+<!--    <div class="h2 flex flex-col mt-10 items-center justify-center">-->
+<!--      How to start?-->
+<!--    </div>-->
+<!--  </div>-->
 </div>
+
 <app-footer />
 
 <style>
+
+
+  .line {
+    --tw-gradient-position: to right in oklab;
+    --tw-gradient-from: transparent;
+    --tw-gradient-via: #FD9500;
+    --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) 0%, var(--tw-gradient-via) 50%, var(--tw-gradient-to) 100%;
+    --tw-gradient-to: transparent;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) 0%, var(--tw-gradient-to) 100%);
+    height: 1px;
+    inline-size: 100%;
+    display: block;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+
+  .custom-code {
+    code .line {
+      font-size: 20px !important;
+      line-height: 28px !important;
+      height: 28px !important;
+    }
+  }
+
   .benefits {
     border-top: 1px dashed #E5E5E5;
   }

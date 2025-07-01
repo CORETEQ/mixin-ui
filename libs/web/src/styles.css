@@ -48,7 +48,7 @@ body {
   overflow: auto;
   scrollbar-width: none;
   border-style: solid;
-  border-color: rgba(229, 229, 229, 0.75);
+  border-color: rgb(229 229 229 / 75%);
   border-right-width: 1px;
 }
 
@@ -69,12 +69,12 @@ body {
     &.active {
       color: #09090B;
       font-weight: 500;
-      background: #F0F0F0;
+      background: #EDEDED;
     }
 
     &:hover {
       color: #09090B;
-      background: #F0F0F0;
+      background: #EDEDED;
     }
   }
 
@@ -102,7 +102,7 @@ body {
 
   &:hover {
     color: transparent;
-    background: linear-gradient(45deg, #09090B, #707070);
+    background: linear-gradient(45deg, #09090B, #52525B);
     background-size: 200% 200%;
     background-clip: text;
     animation: gradient 3s ease infinite;
@@ -209,7 +209,7 @@ body {
 
   > p {
     display: block;
-    color: #707070;
+    color: #52525B;
     font-size: 16px;
     font-weight: 400;
     line-height: 28px;
@@ -273,7 +273,7 @@ body {
       margin-top: 6px;
       margin-bottom: 6px;
       padding-left: 24px;
-      color: #707070;
+      color: #52525B;
 
       &::before {
         position: relative;

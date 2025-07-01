@@ -54,6 +54,7 @@
   color: var(--x-placeholder-color);
   opacity: 1;
   user-select: none;
+  -webkit-font-smoothing: antialiased;
 }
 
 @mixin reset {
