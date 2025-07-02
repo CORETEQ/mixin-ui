@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { XCalendar, XControl, XDateRoot, XPopoverContent } from '@mixin-ui/kit';
 
@@ -9,10 +9,4 @@ import { XCalendar, XControl, XDateRoot, XPopoverContent } from '@mixin-ui/kit';
 })
 export class InputDateBasicExample {
   readonly date = signal(new Date());
-
-  constructor() {
-    effect(() => {
-      console.log(this.date());
-    });
-  }
 }

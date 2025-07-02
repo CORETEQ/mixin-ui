@@ -10,7 +10,6 @@
     <button
       type="button"
       class="mode-button"
-      (click)="toggleSelectionMode()"
     >
       {{ headerTitle() }}
     </button>
@@ -36,7 +35,7 @@
       <div class="x-calendar-days">
         @for (day of daysInMonth(); track day.getTime()) {
           @let selected = day | map: daySelected: value();
-          @let adjacent = day | map: dayAdjacent: value();
+          @let adjacent = day | map: dayAdjacent: month();
           @let disabled = day | map: dayDisabled: min() : max();
 
           <button
