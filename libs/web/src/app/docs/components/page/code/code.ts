@@ -24,6 +24,6 @@ export class DocsCode {
   readonly #sanitizer = inject(DomSanitizer);
 
   readonly src = input<string>();
-  readonly withNumbers = input(false, { transform: booleanAttribute });
+  readonly withNumbers = input(true, { transform: booleanAttribute });
   readonly html = computed(() => this.#sanitizer.bypassSecurityTrustHtml(this.src() || ''));
 }
