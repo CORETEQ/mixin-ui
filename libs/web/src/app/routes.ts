@@ -33,7 +33,7 @@ export const ROUTES: Route[] = [
               }),
               page({
                 path: 'browser-support',
-                title: 'Browser support',
+                title: 'Compatibility',
                 loadComponent: () => import('./pages/browser-support'),
               }),
             ],
