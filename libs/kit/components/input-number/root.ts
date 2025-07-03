@@ -118,15 +118,15 @@ export class XNumberRoot implements XControlAccessor<number | null> {
     }
   }
 
-  setValue(value: number | null): void {
+  handleControlValue(value: number | null): void {
     this.#mask.setValue(value);
   }
 
-  onControlInit(el: HTMLInputElement): void {
+  handleControlInit(el: HTMLInputElement): void {
     this.#mask.init(el);
   }
 
-  onControlDestroy(): void {
+  handleControlDestroy(): void {
     this.#mask.destroy();
   }
 

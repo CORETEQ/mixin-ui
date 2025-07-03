@@ -5,9 +5,12 @@ export const X_CONTROL_ACCESSOR = new InjectionToken<XControlAccessor<any>>('CON
 
 export interface XControlAccessor<T> {
   readonly valueChanges: Observable<T>;
-  readonly setValue: (value: T) => void;
-  readonly onControlInit?: (element: HTMLInputElement) => void;
-  readonly onControlDestroy?: () => void;
+
+  handleControlValue(value: T): void;
+
+  handleControlInit?(element: HTMLInputElement): void;
+
+  handleControlDestroy?(): void;
 }
 
 export function provideControlAccessor<T>(

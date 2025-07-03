@@ -46,7 +46,7 @@ import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/componen
     '[attr.aria-expanded]': 'open()',
     '(keydown.arrowDown)': '$event.preventDefault(); togglePopover(true)',
     '(click)': 'togglePopover(!open())',
-    '(blur)': 'onBlur($event)',
+    '(blur)': 'handleBlur($event)',
   },
 })
 export class XSelectRoot<T> implements XListboxAccessor<T> {
@@ -86,15 +86,15 @@ export class XSelectRoot<T> implements XListboxAccessor<T> {
     });
   }
 
-  select(values: readonly T[]): void {
-    this.#cva.updateValue(this.multiple() ? values : values.at(0) ?? null);
-  }
-
   togglePopover(open: boolean): void {
     this.#popover.toggle(open);
   }
 
-  protected onBlur(e: FocusEvent): void {
+  handleOptions(values: readonly T[]): void {
+    this.#cva.updateValue(this.multiple() ? values : values.at(0) ?? null);
+  }
+
+  handleBlur(e: FocusEvent): void {
     if (relatedTo(e, this.#popover.overlayElement)) {
       return;
     }

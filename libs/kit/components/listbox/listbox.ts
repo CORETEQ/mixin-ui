@@ -63,7 +63,7 @@ export class XListboxRoot {
 
     // to accessor |->
     this.#cdkListbox.valueChange.pipe(takeUntilDestroyed()).subscribe(({ value }) => {
-      this.#accessor.select(value);
+      this.#accessor.handleOptions(value);
 
       if (!this.#cdkListbox.multiple) {
         this.#popover?.toggle(false);

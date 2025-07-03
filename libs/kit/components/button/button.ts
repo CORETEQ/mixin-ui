@@ -26,7 +26,6 @@ import { X_BUTTON_OPTIONS } from './options';
     '[class]': '`x-btn x-variant-${variant()} x-size-${size()} x-radius-${radius()}`',
     '[class.x-icon-only]': 'iconOnly',
     '[class.x-loading]': 'loading()',
-    '[class.x-contrast]': 'contrast()',
     '[class.x-block]': 'block()',
     '[class.x-vertical]': 'vertical()',
     '[attr.data-main-color]': 'color()',
@@ -44,7 +43,6 @@ export class XButton {
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
   readonly loadingText = input(this.#opt.loadingText);
-  readonly contrast = input(this.#opt.contrast, { transform: booleanAttribute });
   readonly block = input(this.#opt.block, { transform: booleanAttribute });
   readonly vertical = input(this.#opt.vertical, { transform: booleanAttribute });
   readonly loading = input(false, { transform: booleanAttribute });

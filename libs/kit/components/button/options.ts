@@ -6,7 +6,6 @@ export interface XButtonOptions {
   readonly variant: XUnion<'solid' | 'outline' | 'surface' | 'subtle' | 'ghost' | 'plain'>;
   readonly size: XUnion<'xs' | 'sm' | 'md' | 'lg' | 'xl'>;
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
-  readonly contrast: boolean;
   readonly vertical: boolean;
   readonly block: boolean;
   readonly loadingText?: string;
@@ -18,7 +17,6 @@ const defaultOptions: XButtonOptions = {
   variant: 'solid',
   size: 'md',
   radius: 'md',
-  contrast: false,
   vertical: false,
   block: false,
 };

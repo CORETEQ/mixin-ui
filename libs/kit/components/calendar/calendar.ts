@@ -228,7 +228,7 @@ export class XCalendar {
   }
 
   private updateValue(date: Date | null): void {
-    this.#accessor.selectDate(date);
+    this.#accessor.handleDate(date);
   }
 }
 

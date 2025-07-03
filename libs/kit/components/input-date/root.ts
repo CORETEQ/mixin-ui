@@ -63,8 +63,8 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   ],
   host: {
     class: 'x-date',
-    '(focusin)': 'onFocusIn($event)',
-    '(focusout)': 'onFocusOut($event)',
+    '(focusin)': 'handleFocusIn($event)',
+    '(focusout)': 'handleFocusOut($event)',
   },
 })
 export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccessor {
@@ -120,40 +120,45 @@ export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccess
       })
     );
 
-    this.#mask.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => this.value.set(value));
-    this.#calendarChanges.pipe(takeUntilDestroyed()).subscribe(value => this.#mask.setValue(value));
+    this.#mask.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
+      this.value.set(value);
+    });
+
+    this.#calendarChanges.pipe(takeUntilDestroyed()).subscribe(value => {
+      this.#mask.setValue(value);
+    });
   }
 
   togglePopover(open: boolean): void {
     this.#popover.toggle(open);
   }
 
-  selectDate(value: Date | null): void {
+  handleDate(value: Date | null): void {
     this.value.set(value);
     this.#calendarChanges.next(value);
     this.togglePopover(false);
   }
 
-  setValue(value: Date | null): void {
+  handleControlValue(value: Date | null): void {
     this.value.set(value);
     this.#mask.setValue(value);
   }
 
-  onControlInit(el: HTMLInputElement): void {
+  handleControlInit(el: HTMLInputElement): void {
     this.#mask.init(el);
   }
 
-  onControlDestroy(): void {
+  handleControlDestroy(): void {
     this.#mask.destroy();
   }
 
-  protected onFocusIn(e: FocusEvent): void {
+  handleFocusIn(e: FocusEvent): void {
     if (isElement(e.target) && e.target.matches('input') && this.popoverOnFocus()) {
       this.#popover.toggle(true);
     }
   }
 
-  protected onFocusOut(e: FocusEvent): void {
+  handleFocusOut(e: FocusEvent): void {
     if (isElement(e.target) && e.target.matches('input') && !this.#mask.completed) {
       this.#mask.setValue(null);
     }

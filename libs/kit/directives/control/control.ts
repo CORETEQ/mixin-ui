@@ -38,8 +38,8 @@ export class XControl<T> implements ControlValueAccessor, OnDestroy {
   protected onTouched = EMPTY_FN;
 
   constructor() {
-    if (this.#accessor?.onControlInit) {
-      this.#accessor.onControlInit(this.#el);
+    if (this.#accessor?.handleControlInit) {
+      this.#accessor.handleControlInit(this.#el);
     }
     this.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => this.onChange(value));
   }
@@ -48,7 +48,7 @@ export class XControl<T> implements ControlValueAccessor, OnDestroy {
     const modelValue = this.control instanceof NgModel ? this.control.model : value;
 
     if (this.#accessor) {
-      this.#accessor.setValue(modelValue);
+      this.#accessor.handleControlValue(modelValue);
     } else {
       this.#r2.setProperty(this.#el, 'value', modelValue == null ? '' : modelValue);
     }
@@ -67,8 +67,8 @@ export class XControl<T> implements ControlValueAccessor, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.#accessor?.onControlDestroy) {
-      this.#accessor.onControlDestroy();
+    if (this.#accessor?.handleControlDestroy) {
+      this.#accessor.handleControlDestroy();
     }
   }
 

@@ -38,142 +38,73 @@
   }
 }
 
-// modifiers
-@mixin contrast {
-  &:where(.x-contrast) {
-    @content;
-  }
+@mixin reset {
+  box-sizing: border-box;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  border: none;
+  appearance: none;
+  touch-action: manipulation;
+
+  // Removes blue tap highlight on iOS/Safari
+  -webkit-tap-highlight-color: transparent;
 }
 
 .x-btn {
-  --x-icon-color: currentcolor;
+  @include reset;
 
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
-  gap: var(--x-gap, 0.5rem);
+  gap: var(--x-gap);
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  block-size: var(--x-block-size);
-  padding: 0 var(--x-padding);
+  block-size: var(--x-size);
+  padding: 0 var(--x-side);
   color: var(--x-color);
-  white-space: nowrap;
-  text-decoration: none;
-  vertical-align: top;
-  background-color: var(--x-track-bg);
-  outline: 1.5px solid transparent;
+  background-color: var(--x-bg);
+  outline: 2px solid transparent;
   outline-offset: 1px;
-  border: 1px solid transparent;
+  box-shadow: inset 0 0 0 1px var(--x-border, transparent);
   border-radius: var(--x-radius);
-  appearance: none;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
 
-  &:where(button) {
-    cursor: pointer;
-  }
-
-  // variants
   @include variant(solid) {
+    --x-bg: var(--x-theme-main-9);
     --x-color: var(--x-white);
-    --x-track-bg: var(--x-accent-600);
 
     @include hover {
-      --x-track-bg: var(--x-accent-700);
-    }
-
-    @include active {
-      --x-track-bg: var(--x-accent-700);
-    }
-
-    @include contrast {
-      --x-track-bg: var(--x-accent-900);
-
-      @include hover {
-        --x-track-bg: var(--x-accent-950);
-      }
-
-      @include active {
-        --x-track-bg: var(--x-accent-950);
-      }
+      --x-bg: var(--x-theme-main-10);
     }
   }
 
   @include variant(outline) {
-    --x-color: var(--x-accent-950);
-    --x-track-bg: var(--x-white);
-
-    box-shadow: rgb(27 31 35 / 4%) 0 1px 0;
-    border-color: var(--x-accent-400);
+    --x-color: var(--x-theme-main-11);
+    --x-border: var(--x-theme-main-7);
 
     @include hover {
-      --x-track-bg: var(--x-accent-50);
-    }
-
-    @include active {
-      --x-track-bg: var(--x-accent-100);
-    }
-
-    @include contrast {
-      border-color: var(--x-accent-500);
-
-      @include hover {
-        --x-track-bg: var(--x-accent-100);
-      }
-
-      @include active {
-        --x-track-bg: var(--x-accent-100);
-      }
+      --x-bg: var(--x-theme-main-2);
+      --x-border: var(--x-theme-main-8);
     }
   }
 
   @include variant(surface) {
-    --x-color: var(--x-accent-950);
-    --x-track-bg: var(--x-accent-200);
-
-    box-shadow: rgb(27 31 35 / 4%) 0 1px 0;
-    border-color: var(--x-accent-400);
+    --x-bg: var(--x-theme-main-a2);
+    --x-color: var(--x-theme-main-11);
+    --x-border: var(--x-theme-main-7);
 
     @include hover {
-      --x-track-bg: var(--x-accent-300);
-    }
-
-    @include active {
-      --x-track-bg: var(--x-accent-300);
-    }
-
-    @include contrast {
-      --x-track-bg: var(--x-accent-50);
-
-      border-color: var(--x-accent-500);
-
-      @include hover {
-        --x-track-bg: var(--x-accent-100);
-      }
-
-      @include active {
-        --x-track-bg: var(--x-accent-100);
-      }
+      --x-bg: var(--x-theme-main-a3);
+      --x-border: var(--x-theme-main-8);
     }
   }
 
   @include variant(subtle) {
-    --x-color: var(--x-accent-950);
-    --x-track-bg: var(--x-accent-200);
+    --x-bg: var(--x-theme-main-a3);
+    --x-color: var(--x-theme-main-a11);
 
     @include hover {
-      --x-color: var(--x-accent-950);
-      --x-track-bg: var(--x-accent-300);
-    }
-
-    @include active {
-      --x-color: var(--x-accent-950);
-      --x-track-bg: var(--x-accent-300);
-    }
-
-    @include contrast {
-      --x-color: var(--x-gray-950);
+      --x-bg: var(--x-theme-main-a4);
     }
   }
 
@@ -181,17 +112,8 @@
     --x-color: var(--x-accent-950);
 
     @include hover {
+      --x-bg: var(--x-accent-200);
       --x-color: var(--x-accent-950);
-      --x-track-bg: var(--x-accent-200);
-    }
-
-    @include active {
-      --x-color: var(--x-accent-950);
-      --x-track-bg: var(--x-accent-200);
-    }
-
-    @include contrast {
-      --x-color: var(--x-gray-950);
     }
   }
 
@@ -201,14 +123,6 @@
     @include hover {
       --x-color: var(--x-accent-950);
     }
-
-    @include active {
-      --x-color: var(--x-accent-950);
-    }
-
-    @include contrast {
-      --x-color: var(--x-gray-950);
-    }
   }
 
   @include focus-visible {
@@ -216,51 +130,40 @@
   }
 
   @include size(xs) {
-    --x-block-size: var(--x-size-xs);
-    --x-padding: 0.5rem;
-    --x-gap: 0.375rem;
-    --x-spinner-size: 0.5rem;
-    --x-spinner-thickness: 1.5px;
+    --x-size: var(--x-size-xs);
+    --x-side: 0.5rem;
 
     font-size: 0.75rem;
     line-height: 1rem;
   }
 
   @include size(sm) {
-    --x-block-size: var(--x-size-sm);
-    --x-padding: 0.625rem;
-    --x-spinner-size: 0.675rem;
-    --x-spinner-thickness: 1.5px;
+    --x-size: var(--x-size-sm);
+    --x-side: 0.625rem;
 
     font-size: 0.815rem;
     line-height: 1rem;
   }
 
   @include size(md) {
-    --x-block-size: var(--x-size-md);
-    --x-padding: 0.75rem;
-    --x-spinner-size: 0.75rem;
-    --x-spinner-thickness: 2px;
+    --x-size: var(--x-size-md);
+    --x-side: 0.75rem;
 
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
 
   @include size(lg) {
-    --x-block-size: var(--x-size-lg);
-    --x-padding: 0.875rem;
-    --x-spinner-size: 0.875rem;
-    --x-spinner-thickness: 2px;
+    --x-size: var(--x-size-lg);
+    --x-side: 0.875rem;
 
     font-size: 0.935rem;
     line-height: 1.25rem;
   }
 
   @include size(xl) {
-    --x-block-size: var(--x-size-xl);
-    --x-padding: 1rem;
-    --x-spinner-size: 1rem;
-    --x-spinner-thickness: 2.5px;
+    --x-size: var(--x-size-xl);
+    --x-side: 1rem;
 
     font-size: 1rem;
     line-height: 1.5rem;
@@ -286,6 +189,15 @@
     --x-radius: var(--x-radius-full);
   }
 
+  &:where(button) {
+    cursor: pointer;
+  }
+
+  &:where(:disabled) {
+    opacity: 0.6;
+    cursor: var(--x-cursor-disabled);
+  }
+
   &:where(.x-loading) {
     opacity: 0.9;
     cursor: var(--x-cursor-loading);
@@ -299,11 +211,6 @@
     }
   }
 
-  &:where(:disabled) {
-    opacity: 0.6;
-    cursor: var(--x-cursor-disabled);
-  }
-
   &:where(.x-block) {
     display: flex;
     inline-size: 100%;
@@ -312,12 +219,12 @@
   &:where(.x-vertical) {
     flex-direction: column;
     block-size: auto;
-    padding: calc(var(--x-padding) / 1.5) var(--x-padding);
+    padding: calc(var(--x-side) / 1.5) var(--x-side);
   }
 
   &:where(.x-icon-only) {
-    inline-size: var(--x-block-size);
-    min-inline-size: var(--x-block-size);
+    inline-size: var(--x-size);
+    min-inline-size: var(--x-size);
     padding: 0;
   }
 }
