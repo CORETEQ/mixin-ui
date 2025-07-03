@@ -47,11 +47,6 @@ export const ROUTES: Route[] = [
                 title: 'Color palette',
                 loadComponent: () => import('./pages/colors'),
               }),
-              page({
-                path: 'dark-mode',
-                title: 'Dark mode',
-                loadComponent: () => import('./pages/colors'),
-              }),
             ],
           }),
           group({
