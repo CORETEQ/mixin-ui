@@ -1,3 +1,38 @@
 <docs-page>
-  <p>In progress...</p>
+  <p class="mb-8">
+    This article presents several color palettes used in the design system, including base, accent, and semantic
+    variations. These palettes ensure consistent theming, support for dark and light modes, and flexibility for
+    customization.
+  </p>
+
+  <div class="flex flex-col gap-10">
+    @for (palette of palettes; track palette) {
+      <section class="space-y-4">
+        <h2 class="text-xl font-semibold">{{ palette | titlecase }}</h2>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          @for (step of steps; track step) {
+            <div
+              class="rounded-md overflow-hidden border bg-white"
+              style="border-color: #dedede"
+            >
+              <!-- цветная плашка -->
+              <div
+                class="h-16"
+                [style.background-color]="'var(--x-' + palette + '-' + step + ')'"
+              ></div>
+
+              <!-- подписи -->
+              <div class="text-sm p-2 text-gray-700">
+                {{ step }}<br />
+                <span class="text-[10px] text-gray-500">
+                var(--x-{{ palette }}-{{ step }})
+              </span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+  </div>
 </docs-page>

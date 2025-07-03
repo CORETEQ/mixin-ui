@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { DocsPage } from '@/docs/components';
 
 @Component({
-  selector: 'app-browser-support',
+  selector: 'app-сompatibility',
   templateUrl: './index.html',
   imports: [DocsPage],
   encapsulation: ViewEncapsulation.None,

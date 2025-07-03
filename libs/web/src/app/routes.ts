@@ -32,9 +32,9 @@ export const ROUTES: Route[] = [
                 loadComponent: () => import('./pages/installation'),
               }),
               page({
-                path: 'browser-support',
+                path: 'сompatibility',
                 title: 'Compatibility',
-                loadComponent: () => import('./pages/browser-support'),
+                loadComponent: () => import('./pages/сompatibility'),
               }),
             ],
           }),
