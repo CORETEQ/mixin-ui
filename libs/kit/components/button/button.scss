@@ -63,6 +63,7 @@
   block-size: var(--x-size);
   padding: 0 var(--x-side);
   color: var(--x-color);
+  font: var(--x-font);
   background-color: var(--x-bg);
   outline: 2px solid transparent;
   outline-offset: 1px;
@@ -70,103 +71,84 @@
   border-radius: var(--x-radius);
 
   @include variant(solid) {
-    --x-bg: var(--x-theme-main-9);
+    --x-bg: var(--x-theme-main-500);
     --x-color: var(--x-white);
 
     @include hover {
-      --x-bg: var(--x-theme-main-10);
+      --x-bg: var(--x-theme-main-700);
     }
   }
 
   @include variant(outline) {
-    --x-color: var(--x-theme-main-11);
-    --x-border: var(--x-theme-main-7);
+    --x-color: var(--x-theme-main-900);
+    --x-border: var(--x-theme-main-a600);
 
     @include hover {
-      --x-bg: var(--x-theme-main-2);
-      --x-border: var(--x-theme-main-8);
+      --x-bg: var(--x-theme-main-a50);
     }
   }
 
   @include variant(surface) {
-    --x-bg: var(--x-theme-main-a2);
-    --x-color: var(--x-theme-main-11);
-    --x-border: var(--x-theme-main-7);
+    --x-bg: var(--x-theme-main-a200);
+    --x-color: var(--x-theme-main-900);
+    --x-border: var(--x-theme-main-a600);
 
     @include hover {
-      --x-bg: var(--x-theme-main-a3);
-      --x-border: var(--x-theme-main-8);
+      --x-bg: var(--x-theme-main-a300);
+      --x-border: var(--x-theme-main-a700);
     }
   }
 
   @include variant(subtle) {
-    --x-bg: var(--x-theme-main-a3);
-    --x-color: var(--x-theme-main-a11);
+    --x-bg: var(--x-theme-main-a300);
+    --x-color: var(--x-theme-main-900);
 
     @include hover {
-      --x-bg: var(--x-theme-main-a4);
+      --x-bg: var(--x-theme-main-a400);
     }
   }
 
   @include variant(ghost) {
-    --x-color: var(--x-accent-950);
+    --x-bg: transparent;
+    --x-color: var(--x-theme-main-900);
 
     @include hover {
-      --x-bg: var(--x-accent-200);
-      --x-color: var(--x-accent-950);
+      --x-bg: var(--x-theme-main-a400);
     }
   }
 
   @include variant(plain) {
-    --x-color: var(--x-accent-950);
-
-    @include hover {
-      --x-color: var(--x-accent-950);
-    }
-  }
-
-  @include focus-visible {
-    outline-color: var(--x-accent-500);
+    --x-color: var(--x-theme-main-900);
   }
 
   @include size(xs) {
+    --x-font: var(--x-text-xs);
     --x-size: var(--x-size-xs);
     --x-side: 0.5rem;
-
-    font-size: 0.75rem;
-    line-height: 1rem;
   }
 
   @include size(sm) {
+    --x-font: var(--x-text-sm);
     --x-size: var(--x-size-sm);
     --x-side: 0.625rem;
-
-    font-size: 0.815rem;
-    line-height: 1rem;
   }
 
   @include size(md) {
+    --x-font: var(--x-text-sm);
     --x-size: var(--x-size-md);
-    --x-side: 0.75rem;
-
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    --x-side: 0.625rem;
   }
 
   @include size(lg) {
+    --x-font: var(--x-text-md);
     --x-size: var(--x-size-lg);
-    --x-side: 0.875rem;
-
-    font-size: 0.935rem;
-    line-height: 1.25rem;
+    --x-side: 0.75rem;
   }
 
   @include size(xl) {
+    --x-font: var(--x-text-md);
     --x-size: var(--x-size-xl);
-    --x-side: 1rem;
-
-    font-size: 1rem;
-    line-height: 1.5rem;
+    --x-side: 0.875rem;
   }
 
   @include radius(none) {

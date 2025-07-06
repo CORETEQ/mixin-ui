@@ -19,6 +19,7 @@ const defaultOptions: XButtonOptions = {
   radius: 'md',
   vertical: false,
   block: false,
+  color: 'orange',
 };
 
 export const X_BUTTON_OPTIONS = new InjectionToken<XButtonOptions>('BUTTON_OPTIONS', {
