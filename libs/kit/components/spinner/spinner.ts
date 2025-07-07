@@ -5,9 +5,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-spinner',
   styleUrl: './spinner.scss',
+  template: '',
   host: {
     '[class]': '`x-spinner`',
   },
-  template: '',
 })
 export class XSpinner {}

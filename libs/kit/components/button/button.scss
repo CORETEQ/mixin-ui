@@ -62,63 +62,68 @@
   justify-content: center;
   block-size: var(--x-size);
   padding: 0 var(--x-side);
-  color: var(--x-color);
   font: var(--x-font);
-  background-color: var(--x-bg);
   outline: 2px solid transparent;
   outline-offset: 1px;
-  box-shadow: inset 0 0 0 1px var(--x-border, transparent);
   border-radius: var(--x-radius);
 
   @include variant(solid) {
-    --x-bg: var(--x-theme-main-500);
-    --x-color: var(--x-white);
+    color: var(--x-white);
+    background-color: var(--x-theme-main-500);
 
     @include hover {
-      --x-bg: var(--x-theme-main-700);
+      background-color: var(--x-theme-main-600);
     }
   }
 
   @include variant(outline) {
-    --x-color: var(--x-theme-main-900);
-    --x-border: var(--x-theme-main-a600);
+    color: var(--x-theme-main-950);
+    background-color: var(--x-white);
+    box-shadow: inset 0 0 0 1px var(--x-theme-main-300), 0 1px 1px #F1F1F1;
 
     @include hover {
-      --x-bg: var(--x-theme-main-a50);
+      background-color: var(--x-theme-main-50);
+    }
+
+    @include active {
+      background-color: var(--x-theme-main-100);
     }
   }
 
   @include variant(surface) {
-    --x-bg: var(--x-theme-main-a200);
-    --x-color: var(--x-theme-main-900);
-    --x-border: var(--x-theme-main-a600);
+    color: var(--x-theme-main-950);
+    background-color: var(--x-theme-main-100);
+    box-shadow: inset 0 0 0 1px var(--x-theme-main-300), 0 1px 1px #F1F1F1;
 
     @include hover {
-      --x-bg: var(--x-theme-main-a300);
-      --x-border: var(--x-theme-main-a700);
+      background-color: var(--x-theme-main-200);
     }
   }
 
   @include variant(subtle) {
-    --x-bg: var(--x-theme-main-a300);
-    --x-color: var(--x-theme-main-900);
+    color: var(--x-theme-main-950);
+    background-color: var(--x-theme-main-100);
 
     @include hover {
-      --x-bg: var(--x-theme-main-a400);
+      background-color: var(--x-theme-main-200);
     }
   }
 
   @include variant(ghost) {
-    --x-bg: transparent;
-    --x-color: var(--x-theme-main-900);
+    color: var(--x-theme-main-950);
+    background-color: transparent;
 
     @include hover {
-      --x-bg: var(--x-theme-main-a400);
+      background-color: var(--x-theme-main-100);
+    }
+
+    @include active {
+      background-color: var(--x-theme-main-200);
     }
   }
 
   @include variant(plain) {
-    --x-color: var(--x-theme-main-900);
+    color: var(--x-theme-main-950);
   }
 
   @include size(xs) {

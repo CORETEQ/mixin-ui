@@ -1,9 +1,9 @@
 @Component({
   template: `
-    <x-date>
+    <x-input-date>
       <input x-control [(ngModel)]="value" />
       <x-calendar *x-popover />
-    </x-date>
+    </x-input-date>
   `
 })
 export class Usage {

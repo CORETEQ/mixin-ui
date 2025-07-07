@@ -1,13 +1,6 @@
 <ng-content select="input" />
 <ng-content />
 
-@if (popoverContent()) {
-  <span class="x-input-suffix">
-    <button x-icon
-            [size]="size()"
-            (pointerdown)="$event.preventDefault()"
-            (click)="togglePopover(!open())">
-      <x-icon src="calendar" />
-    </button>
-  </span>
-}
+<span class="x-input-prefix">
+  <x-icon src="calendar" />
+</span>

@@ -2,7 +2,6 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
-  contentChild,
   effect,
   forwardRef,
   inject,
@@ -25,10 +24,9 @@ import {
   XControlAccessor,
   XInput,
   XPopover,
-  XPopoverContent,
 } from '@mixin-ui/kit/directives';
 import { provideCalendarAccessor, XCalendarAccessor } from '@mixin-ui/kit/components/calendar';
-import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
+import { provideButtonOptions } from '@mixin-ui/kit/components/button';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_INPUT_DATE_OPTIONS } from './options';
 
@@ -37,7 +35,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-date',
   templateUrl: './root.html',
-  imports: [XButton, XIcon],
+  imports: [XIcon],
   providers: [
     provideMask(X_DATE_MASK_FACTORY),
     provideControlAccessor(forwardRef(() => XDateRoot)),
@@ -76,7 +74,6 @@ export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccess
 
   readonly size = this.#input.size;
   readonly open = this.#popover.open;
-  readonly popoverContent = contentChild(XPopoverContent);
   readonly value = signal<Date | null>(null);
 
   /** Show calendar popover when input field receives focus (defaults to true) */

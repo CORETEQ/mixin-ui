@@ -47,7 +47,7 @@ export class XButton {
   readonly vertical = input(this.#opt.vertical, { transform: booleanAttribute });
   readonly loading = input(false, { transform: booleanAttribute });
   readonly attrType = computed(() => (this.#el.tagName === 'A' ? null : this.type()));
-  readonly withLoadingText = computed(() => this.loadingText() && !this.iconOnly);
+  readonly hasLoadingText = computed(() => !!this.loadingText() && !this.iconOnly);
 
   constructor() {
     toObservable(this.loading)

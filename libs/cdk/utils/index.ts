@@ -2,6 +2,7 @@ export * from './dom';
 export * from './forms';
 export * from './keyboard';
 export * from './math';
+export * from './popover';
 export * from './signals';
 export * from './format';
 export * from './types';

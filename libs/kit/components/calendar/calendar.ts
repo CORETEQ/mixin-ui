@@ -72,25 +72,6 @@ export class XCalendar {
     orderWeekdays(this.#language()['dayNamesMin'], this.startOfWeek())
   );
 
-  readonly headerTitle = computed(() => {
-    const currentMonth = this.month();
-    const mode = this.mode();
-
-    switch (mode) {
-      case 'days':
-        return this.format(currentMonth, 'MMMM yyyy');
-      case 'months':
-        return this.format(currentMonth, 'yyyy');
-      case 'years': {
-        const year = currentMonth.getFullYear();
-        const decade = Math.floor(year / 10) * 10;
-        return `${decade} - ${decade + 9}`;
-      }
-      default:
-        return '';
-    }
-  });
-
   readonly daysInMonth = computed(() => {
     const month = this.month();
     const start = startOfWeek(startOfMonth(month), { weekStartsOn: this.startOfWeek() });
@@ -157,26 +138,6 @@ export class XCalendar {
     }
 
     this.month.set(newMonth);
-  }
-
-  toggleSelectionMode(): void {
-    const currentMode = this.mode();
-    let newMode: CalendarSelectionMode;
-
-    switch (currentMode) {
-      case 'days':
-        newMode = 'months';
-        break;
-      case 'months':
-        newMode = 'years';
-        break;
-      case 'years':
-        newMode = 'days';
-        break;
-      default:
-        newMode = 'days';
-    }
-    this.mode.set(newMode);
   }
 
   selectDay(day: Date): void {

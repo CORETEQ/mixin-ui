@@ -45,7 +45,7 @@ class XInputStyles {}
     '[class.x-pending]': 'state()?.pending',
     '[class.x-invalid]': 'state()?.invalid && state()?.touched',
     '[attr.data-main-color]': 'color()',
-    '(pointerdown)': 'onPointerdown($event);',
+    '(pointerdown)': 'onPointerDown($event);',
   },
 })
 export class XInput {
@@ -119,7 +119,7 @@ export class XInput {
     this.focusableEl()?.focus();
   }
 
-  protected onPointerdown(e: PointerEvent): void {
+  protected onPointerDown(e: PointerEvent): void {
     const focusable = this.focusableEl();
 
     if (!focusable || (isElement(e.target) && e.target.closest(INTERACTIVE))) {

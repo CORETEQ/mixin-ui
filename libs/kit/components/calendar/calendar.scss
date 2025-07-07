@@ -53,6 +53,7 @@
   justify-content: center;
   inline-size: 2rem;
   block-size: 2rem;
+  color: var(--x-theme-gray-950);
   font-size: 0.875rem;
   line-height: 1.5rem;
   background-color: transparent;
@@ -60,13 +61,13 @@
   cursor: pointer;
 
   @include hover {
-    background-color: var(--x-gray-200);
+    background-color: var(--x-theme-gray-200);
   }
 
   @include selected {
     color: var(--x-white);
     font-weight: 500;
-    background-color: var(--x-accent-600);
+    background-color: var(--x-theme-main-500);
   }
 
   @include disabled {

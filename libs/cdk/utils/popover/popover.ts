@@ -44,14 +44,14 @@ export interface XPopoverPositionOptions {
   readonly fixed: boolean;
 }
 
-export function popover(injector?: Injector): XPopoverManager {
+export function createPopover(injector?: Injector): XPopoverImpl {
   if (!injector) {
-    assertInInjectionContext(popover);
+    assertInInjectionContext(createPopover);
   }
-  return runInInjectionContext(injector || inject(Injector), () => new XPopoverManager());
+  return runInInjectionContext(injector || inject(Injector), () => new XPopoverImpl());
 }
 
-export class XPopoverManager {
+export class XPopoverImpl {
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
   readonly #cdk = inject(Overlay);
   readonly #vcr = inject(ViewContainerRef);
