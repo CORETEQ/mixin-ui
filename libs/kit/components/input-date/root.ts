@@ -106,7 +106,7 @@ export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccess
   readonly valueChanges = merge(this.#mask.valueChanges, this.#calendarChanges);
 
   constructor() {
-    effect(() =>
+    effect(() => {
       this.#mask.updateOptions({
         min: this.min(),
         max: this.max(),
@@ -114,8 +114,8 @@ export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccess
         pattern: this.pattern(),
         showFiller: this.showFiller(),
         fillerChar: this.fillerChar(),
-      })
-    );
+      });
+    });
 
     this.#mask.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
       this.value.set(value);
