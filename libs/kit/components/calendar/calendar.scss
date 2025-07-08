@@ -7,6 +7,12 @@
   }
 }
 
+@mixin active {
+  &:where(:active:not(.x-disabled)) {
+    @content;
+  }
+}
+
 @mixin selected {
   &:where(.x-selected) {
     @content;
@@ -73,7 +79,15 @@
   cursor: pointer;
 
   @include hover {
+    background-color: var(--x-gray-200);
+  }
+
+  @include active {
     background-color: var(--x-gray-300);
+  }
+
+  @include today {
+    color: var(--x-main-600);
   }
 
   @include selected {
@@ -82,12 +96,12 @@
     background-color: var(--x-main-600);
   }
 
+  @include adjacent {
+    opacity: 0.5;
+  }
+
   @include disabled {
     opacity: 0.5;
     cursor: var(--x-cursor-disabled);
-  }
-
-  @include adjacent {
-    opacity: 0.5;
   }
 }

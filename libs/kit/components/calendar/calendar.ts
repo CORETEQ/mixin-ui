@@ -31,7 +31,7 @@ import {
   subMonths,
   subYears,
 } from 'date-fns';
-import { XMapPipe } from '@mixin-ui/cdk';
+import { createCva, XMapPipe } from '@mixin-ui/cdk';
 import { X_LANGUAGE } from '@mixin-ui/kit/providers';
 import { X_SLOT, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
@@ -55,6 +55,7 @@ export type CalendarSelectionMode = 'days' | 'months' | 'years';
 })
 export class XCalendar {
   readonly #opt = inject(X_CALENDAR_OPTIONS);
+  readonly #cva = createCva<Date | null>({ defaultValue: null, transform: value => value });
   readonly #accessor = inject(X_CALENDAR_ACCESSOR, { optional: true });
   readonly #lang = inject(X_LANGUAGE);
 
@@ -63,10 +64,11 @@ export class XCalendar {
   readonly startOfWeek = input(this.#opt.startOfWeek);
 
   readonly month = linkedSignal(() => this.value() || new Date());
-  readonly value = this.#accessor?.value || signal(null);
+  readonly value = computed(() => this.#accessor?.value() || this.#cva.value());
   readonly min = this.#accessor?.min || signal(null);
   readonly max = this.#accessor?.max || signal(null);
 
+  protected readonly isToday = isToday;
   protected readonly daySelected = daySelected;
   protected readonly dayDisabled = dayDisabled;
   protected readonly dayAdjacent = dayAdjacent;
@@ -191,7 +193,12 @@ export class XCalendar {
 
   private updateValue(date: Date | null): void {
     this.#accessor?.handleDate(date);
+    this.#cva.updateValue(date);
   }
+}
+
+function isToday(date: Date): boolean {
+  return isSameDay(date, Date.now());
 }
 
 function daySelected(date: Date, value: Date | null): boolean {

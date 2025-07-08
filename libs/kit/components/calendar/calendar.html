@@ -38,6 +38,7 @@
 
       <div class="x-calendar-days">
         @for (day of daysInMonth(); track day.getTime()) {
+          @let today = day | map: isToday;
           @let selected = day | map: daySelected: value();
           @let adjacent = day | map: dayAdjacent: month();
           @let disabled = day | map: dayDisabled: min() : max();
@@ -45,6 +46,7 @@
           <button
             type="button"
             class="x-calendar-day"
+            [class.x-today]="today"
             [class.x-selected]="selected"
             [class.x-adjacent]="adjacent"
             [class.x-disabled]="disabled"
@@ -52,7 +54,7 @@
 
             @if ($.day) {
               <ng-container [ngTemplateOutlet]="$.day"
-                            [ngTemplateOutletContext]="{ $implicit: { day, selected, adjacent, disabled } }">
+                            [ngTemplateOutletContext]="{ $implicit: { day, today, selected, adjacent, disabled } }">
               </ng-container>
             } @else {
               {{ day }}
