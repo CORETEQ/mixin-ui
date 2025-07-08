@@ -1,33 +1,37 @@
 <div class="x-calendar-header">
   <button
     x-icon
+    variant="subtle"
     (click)="navigatePrevious()"
   >
     <x-icon src="chevron-left" />
   </button>
 
-  <div class="header-title">
-    <button
-      type="button"
-      class="mode-button"
-    >
-      {{ headerTitle() }}
-    </button>
+  <div>
+    <span>
+      {{ monthName() }}
+    </span>
+    <span>
+      {{ year() }}
+    </span>
   </div>
 
   <button
     x-icon
+    variant="subtle"
     (click)="navigateNext()"
   >
     <x-icon src="chevron-right" />
   </button>
 </div>
 
+@let $ = slots() | asRecord;
+
 <div class="x-calendar-content">
   @switch (mode()) {
     @case ('days') {
       <div class="x-calendar-days">
-        @for (day of weekdays(); track day) {
+        @for (day of dayNames(); track day) {
           <div class="x-calendar-weekday">{{ day }}</div>
         }
       </div>
@@ -45,7 +49,14 @@
             [class.x-adjacent]="adjacent"
             [class.x-disabled]="disabled"
             (click)="selectDay(day)">
-            {{ day | map: format: 'd' }}
+
+            @if ($.day) {
+              <ng-container [ngTemplateOutlet]="$.day"
+                            [ngTemplateOutletContext]="{ $implicit: { day, selected, adjacent, disabled } }">
+              </ng-container>
+            } @else {
+              {{ day }}
+            }
           </button>
         }
       </div>
@@ -53,16 +64,17 @@
     @case ('months') {
       <div class="x-calendar-months">
         @for (month of monthsInYear(); track month.getTime()) {
+          @let selected = month | map: monthSelected: value();
           @let disabled = month | map: monthDisabled: min() : max();
 
           <button
             type="button"
             class="month-cell"
-            [class.x-selected]="isMonthSelected(month)"
+            [class.x-selected]="selected"
             [class.x-disabled]="disabled"
             (click)="selectMonth(month)"
           >
-            {{ month | map: format: 'MMM' }}
+            {{ month }}
           </button>
         }
       </div>
@@ -70,16 +82,17 @@
     @case ('years') {
       <div class="x-calendar-years">
         @for (year of yearsInDecade(); track year.getTime()) {
+          @let selected = year | map: yearSelected: value();
           @let disabled = year | map: yearDisabled: min() : max();
 
           <button
             type="button"
             class="year-cell"
-            [class.x-selected]="isYearSelected(year)"
+            [class.x-selected]="selected"
             [class.x-disabled]="disabled"
             (click)="selectYear(year)"
           >
-            {{ year | map: format: 'yyyy' }}
+            {{ year }}
           </button>
         }
       </div>

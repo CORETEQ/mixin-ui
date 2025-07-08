@@ -2,12 +2,15 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChildren,
   inject,
   input,
   linkedSignal,
   model,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   addMonths,
   addYears,
@@ -17,7 +20,6 @@ import {
   endOfMonth,
   endOfWeek,
   endOfYear,
-  format,
   isAfter,
   isBefore,
   isSameDay,
@@ -31,6 +33,7 @@ import {
 } from 'date-fns';
 import { XMapPipe } from '@mixin-ui/cdk';
 import { X_LANGUAGE } from '@mixin-ui/kit/providers';
+import { X_SLOT, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_CALENDAR_ACCESSOR } from './providers';
@@ -44,73 +47,72 @@ export type CalendarSelectionMode = 'days' | 'months' | 'years';
   selector: 'x-calendar',
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
-  imports: [XButton, XMapPipe, XIcon],
-  providers: [provideButtonOptions({ variant: 'ghost', color: 'gray', size: 'md' })],
-  host: { class: 'x-calendar' },
+  imports: [XButton, XMapPipe, XSlotsPipe, XIcon, NgTemplateOutlet],
+  providers: [provideButtonOptions({ variant: 'outline', color: 'gray', size: 'sm' })],
+  host: {
+    class: 'x-calendar',
+  },
 })
 export class XCalendar {
   readonly #opt = inject(X_CALENDAR_OPTIONS);
-  readonly #accessor = inject(X_CALENDAR_ACCESSOR);
-  readonly #language = inject(X_LANGUAGE);
+  readonly #accessor = inject(X_CALENDAR_ACCESSOR, { optional: true });
+  readonly #lang = inject(X_LANGUAGE);
 
+  readonly slots = contentChildren(X_SLOT);
   readonly mode = model<CalendarSelectionMode>('days');
   readonly startOfWeek = input(this.#opt.startOfWeek);
 
   readonly month = linkedSignal(() => this.value() || new Date());
-  readonly value = this.#accessor.value;
-  readonly min = this.#accessor.min;
-  readonly max = this.#accessor.max;
+  readonly value = this.#accessor?.value || signal(null);
+  readonly min = this.#accessor?.min || signal(null);
+  readonly max = this.#accessor?.max || signal(null);
 
-  protected readonly format = format;
-  protected readonly dayDisabled = dayDisabled;
   protected readonly daySelected = daySelected;
+  protected readonly dayDisabled = dayDisabled;
   protected readonly dayAdjacent = dayAdjacent;
+  protected readonly monthSelected = monthSelected;
   protected readonly monthDisabled = monthDisabled;
+  protected readonly yearSelected = yearSelected;
   protected readonly yearDisabled = yearDisabled;
 
-  readonly weekdays = computed(() =>
-    orderWeekdays(this.#language()['dayNamesMin'], this.startOfWeek())
-  );
-
-  readonly headerTitle = computed(() => {
-    const currentMonth = this.month();
-    const mode = this.mode();
-
-    switch (mode) {
-      case 'days':
-        return this.format(currentMonth, 'MMMM yyyy');
-      case 'months':
-        return this.format(currentMonth, 'yyyy');
-      case 'years': {
-        const year = currentMonth.getFullYear();
-        const decade = Math.floor(year / 10) * 10;
-        return `${decade} - ${decade + 9}`;
-      }
-      default:
-        return '';
-    }
-  });
+  readonly dayNames = computed(() => reorder(this.#lang()['dayNamesMin'], this.startOfWeek()));
+  readonly monthNames = computed(() => this.#lang()['monthNames']);
+  readonly monthName = computed(() => this.monthNames()[this.month().getMonth()]);
+  readonly year = computed(() => this.month().getFullYear());
 
   readonly daysInMonth = computed(() => {
     const month = this.month();
     const start = startOfWeek(startOfMonth(month), { weekStartsOn: this.startOfWeek() });
     const end = endOfWeek(endOfMonth(month), { weekStartsOn: this.startOfWeek() });
-    return eachDayOfInterval({ start, end });
+
+    return eachDayOfInterval({ start, end }).map(date => {
+      date.toString = () => String(date.getDate());
+      return date;
+    });
   });
 
   readonly monthsInYear = computed(() => {
-    const year = this.month().getFullYear();
+    const year = this.year();
     const start = startOfYear(new Date(year, 0, 1));
     const end = endOfYear(start);
-    return eachMonthOfInterval({ start, end });
+    const names = this.monthNames();
+
+    return eachMonthOfInterval({ start, end }).map(date => {
+      date.toString = () => names[date.getMonth()];
+      return date;
+    });
   });
 
   readonly yearsInDecade = computed(() => {
-    const currentYear = this.month().getFullYear();
-    const decade = Math.floor(currentYear / 10) * 10;
+    const year = this.year();
+    const decade = Math.floor(year / 10) * 10;
     const start = new Date(decade, 0, 1);
     const end = new Date(decade + 9, 11, 31);
-    return eachYearOfInterval({ start, end });
+
+    return eachYearOfInterval({ start, end }).map(date => {
+      date.toString = () => String(date.getFullYear());
+      return date;
+    });
   });
 
   navigatePrevious(): void {
@@ -159,26 +161,6 @@ export class XCalendar {
     this.month.set(newMonth);
   }
 
-  toggleSelectionMode(): void {
-    const currentMode = this.mode();
-    let newMode: CalendarSelectionMode;
-
-    switch (currentMode) {
-      case 'days':
-        newMode = 'months';
-        break;
-      case 'months':
-        newMode = 'years';
-        break;
-      case 'years':
-        newMode = 'days';
-        break;
-      default:
-        newMode = 'days';
-    }
-    this.mode.set(newMode);
-  }
-
   selectDay(day: Date): void {
     if (this.dayDisabled(day, this.min(), this.max())) {
       return;
@@ -187,53 +169,41 @@ export class XCalendar {
     this.updateValue(day);
   }
 
-  selectMonth(date: Date): void {
-    if (this.monthDisabled(date, this.min(), this.max())) {
+  selectMonth(month: Date): void {
+    if (this.monthDisabled(month, this.min(), this.max())) {
       return;
     }
 
-    this.updateValue(date);
-    this.month.set(date);
+    this.month.set(month);
     this.mode.set('days');
+    this.updateValue(month);
   }
 
-  selectYear(date: Date): void {
-    if (this.yearDisabled(date, this.min(), this.max())) {
+  selectYear(year: Date): void {
+    if (this.yearDisabled(year, this.min(), this.max())) {
       return;
     }
 
-    this.updateValue(date);
-    this.month.set(date);
+    this.month.set(year);
     this.mode.set('months');
-  }
-
-  isMonthSelected(date: Date): boolean {
-    const currentValue = this.value();
-
-    if (!currentValue) {
-      return false;
-    }
-
-    return isSameMonth(currentValue, date);
-  }
-
-  isYearSelected(date: Date): boolean {
-    const currentValue = this.value();
-
-    if (!currentValue) {
-      return false;
-    }
-
-    return isSameYear(currentValue, date);
+    this.updateValue(year);
   }
 
   private updateValue(date: Date | null): void {
-    this.#accessor.selectDate(date);
+    this.#accessor?.handleDate(date);
   }
 }
 
 function daySelected(date: Date, value: Date | null): boolean {
   return value ? isSameDay(date, value) : false;
+}
+
+function monthSelected(date: Date, value: Date | null): boolean {
+  return value ? isSameMonth(date, value) : false;
+}
+
+function yearSelected(date: Date, value: Date | null): boolean {
+  return value ? isSameYear(date, value) : false;
 }
 
 function dayAdjacent(date: Date, value: Date | null): boolean {
@@ -258,7 +228,7 @@ function yearDisabled(date: Date, min: Date | null, max: Date | null): boolean {
   );
 }
 
-function orderWeekdays(tuple: readonly string[], startIndex: number): readonly string[] {
+function reorder(tuple: readonly string[], startIndex: number): readonly string[] {
   const length = tuple.length;
   const index = ((startIndex % length) + length) % length;
   return [...tuple.slice(index), ...tuple.slice(0, index)];

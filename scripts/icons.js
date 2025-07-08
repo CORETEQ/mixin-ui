@@ -5,7 +5,7 @@ const path = require('path');
 const config = {
   inputDirectory: './libs/kit/icons',
   vectorEffect: 'non-scaling-stroke',
-  strokeWidth: '1.5',
+  strokeWidth: '1.4',
 };
 
 const strokeElements = ['path', 'line', 'polyline', 'polygon', 'circle', 'ellipse', 'rect'];

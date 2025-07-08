@@ -7,7 +7,7 @@
             tabindex="-1"
             [size]="size()"
             [disabled]="minusDisabled()"
-            (pointerdown)="onSpin($event)"
+            (pointerdown)="handleSpin($event)"
             (click)="minus(step)">
       <x-icon src="minus" />
     </button>
@@ -15,7 +15,7 @@
             tabindex="-1"
             [size]="size()"
             [disabled]="plusDisabled()"
-            (pointerdown)="onSpin($event)"
+            (pointerdown)="handleSpin($event)"
             (click)="plus(step)">
       <x-icon src="plus" />
     </button>

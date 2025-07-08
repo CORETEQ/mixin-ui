@@ -23,9 +23,8 @@ import { X_SWITCH_OPTIONS } from './options';
     role: 'switch',
     '[class]': '`x-switch x-size-${size()} x-radius-${radius()}`',
     '[attr.data-state]': 'state()',
-    '[attr.data-main-color]': 'color()',
-    '(blur)': 'markAsTouched()',
-    '(click)': 'toggle()',
+    '(click)': 'handleClick()',
+    '(blur)': 'handleBlur()',
   },
 })
 export class XSwitch {
@@ -36,7 +35,6 @@ export class XSwitch {
   readonly value = input<string>();
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
-  readonly color = input(this.#opt.color);
   readonly iconChecked = input(this.#opt.iconChecked);
   readonly iconUnchecked = input(this.#opt.iconUnchecked);
   readonly checked = this.#cva.value;
@@ -52,11 +50,11 @@ export class XSwitch {
     }
   }
 
-  protected toggle(): void {
+  handleClick(): void {
     this.#cva.updateValue(!this.checked());
   }
 
-  protected markAsTouched(): void {
+  handleBlur(): void {
     this.#cva.markAsTouched();
   }
 }

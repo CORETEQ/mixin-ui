@@ -1,8 +1,8 @@
 @Component({
   template: `
-    <x-text>
+    <x-input-text>
       <input [(ngModel)]="value" />
-    </x-text>
+    </x-input-text>
   `
 })
 export class Usage {

@@ -44,8 +44,7 @@ class XInputStyles {}
     '[class.x-disabled]': 'state()?.disabled',
     '[class.x-pending]': 'state()?.pending',
     '[class.x-invalid]': 'state()?.invalid && state()?.touched',
-    '[attr.data-main-color]': 'color()',
-    '(pointerdown)': 'onPointerdown($event);',
+    '(pointerdown)': 'onPointerDown($event);',
   },
 })
 export class XInput {
@@ -63,7 +62,6 @@ export class XInput {
   readonly variant = input(this.#opt.variant);
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
-  readonly color = input(this.#opt.color);
   readonly control = computed(() => this.childControl()?.control || this.#selfControl?.control);
 
   readonly focusableEl = toSignal(
@@ -119,7 +117,7 @@ export class XInput {
     this.focusableEl()?.focus();
   }
 
-  protected onPointerdown(e: PointerEvent): void {
+  protected onPointerDown(e: PointerEvent): void {
     const focusable = this.focusableEl();
 
     if (!focusable || (isElement(e.target) && e.target.closest(INTERACTIVE))) {

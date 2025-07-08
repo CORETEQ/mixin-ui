@@ -1,12 +1,11 @@
 import { InjectionToken, ValueProvider } from '@angular/core';
-import { XColor, XUnion } from '@mixin-ui/kit/types';
+import { XUnion } from '@mixin-ui/kit/types';
 
 export interface XSwitchOptions {
   readonly size: XUnion<'sm' | 'md' | 'lg'>;
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
   readonly iconChecked?: string;
   readonly iconUnchecked?: string;
-  readonly color?: XColor;
 }
 
 const defaultOptions: XSwitchOptions = {

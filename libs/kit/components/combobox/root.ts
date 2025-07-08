@@ -30,7 +30,7 @@ import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/componen
   hostDirectives: [
     {
       directive: XInput,
-      inputs: ['variant', 'size', 'radius', 'color'],
+      inputs: ['variant', 'size', 'radius'],
     },
   ],
   host: {
@@ -51,11 +51,11 @@ export class XComboboxRoot<T>
 
   readonly valueChanges = new Subject<T | readonly T[] | null>();
 
-  setValue(value: T | readonly T[] | null): void {
+  handleControlValue(value: T | readonly T[] | null): void {
     // this.value.set(value);
   }
 
-  select(values: readonly T[]): void {
+  handleOptions(values: readonly T[]): void {
     this.valueChanges.next(this.multiple() ? values : values.at(0) ?? null);
   }
 

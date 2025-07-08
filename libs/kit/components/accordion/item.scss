@@ -3,7 +3,7 @@
   display: block;
   margin-block-end: -1px;
   overflow: hidden;
-  color: var(--x-gray-950);
+  color: var(--x-gray-900);
   border: 1px solid var(--x-gray-400);
 
   &:first-of-type {
@@ -23,7 +23,7 @@
   align-items: center;
   block-size: var(--x-size, 2rem);
   margin-block-end: -1px;
-  padding: 0 var(--x-padding, 1rem);
+  padding: 0 var(--x-side, 1rem);
   background: transparent;
   outline: none;
   border-block-end: 1px solid var(--x-gray-400);
@@ -40,11 +40,7 @@
 
   &:hover,
   details[open] & {
-    background-color: var(--x-gray-50);
-  }
-
-  &:focus-visible {
-
+    background-color: var(--x-gray-100);
   }
 }
 

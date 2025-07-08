@@ -1,9 +1,14 @@
 @Component({
   template: `
     <x-group>
-      <button x-btn>Button</button>
       <button x-icon>
-        <x-icon src="chevron-down" />
+        <x-icon src="align-left" />
+      </button>
+      <button x-icon>
+        <x-icon src="align-center" />
+      </button>
+      <button x-icon>
+        <x-icon src="align-right" />
       </button>
     </x-group>
   `

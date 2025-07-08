@@ -13,13 +13,13 @@ import {
 } from 'rxjs';
 import {
   isPureEscape,
-  popover,
+  createPopover,
   relatedTo,
-  XPopoverManager,
+  XPopoverImpl,
   XPopoverPositionOptions,
 } from '@mixin-ui/cdk';
 
-export const X_POPOVER = new InjectionToken<XPopoverManager>('OVERLAY');
+export const X_POPOVER = new InjectionToken<XPopoverImpl>('OVERLAY');
 
 export const X_POPOVER_POSITION_OPTIONS = new InjectionToken<XPopoverPositionOptions>(
   'POPOVER_POSITION_OPTIONS'
@@ -30,7 +30,7 @@ export const X_POPOVER_CLOSE = new InjectionToken<Observable<boolean>>('OVERLAY_
 export const X_POPOVER_PROVIDERS: Provider[] = [
   {
     provide: X_POPOVER,
-    useFactory: popover,
+    useFactory: createPopover,
   },
   {
     provide: X_POPOVER_CLOSE,

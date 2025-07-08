@@ -9,9 +9,9 @@ import { XInput } from '@mixin-ui/kit/directives';
   hostDirectives: [
     {
       directive: XInput,
-      inputs: ['variant', 'size', 'radius', 'color'],
+      inputs: ['variant', 'size', 'radius'],
     },
   ],
-  host: { class: 'x-text' },
+  host: { class: 'x-input-text' },
 })
 export class XTextRoot {}

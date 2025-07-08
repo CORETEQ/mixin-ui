@@ -11,7 +11,7 @@ import { EMPTY } from 'rxjs';
   hostDirectives: [
     {
       directive: XInput,
-      inputs: ['variant', 'size', 'radius', 'color'],
+      inputs: ['variant', 'size', 'radius'],
     },
   ],
   host: {
@@ -21,9 +21,9 @@ import { EMPTY } from 'rxjs';
 export class XMaskRoot implements XControlAccessor<string> {
   valueChanges = EMPTY;
 
-  setValue(value: string): void {}
+  handleControlValue(value: string): void {}
 
-  onControlInit(el: HTMLInputElement): void {}
+  handleControlInit(el: HTMLInputElement): void {}
 
-  onControlDestroy(): void {}
+  handleControlDestroy(): void {}
 }

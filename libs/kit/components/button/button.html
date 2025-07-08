@@ -2,12 +2,12 @@
   <div role="status"
        aria-live="polite"
        class="x-btn-spinner"
-       [class.x-full]="!withLoadingText()">
+       [class.x-full]="!hasLoadingText()">
     <x-spinner />
   </div>
 }
 
-@if (loading() && withLoadingText()) {
+@if (loading() && hasLoadingText()) {
   {{ loadingText() }}
 } @else {
   <ng-content />

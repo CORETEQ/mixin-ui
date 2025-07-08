@@ -1,10 +1,11 @@
 import { ExistingProvider, InjectionToken, Signal, Type } from '@angular/core';
 
 export interface XCalendarAccessor {
-  readonly value: Signal<Date | null>;
   readonly min: Signal<Date | null>;
   readonly max: Signal<Date | null>;
-  readonly selectDate: (value: Date | null) => void;
+  readonly value: Signal<Date | null>;
+
+  handleDate(value: Date | null): void;
 }
 
 export const X_CALENDAR_ACCESSOR = new InjectionToken<XCalendarAccessor>('CALENDAR_ACCESSOR');

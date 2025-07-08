@@ -11,13 +11,16 @@ import { ControlValueAccessor, NgControl, NgModel, Validators } from '@angular/f
 import { debounceTime, EMPTY, map, startWith, switchMap, timer } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { watch } from '../signals';
+import { EMPTY_FN } from '../empty';
 
 export interface XCva<T> {
   readonly value: Signal<T>;
   readonly disabled: Signal<boolean>;
   readonly required: Signal<boolean>;
-  readonly updateValue: (updater: T | ((current: T) => T)) => void;
-  readonly markAsTouched: () => void;
+
+  updateValue(updater: T | ((current: T) => T)): void;
+
+  markAsTouched(): void;
 }
 
 export interface XCvaOptions<T> {
@@ -31,15 +34,11 @@ export function createCva<T>(options: XCvaOptions<T>): XCva<T> {
 }
 
 class CvaImpl<T> implements ControlValueAccessor, XCva<T> {
-  static readonly #EMPTY = () => {
-    /* empty */
-  };
-
-  #onChange: (value: T) => void = CvaImpl.#EMPTY;
-  #onTouched: () => void = () => CvaImpl.#EMPTY;
-
   readonly #ngc = inject(NgControl, { self: true, optional: true });
   readonly #cdr = inject(ChangeDetectorRef);
+
+  #onChange = EMPTY_FN;
+  #onTouched = EMPTY_FN;
 
   readonly #value: WritableSignal<T>;
 
@@ -64,9 +63,11 @@ class CvaImpl<T> implements ControlValueAccessor, XCva<T> {
 
   constructor(readonly options: XCvaOptions<T>) {
     this.#value = signal(this.defaultValue);
+
     if (this.#ngc) {
       this.#ngc.valueAccessor = this;
     }
+
     watch(this.value, value => this.#onChange(value));
   }
 

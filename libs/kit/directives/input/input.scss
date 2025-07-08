@@ -118,8 +118,8 @@
   align-items: stretch;
   box-sizing: border-box;
   inline-size: 100%;
-  min-block-size: var(--x-block-size);
-  padding: 0 var(--x-padding);
+  min-block-size: var(--x-size);
+  padding: 0 var(--x-side);
   color: var(--x-text-color);
   background-color: var(--x-bg-color);
   outline: none;
@@ -140,31 +140,31 @@
   }
 
   @include variant(outline) {
-    --x-text-color: var(--x-gray-950);
+    --x-text-color: var(--x-gray-900);
     --x-bg-color: var(--x-white);
-    --x-border-color: oklch(87% .006 286.286deg);
-    --x-placeholder-color: var(--x-gray-500);
-    --x-spinner-color: var(--x-accent-600);
-    --x-autofill-color: var(--x-accent-100);
-    --x-selection-color: var(--x-accent-200);
-    --x-icon-color: var(--x-gray-600);
+    --x-border-color: var(--x-gray-400);
+    --x-placeholder-color: var(--x-gray-600);
+    --x-spinner-color: var(--x-main-600);
+    --x-autofill-color: var(--x-main-200);
+    --x-selection-color: var(--x-main-200);
 
     transition-timing-function: ease-in-out;
     transition-duration: 150ms;
     transition-property: background-color;
 
     @include focus {
-      --x-border-color: var(--x-accent-500);
+      --x-bg-color: var(--x-white);
+      --x-border-color: var(--x-main-500);
       --x-border-width: 1.5px;
     }
 
     @include invalid {
-      --x-border-color: oklch(64% .237 25.331deg);
-      --x-selection-color: var(--x-red-200);
+      --x-border-color: var(--x-error-500);
+      --x-selection-color: var(--x-error-200);
 
       @include focus {
         --x-bg-color: var(--x-white);
-        --x-border-color: oklch(64% .237 25.331deg);
+        --x-border-color: var(--x-error-500);
         --x-border-width: 1.5px;
       }
     }
@@ -181,8 +181,8 @@
 
   // sizes
   @include size(md) {
-    --x-block-size: var(--x-size-md);
-    --x-padding: 0.5rem;
+    --x-size: var(--x-size-md);
+    --x-side: 0.5rem;
     --x-icon-size: 1rem;
 
     font-size: 0.875rem;
@@ -190,16 +190,16 @@
   }
 
   @include size(lg) {
-    --x-block-size: var(--x-size-lg);
-    --x-padding: 0.625rem;
+    --x-size: var(--x-size-lg);
+    --x-side: 0.625rem;
 
     font-size: 0.935rem;
     line-height: 1.25rem;
   }
 
   @include size(xl) {
-    --x-block-size: var(--x-size-xl);
-    --x-padding: 0.75rem;
+    --x-size: var(--x-size-xl);
+    --x-side: 0.75rem;
 
     font-size: 1rem;
     line-height: 1.5rem;
@@ -300,7 +300,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  min-inline-size: var(--x-block-size);
+  min-inline-size: var(--x-size);
   overflow: hidden;
   color: var(--x-icon-color);
   cursor: inherit;

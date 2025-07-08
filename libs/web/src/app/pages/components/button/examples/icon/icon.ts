@@ -5,6 +5,6 @@ import { provideButtonOptions, XButton, XIcon } from '@mixin-ui/kit';
   selector: 'app-button-icon-example',
   templateUrl: './icon.html',
   imports: [XButton, XIcon],
-  providers: [provideButtonOptions({ color: 'gray', contrast: true })]
+  providers: [provideButtonOptions({ color: 'gray' })]
 })
 export class IconExample {}

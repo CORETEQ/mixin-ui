@@ -1,12 +1,11 @@
 import { InjectionToken, ValueProvider } from '@angular/core';
-import { XColor, XUnion } from '@mixin-ui/kit/types';
+import { XUnion } from '@mixin-ui/kit/types';
 
 export interface XCheckboxOptions {
   readonly size: XUnion<'sm' | 'md' | 'lg'>;
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
   readonly iconChecked: string;
   readonly iconIndeterminate: string;
-  readonly color?: XColor;
 }
 
 const defaultOptions: XCheckboxOptions = {

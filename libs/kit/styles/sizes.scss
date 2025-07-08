@@ -1,7 +1,7 @@
 :root {
-  --x-size-xs: calc(1.5rem * var(--x-scale, 1));
-  --x-size-sm: calc(1.75rem * var(--x-scale, 1));
-  --x-size-md: calc(2rem * var(--x-scale, 1));
-  --x-size-lg: calc(2.25rem * var(--x-scale, 1));
-  --x-size-xl: calc(2.5rem * var(--x-scale, 1));
+  --x-size-xs: 1.5rem;
+  --x-size-sm: 1.75rem;
+  --x-size-lg: 2.25rem;
+  --x-size-md: 2rem;
+  --x-size-xl: 2.5rem;
 }

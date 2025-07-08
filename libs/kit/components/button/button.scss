@@ -20,14 +20,20 @@
 // states
 @mixin hover {
   @media (hover: hover) {
-    &:where(:hover:not(:disabled)) {
+    &:where(:hover:not(:disabled), .x-hover:not(:disabled)) {
       @content;
     }
   }
 }
 
 @mixin active {
-  &:where(:active:not(:disabled), .x-overlay-opened:not(:disabled)) {
+  &:where(:active:not(:disabled), .x-active:not(:disabled)) {
+    @content;
+  }
+}
+
+@mixin pressed {
+  &:where([aria-pressed='true'], .x-overlay-opened) {
     @content;
   }
 }
@@ -38,15 +44,21 @@
   }
 }
 
-// modifiers
-@mixin contrast {
-  &:where(.x-contrast) {
-    @content;
-  }
+@mixin reset {
+  box-sizing: border-box;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  border: none;
+  appearance: none;
+  touch-action: manipulation;
+
+  // Removes blue tap highlight on iOS/Safari
+  -webkit-tap-highlight-color: transparent;
 }
 
 .x-btn {
-  --x-icon-color: currentcolor;
+  @include reset;
 
   position: relative;
   display: inline-flex;
@@ -54,216 +66,110 @@
   gap: var(--x-gap, 0.5rem);
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  block-size: var(--x-block-size);
-  padding: 0 var(--x-padding);
-  color: var(--x-color);
-  white-space: nowrap;
-  text-decoration: none;
-  vertical-align: top;
-  background-color: var(--x-track-bg);
-  outline: 1.5px solid transparent;
+  block-size: var(--x-size);
+  padding: 0 var(--x-side);
+  font: var(--x-font);
+  outline: 2px solid transparent;
   outline-offset: 1px;
-  border: 1px solid transparent;
   border-radius: var(--x-radius);
-  appearance: none;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
 
-  &:where(button) {
-    cursor: pointer;
-  }
-
-  // variants
   @include variant(solid) {
-    --x-color: var(--x-white);
-    --x-track-bg: var(--x-accent-600);
+    color: var(--x-white);
+    background-color: var(--x-color-600);
 
     @include hover {
-      --x-track-bg: var(--x-accent-700);
-    }
-
-    @include active {
-      --x-track-bg: var(--x-accent-700);
-    }
-
-    @include contrast {
-      --x-track-bg: var(--x-accent-900);
-
-      @include hover {
-        --x-track-bg: var(--x-accent-950);
-      }
-
-      @include active {
-        --x-track-bg: var(--x-accent-950);
-      }
+      background-color: var(--x-color-700);
     }
   }
 
   @include variant(outline) {
-    --x-color: var(--x-accent-950);
-    --x-track-bg: var(--x-white);
-
-    box-shadow: rgb(27 31 35 / 4%) 0 1px 0;
-    border-color: var(--x-accent-400);
+    color: var(--x-color-900);
+    background-color: var(--x-white);
+    box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #F1F1F1;
 
     @include hover {
-      --x-track-bg: var(--x-accent-50);
+      background-color: var(--x-color-100);
     }
 
     @include active {
-      --x-track-bg: var(--x-accent-100);
+      background-color: var(--x-color-200);
     }
 
-    @include contrast {
-      border-color: var(--x-accent-500);
-
-      @include hover {
-        --x-track-bg: var(--x-accent-100);
-      }
-
-      @include active {
-        --x-track-bg: var(--x-accent-100);
-      }
+    @include pressed {
+      background-color: var(--x-color-200);
+      filter: brightness(0.97) saturate(1.1);
     }
   }
 
   @include variant(surface) {
-    --x-color: var(--x-accent-950);
-    --x-track-bg: var(--x-accent-200);
-
-    box-shadow: rgb(27 31 35 / 4%) 0 1px 0;
-    border-color: var(--x-accent-400);
+    color: var(--x-color-900);
+    background-color: var(--x-color-100);
+    box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #F1F1F1;
 
     @include hover {
-      --x-track-bg: var(--x-accent-300);
+      background-color: var(--x-color-200);
     }
 
     @include active {
-      --x-track-bg: var(--x-accent-300);
-    }
-
-    @include contrast {
-      --x-track-bg: var(--x-accent-50);
-
-      border-color: var(--x-accent-500);
-
-      @include hover {
-        --x-track-bg: var(--x-accent-100);
-      }
-
-      @include active {
-        --x-track-bg: var(--x-accent-100);
-      }
+      background-color: var(--x-color-300);
     }
   }
 
   @include variant(subtle) {
-    --x-color: var(--x-accent-950);
-    --x-track-bg: var(--x-accent-200);
+    color: var(--x-color-900);
+    background-color: var(--x-color-200);
 
     @include hover {
-      --x-color: var(--x-accent-950);
-      --x-track-bg: var(--x-accent-300);
-    }
-
-    @include active {
-      --x-color: var(--x-accent-950);
-      --x-track-bg: var(--x-accent-300);
-    }
-
-    @include contrast {
-      --x-color: var(--x-gray-950);
+      background-color: var(--x-color-300);
     }
   }
 
   @include variant(ghost) {
-    --x-color: var(--x-accent-950);
+    color: var(--x-color-900);
+    background-color: transparent;
 
     @include hover {
-      --x-color: var(--x-accent-950);
-      --x-track-bg: var(--x-accent-200);
+      background-color: var(--x-color-200);
     }
 
     @include active {
-      --x-color: var(--x-accent-950);
-      --x-track-bg: var(--x-accent-200);
-    }
-
-    @include contrast {
-      --x-color: var(--x-gray-950);
+      background-color: var(--x-color-300);
     }
   }
 
   @include variant(plain) {
-    --x-color: var(--x-accent-950);
-
-    @include hover {
-      --x-color: var(--x-accent-950);
-    }
-
-    @include active {
-      --x-color: var(--x-accent-950);
-    }
-
-    @include contrast {
-      --x-color: var(--x-gray-950);
-    }
-  }
-
-  @include focus-visible {
-    outline-color: var(--x-accent-500);
+    color: var(--x-color-900);
   }
 
   @include size(xs) {
-    --x-block-size: var(--x-size-xs);
-    --x-padding: 0.5rem;
+    --x-font: var(--x-text-xs);
+    --x-size: var(--x-size-xs);
+    --x-side: 0.5rem;
     --x-gap: 0.375rem;
-    --x-spinner-size: 0.5rem;
-    --x-spinner-thickness: 1.5px;
-
-    font-size: 0.75rem;
-    line-height: 1rem;
   }
 
   @include size(sm) {
-    --x-block-size: var(--x-size-sm);
-    --x-padding: 0.625rem;
-    --x-spinner-size: 0.675rem;
-    --x-spinner-thickness: 1.5px;
-
-    font-size: 0.815rem;
-    line-height: 1rem;
+    --x-font: var(--x-text-sm);
+    --x-size: var(--x-size-sm);
+    --x-side: 0.625rem;
   }
 
   @include size(md) {
-    --x-block-size: var(--x-size-md);
-    --x-padding: 0.75rem;
-    --x-spinner-size: 0.75rem;
-    --x-spinner-thickness: 2px;
-
-    font-size: 0.875rem;
-    line-height: 1.25rem;
+    --x-font: var(--x-text-sm);
+    --x-size: var(--x-size-md);
+    --x-side: 0.75rem;
   }
 
   @include size(lg) {
-    --x-block-size: var(--x-size-lg);
-    --x-padding: 0.875rem;
-    --x-spinner-size: 0.875rem;
-    --x-spinner-thickness: 2px;
-
-    font-size: 0.935rem;
-    line-height: 1.25rem;
+    --x-font: var(--x-text-md);
+    --x-size: var(--x-size-lg);
+    --x-side: 0.75rem;
   }
 
   @include size(xl) {
-    --x-block-size: var(--x-size-xl);
-    --x-padding: 1rem;
-    --x-spinner-size: 1rem;
-    --x-spinner-thickness: 2.5px;
-
-    font-size: 1rem;
-    line-height: 1.5rem;
+    --x-font: var(--x-text-md);
+    --x-size: var(--x-size-xl);
+    --x-side: 0.875rem;
   }
 
   @include radius(none) {
@@ -286,6 +192,15 @@
     --x-radius: var(--x-radius-full);
   }
 
+  &:where(button) {
+    cursor: pointer;
+  }
+
+  &:where(:disabled) {
+    opacity: 0.6;
+    cursor: var(--x-cursor-disabled);
+  }
+
   &:where(.x-loading) {
     opacity: 0.9;
     cursor: var(--x-cursor-loading);
@@ -299,11 +214,6 @@
     }
   }
 
-  &:where(:disabled) {
-    opacity: 0.6;
-    cursor: var(--x-cursor-disabled);
-  }
-
   &:where(.x-block) {
     display: flex;
     inline-size: 100%;
@@ -312,12 +222,12 @@
   &:where(.x-vertical) {
     flex-direction: column;
     block-size: auto;
-    padding: calc(var(--x-padding) / 1.5) var(--x-padding);
+    padding: calc(var(--x-side) / 1.5) var(--x-side);
   }
 
   &:where(.x-icon-only) {
-    inline-size: var(--x-block-size);
-    min-inline-size: var(--x-block-size);
+    inline-size: var(--x-size);
+    min-inline-size: var(--x-size);
     padding: 0;
   }
 }

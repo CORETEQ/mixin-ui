@@ -1,4 +1,4 @@
-import { InjectionToken, signal, ValueProvider, WritableSignal } from '@angular/core';
+import { InjectionToken, signal, WritableSignal } from '@angular/core';
 import { X_LANGUAGE_ENGLISH } from './en';
 
 export interface XLanguageOptions {
@@ -9,13 +9,6 @@ export interface XLanguageOptions {
   readonly monthNamesShort: readonly string[];
 }
 
-export const X_LANGUAGE = new InjectionToken<WritableSignal<XLanguageOptions>>('X_LANG', {
+export const X_LANGUAGE = new InjectionToken<WritableSignal<XLanguageOptions>>('X_LANGUAGE', {
   factory: () => signal(X_LANGUAGE_ENGLISH),
 });
-
-export function provideLanguage(options: XLanguageOptions): ValueProvider {
-  return {
-    provide: X_LANGUAGE,
-    useValue: signal(options),
-  };
-}
