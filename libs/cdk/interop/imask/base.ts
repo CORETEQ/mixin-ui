@@ -65,7 +65,7 @@ export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<
   }
 
   setValue(value: TRaw): void {
-    this.updateInternalValue(() => {
+    this.handleModelUpdate(() => {
       if (!this.#mask) {
         return;
       }
@@ -89,7 +89,7 @@ export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<
     this.#mask = null;
   }
 
-  private updateInternalValue(fn: () => void): void {
+  private handleModelUpdate(fn: () => void): void {
     this.#modelUpdating = true;
     try {
       fn();

@@ -31,7 +31,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
   hostDirectives: [
     {
       directive: XInput,
-      inputs: ['variant', 'size', 'radius', 'color'],
+      inputs: ['variant', 'size', 'radius'],
     },
   ],
   host: {
@@ -130,7 +130,7 @@ export class XNumberRoot implements XControlAccessor<number | null> {
     this.#mask.destroy();
   }
 
-  protected onSpin(e: PointerEvent): void {
+  handleSpin(e: PointerEvent): void {
     e.preventDefault();
     this.#input.focus();
   }

@@ -64,6 +64,11 @@ export const ROUTES: Route[] = [
                 loadComponent: () => import('./pages/components/button'),
               }),
               page({
+                path: 'calendar',
+                title: 'Calendar',
+                loadComponent: () => import('./pages/components/calendar'),
+              }),
+              page({
                 path: 'checkbox',
                 title: 'Checkbox',
                 loadComponent: () => import('./pages/components/checkbox'),
@@ -99,7 +104,7 @@ export const ROUTES: Route[] = [
                 loadComponent: () => import('./pages/components/input-date'),
               }),
               page({
-                path: 'input-mask',
+                path: 'input-imask',
                 title: 'Input Mask',
                 loadComponent: () => import('./pages/components/input-mask'),
               }),

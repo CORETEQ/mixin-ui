@@ -1,20 +1,18 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { DocsPage } from '@/docs/components';
 
+import { CalendarBasicExample } from './examples/basic/basic';
 import imp from './examples/import?raw&lang=ts';
 import usage from './examples/usage?raw&lang=ts';
-import { InputTextBasicExample } from './examples/basic/basic';
-import { InputTextSizesExample } from './examples/sizes/sizes';
-import { InputTextRadiiExample } from './examples/radii/radii';
 
 @Component({
-  selector: 'app-input-text',
+  selector: 'app-calendar',
   templateUrl: './index.html',
-  imports: [DocsPage, InputTextBasicExample, InputTextSizesExample, InputTextRadiiExample],
+  imports: [DocsPage, CalendarBasicExample],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class InputText {
+export default class Calendar {
   imp = imp;
   usage = usage;
 }

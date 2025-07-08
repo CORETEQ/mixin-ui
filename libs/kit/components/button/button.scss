@@ -27,7 +27,13 @@
 }
 
 @mixin active {
-  &:where(:active:not(:disabled), .x-overlay-opened:not(:disabled)) {
+  &:where(:active:not(:disabled), .x-active:not(:disabled)) {
+    @content;
+  }
+}
+
+@mixin pressed {
+  &:where([aria-pressed='true'], .x-overlay-opened) {
     @content;
   }
 }
@@ -87,6 +93,11 @@
 
     @include active {
       background-color: var(--x-color-200);
+    }
+
+    @include pressed {
+      background-color: var(--x-color-200);
+      filter: brightness(0.97) saturate(1.1);
     }
   }
 
@@ -182,7 +193,7 @@
   }
 
   &:where(button) {
-    cursor: default;
+    cursor: pointer;
   }
 
   &:where(:disabled) {

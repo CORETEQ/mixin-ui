@@ -1,13 +1,9 @@
-import { afterNextRender, AfterRenderOptions, assertInInjectionContext } from '@angular/core';
+import { afterNextRender, AfterRenderOptions } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export function fromAfterNextRender(
-  options?: Omit<AfterRenderOptions, 'manualCleanup'>
+  options?: Omit<AfterRenderOptions, 'manualCleanup' | 'injector'>
 ): Observable<void> {
-  if (!options?.injector) {
-    assertInInjectionContext(fromAfterNextRender);
-  }
-
   return new Observable(subscriber => {
     const ref = afterNextRender(
       () => {

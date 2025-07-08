@@ -1,1 +1,1 @@
-import { XMask } from '@mixin-ui/kit';
+import { XInputMask } from '@mixin-ui/kit';

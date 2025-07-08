@@ -30,7 +30,7 @@ import {
   take,
   takeUntil,
 } from 'rxjs';
-import { isElement } from '@mixin-ui/cdk/utils';
+import { isElement } from '../dom';
 
 export type XPopoverDirection = 'horizontal' | 'vertical' | 'both';
 export type XPopoverPosition = 'top' | 'end' | 'bottom' | 'start';

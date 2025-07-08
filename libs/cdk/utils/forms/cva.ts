@@ -10,8 +10,8 @@ import {
 import { ControlValueAccessor, NgControl, NgModel, Validators } from '@angular/forms';
 import { debounceTime, EMPTY, map, startWith, switchMap, timer } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { EMPTY_FN } from '@mixin-ui/cdk/utils';
 import { watch } from '../signals';
+import { EMPTY_FN } from '../empty';
 
 export interface XCva<T> {
   readonly value: Signal<T>;

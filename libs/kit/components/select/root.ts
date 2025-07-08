@@ -25,7 +25,7 @@ import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/componen
   hostDirectives: [
     {
       directive: XInput,
-      inputs: ['variant', 'size', 'radius', 'color'],
+      inputs: ['variant', 'size', 'radius'],
     },
     {
       directive: XPopover,

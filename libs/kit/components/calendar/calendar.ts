@@ -7,8 +7,10 @@ import {
   input,
   linkedSignal,
   model,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   addMonths,
   addYears,
@@ -18,7 +20,6 @@ import {
   endOfMonth,
   endOfWeek,
   endOfYear,
-  format,
   isAfter,
   isBefore,
   isSameDay,
@@ -32,7 +33,7 @@ import {
 } from 'date-fns';
 import { XMapPipe } from '@mixin-ui/cdk';
 import { X_LANGUAGE } from '@mixin-ui/kit/providers';
-import { X_SLOT } from '@mixin-ui/kit/directives';
+import { X_SLOT, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_CALENDAR_ACCESSOR } from './providers';
@@ -46,13 +47,15 @@ export type CalendarSelectionMode = 'days' | 'months' | 'years';
   selector: 'x-calendar',
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
-  imports: [XButton, XMapPipe, XIcon],
+  imports: [XButton, XMapPipe, XSlotsPipe, XIcon, NgTemplateOutlet],
   providers: [provideButtonOptions({ variant: 'outline', color: 'gray', size: 'sm' })],
-  host: { class: 'x-calendar' },
+  host: {
+    class: 'x-calendar',
+  },
 })
 export class XCalendar {
   readonly #opt = inject(X_CALENDAR_OPTIONS);
-  readonly #accessor = inject(X_CALENDAR_ACCESSOR);
+  readonly #accessor = inject(X_CALENDAR_ACCESSOR, { optional: true });
   readonly #lang = inject(X_LANGUAGE);
 
   readonly slots = contentChildren(X_SLOT);
@@ -60,11 +63,10 @@ export class XCalendar {
   readonly startOfWeek = input(this.#opt.startOfWeek);
 
   readonly month = linkedSignal(() => this.value() || new Date());
-  readonly value = this.#accessor.value;
-  readonly min = this.#accessor.min;
-  readonly max = this.#accessor.max;
+  readonly value = this.#accessor?.value || signal(null);
+  readonly min = this.#accessor?.min || signal(null);
+  readonly max = this.#accessor?.max || signal(null);
 
-  protected readonly format = format;
   protected readonly daySelected = daySelected;
   protected readonly dayDisabled = dayDisabled;
   protected readonly dayAdjacent = dayAdjacent;
@@ -73,30 +75,44 @@ export class XCalendar {
   protected readonly yearSelected = yearSelected;
   protected readonly yearDisabled = yearDisabled;
 
-  readonly weekdays = computed(() =>
-    orderWeekdays(this.#lang()['dayNamesMin'], this.startOfWeek())
-  );
+  readonly dayNames = computed(() => reorder(this.#lang()['dayNamesMin'], this.startOfWeek()));
+  readonly monthNames = computed(() => this.#lang()['monthNames']);
+  readonly monthName = computed(() => this.monthNames()[this.month().getMonth()]);
+  readonly year = computed(() => this.month().getFullYear());
 
   readonly daysInMonth = computed(() => {
     const month = this.month();
     const start = startOfWeek(startOfMonth(month), { weekStartsOn: this.startOfWeek() });
     const end = endOfWeek(endOfMonth(month), { weekStartsOn: this.startOfWeek() });
-    return eachDayOfInterval({ start, end });
+
+    return eachDayOfInterval({ start, end }).map(date => {
+      date.toString = () => String(date.getDate());
+      return date;
+    });
   });
 
   readonly monthsInYear = computed(() => {
-    const year = this.month().getFullYear();
+    const year = this.year();
     const start = startOfYear(new Date(year, 0, 1));
     const end = endOfYear(start);
-    return eachMonthOfInterval({ start, end });
+    const names = this.monthNames();
+
+    return eachMonthOfInterval({ start, end }).map(date => {
+      date.toString = () => names[date.getMonth()];
+      return date;
+    });
   });
 
   readonly yearsInDecade = computed(() => {
-    const currentYear = this.month().getFullYear();
-    const decade = Math.floor(currentYear / 10) * 10;
+    const year = this.year();
+    const decade = Math.floor(year / 10) * 10;
     const start = new Date(decade, 0, 1);
     const end = new Date(decade + 9, 11, 31);
-    return eachYearOfInterval({ start, end });
+
+    return eachYearOfInterval({ start, end }).map(date => {
+      date.toString = () => String(date.getFullYear());
+      return date;
+    });
   });
 
   navigatePrevious(): void {
@@ -174,7 +190,7 @@ export class XCalendar {
   }
 
   private updateValue(date: Date | null): void {
-    this.#accessor.handleDate(date);
+    this.#accessor?.handleDate(date);
   }
 }
 
@@ -212,7 +228,7 @@ function yearDisabled(date: Date, min: Date | null, max: Date | null): boolean {
   );
 }
 
-function orderWeekdays(tuple: readonly string[], startIndex: number): readonly string[] {
+function reorder(tuple: readonly string[], startIndex: number): readonly string[] {
   const length = tuple.length;
   const index = ((startIndex % length) + length) % length;
   return [...tuple.slice(index), ...tuple.slice(0, index)];

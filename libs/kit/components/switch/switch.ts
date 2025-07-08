@@ -23,8 +23,8 @@ import { X_SWITCH_OPTIONS } from './options';
     role: 'switch',
     '[class]': '`x-switch x-size-${size()} x-radius-${radius()}`',
     '[attr.data-state]': 'state()',
-    '(blur)': 'markAsTouched()',
-    '(click)': 'toggle()',
+    '(click)': 'handleClick()',
+    '(blur)': 'handleBlur()',
   },
 })
 export class XSwitch {
@@ -50,11 +50,11 @@ export class XSwitch {
     }
   }
 
-  protected toggle(): void {
+  handleClick(): void {
     this.#cva.updateValue(!this.checked());
   }
 
-  protected markAsTouched(): void {
+  handleBlur(): void {
     this.#cva.markAsTouched();
   }
 }

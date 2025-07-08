@@ -46,7 +46,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   hostDirectives: [
     {
       directive: XInput,
-      inputs: ['variant', 'size', 'radius', 'color'],
+      inputs: ['variant', 'size', 'radius'],
     },
     {
       directive: XPopover,

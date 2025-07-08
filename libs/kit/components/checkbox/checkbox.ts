@@ -27,8 +27,8 @@ import { X_CHECKBOX_OPTIONS } from './options';
     '[attr.aria-checked]': 'ariaChecked()',
     '[attr.aria-required]': 'required()',
     '[attr.value]': 'value()',
-    '(blur)': 'markAsTouched()',
-    '(click)': 'toggle()',
+    '(click)': 'handleClick()',
+    '(blur)': 'handleBlur()',
   },
 })
 export class XCheckbox {
@@ -64,12 +64,12 @@ export class XCheckbox {
     }
   }
 
-  protected toggle(): void {
+  handleClick(): void {
     this.indeterminate.set(false);
     this.#cva.updateValue(!this.checked());
   }
 
-  protected markAsTouched(): void {
+  handleBlur(): void {
     this.#cva.markAsTouched();
   }
 }

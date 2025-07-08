@@ -11,7 +11,7 @@ import { EMPTY } from 'rxjs';
   hostDirectives: [
     {
       directive: XInput,
-      inputs: ['variant', 'size', 'radius', 'color'],
+      inputs: ['variant', 'size', 'radius'],
     },
   ],
   host: {
