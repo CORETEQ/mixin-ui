@@ -79,18 +79,18 @@
     }
 
     &.green {
-      color: var(--x-green-800);
-      background-color: var(--x-green-100);
+      color: var(--x-success-800);
+      background-color: var(--x-success-100);
     }
 
     &.yellow {
-      color: var(--x-yellow-800);
-      background-color: var(--x-yellow-100);
+      color: var(--x-warn-800);
+      background-color: var(--x-warn-100);
     }
 
     &.orange {
-      color: var(--x-orange-800);
-      background-color: var(--x-orange-100);
+      color: var(--x-main-800);
+      background-color: var(--x-main-100);
     }
 
     &.rose {

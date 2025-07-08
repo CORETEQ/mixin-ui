@@ -33,7 +33,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'x-date',
+  selector: 'x-input-date',
   templateUrl: './root.html',
   imports: [XIcon],
   providers: [
@@ -60,7 +60,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
     },
   ],
   host: {
-    class: 'x-date',
+    class: 'x-input-date',
     '(focusin)': 'handleFocusIn($event)',
     '(focusout)': 'handleFocusOut($event)',
   },

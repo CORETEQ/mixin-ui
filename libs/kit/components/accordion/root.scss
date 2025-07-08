@@ -16,10 +16,9 @@
   flex-direction: column;
   inline-size: 100%;
 
-  // sizes
   @include size(sm) {
     --x-size: var(--x-size-sm);
-    --x-side: 0.625rem;
+    --x-side: 0.5rem;
 
     font-size: 0.815rem;
     line-height: 1rem;
@@ -27,7 +26,7 @@
 
   @include size(md) {
     --x-size: var(--x-size-md);
-    --x-side: 0.75rem;
+    --x-side: 0.625rem;
 
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -35,13 +34,12 @@
 
   @include size(lg) {
     --x-size: var(--x-size-lg);
-    --x-side: 0.875rem;
+    --x-side: 0.75rem;
 
     font-size: 0.935rem;
     line-height: 1.5rem;
   }
 
-  // sizes
   @include radius(sm) {
     --x-radius: var(--x-radius-sm);
   }

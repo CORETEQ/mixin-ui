@@ -24,7 +24,6 @@ import { X_CHECKBOX_OPTIONS } from './options';
     role: 'checkbox',
     '[class]': '`x-checkbox x-size-${size()} x-radius-${radius()}`',
     '[attr.data-state]': 'state()',
-    '[attr.data-main-color]': 'color()',
     '[attr.aria-checked]': 'ariaChecked()',
     '[attr.aria-required]': 'required()',
     '[attr.value]': 'value()',
@@ -41,7 +40,6 @@ export class XCheckbox {
   readonly indeterminate = model(false);
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
-  readonly color = input(this.#opt.color);
   readonly checked = this.#cva.value;
   readonly required = this.#cva.required;
   readonly ariaChecked = computed(() => (this.indeterminate() ? 'mixed' : String(this.checked())));

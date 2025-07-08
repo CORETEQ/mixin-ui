@@ -140,14 +140,14 @@
   }
 
   @include variant(outline) {
-    --x-text-color: var(--x-theme-gray-950);
+    --x-text-color: var(--x-gray-900);
     --x-bg-color: var(--x-white);
-    --x-border-color: var(--x-theme-gray-300);
-    --x-placeholder-color: var(--x-theme-gray-500);
-    --x-spinner-color: var(--x-theme-main-600);
-    --x-autofill-color: var(--x-theme-main-100);
-    --x-selection-color: var(--x-theme-main-100);
-    --x-icon-color: var(--x-theme-gray-600);
+    --x-border-color: var(--x-gray-400);
+    --x-placeholder-color: var(--x-gray-600);
+    --x-spinner-color: var(--x-main-600);
+    --x-autofill-color: var(--x-main-200);
+    --x-selection-color: var(--x-main-200);
+    --x-icon-color: var(--x-gray-600);
 
     transition-timing-function: ease-in-out;
     transition-duration: 150ms;
@@ -155,17 +155,17 @@
 
     @include focus {
       --x-bg-color: var(--x-white);
-      --x-border-color: var(--x-theme-main-500);
+      --x-border-color: var(--x-main-500);
       --x-border-width: 1.5px;
     }
 
     @include invalid {
-      --x-border-color: var(--x-red-500);
-      --x-selection-color: var(--x-red-200);
+      --x-border-color: var(--x-error-500);
+      --x-selection-color: var(--x-error-200);
 
       @include focus {
         --x-bg-color: var(--x-white);
-        --x-border-color: var(--x-red-500);
+        --x-border-color: var(--x-error-500);
         --x-border-width: 1.5px;
       }
     }

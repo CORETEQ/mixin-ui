@@ -80,12 +80,12 @@ body {
 
   .docs-sidebar-badge {
     padding: 0 0.25rem;
-    color: var(--x-green-800);
+    color: var(--x-success-800);
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
     text-transform: capitalize;
-    background: var(--x-green-200);
+    background: var(--x-success-200);
     border-radius: 4px;
   }
 }

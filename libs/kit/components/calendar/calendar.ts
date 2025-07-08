@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChildren,
   inject,
   input,
   linkedSignal,
@@ -31,6 +32,7 @@ import {
 } from 'date-fns';
 import { XMapPipe } from '@mixin-ui/cdk';
 import { X_LANGUAGE } from '@mixin-ui/kit/providers';
+import { X_SLOT } from '@mixin-ui/kit/directives';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_CALENDAR_ACCESSOR } from './providers';
@@ -45,14 +47,15 @@ export type CalendarSelectionMode = 'days' | 'months' | 'years';
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
   imports: [XButton, XMapPipe, XIcon],
-  providers: [provideButtonOptions({ variant: 'ghost', color: 'gray', size: 'md' })],
+  providers: [provideButtonOptions({ variant: 'outline', color: 'gray', size: 'sm' })],
   host: { class: 'x-calendar' },
 })
 export class XCalendar {
   readonly #opt = inject(X_CALENDAR_OPTIONS);
   readonly #accessor = inject(X_CALENDAR_ACCESSOR);
-  readonly #language = inject(X_LANGUAGE);
+  readonly #lang = inject(X_LANGUAGE);
 
+  readonly slots = contentChildren(X_SLOT);
   readonly mode = model<CalendarSelectionMode>('days');
   readonly startOfWeek = input(this.#opt.startOfWeek);
 
@@ -62,14 +65,16 @@ export class XCalendar {
   readonly max = this.#accessor.max;
 
   protected readonly format = format;
-  protected readonly dayDisabled = dayDisabled;
   protected readonly daySelected = daySelected;
+  protected readonly dayDisabled = dayDisabled;
   protected readonly dayAdjacent = dayAdjacent;
+  protected readonly monthSelected = monthSelected;
   protected readonly monthDisabled = monthDisabled;
+  protected readonly yearSelected = yearSelected;
   protected readonly yearDisabled = yearDisabled;
 
   readonly weekdays = computed(() =>
-    orderWeekdays(this.#language()['dayNamesMin'], this.startOfWeek())
+    orderWeekdays(this.#lang()['dayNamesMin'], this.startOfWeek())
   );
 
   readonly daysInMonth = computed(() => {
@@ -148,44 +153,24 @@ export class XCalendar {
     this.updateValue(day);
   }
 
-  selectMonth(date: Date): void {
-    if (this.monthDisabled(date, this.min(), this.max())) {
+  selectMonth(month: Date): void {
+    if (this.monthDisabled(month, this.min(), this.max())) {
       return;
     }
 
-    this.updateValue(date);
-    this.month.set(date);
+    this.month.set(month);
     this.mode.set('days');
+    this.updateValue(month);
   }
 
-  selectYear(date: Date): void {
-    if (this.yearDisabled(date, this.min(), this.max())) {
+  selectYear(year: Date): void {
+    if (this.yearDisabled(year, this.min(), this.max())) {
       return;
     }
 
-    this.updateValue(date);
-    this.month.set(date);
+    this.month.set(year);
     this.mode.set('months');
-  }
-
-  isMonthSelected(date: Date): boolean {
-    const currentValue = this.value();
-
-    if (!currentValue) {
-      return false;
-    }
-
-    return isSameMonth(currentValue, date);
-  }
-
-  isYearSelected(date: Date): boolean {
-    const currentValue = this.value();
-
-    if (!currentValue) {
-      return false;
-    }
-
-    return isSameYear(currentValue, date);
+    this.updateValue(year);
   }
 
   private updateValue(date: Date | null): void {
@@ -195,6 +180,14 @@ export class XCalendar {
 
 function daySelected(date: Date, value: Date | null): boolean {
   return value ? isSameDay(date, value) : false;
+}
+
+function monthSelected(date: Date, value: Date | null): boolean {
+  return value ? isSameMonth(date, value) : false;
+}
+
+function yearSelected(date: Date, value: Date | null): boolean {
+  return value ? isSameYear(date, value) : false;
 }
 
 function dayAdjacent(date: Date, value: Date | null): boolean {

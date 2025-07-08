@@ -28,7 +28,7 @@ import { X_BUTTON_OPTIONS } from './options';
     '[class.x-loading]': 'loading()',
     '[class.x-block]': 'block()',
     '[class.x-vertical]': 'vertical()',
-    '[attr.data-main-color]': 'color()',
+    '[attr.data-color]': 'color()',
     '[attr.type]': 'attrType()',
   },
 })

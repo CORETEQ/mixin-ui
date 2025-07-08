@@ -33,7 +33,7 @@
 }
 
 .x-switch {
-  --x-track-bg: var(--x-theme-gray-300);
+  --x-track-bg: var(--x-gray-400);
   --t-thumb-bg: var(--x-white);
   --t-thumb-radius: 50%;
 
@@ -53,15 +53,15 @@
   cursor: pointer;
 
   @include active {
-    --x-track-bg: var(--x-theme-gray-400);
+    --x-track-bg: var(--x-gray-500);
   }
 
   @include checked {
-    --x-track-bg: var(--x-theme-main-500);
+    --x-track-bg: var(--x-main-600);
     --x-track-offset: calc(var(--x-size) / 2);
 
     @include hover {
-      --x-track-bg: var(--x-theme-main-600);
+      --x-track-bg: var(--x-main-700);
     }
   }
 

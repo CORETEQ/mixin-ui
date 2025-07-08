@@ -20,7 +20,7 @@
 // states
 @mixin hover {
   @media (hover: hover) {
-    &:where(:hover:not(:disabled)) {
+    &:where(:hover:not(:disabled), .x-hover:not(:disabled)) {
       @content;
     }
   }
@@ -57,7 +57,7 @@
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
-  gap: var(--x-gap);
+  gap: var(--x-gap, 0.5rem);
   align-items: center;
   justify-content: center;
   block-size: var(--x-size);
@@ -69,67 +69,72 @@
 
   @include variant(solid) {
     color: var(--x-white);
-    background-color: var(--x-theme-main-500);
+    background-color: var(--x-color-600);
 
     @include hover {
-      background-color: var(--x-theme-main-600);
+      background-color: var(--x-color-700);
     }
   }
 
   @include variant(outline) {
-    color: var(--x-theme-main-950);
+    color: var(--x-color-900);
     background-color: var(--x-white);
-    box-shadow: inset 0 0 0 1px var(--x-theme-main-300), 0 1px 1px #F1F1F1;
+    box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #F1F1F1;
 
     @include hover {
-      background-color: var(--x-theme-main-50);
+      background-color: var(--x-color-100);
     }
 
     @include active {
-      background-color: var(--x-theme-main-100);
+      background-color: var(--x-color-200);
     }
   }
 
   @include variant(surface) {
-    color: var(--x-theme-main-950);
-    background-color: var(--x-theme-main-100);
-    box-shadow: inset 0 0 0 1px var(--x-theme-main-300), 0 1px 1px #F1F1F1;
+    color: var(--x-color-900);
+    background-color: var(--x-color-100);
+    box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #F1F1F1;
 
     @include hover {
-      background-color: var(--x-theme-main-200);
+      background-color: var(--x-color-200);
+    }
+
+    @include active {
+      background-color: var(--x-color-300);
     }
   }
 
   @include variant(subtle) {
-    color: var(--x-theme-main-950);
-    background-color: var(--x-theme-main-100);
+    color: var(--x-color-900);
+    background-color: var(--x-color-200);
 
     @include hover {
-      background-color: var(--x-theme-main-200);
+      background-color: var(--x-color-300);
     }
   }
 
   @include variant(ghost) {
-    color: var(--x-theme-main-950);
+    color: var(--x-color-900);
     background-color: transparent;
 
     @include hover {
-      background-color: var(--x-theme-main-100);
+      background-color: var(--x-color-200);
     }
 
     @include active {
-      background-color: var(--x-theme-main-200);
+      background-color: var(--x-color-300);
     }
   }
 
   @include variant(plain) {
-    color: var(--x-theme-main-950);
+    color: var(--x-color-900);
   }
 
   @include size(xs) {
     --x-font: var(--x-text-xs);
     --x-size: var(--x-size-xs);
     --x-side: 0.5rem;
+    --x-gap: 0.375rem;
   }
 
   @include size(sm) {
@@ -141,7 +146,7 @@
   @include size(md) {
     --x-font: var(--x-text-sm);
     --x-size: var(--x-size-md);
-    --x-side: 0.625rem;
+    --x-side: 0.75rem;
   }
 
   @include size(lg) {
@@ -177,7 +182,7 @@
   }
 
   &:where(button) {
-    cursor: pointer;
+    cursor: default;
   }
 
   &:where(:disabled) {

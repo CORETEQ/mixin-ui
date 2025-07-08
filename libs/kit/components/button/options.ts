@@ -6,10 +6,10 @@ export interface XButtonOptions {
   readonly variant: XUnion<'solid' | 'outline' | 'surface' | 'subtle' | 'ghost' | 'plain'>;
   readonly size: XUnion<'xs' | 'sm' | 'md' | 'lg' | 'xl'>;
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
+  readonly color: XColor;
   readonly vertical: boolean;
   readonly block: boolean;
   readonly loadingText?: string;
-  readonly color?: XColor;
 }
 
 const defaultOptions: XButtonOptions = {
@@ -19,7 +19,7 @@ const defaultOptions: XButtonOptions = {
   radius: 'md',
   vertical: false,
   block: false,
-  color: 'orange',
+  color: 'main',
 };
 
 export const X_BUTTON_OPTIONS = new InjectionToken<XButtonOptions>('BUTTON_OPTIONS', {

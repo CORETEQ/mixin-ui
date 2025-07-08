@@ -3,8 +3,8 @@
   display: block;
   margin-block-end: -1px;
   overflow: hidden;
-  color: var(--x-theme-gray-950);
-  border: 1px solid var(--x-theme-gray-300);
+  color: var(--x-gray-900);
+  border: 1px solid var(--x-gray-400);
 
   &:first-of-type {
     border-top-left-radius: var(--x-radius);
@@ -26,7 +26,7 @@
   padding: 0 var(--x-side, 1rem);
   background: transparent;
   outline: none;
-  border-block-end: 1px solid var(--x-theme-gray-300);
+  border-block-end: 1px solid var(--x-gray-400);
   user-select: none; // https://github.com/whatwg/html/issues/3191
   cursor: pointer;
 
@@ -40,7 +40,7 @@
 
   &:hover,
   details[open] & {
-    background-color: var(--x-theme-gray-50);
+    background-color: var(--x-gray-100);
   }
 }
 
