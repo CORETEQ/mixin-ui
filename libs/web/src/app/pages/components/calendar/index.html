@@ -10,4 +10,17 @@
 
   <h2>Usage</h2>
   <docs-code [src]="usage" />
+
+  <h2>Api</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="startOfWeek" type="0 | 1 | 2 | 3 | 4 | 5 | 6" default="1" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+  </docs-api-table>
+
+  <h3>Models</h3>
+  <docs-api-table>
+    <docs-input name="mode" type="enum" default="days" />
+  </docs-api-table>
 </docs-page>

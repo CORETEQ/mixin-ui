@@ -35,6 +35,7 @@ import { createCva, XMapPipe } from '@mixin-ui/cdk';
 import { X_LANGUAGE } from '@mixin-ui/kit/providers';
 import { X_SLOT, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
+import { XGroup } from '@mixin-ui/kit/components/group';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_CALENDAR_ACCESSOR } from './providers';
 import { X_CALENDAR_OPTIONS } from './options';
@@ -47,10 +48,10 @@ export type CalendarSelectionMode = 'days' | 'months' | 'years';
   selector: 'x-calendar',
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
-  imports: [XButton, XMapPipe, XSlotsPipe, XIcon, NgTemplateOutlet],
-  providers: [provideButtonOptions({ variant: 'outline', color: 'gray', size: 'sm' })],
+  imports: [XButton, XMapPipe, XSlotsPipe, XIcon, NgTemplateOutlet, XGroup],
+  providers: [provideButtonOptions({ variant: 'subtle', color: 'gray', size: 'sm' })],
   host: {
-    class: 'x-calendar',
+    '[class]': '`x-calendar x-size-${this.size()} x-radius-${this.radius()}`',
   },
 })
 export class XCalendar {
@@ -62,6 +63,8 @@ export class XCalendar {
   readonly slots = contentChildren(X_SLOT);
   readonly mode = model<CalendarSelectionMode>('days');
   readonly startOfWeek = input(this.#opt.startOfWeek);
+  readonly size = input(this.#opt.size);
+  readonly radius = input(this.#opt.radius);
 
   readonly month = linkedSignal(() => this.value() || new Date());
   readonly value = computed(() => this.#accessor?.value() || this.#cva.value());

@@ -1,24 +1,35 @@
 <div class="x-calendar-header">
   <button
     x-icon
-    variant="subtle"
+    variant="ghost"
+    [radius]="radius()"
+    [disabled]="mode() === 'months'"
     (click)="navigatePrevious()"
   >
     <x-icon src="chevron-left" />
   </button>
 
-  <div>
-    <span>
+  <x-group class="x-calendar-header-group">
+    <button x-btn
+            [radius]="radius()"
+            [attr.aria-pressed]="mode() === 'months'"
+            (click)="mode.set('months')">
       {{ monthName() }}
-    </span>
-    <span>
+    </button>
+
+    <button x-btn
+            [radius]="radius()"
+            [attr.aria-pressed]="mode() === 'years'"
+            (click)="mode.set('years')">
       {{ year() }}
-    </span>
-  </div>
+    </button>
+  </x-group>
 
   <button
     x-icon
-    variant="subtle"
+    variant="ghost"
+    [radius]="radius()"
+    [disabled]="mode() === 'months'"
     (click)="navigateNext()"
   >
     <x-icon src="chevron-right" />
