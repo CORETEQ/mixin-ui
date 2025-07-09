@@ -5,7 +5,7 @@ import { XInput } from '@mixin-ui/kit/directives';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-text',
-  templateUrl: './root.html',
+  templateUrl: './input-text.html',
   hostDirectives: [
     {
       directive: XInput,

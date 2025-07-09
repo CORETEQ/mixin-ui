@@ -1,3 +1,3 @@
-export * from './root';
+export * from './combobox';
 export * from './options';
 export * from './export';

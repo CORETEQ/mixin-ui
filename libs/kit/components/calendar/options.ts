@@ -1,4 +1,4 @@
-import { InjectionToken } from '@angular/core';
+import { InjectionToken, ValueProvider } from '@angular/core';
 import { XUnion } from '@mixin-ui/kit/types';
 
 export interface XCalendarOptions {
@@ -16,3 +16,10 @@ const defaultOptions: XCalendarOptions = {
 export const X_CALENDAR_OPTIONS = new InjectionToken<XCalendarOptions>('CALENDAR_OPTIONS', {
   factory: () => defaultOptions,
 });
+
+export function provideCalendarOptions(options: Partial<XCalendarOptions>): ValueProvider {
+  return {
+    provide: X_CALENDAR_OPTIONS,
+    useValue: { ...defaultOptions, ...options },
+  };
+}

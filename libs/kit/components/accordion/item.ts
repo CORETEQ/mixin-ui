@@ -13,7 +13,7 @@ import { generateId } from '@mixin-ui/cdk';
 import { X_SLOT, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { XCollapsible } from '@mixin-ui/kit/components/collapsible';
-import { XAccordionRoot } from './root';
+import { XAccordionRoot } from './accordion';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -22,7 +22,9 @@ import { XAccordionRoot } from './root';
   styleUrl: './item.scss',
   templateUrl: './item.html',
   imports: [NgTemplateOutlet, XCollapsible, XSlot, XSlotsPipe, XIcon],
-  host: { class: 'x-accordion-item' },
+  host: {
+    class: 'x-accordion-item',
+  },
 })
 export class XAccordionItem {
   readonly #root = inject(XAccordionRoot);

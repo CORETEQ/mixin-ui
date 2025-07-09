@@ -13,8 +13,8 @@ import { X_ACCORDION_OPTIONS } from './options';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-accordion',
-  styleUrl: './root.scss',
-  templateUrl: './root.html',
+  styleUrl: './accordion.scss',
+  templateUrl: './accordion.html',
   host: {
     '[class]': '`x-accordion x-size-${size()} x-radius-${radius()}`',
   },

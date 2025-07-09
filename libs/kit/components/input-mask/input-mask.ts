@@ -6,7 +6,7 @@ import { EMPTY } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-mask',
-  templateUrl: './root.html',
+  templateUrl: './input-mask.html',
   providers: [provideControlAccessor(forwardRef(() => XMaskRoot))],
   hostDirectives: [
     {

@@ -25,12 +25,7 @@ import { X_LISTBOX_OPTIONS } from './options';
   styleUrl: './listbox.scss',
   templateUrl: './listbox.html',
   imports: [XTypedOutletPipe, NgComponentOutlet, NgTemplateOutlet],
-  hostDirectives: [
-    {
-      directive: CdkListbox,
-      inputs: ['cdkListboxCompareWith: compareFn'],
-    },
-  ],
+  hostDirectives: [CdkListbox],
   host: {
     '[class]': '`x-listbox x-size-${size()} x-radius-${radius()}`',
     '(keydown.tab)': 'onTabOut()',
@@ -54,10 +49,12 @@ export class XListboxRoot {
     effect(() => {
       const value = this.#accessor.value();
       const multiple = this.#accessor.multiple();
+      const compareFn = this.#accessor.compareFn();
 
       untracked(() => {
         this.#cdkListbox.value = value;
         this.#cdkListbox.multiple = multiple;
+        this.#cdkListbox.compareWith = compareFn;
       });
     });
 

@@ -1,7 +1,6 @@
 <div class="x-calendar-header">
   <button
     x-icon
-    variant="ghost"
     [radius]="radius()"
     [disabled]="mode() === 'months'"
     (click)="navigatePrevious()"
@@ -11,23 +10,24 @@
 
   <x-group class="x-calendar-header-group">
     <button x-btn
+            variant="outline"
             [radius]="radius()"
             [attr.aria-pressed]="mode() === 'months'"
-            (click)="mode.set('months')">
+            (click)="setMode('months')">
       {{ monthName() }}
     </button>
 
     <button x-btn
+            variant="outline"
             [radius]="radius()"
             [attr.aria-pressed]="mode() === 'years'"
-            (click)="mode.set('years')">
+            (click)="setMode('years')">
       {{ year() }}
     </button>
   </x-group>
 
   <button
     x-icon
-    variant="ghost"
     [radius]="radius()"
     [disabled]="mode() === 'months'"
     (click)="navigateNext()"
@@ -48,24 +48,24 @@
       </div>
 
       <div class="x-calendar-days">
-        @for (day of daysInMonth(); track day.getTime()) {
-          @let today = day | map: isToday;
+        @for (day of days(); track day.getTime()) {
+          @let current = day | map: isCurrentDay;
           @let selected = day | map: daySelected: value();
           @let adjacent = day | map: dayAdjacent: month();
           @let disabled = day | map: dayDisabled: min() : max();
 
           <button
             type="button"
-            class="x-calendar-day"
-            [class.x-today]="today"
+            class="x-calendar-item"
+            [class.x-current]="current"
             [class.x-selected]="selected"
             [class.x-adjacent]="adjacent"
             [class.x-disabled]="disabled"
-            (click)="selectDay(day)">
+            (click)="setDay(day)">
 
             @if ($.day) {
               <ng-container [ngTemplateOutlet]="$.day"
-                            [ngTemplateOutletContext]="{ $implicit: { day, today, selected, adjacent, disabled } }">
+                            [ngTemplateOutletContext]="{ $implicit: { day, current, selected, adjacent, disabled } }">
               </ng-container>
             } @else {
               {{ day }}
@@ -76,16 +76,18 @@
     }
     @case ('months') {
       <div class="x-calendar-months">
-        @for (month of monthsInYear(); track month.getTime()) {
+        @for (month of months(); track month.getTime()) {
+          @let current = month | map: isCurrentMonth;
           @let selected = month | map: monthSelected: value();
           @let disabled = month | map: monthDisabled: min() : max();
 
           <button
             type="button"
-            class="month-cell"
+            class="x-calendar-item x-month"
+            [class.x-current]="current"
             [class.x-selected]="selected"
             [class.x-disabled]="disabled"
-            (click)="selectMonth(month)"
+            (click)="setMonth(month)"
           >
             {{ month }}
           </button>
@@ -93,22 +95,12 @@
       </div>
     }
     @case ('years') {
-      <div class="x-calendar-years">
-        @for (year of yearsInDecade(); track year.getTime()) {
-          @let selected = year | map: yearSelected: value();
-          @let disabled = year | map: yearDisabled: min() : max();
-
-          <button
-            type="button"
-            class="year-cell"
-            [class.x-selected]="selected"
-            [class.x-disabled]="disabled"
-            (click)="selectYear(year)"
-          >
-            {{ year }}
-          </button>
-        }
-      </div>
+      <x-years [year]="month()"
+               [value]="value()"
+               [min]="min()"
+               [max]="max()"
+               (yearChange)="setYear($event)">
+      </x-years>
     }
   }
 </div>

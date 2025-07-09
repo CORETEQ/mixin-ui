@@ -34,7 +34,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-input-date',
-  templateUrl: './root.html',
+  templateUrl: './input-date.html',
   imports: [XIcon],
   providers: [
     provideMask(X_DATE_MASK_FACTORY),
@@ -133,7 +133,6 @@ export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccess
   handleDate(value: Date | null): void {
     this.value.set(value);
     this.#calendarChanges.next(value);
-    this.togglePopover(false);
   }
 
   handleControlValue(value: Date | null): void {

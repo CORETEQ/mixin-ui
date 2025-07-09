@@ -1,1 +1,1 @@
-export * from './root';
+export * from './input-mask';

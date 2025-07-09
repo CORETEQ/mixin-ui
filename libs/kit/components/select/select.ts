@@ -13,13 +13,14 @@ import { createCva, relatedTo, watch } from '@mixin-ui/cdk';
 import { X_SLOT, XInput, XPopover, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
+import { X_SELECT_OPTIONS } from './options';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-select',
-  styleUrl: './root.scss',
-  templateUrl: './root.html',
+  styleUrl: './select.scss',
+  templateUrl: './select.html',
   imports: [XIcon, XSlotsPipe, NgTemplateOutlet],
   providers: [provideListboxAccessor(forwardRef(() => XSelectRoot))],
   hostDirectives: [
@@ -50,11 +51,13 @@ import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/componen
   },
 })
 export class XSelectRoot<T> implements XListboxAccessor<T> {
+  readonly #opt = inject(X_SELECT_OPTIONS);
   readonly #popover = inject(XPopover, { self: true });
 
   readonly slots = contentChildren(X_SLOT);
   readonly placeholder = input<string>();
   readonly multiple = input(false);
+  readonly compareFn = input(this.#opt.compareFn);
   readonly tabIndex = computed(() => (this.disabled() ? null : '0'));
 
   readonly #cva = createCva<T | readonly T[] | null>({

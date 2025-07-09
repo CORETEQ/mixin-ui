@@ -1,2 +1,2 @@
-export * from './root';
+export * from './input-text';
 export * from './export';

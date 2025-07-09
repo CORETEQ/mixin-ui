@@ -15,13 +15,14 @@ import {
   XPopover,
 } from '@mixin-ui/kit/directives';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
+import { X_COMBOBOX_OPTIONS } from './options';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-combobox',
-  styleUrl: './root.scss',
-  templateUrl: './root.html',
+  styleUrl: './combobox.scss',
+  templateUrl: './combobox.html',
   imports: [],
   providers: [
     provideControlAccessor(forwardRef(() => XComboboxRoot)),
@@ -43,13 +44,19 @@ import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/componen
 export class XComboboxRoot<T>
   implements XControlAccessor<T | readonly T[] | null>, XListboxAccessor<T>
 {
+  readonly #opt = inject(X_COMBOBOX_OPTIONS);
   readonly #popover = inject(XPopover, { self: true });
 
   readonly open = this.#popover.open;
   readonly multiple = input(false);
+  readonly compareFn = input(this.#opt.compareFn);
   readonly value = linkedSignal(() => (this.multiple() ? [] : null));
 
   readonly valueChanges = new Subject<T | readonly T[] | null>();
+
+  togglePopover(open: boolean): void {
+    this.#popover.toggle(open);
+  }
 
   handleControlValue(value: T | readonly T[] | null): void {
     // this.value.set(value);
@@ -57,9 +64,5 @@ export class XComboboxRoot<T>
 
   handleOptions(values: readonly T[]): void {
     this.valueChanges.next(this.multiple() ? values : values.at(0) ?? null);
-  }
-
-  togglePopover(open: boolean): void {
-    this.#popover.toggle(open);
   }
 }
