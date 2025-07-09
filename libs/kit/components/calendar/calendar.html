@@ -15,6 +15,7 @@
               [max]="max()"
               [startOfWeek]="startOfWeek()"
               [format]="weekdayFormat()"
+              [mapper]="mapper()"
               (dateChange)="setDay($event)">
         @if ($.day) {
           <ng-template x-slot="item" let-ctx>

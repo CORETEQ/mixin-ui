@@ -12,7 +12,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { XMapPipe } from '@mixin-ui/cdk';
 import { X_I18N } from '@mixin-ui/kit/providers';
 import { X_SLOT, XSlotsPipe } from '@mixin-ui/kit/directives';
-import { XStartOfWeek, XWeekdayFormat } from './options';
+import { XCalendarMapper, XStartOfWeek, XWeekdayFormat } from './options';
 
 // @TODO: replace with internal utils
 import {
@@ -41,6 +41,7 @@ export class XDays {
   readonly date = model.required<Date>();
   readonly startOfWeek = input<XStartOfWeek>(1);
   readonly format = input<XWeekdayFormat>('min');
+  readonly mapper = input<XCalendarMapper>();
   readonly value = input<Date | null>(null);
   readonly min = input<Date | null>(null);
   readonly max = input<Date | null>(null);
@@ -73,6 +74,8 @@ export class XDays {
   readonly isAdjacent = (date: Date, value: Date | null) => {
     return value ? !isSameMonth(date, value) : false;
   };
+
+  readonly mapDetail = (date: Date, mapper?: XCalendarMapper) => (mapper ? mapper(date) : null);
 }
 
 function reorder(tuple: readonly string[], startIndex: number): readonly string[] {

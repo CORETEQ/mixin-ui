@@ -27,7 +27,7 @@ import { XYears } from './years';
   selector: 'x-calendar',
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
-  imports: [XDays, XYears, XMonths, XSlotsPipe, NgTemplateOutlet, XSlot, XCalendarNav],
+  imports: [NgTemplateOutlet, XDays, XYears, XMonths, XSlotsPipe, XSlot, XCalendarNav],
   providers: [provideButtonOptions({ variant: 'subtle', color: 'gray', size: 'sm' })],
   host: {
     '[class]': '`x-calendar x-size-${size()} x-radius-${radius()}`',
@@ -44,6 +44,7 @@ export class XCalendar {
   readonly startOfWeek = input(this.#opt.startOfWeek);
   readonly weekdayFormat = input(this.#opt.weekdayFormat);
   readonly monthFormat = input(this.#opt.monthFormat);
+  readonly mapper = input(this.#opt.mapper);
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
 

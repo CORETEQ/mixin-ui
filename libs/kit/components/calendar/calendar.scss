@@ -14,14 +14,14 @@
 // states
 @mixin hover {
   @media (hover: hover) {
-    &:where(:hover:not(.x-disabled)) {
+    &:where(:hover:not(:disabled)) {
       @content;
     }
   }
 }
 
 @mixin active {
-  &:where(:active:not(.x-disabled)) {
+  &:where(:active:not(:disabled)) {
     @content;
   }
 }
