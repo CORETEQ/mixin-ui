@@ -7,6 +7,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { XMapPipe } from '@mixin-ui/cdk';
+
+// @TODO: replace with internal utils
 import {
   eachYearOfInterval,
   endOfYear,
@@ -33,7 +35,7 @@ export class XYears {
   readonly max = input<Date | null>(null);
 
   readonly years = computed(() => {
-    const startYear = this.year().getFullYear() - 11;
+    const startYear = this.year().getFullYear();
     const start = new Date(startYear, 0, 1);
     const end = new Date(startYear + 23, 11, 31);
     return eachYearOfInterval({ start, end });

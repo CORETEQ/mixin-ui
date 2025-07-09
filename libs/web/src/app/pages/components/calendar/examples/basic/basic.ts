@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { XCalendar } from '@mixin-ui/kit';
 import { FormsModule } from '@angular/forms';
+import { XCalendar } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-calendar-basic-example',

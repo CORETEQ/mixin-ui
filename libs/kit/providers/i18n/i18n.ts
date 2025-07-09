@@ -1,7 +1,7 @@
 import { InjectionToken, signal, WritableSignal } from '@angular/core';
-import { X_LANGUAGE_ENGLISH } from './en';
+import { X_I18N_EN } from './en';
 
-export interface XLanguageOptions {
+export interface XDictionary {
   readonly dayNames: readonly string[];
   readonly dayNamesShort: readonly string[];
   readonly dayNamesMin: readonly string[];
@@ -9,6 +9,6 @@ export interface XLanguageOptions {
   readonly monthNamesShort: readonly string[];
 }
 
-export const X_LANGUAGE = new InjectionToken<WritableSignal<XLanguageOptions>>('X_LANGUAGE', {
-  factory: () => signal(X_LANGUAGE_ENGLISH),
+export const X_I18N = new InjectionToken<WritableSignal<XDictionary>>('I18N', {
+  factory: () => signal(X_I18N_EN),
 });

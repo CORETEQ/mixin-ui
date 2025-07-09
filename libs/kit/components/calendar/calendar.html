@@ -42,7 +42,7 @@
   @switch (mode()) {
     @case ('days') {
       <div class="x-calendar-days">
-        @for (day of dayNames(); track day) {
+        @for (day of dayNames(); track $index) {
           <div class="x-calendar-weekday">{{ day }}</div>
         }
       </div>
@@ -75,24 +75,13 @@
       </div>
     }
     @case ('months') {
-      <div class="x-calendar-months">
-        @for (month of months(); track month.getTime()) {
-          @let current = month | map: isCurrentMonth;
-          @let selected = month | map: monthSelected: value();
-          @let disabled = month | map: monthDisabled: min() : max();
-
-          <button
-            type="button"
-            class="x-calendar-item x-month"
-            [class.x-current]="current"
-            [class.x-selected]="selected"
-            [class.x-disabled]="disabled"
-            (click)="setMonth(month)"
-          >
-            {{ month }}
-          </button>
-        }
-      </div>
+      <x-months [month]="month()"
+                [value]="value()"
+                [min]="min()"
+                [max]="max()"
+                [format]="monthFormat()"
+                (monthChange)="setMonth($event)">
+      </x-months>
     }
     @case ('years') {
       <x-years [year]="month()"
