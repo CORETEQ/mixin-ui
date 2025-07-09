@@ -1,12 +1,12 @@
 @for (month of months(); track month.getTime()) {
-  @let current = month | map: isCurrent;
+  @let actual = month | map: isActual;
   @let selected = month | map: isSelected: value();
   @let disabled = month | map: isDisabled: min() : max();
 
   <button
     type="button"
     class="x-calendar-item x-month"
-    [class.x-current]="current"
+    [class.x-actual]="actual"
     [class.x-selected]="selected"
     [disabled]="disabled"
     (click)="date.set(month)"

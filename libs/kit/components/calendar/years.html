@@ -1,12 +1,12 @@
 @for (year of years(); track year.getTime()) {
-  @let current = year | map: isCurrent;
+  @let actual = year | map: isActual;
   @let selected = year | map: isSelected: value();
   @let disabled = year | map: isDisabled: min() : max();
 
   <button
     type="button"
     class="x-calendar-item x-year"
-    [class.x-current]="current"
+    [class.x-actual]="actual"
     [class.x-selected]="selected"
     [disabled]="disabled"
     (click)="date.set(year)"

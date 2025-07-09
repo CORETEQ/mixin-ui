@@ -44,8 +44,8 @@
   }
 }
 
-@mixin current {
-  &:where(.x-current) {
+@mixin actual {
+  &:where(.x-actual) {
     @content;
   }
 }
@@ -164,7 +164,7 @@
     background-color: var(--x-gray-300);
   }
 
-  @include current {
+  @include actual {
     color: var(--x-main-600);
   }
 

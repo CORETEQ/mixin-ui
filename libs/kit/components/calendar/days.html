@@ -8,7 +8,7 @@
 
 <div class="x-calendar-days">
   @for (day of days(); track day.getTime()) {
-    @let current = day | map: isCurrent;
+    @let actual = day | map: isActual;
     @let selected = day | map: isSelected: value();
     @let disabled = day | map: isDisabled: min() : max();
     @let adjacent = day | map: isAdjacent: date();
@@ -16,19 +16,16 @@
     <button
       type="button"
       class="x-calendar-item"
-      [class.x-current]="current"
+      [class.x-actual]="actual"
       [class.x-selected]="selected"
       [class.x-adjacent]="adjacent"
       [disabled]="disabled"
       (click)="date.set(day)">
 
-      @if ($.day) {
-        <ng-container *ngTemplateOutlet="$.day; context:
-          {
-            $implicit: { day, current, selected, adjacent, disabled }
-          }
-        ">
-        </ng-container>
+      @if ($.cell) {
+        <ng-container *ngTemplateOutlet="$.cell; context:
+          { $implicit: { day, actual, selected, adjacent, disabled } }"
+        />
       } @else {
         {{ day }}
       }

@@ -57,7 +57,7 @@ export class XMonths {
     });
   });
 
-  readonly isCurrent = (date: Date) => isSameMonth(date, Date.now());
+  readonly isActual = (date: Date) => isSameMonth(date, Date.now());
 
   readonly isSelected = (date: Date, value: Date | null) => {
     return value ? isSameMonth(date, value) : false;

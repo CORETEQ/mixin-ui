@@ -41,7 +41,7 @@ export class XYears {
     return eachYearOfInterval({ start, end });
   });
 
-  readonly isCurrent = (date: Date) => isSameYear(date, Date.now());
+  readonly isActual = (date: Date) => isSameYear(date, Date.now());
 
   readonly isSelected = (date: Date, value: Date | null) => {
     return value ? isSameYear(date, value) : false;

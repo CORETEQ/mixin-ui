@@ -60,7 +60,7 @@ export class XDays {
     return reorder(this.format() === 'min' ? dayNamesMin : dayNamesShort, this.startOfWeek());
   });
 
-  readonly isCurrent = (date: Date) => isSameDay(date, Date.now());
+  readonly isActual = (date: Date) => isSameDay(date, Date.now());
 
   readonly isSelected = (date: Date, value: Date | null) => {
     return value ? isSameDay(date, value) : false;
