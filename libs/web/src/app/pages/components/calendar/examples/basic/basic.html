@@ -12,6 +12,9 @@
   <x-calendar class="rounded-lg border-1 border-gray-200"
               size="md"
               [(ngModel)]="value">
+    <ng-template x-slot="day" let-ctx>
+      <span [class.text-red-500]="ctx.adjacent" class="font-bold">{{ ctx.day }}</span>
+    </ng-template>
   </x-calendar>
 
 <!--  <x-calendar class="rounded-lg border-1 border-gray-200"-->

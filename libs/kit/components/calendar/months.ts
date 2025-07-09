@@ -2,13 +2,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChildren,
   inject,
   input,
   model,
   ViewEncapsulation,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { XMapPipe } from '@mixin-ui/cdk';
 import { X_I18N } from '@mixin-ui/kit/providers';
+import { X_SLOT, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { XMonthFormat } from './options';
 
 // @TODO: replace with internal utils
@@ -28,7 +31,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-months',
   templateUrl: './months.html',
-  imports: [XMapPipe],
+  imports: [XMapPipe, NgTemplateOutlet, XSlotsPipe],
   host: {
     class: 'x-calendar-months',
   },
@@ -36,6 +39,7 @@ import {
 export class XMonths {
   readonly #i18n = inject(X_I18N);
 
+  readonly slots = contentChildren(X_SLOT);
   readonly date = model.required<Date>();
   readonly format = input<XMonthFormat>('short');
   readonly value = input<Date | null>(null);

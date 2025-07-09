@@ -10,9 +10,10 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { createCva } from '@mixin-ui/cdk';
 import { X_I18N } from '@mixin-ui/kit/providers';
-import { X_SLOT, XPopover } from '@mixin-ui/kit/directives';
+import { X_SLOT, XPopover, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
 import { XGroup } from '@mixin-ui/kit/components/group';
 import { XIcon } from '@mixin-ui/kit/components/icon';
@@ -30,7 +31,7 @@ import { addMonths, addYears, subMonths, subYears } from 'date-fns';
   selector: 'x-calendar',
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
-  imports: [XButton, XIcon, XGroup, XDays, XYears, XMonths],
+  imports: [XButton, XIcon, XGroup, XDays, XYears, XMonths, XSlotsPipe, NgTemplateOutlet, XSlot],
   providers: [provideButtonOptions({ variant: 'subtle', color: 'gray', size: 'sm' })],
   host: {
     '[class]': '`x-calendar x-size-${size()} x-radius-${radius()}`',

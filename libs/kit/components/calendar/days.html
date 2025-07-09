@@ -22,13 +22,14 @@
       [disabled]="disabled"
       (click)="date.set(day)">
 
-      @if ($.cell) {
-        <ng-container *ngTemplateOutlet="$.cell; context:
+      @if ($.item) {
+        <ng-container *ngTemplateOutlet="$.item; context:
           { $implicit: { day, actual, selected, adjacent, disabled } }"
         />
       } @else {
         {{ day }}
       }
+
     </button>
   }
 </div>

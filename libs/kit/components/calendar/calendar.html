@@ -7,7 +7,6 @@
   >
     <x-icon src="chevron-left" />
   </button>
-
   <x-group class="x-calendar-header-group">
     <button x-btn
             variant="outline"
@@ -25,7 +24,6 @@
       {{ year() }}
     </button>
   </x-group>
-
   <button
     x-icon
     [radius]="radius()"
@@ -35,6 +33,8 @@
     <x-icon src="chevron-right" />
   </button>
 </div>
+
+@let $ = slots() | asRecord;
 
 <div class="x-calendar-content">
   @switch (mode()) {
@@ -46,6 +46,11 @@
               [startOfWeek]="startOfWeek()"
               [format]="weekdayFormat()"
               (dateChange)="setDay($event)">
+        @if ($.day) {
+          <ng-template x-slot="item" let-ctx>
+            <ng-container *ngTemplateOutlet="$.day; context: { $implicit: ctx }" />
+          </ng-template>
+        }
       </x-days>
     }
     @case ('months') {
@@ -55,6 +60,11 @@
                 [max]="max()"
                 [format]="monthFormat()"
                 (dateChange)="setMonth($event)">
+        @if ($.month) {
+          <ng-template x-slot="item" let-ctx>
+            <ng-container *ngTemplateOutlet="$.month; context: { $implicit: ctx }" />
+          </ng-template>
+        }
       </x-months>
     }
     @case ('years') {
@@ -63,6 +73,11 @@
                [min]="min()"
                [max]="max()"
                (dateChange)="setYear($event)">
+        @if ($.year) {
+          <ng-template x-slot="item" let-ctx>
+            <ng-container *ngTemplateOutlet="$.year; context: { $implicit: ctx }" />
+          </ng-template>
+        }
       </x-years>
     }
   }

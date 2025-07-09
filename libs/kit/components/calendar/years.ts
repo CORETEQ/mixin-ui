@@ -2,11 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChildren,
   input,
   model,
   ViewEncapsulation,
 } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { XMapPipe } from '@mixin-ui/cdk';
+import { X_SLOT, XSlotsPipe } from '@mixin-ui/kit/directives';
 
 // @TODO: replace with internal utils
 import {
@@ -23,12 +26,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-years',
   templateUrl: './years.html',
-  imports: [XMapPipe],
+  imports: [XMapPipe, NgTemplateOutlet, XSlotsPipe],
   host: {
     class: 'x-calendar-years',
   },
 })
 export class XYears {
+  readonly slots = contentChildren(X_SLOT);
   readonly date = model.required<Date>();
   readonly value = input<Date | null>(null);
   readonly min = input<Date | null>(null);
@@ -38,7 +42,10 @@ export class XYears {
     const startYear = this.date().getFullYear();
     const start = new Date(startYear, 0, 1);
     const end = new Date(startYear + 23, 11, 31);
-    return eachYearOfInterval({ start, end });
+
+    return eachYearOfInterval({ start, end }).map(date => {
+      return Object.defineProperty(date, 'toString', { value: () => String(date.getFullYear()) });
+    });
   });
 
   readonly isActual = (date: Date) => isSameYear(date, Date.now());

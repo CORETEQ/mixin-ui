@@ -1,3 +1,5 @@
+@let $ = slots() | asRecord;
+
 @for (month of months(); track month.getTime()) {
   @let actual = month | map: isActual;
   @let selected = month | map: isSelected: value();
@@ -11,6 +13,14 @@
     [disabled]="disabled"
     (click)="date.set(month)"
   >
-    {{ month }}
+
+    @if ($.item) {
+      <ng-container *ngTemplateOutlet="$.item; context:
+          { $implicit: { month, actual, selected, disabled } }"
+      />
+    } @else {
+      {{ month }}
+    }
+
   </button>
 }
