@@ -10,9 +10,9 @@
 
   <span class="x-input-suffix gap-1 pr-1.5">
     <button x-btn
-            color="amber"
             size="sm"
             radius="none"
+            color="warn"
             class="font-medium"
             [variant]="input.focused() ? 'subtle' : 'surface'"
             (click)="number.plus(5)">
@@ -20,9 +20,9 @@
     </button>
 
     <button x-btn
-            color="red"
             size="sm"
             radius="none"
+            color="error"
             class="font-medium"
             [variant]="input.focused() ? 'subtle' : 'surface'"
             (click)="number.plus(10)">

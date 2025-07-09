@@ -1,4 +1,7 @@
 <x-input-date>
   <input x-control placeholder="dd/MM/yyyy" [(ngModel)]="date" />
-  <x-calendar *x-popover />
+
+  <ng-container *x-popover >
+    <x-calendar />
+  </ng-container>
 </x-input-date>

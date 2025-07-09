@@ -5,6 +5,7 @@ export type XStartOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type XWeekdayFormat = 'min' | 'short';
 export type XMonthFormat = 'short' | 'long';
 export type XCalendarMode = 'days' | 'months' | 'years';
+export type XCalendarItemHandler = <T = unknown>(item: Date) => T;
 
 export interface XCalendarOptions {
   readonly mode: XCalendarMode;
@@ -13,6 +14,7 @@ export interface XCalendarOptions {
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
   readonly weekdayFormat: XWeekdayFormat;
   readonly monthFormat: XMonthFormat;
+  readonly handler?: XCalendarItemHandler;
 }
 
 const defaultOptions: XCalendarOptions = {
@@ -21,7 +23,7 @@ const defaultOptions: XCalendarOptions = {
   size: 'md',
   radius: 'md',
   weekdayFormat: 'min',
-  monthFormat: 'long',
+  monthFormat: 'short',
 };
 
 export const X_CALENDAR_OPTIONS = new InjectionToken<XCalendarOptions>('CALENDAR_OPTIONS', {
