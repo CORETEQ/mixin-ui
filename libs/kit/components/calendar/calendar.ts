@@ -12,18 +12,14 @@ import {
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { createCva } from '@mixin-ui/cdk';
-import { X_I18N } from '@mixin-ui/kit/providers';
 import { X_SLOT, XPopover, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
-import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
-import { XGroup } from '@mixin-ui/kit/components/group';
-import { XIcon } from '@mixin-ui/kit/components/icon';
+import { provideButtonOptions } from '@mixin-ui/kit/components/button';
 import { X_CALENDAR_ACCESSOR } from './providers';
 import { X_CALENDAR_OPTIONS, XCalendarMode } from './options';
+import { XCalendarNav } from './nav';
 import { XDays } from './days';
 import { XMonths } from './months';
 import { XYears } from './years';
-
-import { addMonths, addYears, subMonths, subYears } from 'date-fns';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -31,7 +27,7 @@ import { addMonths, addYears, subMonths, subYears } from 'date-fns';
   selector: 'x-calendar',
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
-  imports: [XButton, XIcon, XGroup, XDays, XYears, XMonths, XSlotsPipe, NgTemplateOutlet, XSlot],
+  imports: [XDays, XYears, XMonths, XSlotsPipe, NgTemplateOutlet, XSlot, XCalendarNav],
   providers: [provideButtonOptions({ variant: 'subtle', color: 'gray', size: 'sm' })],
   host: {
     '[class]': '`x-calendar x-size-${size()} x-radius-${radius()}`',
@@ -42,8 +38,6 @@ export class XCalendar {
   readonly #cva = createCva<Date | null>({ defaultValue: null, transform: value => value });
   readonly #accessor = inject(X_CALENDAR_ACCESSOR, { optional: true });
   readonly #popover = inject(XPopover, { optional: true });
-
-  readonly #i18n = inject(X_I18N);
 
   readonly slots = contentChildren(X_SLOT);
   readonly mode = model(this.#opt.mode);
@@ -57,61 +51,6 @@ export class XCalendar {
   readonly value = computed(() => this.#accessor?.value() || this.#cva.value());
   readonly min = this.#accessor?.min || signal(null);
   readonly max = this.#accessor?.max || signal(null);
-
-  readonly monthName = computed(() => {
-    const { monthNamesShort, monthNames } = this.#i18n();
-    const format = this.monthFormat();
-    const index = this.month().getMonth();
-    return (format === 'short' ? monthNamesShort : monthNames)[index];
-  });
-
-  readonly year = computed(() => this.month().getFullYear());
-
-  navigatePrevious(): void {
-    const currentMonth = this.month();
-    const mode = this.mode();
-
-    let newMonth: Date;
-
-    switch (mode) {
-      case 'days':
-        newMonth = subMonths(currentMonth, 1);
-        break;
-      case 'months':
-        newMonth = subYears(currentMonth, 1);
-        break;
-      case 'years':
-        newMonth = subYears(currentMonth, 24);
-        break;
-      default:
-        return;
-    }
-
-    this.month.set(newMonth);
-  }
-
-  navigateNext(): void {
-    const currentMonth = this.month();
-    const mode = this.mode();
-
-    let newMonth: Date;
-
-    switch (mode) {
-      case 'days':
-        newMonth = addMonths(currentMonth, 1);
-        break;
-      case 'months':
-        newMonth = addYears(currentMonth, 1);
-        break;
-      case 'years':
-        newMonth = addYears(currentMonth, 24);
-        break;
-      default:
-        return;
-    }
-
-    this.month.set(newMonth);
-  }
 
   setMode(mode: XCalendarMode): void {
     this.mode.update(curr => (curr === mode ? 'days' : mode));

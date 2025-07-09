@@ -1,40 +1,10 @@
-<div class="x-calendar-header">
-  <button
-    x-icon
-    [radius]="radius()"
-    [disabled]="mode() === 'months'"
-    (click)="navigatePrevious()"
-  >
-    <x-icon src="chevron-left" />
-  </button>
-  <x-group class="x-calendar-header-group">
-    <button x-btn
-            variant="outline"
-            [radius]="radius()"
-            [attr.aria-pressed]="mode() === 'months'"
-            (click)="setMode('months')">
-      {{ monthName() }}
-    </button>
-
-    <button x-btn
-            variant="outline"
-            [radius]="radius()"
-            [attr.aria-pressed]="mode() === 'years'"
-            (click)="setMode('years')">
-      {{ year() }}
-    </button>
-  </x-group>
-  <button
-    x-icon
-    [radius]="radius()"
-    [disabled]="mode() === 'months'"
-    (click)="navigateNext()"
-  >
-    <x-icon src="chevron-right" />
-  </button>
-</div>
-
 @let $ = slots() | asRecord;
+
+<x-calendar-nav [(mode)]="mode"
+                [(month)]="month"
+                [monthFormat]="monthFormat()"
+                [radius]="radius()">
+</x-calendar-nav>
 
 <div class="x-calendar-content">
   @switch (mode()) {
