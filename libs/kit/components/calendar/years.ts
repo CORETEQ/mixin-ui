@@ -29,13 +29,13 @@ import {
   },
 })
 export class XYears {
-  readonly year = model.required<Date>();
+  readonly date = model.required<Date>();
   readonly value = input<Date | null>(null);
   readonly min = input<Date | null>(null);
   readonly max = input<Date | null>(null);
 
   readonly years = computed(() => {
-    const startYear = this.year().getFullYear();
+    const startYear = this.date().getFullYear();
     const start = new Date(startYear, 0, 1);
     const end = new Date(startYear + 23, 11, 31);
     return eachYearOfInterval({ start, end });
@@ -53,12 +53,4 @@ export class XYears {
       (!!max && isAfter(startOfYear(date), endOfYear(max)))
     );
   };
-
-  handleClick(year: Date): void {
-    if (this.isDisabled(year, this.min(), this.max())) {
-      return;
-    }
-
-    this.year.set(year);
-  }
 }

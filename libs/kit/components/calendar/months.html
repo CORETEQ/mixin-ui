@@ -8,8 +8,8 @@
     class="x-calendar-item x-month"
     [class.x-current]="current"
     [class.x-selected]="selected"
-    [class.x-disabled]="disabled"
-    (click)="handleClick(month)"
+    [disabled]="disabled"
+    (click)="date.set(month)"
   >
     {{ month }}
   </button>

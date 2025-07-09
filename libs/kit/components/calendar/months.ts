@@ -36,7 +36,7 @@ import {
 export class XMonths {
   readonly #i18n = inject(X_I18N);
 
-  readonly month = model.required<Date>();
+  readonly date = model.required<Date>();
   readonly format = input<XMonthFormat>('short');
   readonly value = input<Date | null>(null);
   readonly min = input<Date | null>(null);
@@ -47,9 +47,14 @@ export class XMonths {
   );
 
   readonly months = computed(() => {
-    const start = startOfYear(new Date(0, 0, 1));
+    const names = this.names();
+    const year = this.date().getFullYear();
+    const start = startOfYear(new Date(year, 0, 1));
     const end = endOfYear(start);
-    return eachMonthOfInterval({ start, end });
+
+    return eachMonthOfInterval({ start, end }).map(date => {
+      return Object.defineProperty(date, 'toString', { value: () => names[date.getMonth()] });
+    });
   });
 
   readonly isCurrent = (date: Date) => isSameMonth(date, Date.now());
@@ -64,12 +69,4 @@ export class XMonths {
       (!!max && isAfter(startOfMonth(date), endOfMonth(max)))
     );
   };
-
-  handleClick(month: Date): void {
-    if (this.isDisabled(month, this.min(), this.max())) {
-      return;
-    }
-
-    this.month.set(month);
-  }
 }

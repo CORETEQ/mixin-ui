@@ -10,34 +10,19 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { NgTemplateOutlet } from '@angular/common';
-import {
-  addMonths,
-  addYears,
-  eachDayOfInterval,
-  endOfMonth,
-  endOfWeek,
-  isAfter,
-  isBefore,
-  isSameDay,
-  isSameMonth,
-  startOfMonth,
-  startOfWeek,
-  subMonths,
-  subYears,
-} from 'date-fns';
-import { createCva, XMapPipe } from '@mixin-ui/cdk';
+import { createCva } from '@mixin-ui/cdk';
 import { X_I18N } from '@mixin-ui/kit/providers';
-import { X_SLOT, XPopover, XSlotsPipe } from '@mixin-ui/kit/directives';
+import { X_SLOT, XPopover } from '@mixin-ui/kit/directives';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
 import { XGroup } from '@mixin-ui/kit/components/group';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { X_CALENDAR_ACCESSOR } from './providers';
-import { X_CALENDAR_OPTIONS } from './options';
+import { X_CALENDAR_OPTIONS, XCalendarMode } from './options';
+import { XDays } from './days';
 import { XMonths } from './months';
 import { XYears } from './years';
 
-export type XCalendarMode = 'days' | 'months' | 'years';
+import { addMonths, addYears, subMonths, subYears } from 'date-fns';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -45,10 +30,10 @@ export type XCalendarMode = 'days' | 'months' | 'years';
   selector: 'x-calendar',
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
-  imports: [XButton, XMapPipe, XSlotsPipe, XIcon, NgTemplateOutlet, XGroup, XYears, XMonths],
+  imports: [XButton, XIcon, XGroup, XDays, XYears, XMonths],
   providers: [provideButtonOptions({ variant: 'subtle', color: 'gray', size: 'sm' })],
   host: {
-    '[class]': '`x-calendar x-size-${this.size()} x-radius-${this.radius()}`',
+    '[class]': '`x-calendar x-size-${size()} x-radius-${radius()}`',
   },
 })
 export class XCalendar {
@@ -60,37 +45,26 @@ export class XCalendar {
   readonly #i18n = inject(X_I18N);
 
   readonly slots = contentChildren(X_SLOT);
-  readonly mode = model<XCalendarMode>('days');
+  readonly mode = model(this.#opt.mode);
   readonly startOfWeek = input(this.#opt.startOfWeek);
-  readonly size = input(this.#opt.size);
-  readonly radius = input(this.#opt.radius);
   readonly weekdayFormat = input(this.#opt.weekdayFormat);
   readonly monthFormat = input(this.#opt.monthFormat);
+  readonly size = input(this.#opt.size);
+  readonly radius = input(this.#opt.radius);
 
   readonly month = linkedSignal(() => this.value() || new Date());
   readonly value = computed(() => this.#accessor?.value() || this.#cva.value());
   readonly min = this.#accessor?.min || signal(null);
   readonly max = this.#accessor?.max || signal(null);
-  readonly dayNames = computed(() => reorder(this.#i18n().dayNamesMin, this.startOfWeek()));
-  readonly monthNames = computed(() => this.#i18n().monthNamesShort);
-  readonly monthName = computed(() => this.monthNames()[this.month().getMonth()]);
-  readonly year = computed(() => this.month().getFullYear());
 
-  readonly days = computed(() => {
-    const month = this.month();
-    const start = startOfWeek(startOfMonth(month), { weekStartsOn: this.startOfWeek() });
-    const end = endOfWeek(endOfMonth(month), { weekStartsOn: this.startOfWeek() });
-
-    return eachDayOfInterval({ start, end }).map(date => {
-      date.toString = () => String(date.getDate());
-      return date;
-    });
+  readonly monthName = computed(() => {
+    const { monthNamesShort, monthNames } = this.#i18n();
+    const format = this.monthFormat();
+    const index = this.month().getMonth();
+    return (format === 'short' ? monthNamesShort : monthNames)[index];
   });
 
-  readonly isCurrentDay = isCurrentDay;
-  readonly daySelected = daySelected;
-  readonly dayDisabled = dayDisabled;
-  readonly dayAdjacent = dayAdjacent;
+  readonly year = computed(() => this.month().getFullYear());
 
   navigatePrevious(): void {
     const currentMonth = this.month();
@@ -143,10 +117,6 @@ export class XCalendar {
   }
 
   setDay(day: Date): void {
-    if (this.dayDisabled(day, this.min(), this.max())) {
-      return;
-    }
-
     this.#popover?.toggle(false);
     this.#popover?.focusOrigin();
     this.updateValue(day);
@@ -168,26 +138,4 @@ export class XCalendar {
     this.#accessor?.handleDate(date);
     this.#cva.updateValue(date);
   }
-}
-
-function isCurrentDay(date: Date): boolean {
-  return isSameDay(date, Date.now());
-}
-
-function daySelected(date: Date, value: Date | null): boolean {
-  return value ? isSameDay(date, value) : false;
-}
-
-function dayAdjacent(date: Date, value: Date | null): boolean {
-  return value ? !isSameMonth(date, value) : false;
-}
-
-function dayDisabled(date: Date, min: Date | null, max: Date | null): boolean {
-  return (!!min && isBefore(date, min)) || (!!max && isAfter(date, max));
-}
-
-function reorder(tuple: readonly string[], startIndex: number): readonly string[] {
-  const length = tuple.length;
-  const index = ((startIndex % length) + length) % length;
-  return [...tuple.slice(index), ...tuple.slice(0, index)];
 }

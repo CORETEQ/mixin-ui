@@ -36,59 +36,33 @@
   </button>
 </div>
 
-@let $ = slots() | asRecord;
-
 <div class="x-calendar-content">
   @switch (mode()) {
     @case ('days') {
-      <div class="x-calendar-days">
-        @for (day of dayNames(); track $index) {
-          <div class="x-calendar-weekday">{{ day }}</div>
-        }
-      </div>
-
-      <div class="x-calendar-days">
-        @for (day of days(); track day.getTime()) {
-          @let current = day | map: isCurrentDay;
-          @let selected = day | map: daySelected: value();
-          @let adjacent = day | map: dayAdjacent: month();
-          @let disabled = day | map: dayDisabled: min() : max();
-
-          <button
-            type="button"
-            class="x-calendar-item"
-            [class.x-current]="current"
-            [class.x-selected]="selected"
-            [class.x-adjacent]="adjacent"
-            [class.x-disabled]="disabled"
-            (click)="setDay(day)">
-
-            @if ($.day) {
-              <ng-container [ngTemplateOutlet]="$.day"
-                            [ngTemplateOutletContext]="{ $implicit: { day, current, selected, adjacent, disabled } }">
-              </ng-container>
-            } @else {
-              {{ day }}
-            }
-          </button>
-        }
-      </div>
+      <x-days [date]="month()"
+              [value]="value()"
+              [min]="min()"
+              [max]="max()"
+              [startOfWeek]="startOfWeek()"
+              [format]="weekdayFormat()"
+              (dateChange)="setDay($event)">
+      </x-days>
     }
     @case ('months') {
-      <x-months [month]="month()"
+      <x-months [date]="month()"
                 [value]="value()"
                 [min]="min()"
                 [max]="max()"
                 [format]="monthFormat()"
-                (monthChange)="setMonth($event)">
+                (dateChange)="setMonth($event)">
       </x-months>
     }
     @case ('years') {
-      <x-years [year]="month()"
+      <x-years [date]="month()"
                [value]="value()"
                [min]="min()"
                [max]="max()"
-               (yearChange)="setYear($event)">
+               (dateChange)="setYear($event)">
       </x-years>
     }
   }

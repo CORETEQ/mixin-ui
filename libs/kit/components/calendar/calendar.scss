@@ -33,7 +33,7 @@
 }
 
 @mixin disabled {
-  &:where(.x-disabled) {
+  &:where(:disabled) {
     @content;
   }
 }

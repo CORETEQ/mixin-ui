@@ -8,8 +8,8 @@
     class="x-calendar-item x-year"
     [class.x-current]="current"
     [class.x-selected]="selected"
-    [class.x-disabled]="disabled"
-    (click)="handleClick(year)"
+    [disabled]="disabled"
+    (click)="date.set(year)"
   >
     {{ year.getFullYear() }}
   </button>
