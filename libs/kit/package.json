@@ -16,5 +16,8 @@
     "@angular/core": "^19.2.0",
     "rxjs": ">=7.0.0",
     "@mixin-ui/cdk": "workspace:*"
+  },
+  "publishConfig": {
+    "registry": "https://repo.coreteq.cloud/repository/libs-release-npm/"
   }
 }
