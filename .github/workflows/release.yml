@@ -29,16 +29,3 @@ jobs:
 
       - name: Build packages
         run: pnpm build
-
-      - name: Release & Publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          pnpm release
-
-      - name: Notification in Teams (webhook)
-        if: success()
-        run: |
-          curl -H "Content-Type: application/json" \
-            -d '{"text": "New Mixin UI out! Version: '"$(node -p "require('./libs/kit/package.json').version")"'"}' \
-            ${{ secrets.TEAMS_WEBHOOK_URL }}
