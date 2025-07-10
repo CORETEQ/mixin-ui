@@ -39,6 +39,11 @@ jobs:
         env:
           $NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Authenticate with GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm config set //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=$NPM_TOKEN
+
       - name: Create and publish versions
         uses: changesets/action@v1
         with:
