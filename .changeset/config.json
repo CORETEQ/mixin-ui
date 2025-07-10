@@ -6,7 +6,7 @@
   ],
   "commit": false,
   "fixed": [["@mixin-ui/cdk", "@mixin-ui/kit"]],
-  "access": "restricted",
+  "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": []
