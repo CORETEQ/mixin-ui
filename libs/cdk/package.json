@@ -1,6 +1,6 @@
 {
   "name": "@mixin-ui/cdk",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "dependencies": {
     "imask": "7.6.1",
     "date-fns": "4.1.0"
