@@ -1,5 +1,11 @@
 # @mixin-ui/cdk
 
+## 0.0.7
+
+### Patch Changes
+
+- [`e0edbd2`](https://github.com/CORETEQ/mixin-ui/commit/e0edbd29645d2aa210e6e63943bb0a9606909184) Thanks [@vs-borodin](https://github.com/vs-borodin)! - test7
+
 ## 0.0.6
 
 ### Patch Changes
