@@ -9,5 +9,8 @@
       "@/docs/*": ["libs/web/src/app/docs/*"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "angularCompilerOptions": {
+    "compilationMode": "partial"
+  }
 }

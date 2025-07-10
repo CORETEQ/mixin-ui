@@ -1,6 +1,10 @@
 {
   "name": "@mixin-ui/kit",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha.1",
+  "license": "Apache-2.0",
+  "exports": {
+    "./styles/*": "./styles/*"
+  },
   "description": "Mixin UI components kit",
   "keywords": [
     "angular",

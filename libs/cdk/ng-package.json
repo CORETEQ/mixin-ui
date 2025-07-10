@@ -3,5 +3,6 @@
   "dest": "../../dist/libs/cdk",
   "lib": {
     "entryFile": "index.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["imask", "date-fns"]
 }
