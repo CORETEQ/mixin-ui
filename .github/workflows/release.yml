@@ -11,18 +11,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
+          registry-url: 'https://registry.npmjs.org'
           node-version: 20
-          registry-url: 'https://repo.coreteq.cloud/repository/libs-release-npm/'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8
+          cache: 'pnpm'
 
       - name: Install dependencies
+        shell: bash
         run: pnpm install
 
       - name: Build packages
