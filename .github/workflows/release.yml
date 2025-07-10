@@ -29,19 +29,22 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Configure .npmrc for private registry
-        run: |
-          echo "//repo.coreteq.cloud/repository/libs-release-npm/:_authToken=${NPM_TOKEN}" > ~/.npmrc
-          echo "@mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/" >> ~/.npmrc
+      - name: Build
+        run: pnpm build
+
+      - run: |
+          cat << EOF > "$HOME/.npmrc"
+            @mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/
+            //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=$NPM_TOKEN
+          EOF
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release Pull Request and Publish
-        uses: changesets/action@v1.4.7
+        uses: changesets/action@v1
         with:
-          title: Release 🚀
-          publish: pnpm release
-          commit: "ci(changesets): version packages"
+          version: pnpm ci:version
+          publish: pnpm ci:publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
