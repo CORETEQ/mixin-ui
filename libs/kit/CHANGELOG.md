@@ -1,5 +1,14 @@
 # @mixin-ui/kit
 
+## 0.0.24
+
+### Patch Changes
+
+- [`b78bd4c`](https://github.com/CORETEQ/mixin-ui/commit/b78bd4c9b80907dd36954bf16f71318a994a1e25) Thanks [@vs-borodin](https://github.com/vs-borodin)! - test25
+
+- Updated dependencies [[`b78bd4c`](https://github.com/CORETEQ/mixin-ui/commit/b78bd4c9b80907dd36954bf16f71318a994a1e25)]:
+  - @mixin-ui/cdk@0.0.24
+
 ## 0.0.23
 
 ### Patch Changes
