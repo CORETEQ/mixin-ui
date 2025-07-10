@@ -1,6 +1,9 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "https://github.com/CORETEQ/mixin-ui" }],
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "CORETEQ/mixin-ui" }
+  ],
   "commit": false,
   "fixed": [["@mixin-ui/cdk", "@mixin-ui/kit"]],
   "access": "restricted",
