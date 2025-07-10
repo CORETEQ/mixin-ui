@@ -23,19 +23,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          registry-url: "https://registry.npmjs.org"
           cache: 'pnpm'
+
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=$NPM_TOKEN
+            @mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies
         run: pnpm install
-
-#      - name: Creating .npmrc
-#        run: |
-#          cat << EOF > "$HOME/.npmrc"
-#            //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=$NPM_TOKEN
-#            @mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/
-#          EOF
-#        env:
-#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
