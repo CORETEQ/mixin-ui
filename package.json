@@ -6,7 +6,7 @@
     "build:web": "nx build cdk && nx build kit && nx build web",
     "build": "nx build cdk && nx build kit",
     "update-version": "node scripts/version.js",
-    "release": "pnpm build && pnpm update-version && changeset publish"
+    "release": "pnpm build && node scripts/version.js && changeset publish"
   },
   "private": true,
   "engines": {
