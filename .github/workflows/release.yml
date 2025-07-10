@@ -24,6 +24,7 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
+          registry-url: 'https://repo.coreteq.cloud/repository/libs-release-npm/'
 
       - name: Install dependencies
         run: pnpm install
@@ -40,6 +41,7 @@ jobs:
           publish: pnpm release
           commit: "ci(changesets): version packages"
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
