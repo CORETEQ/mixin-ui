@@ -12,8 +12,5 @@
     "@angular/forms": "^19.2.0",
     "rxjs": ">=7.0.0"
   },
-  "sideEffects": false,
-  "publishConfig": {
-    "registry": "https://repo.coreteq.cloud/repository/libs-release-npm/"
-  }
+  "sideEffects": false
 }
