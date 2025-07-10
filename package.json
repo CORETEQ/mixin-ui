@@ -39,6 +39,7 @@
     "@analogjs/vitest-angular": "1.14.0",
     "@angular-devkit/build-angular": "19.2.9",
     "@angular/compiler-cli": "19.2.14",
+    "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.29.5",
     "@nx/angular": "20.8.1",
     "@nx/devkit": "20.8.1",
