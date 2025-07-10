@@ -25,14 +25,8 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Creating .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=NpmToken.f2752920-a992-3900-b23c-bbdfe69033f6
-            @mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Authenticate with npm
+        run: npm config set //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=NpmToken.f2752920-a992-3900-b23c-bbdfe69033f6
 
       - name: Install dependencies
         run: pnpm install

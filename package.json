@@ -6,7 +6,7 @@
     "build:web": "nx build cdk && nx build kit && nx build web",
     "build": "nx build cdk && nx build kit",
     "update-version": "node scripts/version.js",
-    "release": "pnpm build && changeset publish"
+    "release": "pnpm build && npm_config_registry=https://repo.coreteq.cloud/repository/libs-release-npm/ changeset publish"
   },
   "private": true,
   "engines": {
