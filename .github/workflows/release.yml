@@ -28,7 +28,7 @@ jobs:
         run: pnpm install
 
       - name: Build packages
-        run: pnpm nx run-many --target=build --all
+        run: pnpm nx build cdk && nx build kit
 
       - name: Release & Publish
         env:
