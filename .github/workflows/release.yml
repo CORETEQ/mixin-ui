@@ -26,29 +26,10 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        shell: bash
         run: pnpm install
 
-      - name: Build packages
-        run: pnpm build
-
-#      - name: Creating .npmrc
-#        run: |
-#          cat << EOF > "$HOME/.npmrc"
-#            //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=$NPM_TOKEN
-#            @mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/
-#          EOF
-#        env:
-#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Create release Pull Request or publish to NPM
+      - name: Create Release Pull Request
         uses: changesets/action@v1
-        with:
-          version: pnpm changeset version
-          publish: pnpm release
-          commit: "ci(changeset): version packages"
-          title: "ci: release new version"
-          setupGitUser: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
