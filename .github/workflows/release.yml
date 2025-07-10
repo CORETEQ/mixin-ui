@@ -25,15 +25,18 @@ jobs:
           node-version: 20
           cache: 'pnpm'
 
-      - name: Authenticate with npm
-        run: npm config set //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=NpmToken.f2752920-a992-3900-b23c-bbdfe69033f6
-
       - name: Install dependencies
         run: pnpm install
 
+      - name: Authenticate with NPM
+        run: npm config set //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=$NPM_TOKEN
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Create Release Pull Request
-        uses: changesets/action@v1
+        uses: changesets/action@v1.4.7
         with:
+          title: Release 🚀
           publish: pnpm release
           commit: "ci(changesets): version packages"
         env:
