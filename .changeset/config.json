@@ -3,9 +3,8 @@
   "changelog": ["@changesets/changelog-github", { "repo": "https://github.com/CORETEQ/mixin-ui" }],
   "commit": false,
   "fixed": [["@mixin-ui/cdk", "@mixin-ui/kit"]],
-  "linked": [["@mixin-ui/cdk", "@mixin-ui/kit"]],
   "access": "restricted",
   "baseBranch": "main",
-  "updateInternalDependencies": "always",
+  "updateInternalDependencies": "patch",
   "ignore": []
 }

@@ -80,7 +80,6 @@ export class XComparable {
 
   private updateOffset(x: number): void {
     const clickX = x - this.#left;
-    const relativeXPercent = (clickX / this.#width) * 100;
-    this.offset.set(relativeXPercent);
+    this.offset.set((clickX / this.#width) * 100);
   }
 }
