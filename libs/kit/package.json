@@ -1,6 +1,6 @@
 {
   "name": "@mixin-ui/kit",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "license": "Apache-2.0",
   "exports": {
     "./styles/*": "./styles/*"
