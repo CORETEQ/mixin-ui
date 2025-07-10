@@ -12,5 +12,9 @@
     "@angular/forms": "^19.2.0",
     "rxjs": ">=7.0.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  }
 }
