@@ -7,8 +7,7 @@
     "build": "nx build cdk && nx build kit",
     "update-version": "node scripts/version.js",
     "release": "pnpm build && pnpm changeset tag && pnpm publish -r",
-    "ci:version": "pnpm changeset version",
-    "ci:publish": "pnpm changeset tag && pnpm publish -r"
+    "ci:publish": "pnpm publish -r"
   },
   "private": true,
   "engines": {
