@@ -14,13 +14,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-        # changesets/action presumes the .npmrc is in $HOME
-        # See:
-        # - https://github.com/changesets/action/issues/58
-        # - https://github.com/changesets/action/blob/2bb9bcbd6bf4996a55ce459a630a0aa699457f59/src/index.ts#L58
-      - name: Set HOME
-        run: echo "HOME=$(pwd)" >> $GITHUB_ENV
-
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -34,6 +27,13 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+        # changesets/action presumes the .npmrc is in $HOME
+        # See:
+        # - https://github.com/changesets/action/issues/58
+        # - https://github.com/changesets/action/blob/2bb9bcbd6bf4996a55ce459a630a0aa699457f59/src/index.ts#L58
+      - name: Set HOME
+        run: echo "HOME=$(pwd)" >> $GITHUB_ENV
 
       - name: Create Release Pull Request
         uses: changesets/action@v1.4.7
