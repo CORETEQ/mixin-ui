@@ -4,6 +4,10 @@
     "@changesets/changelog-github",
     { "repo": "CORETEQ/mixin-ui" }
   ],
+  "privatePackages": {
+    "version": true,
+    "tag": true
+  },
   "commit": false,
   "fixed": [["@mixin-ui/cdk", "@mixin-ui/kit"]],
   "access": "public",
