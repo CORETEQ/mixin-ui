@@ -31,6 +31,14 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - run: |
+          cat << EOF > "$HOME/.npmrc"
+            @mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/
+            //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          $NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Create and publish versions
         uses: changesets/action@v1
         with:
