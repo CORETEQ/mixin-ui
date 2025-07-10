@@ -76,9 +76,5 @@
   },
   "nx": {
     "includedScripts": []
-  },
-  "workspaces": [
-    "libs/cdk",
-    "libs/kit"
-  ]
+  }
 }
