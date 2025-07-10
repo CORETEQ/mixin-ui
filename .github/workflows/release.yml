@@ -14,6 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -25,14 +33,6 @@ jobs:
           node-version: 20
           cache: 'pnpm'
           registry-url: 'https://repo.coreteq.cloud/repository/libs-release-npm/'
-
-      - name: Creating .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            //repo.coreteq.cloud/repository/libs-release-npm/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install dependencies
         run: pnpm install
