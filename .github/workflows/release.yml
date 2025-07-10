@@ -1,0 +1,42 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: 'https://repo.coreteq.cloud/repository/libs-release-npm/'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build packages
+        run: pnpm nx run-many --target=build --all
+
+      - name: Release & Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          pnpm release
+
+      - name: Notification in Teams (webhook)
+        if: success()
+        run: |
+          curl -H "Content-Type: application/json" \
+            -d '{"text": "New Mixin UI out! Version: '"$(node -p "require('./libs/kit/package.json').version")"'"}' \
+            ${{ secrets.TEAMS_WEBHOOK_URL }}

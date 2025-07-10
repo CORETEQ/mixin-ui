@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build:web": "nx build cdk && nx build kit && nx build web"
+    "build:web": "nx build cdk && nx build kit && nx build web",
+    "update-version": "node scripts/version.js",
+    "release": "changeset version && pnpm update-version && changeset publish"
   },
   "private": true,
   "engines": {
@@ -36,6 +38,7 @@
     "@analogjs/vitest-angular": "1.14.0",
     "@angular-devkit/build-angular": "19.2.9",
     "@angular/compiler-cli": "19.2.14",
+    "@changesets/cli": "^2.29.5",
     "@nx/angular": "20.8.1",
     "@nx/devkit": "20.8.1",
     "@nx/eslint": "20.8.1",
