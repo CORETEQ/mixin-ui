@@ -12,6 +12,51 @@
     "projects": ["cdk", "kit"],
     "changelog": {
       "automaticFromRef": true
+    },
+    "conventionalCommits": {
+      "feat": {
+        "semverBump": "minor",
+        "changelog": {
+          "title": "🚀 Features"
+        }
+      },
+      "fix": {
+        "semverBump": "patch",
+        "changelog": {
+          "title": "🐛 Bug Fixes"
+        }
+      },
+      "docs": {
+        "semverBump": "none",
+        "changelog": {
+          "title": "📚 Documentation",
+          "hidden": true
+        }
+      },
+      "style": {
+        "semverBump": "none",
+        "changelog": {
+          "hidden": true
+        }
+      },
+      "refactor": {
+        "semverBump": "none",
+        "changelog": {
+          "hidden": true
+        }
+      },
+      "test": {
+        "semverBump": "none",
+        "changelog": {
+          "hidden": true
+        }
+      },
+      "chore": {
+        "semverBump": "none",
+        "changelog": {
+          "hidden": true
+        }
+      }
     }
   },
   "targetDefaults": {

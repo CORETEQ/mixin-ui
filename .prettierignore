@@ -1,8 +1,7 @@
 # Add files here to ignore them from prettier formatting
 /dist
 /coverage
-/.nx/cache
-/.nx/workspace-data
+.nx
 .angular
-
+*.html
 /libs/web/src/app/pages/**/examples/**

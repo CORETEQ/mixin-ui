@@ -36,8 +36,8 @@
     "*.{scss,css}": [
       "stylelint --fix"
     ],
-    "*.{js,ts}": [
-      "prettier --write libs"
+    "*.{js,ts,scss,css,json}": [
+      "prettier --write"
     ]
   },
   "dependencies": {
@@ -64,6 +64,8 @@
     "@analogjs/vitest-angular": "1.14.0",
     "@angular-devkit/build-angular": "19.2.9",
     "@angular/compiler-cli": "19.2.14",
+    "@commitlint/cli": "19.8.1",
+    "@commitlint/config-conventional": "19.8.1",
     "@nx/angular": "20.8.1",
     "@nx/devkit": "20.8.1",
     "@nx/eslint": "20.8.1",
