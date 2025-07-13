@@ -41,6 +41,7 @@ export class XControl<T> implements ControlValueAccessor, OnDestroy {
     if (this.#accessor?.handleControlInit) {
       this.#accessor.handleControlInit(this.#el);
     }
+
     this.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => this.onChange(value));
   }
 
