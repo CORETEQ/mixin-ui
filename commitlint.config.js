@@ -33,6 +33,9 @@ module.exports = {
         'cdk',
         'kit',
         'web',
+
+        // Release
+        'release',
       ],
     ],
 
