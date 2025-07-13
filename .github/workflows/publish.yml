@@ -2,8 +2,8 @@ name: Publish
 
 on:
   push:
-    tags:
-      - v*.*.*
+    branches:
+      - main
 
 jobs:
   version:
@@ -28,7 +28,7 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.17.0
+          node-version: 20.19.0
           cache: 'pnpm'
 
       - name: Install dependencies

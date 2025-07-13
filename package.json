@@ -29,7 +29,7 @@
   "packageManager": "pnpm@9.12.0",
   "engines": {
     "pnpm": "~9.12.0",
-    "node": ">=20.17.0",
+    "node": ">=20.19.0",
     "npm": "Please use pnpm instead of NPM to install dependencies. See: https://pnpm.io/"
   },
   "lint-staged": {
