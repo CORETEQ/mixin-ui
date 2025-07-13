@@ -28,14 +28,14 @@ jobs:
       - name: Setup node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 20.17.0
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install
 
       - name: Build libraries
-        run: pnpm build
+        run: pnpm ci:build
 
       - name: Set up npm auth for Nexus (basic auth)
         run: |
@@ -45,5 +45,5 @@ jobs:
           echo "//repo.coreteq.cloud/repository/libs-release-npm/:always-auth=true" >> ~/.npmrc
 
       - name: Publish packages
-        run: npx nx release publish
+        run: pnpm ci:publish
         shell: bash
