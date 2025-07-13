@@ -12,7 +12,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { XMapPipe } from '@mixin-ui/cdk';
 import { X_I18N } from '@mixin-ui/kit/providers';
 import { X_SLOT, XSlotsPipe } from '@mixin-ui/kit/directives';
-import { XMonthFormat } from './options';
+import { XMonthFormat } from '../options';
 
 // @TODO: replace with internal utils
 import {

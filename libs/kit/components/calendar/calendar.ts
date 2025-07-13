@@ -14,12 +14,12 @@ import { NgTemplateOutlet } from '@angular/common';
 import { createCva } from '@mixin-ui/cdk';
 import { X_SLOT, XPopover, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { provideButtonOptions } from '@mixin-ui/kit/components/button';
+import { XDays } from './grids/days';
+import { XMonths } from './grids/months';
+import { XYears } from './grids/years';
 import { X_CALENDAR_ACCESSOR } from './providers';
 import { X_CALENDAR_OPTIONS, XCalendarMode } from './options';
 import { XCalendarNav } from './nav';
-import { XDays } from './days';
-import { XMonths } from './months';
-import { XYears } from './years';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
