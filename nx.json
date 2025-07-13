@@ -14,18 +14,6 @@
       "automaticFromRef": true
     },
     "conventionalCommits": {
-      "feat": {
-        "semverBump": "minor",
-        "changelog": {
-          "title": "🚀 Features"
-        }
-      },
-      "fix": {
-        "semverBump": "patch",
-        "changelog": {
-          "title": "🐛 Bug Fixes"
-        }
-      },
       "docs": {
         "semverBump": "none",
         "changelog": {
