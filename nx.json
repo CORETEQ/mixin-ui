@@ -11,7 +11,12 @@
     },
     "projects": ["cdk", "kit"],
     "changelog": {
-      "automaticFromRef": true
+      "automaticFromRef": true,
+      "workspaceChangelog": {
+        "renderOptions": {
+          "authors": false
+        }
+      }
     },
     "conventionalCommits": {
       "docs": {
