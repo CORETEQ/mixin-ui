@@ -23,3 +23,8 @@ declare module '*?raw&lang=json' {
   const src: string;
   export default src;
 }
+
+declare module '*?raw&lang=markdown' {
+  const src: string;
+  export default src;
+}

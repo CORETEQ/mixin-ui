@@ -24,7 +24,7 @@ export const ROUTES: Route[] = [
         children: [
           group({
             path: '',
-            title: 'Getting started',
+            title: 'Documentation',
             children: [
               page({
                 path: 'installation',
@@ -35,6 +35,11 @@ export const ROUTES: Route[] = [
                 path: 'сompatibility',
                 title: 'Compatibility',
                 loadComponent: () => import('./pages/сompatibility'),
+              }),
+              page({
+                path: 'changelog',
+                title: 'Changelog',
+                loadComponent: () => import('./pages/changelog'),
               }),
             ],
           }),

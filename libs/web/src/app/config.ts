@@ -8,6 +8,7 @@ import { ViewportScroller } from '@angular/common';
 import { provideRouter, TitleStrategy, withInMemoryScrolling } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideMarkdown } from 'ngx-markdown';
 import { ROUTES } from './routes';
 import { DocsTitleStrategy } from './docs/services';
 
@@ -32,5 +33,6 @@ export const appConfig: ApplicationConfig = {
     provideEnvironmentInitializer(() => {
       inject(ViewportScroller).setOffset([0, OFFSET_TOP]);
     }),
+    provideMarkdown(),
   ],
 };
