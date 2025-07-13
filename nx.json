@@ -6,9 +6,6 @@
     "sharedGlobals": []
   },
   "release": {
-    "version": {
-      "preVersionCommand": "npx nx run-many -t build -p cdk,kit"
-    },
     "projects": ["cdk", "kit"],
     "changelog": {
       "automaticFromRef": true,

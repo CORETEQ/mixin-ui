@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "prepare": "husky",
-    "release": "nx release --skip-publish",
+    "release": "nx release --skip-publish && node scripts/update-version.js",
     "lint": "eslint .",
     "stylelint": "stylelint '**/*.{scss,css}'",
     "prettier": "prettier --ignore-path .gitignore",
