@@ -32,11 +32,6 @@ export const ROUTES: Route[] = [
                 loadComponent: () => import('./pages/installation'),
               }),
               page({
-                path: 'сompatibility',
-                title: 'Compatibility',
-                loadComponent: () => import('./pages/сompatibility'),
-              }),
-              page({
                 path: 'changelog',
                 title: 'Changelog',
                 loadComponent: () => import('./pages/changelog'),

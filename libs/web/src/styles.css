@@ -171,7 +171,9 @@ body {
   block-size: 100%;
 }
 
-.docs-page-content {
+/* stylelint-disable */
+.docs-page-content,
+markdown {
   display: block;
   flex: 1 1 0;
 
@@ -300,6 +302,7 @@ body {
     }
   }
 }
+/* stylelint-enable */
 
 .docs-separator {
   display: block;
