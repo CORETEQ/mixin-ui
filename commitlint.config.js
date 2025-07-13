@@ -33,10 +33,6 @@ module.exports = {
         'cdk',
         'kit',
         'web',
-
-        // Infrastructure
-        'ci',
-        'docker',
       ],
     ],
 
