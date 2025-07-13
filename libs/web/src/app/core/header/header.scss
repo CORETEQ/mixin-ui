@@ -1,0 +1,42 @@
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  inline-size: 100%;
+  background: hsl(0deg 0% 100% / 80%);
+  border-style: solid;
+  border-color: #e5e5e5;
+  border-bottom-width: 1px;
+  backdrop-filter: saturate(180%) blur(5px);
+  /* stylelint-disable-next-line */
+  -webkit-backdrop-filter: saturate(180%) blur(5px); /* Safari */
+}
+
+.app-header-version {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  block-size: 1.75rem;
+  padding: 0 0.75rem;
+  color: var(--x-gray-600);
+  font-size: 13.5px;
+  font-weight: 500;
+  background-color: #fff;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgb(0 0 0 / 0%)),
+    var(--tw-ring-shadow, 0 0 rgb(0 0 0 / 0%)), var(--tw-shadow);
+  //border: 1px solid #dadada;
+  border-radius: var(--x-radius-full);
+  cursor: default;
+
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-shadow: 0 1px 1px 0.5px rgb(51 51 51 / 4%), 0 3px 3px -1.5px rgb(51 51 51 / 2%),
+    0 6px 6px -3px rgb(51 51 51 / 4%), 0 12px 12px -6px rgb(51 51 51 / 4%),
+    0 24px 24px -12px rgb(51 51 51 / 4%), 0 48px 48px -24px rgb(51 51 51 / 4%),
+    0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
+
+  &:hover {
+    color: #09090b;
+  }
+}

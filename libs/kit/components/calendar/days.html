@@ -1,0 +1,36 @@
+@let $ = slots() | asRecord;
+
+<div class="x-calendar-days">
+  @for (day of dayNames(); track $index) {
+    <div class="x-calendar-weekday">{{ day }}</div>
+  }
+</div>
+
+<div class="x-calendar-days">
+  @for (day of days(); track day.getTime()) {
+    @let actual = day | map: isActual;
+    @let detail = day | map: mapDetail: mapper();
+    @let selected = day | map: isSelected: value();
+    @let disabled = day | map: isDisabled: min() : max();
+    @let adjacent = day | map: isAdjacent: date();
+
+    <button
+      type="button"
+      class="x-calendar-item"
+      [class.x-actual]="actual"
+      [class.x-selected]="selected"
+      [class.x-adjacent]="adjacent"
+      [disabled]="disabled"
+      (click)="date.set(day)">
+
+      @if ($.item) {
+        <ng-container *ngTemplateOutlet="$.item; context:
+          { $implicit: { day, detail, actual, selected, adjacent, disabled } }"
+        />
+      } @else {
+        {{ day }}
+      }
+
+    </button>
+  }
+</div>

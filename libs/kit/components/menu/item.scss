@@ -1,0 +1,36 @@
+// states
+@mixin hover {
+  @media (hover: hover) {
+    &:where(:hover) {
+      @content;
+    }
+  }
+}
+
+@mixin focus-visible {
+  &:where(:focus-visible) {
+    @content;
+  }
+}
+
+.x-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 1.75rem;
+  padding: 0 0.5rem;
+  background-color: var(--x-track-bg);
+  outline: none;
+  border-radius: 4px;
+  appearance: none;
+  cursor: default;
+
+  @include hover {
+    --x-track-bg: var(--x-gray-200);
+  }
+
+  @include focus-visible {
+    --x-track-bg: var(--x-gray-200);
+  }
+}

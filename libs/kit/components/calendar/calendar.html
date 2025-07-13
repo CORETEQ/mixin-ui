@@ -1,0 +1,55 @@
+@let $ = slots() | asRecord;
+
+<x-calendar-nav [(mode)]="mode"
+                [(month)]="month"
+                [monthFormat]="monthFormat()"
+                [radius]="radius()">
+</x-calendar-nav>
+
+<div class="x-calendar-content">
+  @switch (mode()) {
+    @case ('days') {
+      <x-days [date]="month()"
+              [value]="value()"
+              [min]="min()"
+              [max]="max()"
+              [startOfWeek]="startOfWeek()"
+              [format]="weekdayFormat()"
+              [mapper]="mapper()"
+              (dateChange)="setDay($event)">
+        @if ($.day) {
+          <ng-template x-slot="item" let-ctx>
+            <ng-container *ngTemplateOutlet="$.day; context: { $implicit: ctx }" />
+          </ng-template>
+        }
+      </x-days>
+    }
+    @case ('months') {
+      <x-months [date]="month()"
+                [value]="value()"
+                [min]="min()"
+                [max]="max()"
+                [format]="monthFormat()"
+                (dateChange)="setMonth($event)">
+        @if ($.month) {
+          <ng-template x-slot="item" let-ctx>
+            <ng-container *ngTemplateOutlet="$.month; context: { $implicit: ctx }" />
+          </ng-template>
+        }
+      </x-months>
+    }
+    @case ('years') {
+      <x-years [date]="month()"
+               [value]="value()"
+               [min]="min()"
+               [max]="max()"
+               (dateChange)="setYear($event)">
+        @if ($.year) {
+          <ng-template x-slot="item" let-ctx>
+            <ng-container *ngTemplateOutlet="$.year; context: { $implicit: ctx }" />
+          </ng-template>
+        }
+      </x-years>
+    }
+  }
+</div>

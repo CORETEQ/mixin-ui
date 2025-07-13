@@ -1,0 +1,30 @@
+<docs-page>
+  <p>Used to display an svg icon.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet withHeader>
+    <app-icon-basic-example />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Setup</h2>
+  <p>
+    To setup icon path you can use <code>provideIconPathMapper</code>
+  </p>
+  <docs-code [src]="path" />
+
+  <h2>API</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="name" type="string | null" default="null" />
+    <docs-input name="raw" type="boolean" default="false" />
+    <docs-input name="color" type="string" />
+    <docs-input name="size" type="number" />
+  </docs-api-table>
+</docs-page>

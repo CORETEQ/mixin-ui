@@ -1,0 +1,16 @@
+@let $ = slots() | asRecord;
+
+<!--@if ($.label) {-->
+<!--  <label class="x-field-label" [attr.for]="inputId()">-->
+<!--    <ng-container *ngTemplateOutlet="$.label" />-->
+<!--    <span class="x-field-mark"> * </span>-->
+<!--  </label>-->
+<!--}-->
+
+<ng-content />
+
+@if ($.hint) {
+  <div class="x-field-hint">
+    <ng-container *ngTemplateOutlet="$.hint" />
+  </div>
+}

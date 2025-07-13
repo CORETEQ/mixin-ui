@@ -1,0 +1,207 @@
+// options
+@mixin size($size) {
+  &:where(.x-size-#{$size}) {
+    @content;
+  }
+}
+
+@mixin radius($radius) {
+  &:where(.x-radius-#{$radius}) {
+    @content;
+  }
+}
+
+// states
+@mixin hover {
+  @media (hover: hover) {
+    &:where(:hover:not(:disabled)) {
+      @content;
+    }
+  }
+}
+
+@mixin active {
+  &:where(:active:not(:disabled)) {
+    @content;
+  }
+}
+
+@mixin selected {
+  &:where(.x-selected) {
+    @content;
+  }
+}
+
+@mixin disabled {
+  &:where(:disabled) {
+    @content;
+  }
+}
+
+@mixin adjacent {
+  &:where(.x-adjacent) {
+    @content;
+  }
+}
+
+@mixin actual {
+  &:where(.x-actual) {
+    @content;
+  }
+}
+
+@mixin reset {
+  box-sizing: border-box;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  border: none;
+  appearance: none;
+  touch-action: manipulation;
+
+  // Removes blue tap highlight on iOS/Safari
+  -webkit-tap-highlight-color: transparent;
+}
+
+.x-calendar {
+  display: block;
+  padding: 0.75rem;
+
+  @include size(xs) {
+    --x-size: var(--x-size-xs);
+  }
+
+  @include size(sm) {
+    --x-size: var(--x-size-sm);
+  }
+
+  @include size(md) {
+    --x-size: var(--x-size-md);
+  }
+
+  @include size(lg) {
+    --x-size: var(--x-size-lg);
+  }
+
+  @include size(xl) {
+    --x-size: var(--x-size-xl);
+  }
+
+  @include radius(none) {
+    --x-radius: var(--x-radius-none);
+  }
+
+  @include radius(sm) {
+    --x-radius: var(--x-radius-sm);
+  }
+
+  @include radius(md) {
+    --x-radius: var(--x-radius-md);
+  }
+
+  @include radius(lg) {
+    --x-radius: var(--x-radius-lg);
+  }
+
+  @include radius(full) {
+    --x-radius: var(--x-radius-full);
+  }
+}
+
+.x-calendar-nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.25rem;
+  align-items: center;
+  margin-block-end: 0.375rem;
+}
+
+.x-calendar-nav-group {
+  margin: 0 auto;
+}
+
+.x-calendar-content {
+  display: block;
+  min-inline-size: calc((var(--x-size) + 0.25rem) * 7 - 0.25rem);
+}
+
+.x-calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+}
+
+.x-calendar-weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--x-size);
+  block-size: var(--x-size);
+  color: var(--x-gray-600);
+  font: var(--x-text-xs);
+  font-weight: 500;
+}
+
+.x-calendar-item {
+  @include reset;
+
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--x-size);
+  block-size: var(--x-size);
+  color: var(--x-gray-900);
+  font: var(--x-text-sm);
+  background-color: transparent;
+  border-radius: var(--x-radius);
+  cursor: pointer;
+
+  @include hover {
+    background-color: var(--x-gray-200);
+  }
+
+  @include active {
+    background-color: var(--x-gray-300);
+  }
+
+  @include actual {
+    color: var(--x-main-600);
+  }
+
+  @include selected {
+    color: var(--x-white);
+    font-weight: 500;
+    background-color: var(--x-main-600);
+  }
+
+  @include adjacent {
+    opacity: 0.5;
+  }
+
+  @include disabled {
+    opacity: 0.5;
+    cursor: var(--x-cursor-disabled);
+  }
+
+  &.x-month,
+  &.x-year {
+    inline-size: 100%;
+  }
+}
+
+.x-calendar-months {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.375rem 0.25rem;
+  margin-block-start: 0.75rem;
+  text-align: center;
+}
+
+.x-calendar-years {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.375rem 0.25rem;
+  margin-block-start: 0.75rem;
+  text-align: center;
+}

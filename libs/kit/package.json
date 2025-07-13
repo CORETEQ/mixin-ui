@@ -1,0 +1,20 @@
+{
+  "name": "@mixin-ui/kit",
+  "version": "0.0.1-alpha.1",
+  "license": "Apache-2.0",
+  "exports": {
+    "./styles/*": "./styles/*"
+  },
+  "description": "Mixin UI components kit",
+  "keywords": [
+    "angular",
+    "kit",
+    "component"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0",
+    "rxjs": ">=7.0.0",
+    "@mixin-ui/cdk": ">=0.0.1"
+  }
+}

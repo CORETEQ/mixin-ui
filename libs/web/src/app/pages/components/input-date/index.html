@@ -1,0 +1,38 @@
+<docs-page>
+  <p>Used to enter a enter or select a date and time value.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet withHeader>
+    <app-input-date-basic-example class="block w-[274px]" />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>API</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="variant" type="enum" default="outline" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+    <docs-input name="pattern" type="string" default="dd/MM/yyyy" />
+    <docs-input name="min" type="Date" default="Date(1900, 0, 1)" />
+    <docs-input name="min" type="Date" default="Date(2100, 11, 31)" />
+    <docs-input name="autofix" type="boolean" default="true" />
+    <docs-input name="showFiller" type="boolean" default="false" />
+    <docs-input name="fillerChar" type="string" default="_" />
+    <docs-input name="popoverOnFocus" type="boolean" default="true" />
+    <docs-input name="popoverStretch" type="enum" default="auto" />
+    <docs-input name="popoverMinWidth" type="number" />
+    <docs-input name="popoverMaxWidth" type="number" />
+  </docs-api-table>
+
+  <h3>Models</h3>
+  <docs-api-table>
+    <docs-input name="open" prop="model" type="boolean" default="false" />
+  </docs-api-table>
+</docs-page>

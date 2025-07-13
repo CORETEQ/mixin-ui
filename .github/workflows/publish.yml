@@ -1,0 +1,49 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  version:
+    timeout-minutes: 15
+    runs-on: self-hosted
+    permissions:
+      contents: write
+      packages: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: tree:0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build libraries
+        run: pnpm build
+
+      - name: Set up npm auth for Nexus (basic auth)
+        run: |
+          echo "@mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/" >> ~/.npmrc
+          echo "//repo.coreteq.cloud/repository/libs-release-npm/:_auth=$(echo -n '${{ secrets.NPM_USERNAME }}:${{ secrets.NPM_PASSWORD }}' | base64)" >> ~/.npmrc
+          echo "//repo.coreteq.cloud/repository/libs-release-npm/:email=${{ secrets.NPM_EMAIL }}" >> ~/.npmrc
+          echo "//repo.coreteq.cloud/repository/libs-release-npm/:always-auth=true" >> ~/.npmrc
+
+      - name: Publish packages
+        run: npx nx release publish
+        shell: bash

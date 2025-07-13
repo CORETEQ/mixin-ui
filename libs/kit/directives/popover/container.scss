@@ -1,0 +1,19 @@
+.x-popover {
+  position: relative;
+  display: flex;
+  box-sizing: border-box;
+  inline-size: 100%;
+  overflow: hidden;
+  background: var(--x-white);
+  box-shadow: 0 8px 9pt #091e4226;
+  border: 1px solid var(--x-gray-400);
+  border-radius: 0.375rem;
+  isolation: isolate;
+}
+
+.x-popover-wrapper {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: auto;
+}

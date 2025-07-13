@@ -1,0 +1,48 @@
+@if (withHeader()) {
+  <div class="docs-snippet-header">
+    <div class="docs-snippet-dots">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    @for (tab of tabs(); track $index; let index = $index) {
+      <button type="button"
+              class="docs-snippet-tab"
+              [class.active]="index === activeIndex()"
+              (click)="setActiveIndex(index)"
+      >
+        {{ tab.name() }}
+      </button>
+    }
+
+    @if (showButtons()) {
+      <div class="flex gap-0.5 ml-auto">
+        <button x-icon
+                x-tooltip="Very soon..."
+                size="sm"
+                color="gray"
+                variant="ghost"
+                class="!text-[#52525B] !cursor-not-allowed hover:!text-[#09090B]">
+          <x-icon src="stackblitz" size="16" />
+        </button>
+
+        <button x-icon
+                x-tooltip="Very soon..."
+                size="sm"
+                color="gray"
+                variant="ghost"
+                class="!text-[#52525B] !cursor-not-allowed hover:!text-[#09090B]">
+          <x-icon src="sun-medium" size="16" />
+        </button>
+      </div>
+    }
+  </div>
+}
+
+<div class="docs-snippet-content"
+     [class.min-height]="height() === 'min'"
+     [style.align-items]="align()"
+     [style.justify-content]="justify()">
+  <ng-content />
+</div>

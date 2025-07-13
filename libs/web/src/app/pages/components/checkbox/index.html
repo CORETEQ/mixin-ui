@@ -1,0 +1,51 @@
+<docs-page>
+  <p>Used in forms when a user needs to select multiple values from several options.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet withHeader>
+    <app-checkbox-basic-example />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Examples</h2>
+  <h3>Sizes</h3>
+  <docs-snippet>
+    <app-checkbox-sizes-example />
+  </docs-snippet>
+
+  <h3>Radii</h3>
+  <docs-snippet>
+    <app-checkbox-radii-example />
+  </docs-snippet>
+
+  <h3>Invalid</h3>
+  <docs-snippet>
+    <app-checkbox-invalid-example />
+  </docs-snippet>
+
+  <h3>Colors</h3>
+  <docs-snippet>
+    <app-checkbox-colors-example />
+  </docs-snippet>
+
+  <h2>Api</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="value" type="string" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+    <docs-input name="iconChecked" type="string" default="check" />
+    <docs-input name="iconIndeterminate" type="string" default="minus" />
+  </docs-api-table>
+
+  <h3>Models</h3>
+  <docs-api-table>
+    <docs-input name="indeterminate" prop="model" type="boolean" default="false" />
+  </docs-api-table>
+</docs-page>
