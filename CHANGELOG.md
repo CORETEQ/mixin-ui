@@ -1,3 +1,10 @@
+## 0.0.1-alpha.5 (2025-07-14)
+
+### 🚀 Features
+
+- **kit:** implement `disabled` input for calendar, deprecate `mapper` ([c62bd93](https://github.com/CORETEQ/mixin-ui/commit/c62bd93))
+- **kit:** add 2 methods `handleArrowUp`, `handleArrowDown` to `XNumberRoot` ([a3a6440](https://github.com/CORETEQ/mixin-ui/commit/a3a6440))
+
 ## 0.0.1-alpha.4 (2025-07-14)
 
 ### 🚀 Features
