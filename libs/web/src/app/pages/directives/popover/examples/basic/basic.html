@@ -1,11 +1,11 @@
 <button x-btn
+        #popover="x-popover"
         x-popover-stretch="auto"
         x-popover-align="center"
         [x-popover-min-width]="300"
         [x-popover-max-width]="300"
         [x-popover]="content"
-        [(x-popover-open)]="open"
-        (click)="open.set(!open())">
+        (click)="popover.toggle(!popover.open())">
   Show popover
 </button>
 
