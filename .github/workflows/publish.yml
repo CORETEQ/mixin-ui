@@ -2,8 +2,8 @@ name: Publish
 
 on:
   push:
-    tags:
-      - v*.*.*
+    branches:
+      - main
 
 jobs:
   version:
@@ -20,34 +20,6 @@ jobs:
           fetch-depth: 0
           filter: tree:0
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9.12.0
-
-      - name: Setup node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20.19.0
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build libraries
-        run: pnpm ci:build
-
-      - name: Set up npm auth for Nexus (basic auth)
-        run: |
-          echo "@mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/" >> ~/.npmrc
-          echo "//repo.coreteq.cloud/repository/libs-release-npm/:_auth=$(echo -n '${{ secrets.NPM_USERNAME }}:${{ secrets.NPM_PASSWORD }}' | base64)" >> ~/.npmrc
-          echo "//repo.coreteq.cloud/repository/libs-release-npm/:email=${{ secrets.NPM_EMAIL }}" >> ~/.npmrc
-          echo "//repo.coreteq.cloud/repository/libs-release-npm/:always-auth=true" >> ~/.npmrc
-
-      - name: Publish packages
-        run: pnpm ci:publish
-        shell: bash
-
       - name: Send Email Notification
         uses: dawidd6/action-send-mail@v3
         with:
@@ -56,11 +28,24 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: "📦 New Mixin just delivered!"
-          to: vyacheslav.borodin@coreteq.sk, michal.hanak@coreteq.sk, marek.lalik@coreteq.sk
-          from: Dev Bot <${{ secrets.SMTP_USERNAME }}>
+          to: vyacheslav.borodin@coreteq.sk
+          from: Mixin UI Bot <${{ secrets.SMTP_USERNAME }}>
           secure: false
           body: |
-            ✅ A new version of the Mixin UI (cdk/kit) has been published.
+            Hello team,
 
-            ▶️ View the release: https://github.com/CORETEQ/mixin-ui/releases
-            📚️ Check documentation: https://mixin.coreteq.cloud
+            We’re excited to announce that a new version of **Mixin UI** has just been released and published to our private registry.
+
+            🔖 Version: ${{ github.ref_name }}
+            📦 Repository: ${{ github.repository }}
+            🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+
+            📘 Release Notes:
+            https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.ref_name }}
+
+            🧩 Documentation:
+            https://mixin.coreteq.cloud
+
+            Please pull the latest changes and try it out. Let us know if you notice anything unusual.
+
+            — Mixin UI Bot
