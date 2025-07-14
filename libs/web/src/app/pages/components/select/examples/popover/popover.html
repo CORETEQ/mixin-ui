@@ -1,12 +1,12 @@
 <div class="flex gap-3">
-  <button x-btn [disabled]="open()" (click)="open.set(true)">
-    {{ open() ? 'Popover is open' : 'Open popover' }}
+  <button x-btn (click)="popover.toggle(true)">
+    {{ popover.open() ? 'Popover is open' : 'Open popover' }}
   </button>
 
-  <x-select class="w-[10rem]"
+  <x-select #popover="x-popover"
+            class="w-[10rem]"
             placeholder="Size"
             popoverWidth="auto"
-            [(open)]="open"
             [popoverMinWidth]="200"
   >
     <x-listbox *x-popover>

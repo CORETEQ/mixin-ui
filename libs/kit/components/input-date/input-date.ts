@@ -41,7 +41,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
     provideControlAccessor(forwardRef(() => XDateRoot)),
     provideCalendarAccessor(forwardRef(() => XDateRoot)),
     provideButtonOptions({ color: 'gray', radius: 'none', variant: 'outline' }),
-    providePopoverOptions({ stretch: 'auto' }),
+    providePopoverOptions({ autoFocus: false, stretch: 'auto' }),
   ],
   hostDirectives: [
     {

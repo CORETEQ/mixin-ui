@@ -51,6 +51,7 @@ export class XPopover {
   readonly maxWidth = input(this.#opt.minWidth, { alias: 'x-popover-max-width' });
   readonly minHeight = input(this.#opt.minHeight, { alias: 'x-popover-min-height' });
   readonly maxHeight = input(this.#opt.maxHeight, { alias: 'x-popover-max-height' });
+  readonly autoFocus = input(this.#opt.autoFocus, { alias: 'x-popover-auto-focus' });
   readonly content = computed(() => this.inputContent() || this.childContent());
   readonly open = toSignal(this.#overlay.openChanges, { requireSync: true });
 
@@ -108,7 +109,9 @@ export class XPopover {
       });
     });
 
-    this.#close$.pipe(takeUntilDestroyed()).subscribe(open => this.toggle(open));
+    this.#close$.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.toggle(false);
+    });
   }
 
   get overlayElement(): HTMLElement | null {

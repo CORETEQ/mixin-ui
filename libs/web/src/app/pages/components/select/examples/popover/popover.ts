@@ -17,6 +17,4 @@ export class SelectPopoverExample {
     value: 'LG',
     label: '61-65',
   }];
-
-  readonly open = signal(false);
 }

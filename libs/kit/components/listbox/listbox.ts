@@ -28,8 +28,6 @@ import { X_LISTBOX_OPTIONS } from './options';
   hostDirectives: [CdkListbox],
   host: {
     '[class]': '`x-listbox x-size-${size()} x-radius-${radius()}`',
-    '(keydown.tab)': 'onTabOut()',
-    '(keydown.shift.tab)': 'onTabOut()',
   },
 })
 export class XListboxRoot {
@@ -67,9 +65,5 @@ export class XListboxRoot {
         this.#popover?.focusOrigin();
       }
     });
-  }
-
-  protected onTabOut(): void {
-    this.#popover?.focusOrigin();
   }
 }

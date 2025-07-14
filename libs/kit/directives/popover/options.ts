@@ -3,6 +3,7 @@ import { InjectionToken, ValueProvider } from '@angular/core';
 export type XPopoverStretch = 'auto' | 'fit';
 
 export interface XPopoverOptions {
+  readonly autoFocus: boolean;
   readonly stretch: XPopoverStretch;
   readonly minWidth?: number;
   readonly maxWidth?: number;
@@ -11,6 +12,7 @@ export interface XPopoverOptions {
 }
 
 const defaultOptions: XPopoverOptions = {
+  autoFocus: true,
   stretch: 'fit',
   maxHeight: 360,
 };
