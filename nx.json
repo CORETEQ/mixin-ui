@@ -8,9 +8,6 @@
   "release": {
     "projects": ["cdk", "kit"],
     "releaseTagPattern": "v{version}",
-    "git": {
-      "commitMessage": "chore(release): {version}"
-    },
     "changelog": {
       "automaticFromRef": true,
       "workspaceChangelog": {

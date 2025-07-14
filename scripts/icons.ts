@@ -1,7 +1,6 @@
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
 
-// Configuration
 const config = {
   inputDirectory: './libs/kit/icons',
   vectorEffect: 'non-scaling-stroke',
@@ -10,7 +9,7 @@ const config = {
 
 const strokeElements = ['path', 'line', 'polyline', 'polygon', 'circle', 'ellipse', 'rect'];
 
-function processDirectory(directory) {
+function processDirectory(directory: string): void {
   try {
     const files = fs.readdirSync(directory);
     const svgFiles = files.filter(file => path.extname(file).toLowerCase() === '.svg');
@@ -23,12 +22,12 @@ function processDirectory(directory) {
     });
 
     console.log('Processing completed!');
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error reading directory: ${error.message}`);
   }
 }
 
-function processSVGFile(filePath) {
+function processSVGFile(filePath: string): void {
   try {
     console.log(`Processing: ${path.basename(filePath)}`);
 
@@ -36,15 +35,13 @@ function processSVGFile(filePath) {
     let modificationsCount = 0;
 
     strokeElements.forEach(elementType => {
-      // Handle both self-closing and regular tags for vector-effect
       const vectorEffectRegex = new RegExp(`<${elementType}([^>]*?)(/?)>`, 'gi');
 
       processedContent = processedContent.replace(
         vectorEffectRegex,
-        (match, attributes, selfClosing) => {
+        (_, attributes, selfClosing) => {
           let newAttributes = attributes;
 
-          // Add or update vector-effect
           const vectorEffectAttrRegex = /vector-effect\s*=\s*["'][^"']*["']/i;
           if (vectorEffectAttrRegex.test(newAttributes)) {
             newAttributes = newAttributes.replace(
@@ -62,12 +59,11 @@ function processSVGFile(filePath) {
       );
     });
 
-    // Handle stroke-width only for <svg> element
+    // Handle stroke-width on <svg>
     const svgRegex = /<svg([^>]*?)>/gi;
-    processedContent = processedContent.replace(svgRegex, (match, attributes) => {
+    processedContent = processedContent.replace(svgRegex, (match: string, attributes: string) => {
       let newAttributes = attributes;
 
-      // Add or update stroke-width
       const strokeWidthRegex = /stroke-width\s*=\s*["'][^"']*["']/i;
       if (strokeWidthRegex.test(newAttributes)) {
         newAttributes = newAttributes.replace(
@@ -90,12 +86,12 @@ function processSVGFile(filePath) {
       console.log(`No changes needed`);
     }
   } catch (error) {
-    console.error(`Error processing file ${filePath}: ${error.message}`);
+    console.error(`Error processing file ${filePath}: ${error}`);
   }
 }
 
+// CLI argument override
 const args = process.argv.slice(2);
-
 if (args.length > 0) {
   config.inputDirectory = args[0];
 }
