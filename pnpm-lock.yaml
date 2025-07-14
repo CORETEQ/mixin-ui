@@ -50,9 +50,6 @@ importers:
       imask:
         specifier: 7.6.1
         version: 7.6.1
-      marked:
-        specifier: 15.0.12
-        version: 15.0.12
       ngx-markdown:
         specifier: 20.0.0
         version: 20.0.0(@angular/common@19.2.14(@angular/core@19.2.14(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.2.14(rxjs@7.8.1)(zone.js@0.15.0))(@angular/platform-browser@19.2.14(@angular/animations@19.2.14(@angular/common@19.2.14(@angular/core@19.2.14(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.2.14(rxjs@7.8.1)(zone.js@0.15.0)))(@angular/common@19.2.14(@angular/core@19.2.14(rxjs@7.8.1)(zone.js@0.15.0))(rxjs@7.8.1))(@angular/core@19.2.14(rxjs@7.8.1)(zone.js@0.15.0)))(marked@15.0.12)(rxjs@7.8.1)(zone.js@0.15.0)
