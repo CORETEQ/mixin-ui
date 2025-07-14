@@ -58,7 +58,6 @@ jobs:
           subject: "📦 NPM Package Published"
           to: vyacheslav.borodin@coreteq.sk
           from: Dev Bot <${{ secrets.SMTP_USERNAME }}>
-          content_type: text/plain
           secure: true
           body: |
             ✅ A new version of the NPM package has been published.
