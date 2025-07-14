@@ -18,7 +18,7 @@ export function fromIntersectionObserver(
 class NoopIntersectionObserver implements IntersectionObserver {
   readonly root = null;
   readonly rootMargin = '';
-  readonly thresholds = Object.freeze([]);
+  readonly thresholds = [];
 
   disconnect = EMPTY_FN;
   observe = EMPTY_FN;
