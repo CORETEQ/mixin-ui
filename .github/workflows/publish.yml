@@ -56,7 +56,7 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: "🚀 Mixin UI ${{ github.ref_name }} has been released"
-          to: vyacheslav.borodin@coreteq.sk, michal.hanak@coreteq.sk, marek.lalik@coreteq.sk
+          to: fe-devs@coreteq.sk
           from: Mixin UI Bot <${{ secrets.SMTP_USERNAME }}>
           secure: false
           body: |
