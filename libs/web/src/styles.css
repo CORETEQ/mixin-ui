@@ -219,18 +219,6 @@ markdown {
     line-height: 28px;
     letter-spacing: -0.01em;
 
-    a {
-      text-decoration: underline;
-      text-decoration-thickness: 1.5px;
-      text-underline-offset: 0.125em;
-      text-decoration-color: #9c9c9c;
-      text-decoration-style: dotted;
-
-      &:hover {
-        color: #09090b;
-      }
-    }
-
     &:has(+ .docs-snippet, + .docs-code) {
       margin-block-end: 1rem;
     }
@@ -299,6 +287,17 @@ markdown {
   > .docs-snippet {
     &:has(+ h3) {
       margin-bottom: 2rem;
+    }
+  }
+
+  ul,
+  p {
+    a {
+      color: #1470ef;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.175em;
+      text-decoration-color: #dddddd;
     }
   }
 }
