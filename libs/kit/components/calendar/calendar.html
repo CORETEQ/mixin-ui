@@ -17,7 +17,7 @@
               [startOfWeek]="startOfWeek()"
               [format]="weekdayFormat()"
               [disabledMapper]="disabled()"
-              [detailMapper]="detail()"
+              [detailMapper]="detail() || mapper()"
               (dateChange)="setDay($event)">
         @if ($.day) {
           <ng-template x-slot="item" let-ctx>
