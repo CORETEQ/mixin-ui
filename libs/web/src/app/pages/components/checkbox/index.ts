@@ -4,7 +4,7 @@ import { DocsPage } from '@/docs/components';
 import imp from './examples/import?raw&lang=ts';
 import usage from './examples/usage?raw&lang=ts';
 import { CheckboxBasicExample } from './examples/basic/basic';
-import { InvalidExample } from './examples/invalid/invalid';
+import { StatesExample } from './examples/states/states';
 import { SizesExample } from './examples/sizes/sizes';
 import { RadiiExample } from './examples/radii/radii';
 import { ColorsExample } from './examples/colors/colors';
@@ -15,7 +15,7 @@ import { ColorsExample } from './examples/colors/colors';
   imports: [
     DocsPage,
     CheckboxBasicExample,
-    InvalidExample,
+    StatesExample,
     SizesExample,
     RadiiExample,
     ColorsExample,

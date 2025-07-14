@@ -32,10 +32,21 @@
   }
 }
 
+@mixin disabled {
+  &:where(:disabled) {
+    @content;
+  }
+}
+
+@mixin invalid {
+  &:where(.ng-invalid.ng-touched) {
+    @content;
+  }
+}
+
 .x-switch {
   --x-track-bg: var(--x-gray-400);
   --t-thumb-bg: var(--x-white);
-  --t-thumb-radius: 50%;
 
   position: relative;
   display: inline-block;
@@ -54,6 +65,15 @@
 
   @include active {
     --x-track-bg: var(--x-gray-500);
+  }
+
+  @include invalid {
+    outline-color: var(--x-error-600);
+  }
+
+  @include disabled {
+    opacity: 0.6;
+    cursor: var(--x-cursor-disabled);
   }
 
   @include checked {
@@ -79,27 +99,22 @@
 
   @include radius(none) {
     --x-radius: var(--x-radius-none);
-    --t-thumb-radius: var(--x-radius-none);
   }
 
   @include radius(sm) {
     --x-radius: var(--x-radius-sm);
-    --t-thumb-radius: var(--x-radius-sm);
   }
 
   @include radius(md) {
     --x-radius: var(--x-radius-md);
-    --t-thumb-radius: var(--x-radius-md);
   }
 
   @include radius(lg) {
     --x-radius: var(--x-radius-lg);
-    --t-thumb-radius: var(--x-radius-lg);
   }
 
   @include radius(full) {
     --x-radius: var(--x-radius-full);
-    --t-thumb-radius: 50%;
   }
 }
 
@@ -125,5 +140,5 @@
   color: var(--x-track-bg);
   font-size: 1.25rem;
   background-color: var(--t-thumb-bg);
-  border-radius: var(--t-thumb-radius);
+  border-radius: var(--x-radius);
 }

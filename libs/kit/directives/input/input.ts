@@ -43,7 +43,7 @@ class XInputStyles {}
     '[class.x-focused]': 'focused()',
     '[class.x-disabled]': 'state()?.disabled',
     '[class.x-pending]': 'state()?.pending',
-    '[class.x-invalid]': 'state()?.invalid && state()?.touched',
+    '[class.x-invalid]': 'state()?.states && state()?.touched',
     '(pointerdown)': 'onPointerDown($event);',
   },
 })

@@ -61,8 +61,8 @@
   block-size: var(--x-size);
   color: transparent;
   background-color: var(--x-bg, var(--x-white));
-  outline: 1.5px solid transparent;
-  outline-offset: 1.5px;
+  outline: 0.125rem solid transparent;
+  outline-offset: 0.125rem;
   box-shadow: inset 0 0 0 1px var(--x-gray-400), rgb(27 31 35 / 4%) 0 1px 0;
   border-radius: var(--x-radius);
   transition-timing-function: ease-in-out;
@@ -81,8 +81,7 @@
   }
 
   @include invalid {
-    background-color: var(--x-error-300);
-    outline-color: var(--x-error-600);
+    background-color: var(--x-error-200);
     box-shadow: inset 0 0 0 1px var(--x-error-600);
   }
 
@@ -100,12 +99,6 @@
     @include active {
       background-color: var(--x-main-700);
       box-shadow: inset 0 0 0 1px var(--x-main-700);
-    }
-
-    @include invalid {
-      background-color: var(--x-error-600);
-      outline-color: var(--x-error-600);
-      box-shadow: inset 0 0 0 1px var(--x-error-600);
     }
 
     @include disabled {
