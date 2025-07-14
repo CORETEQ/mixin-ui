@@ -1,3 +1,10 @@
+## 0.0.1-alpha.4 (2025-07-14)
+
+### 🚀 Features
+
+- **kit:** add `popoverFixed` input to `x-input-date`, remove `popoverOpen` model ([2e7152d](https://github.com/CORETEQ/mixin-ui/commit/2e7152d))
+- **kit:** implement `autoFocus` input for popover ([648fbda](https://github.com/CORETEQ/mixin-ui/commit/648fbda))
+
 ## 0.0.1-alpha.3 (2025-07-14)
 
 ### 🚀 Features
