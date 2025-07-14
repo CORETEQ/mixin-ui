@@ -1,9 +1,7 @@
 import {
-  afterNextRender,
   ChangeDetectionStrategy,
   Component,
   computed,
-  ElementRef,
   inject,
   INJECTOR,
   ViewEncapsulation,
@@ -11,7 +9,7 @@ import {
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
-import { getFocusableElement, isPureEscape, typedOutlet } from '@mixin-ui/cdk';
+import { isPureEscape, typedOutlet } from '@mixin-ui/cdk';
 import { XPopover } from './popover';
 import { X_POPOVER } from './providers';
 
@@ -26,7 +24,6 @@ import { X_POPOVER } from './providers';
 })
 export class XPopoverContainer {
   readonly #popover = inject(XPopover);
-  readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
   readonly #overlay = inject(X_POPOVER);
 
   readonly injector = inject(INJECTOR);
@@ -34,10 +31,6 @@ export class XPopoverContainer {
   readonly close = () => this.#popover.toggle(false);
 
   constructor() {
-    // afterNextRender(() => {
-    //   getFocusableElement(this.#el)?.focus();
-    // });
-
     this.#overlay.keydownEvents
       .pipe(filter(isPureEscape), takeUntilDestroyed())
       .subscribe(() => this.#popover.focusOrigin());

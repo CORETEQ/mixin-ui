@@ -6,7 +6,6 @@ import {
   ElementRef,
   inject,
   input,
-  model,
   PLATFORM_ID,
   TemplateRef,
   untracked,
@@ -14,7 +13,7 @@ import {
 import { isPlatformServer } from '@angular/common';
 import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { OverlaySizeConfig } from '@angular/cdk/overlay';
-import { distinctUntilChanged, map, merge, of, switchMap } from 'rxjs';
+import { map, of, switchMap } from 'rxjs';
 import { fromResizeObserver, XOutlet, XPopoverPositionOptions } from '@mixin-ui/cdk';
 import { XPopoverContainer } from './container';
 import { X_POPOVER_OPTIONS } from './options';
@@ -29,19 +28,19 @@ import {
   selector: '[x-popover]:not(ng-template)',
   exportAs: 'x-popover',
   providers: X_POPOVER_PROVIDERS,
-  host: { '[class.x-overlay-opened]': 'open()' },
+  host: {
+    '[class.x-overlay-opened]': 'open()',
+  },
 })
 export class XPopover {
   readonly #opt = inject(X_POPOVER_OPTIONS);
   readonly #overlay = inject(X_POPOVER);
   readonly #position = inject(X_POPOVER_POSITION_OPTIONS);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
-  readonly #parent = inject(XPopover, { skipSelf: true, optional: true });
   readonly #close$ = inject(X_POPOVER_CLOSE);
 
   readonly childContent = contentChild(XPopoverContent, { read: TemplateRef });
   readonly inputContent = input<XOutlet>(null, { alias: 'x-popover' });
-  readonly manual = model(false, { alias: 'x-popover-open' });
   readonly direction = input(this.#position.direction, { alias: 'x-popover-direction' });
   readonly position = input(this.#position.position, { alias: 'x-popover-position' });
   readonly align = input(this.#position.align, { alias: 'x-popover-align' });
@@ -55,12 +54,10 @@ export class XPopover {
   readonly content = computed(() => this.inputContent() || this.childContent());
   readonly open = toSignal(this.#overlay.openChanges, { requireSync: true });
 
-  readonly #manual$ = toObservable(this.manual);
-
   readonly rules = toSignal(
     toObservable(this.stretch).pipe(
-      switchMap(width =>
-        width === 'fit'
+      switchMap(stretch =>
+        stretch === 'fit'
           ? fromResizeObserver(this.#el).pipe(
               map(() => ({
                 width: this.#el.offsetWidth,
@@ -111,9 +108,7 @@ export class XPopover {
       });
     });
 
-    merge(this.#manual$, this.#close$)
-      .pipe(distinctUntilChanged(), takeUntilDestroyed())
-      .subscribe(open => this.toggle(open));
+    this.#close$.pipe(takeUntilDestroyed()).subscribe(open => this.toggle(open));
   }
 
   get overlayElement(): HTMLElement | null {
@@ -132,7 +127,6 @@ export class XPopover {
     } else if (!open) {
       this.#overlay.close();
     }
-    this.manual.set(open);
   }
 
   updateSize(value: OverlaySizeConfig): void {

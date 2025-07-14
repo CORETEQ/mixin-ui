@@ -12,8 +12,8 @@ import {
   switchMap,
 } from 'rxjs';
 import {
-  isPureEscape,
   createPopover,
+  isPureEscape,
   relatedTo,
   XPopoverImpl,
   XPopoverPositionOptions,

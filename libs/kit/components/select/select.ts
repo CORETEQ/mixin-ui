@@ -31,13 +31,11 @@ import { X_SELECT_OPTIONS } from './options';
     {
       directive: XPopover,
       inputs: [
-        'x-popover-open: open',
         'x-popover-fixed: popoverFixed',
         'x-popover-stretch: popoverStretch',
         'x-popover-min-width: popoverMinWidth',
         'x-popover-max-width: popoverMaxWidth',
       ],
-      outputs: ['x-popover-openChange: openChange'],
     },
   ],
   host: {
