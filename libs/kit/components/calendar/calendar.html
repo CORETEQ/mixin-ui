@@ -1,9 +1,10 @@
 @let $ = slots() | asRecord;
 
-<x-calendar-nav [(mode)]="mode"
-                [(month)]="month"
+<x-calendar-nav [(month)]="month"
                 [monthFormat]="monthFormat()"
-                [radius]="radius()">
+                [mode]="mode()"
+                [radius]="radius()"
+                (modeChange)="setMode($event)">
 </x-calendar-nav>
 
 <div class="x-calendar-content">

@@ -5,6 +5,7 @@ import {
   inject,
   input,
   model,
+  output,
   ViewEncapsulation,
 } from '@angular/core';
 import { X_I18N } from '@mixin-ui/kit/providers';
@@ -29,12 +30,13 @@ import { addMonths, addYears, subMonths, subYears } from 'date-fns';
 export class XCalendarNav {
   readonly #i18n = inject(X_I18N);
 
-  readonly mode = model<XCalendarMode>();
+  readonly mode = input<XCalendarMode>();
   readonly month = model.required<Date>();
   readonly monthFormat = input<XMonthFormat>();
   readonly radius = input<XCalendarOptions['radius']>('md');
   readonly monthsShown = computed(() => this.mode() === 'months');
   readonly yearsShown = computed(() => this.mode() === 'years');
+  readonly modeChange = output<XCalendarMode>();
 
   readonly monthName = computed(() => {
     const { monthNamesShort, monthNames } = this.#i18n();
