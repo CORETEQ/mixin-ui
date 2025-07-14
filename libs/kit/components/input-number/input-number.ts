@@ -36,8 +36,8 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
   ],
   host: {
     class: 'x-number',
-    '(keydown.arrowDown)': '$event.preventDefault(); step() && minus(step())',
-    '(keydown.arrowUp)': '$event.preventDefault(); step() && plus(step())',
+    '(keydown.arrowUp)': 'handleArrowUp($event)',
+    '(keydown.arrowDown)': 'handleArrowDown($event)',
   },
 })
 export class XNumberRoot implements XControlAccessor<number | null> {
@@ -128,6 +128,20 @@ export class XNumberRoot implements XControlAccessor<number | null> {
 
   handleControlDestroy(): void {
     this.#mask.destroy();
+  }
+
+  handleArrowUp(e: KeyboardEvent): void {
+    if (this.step()) {
+      e.preventDefault();
+      this.plus(this.step());
+    }
+  }
+
+  handleArrowDown(e: KeyboardEvent): void {
+    if (this.step()) {
+      e.preventDefault();
+      this.minus(this.step());
+    }
   }
 
   handleSpin(e: PointerEvent): void {
