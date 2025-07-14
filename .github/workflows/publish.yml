@@ -47,3 +47,5 @@ jobs:
       - name: Publish packages
         run: pnpm ci:publish
         shell: bash
+        env:
+          GITHUB_TOKEN: ${{ github.GITHUB_TOKEN }}
