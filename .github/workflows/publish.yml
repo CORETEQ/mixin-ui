@@ -47,5 +47,22 @@ jobs:
       - name: Publish packages
         run: pnpm ci:publish
         shell: bash
-        env:
-          GITHUB_TOKEN: ${{ github.GITHUB_TOKEN }}
+
+      - name: Send Email Notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.office365.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "📦 NPM Package Published"
+          to: vyacheslav.borodin@coreteq.sk
+          from: Dev Bot <${{ secrets.SMTP_USERNAME }}>
+          content_type: text/plain
+          secure: true
+          body: |
+            ✅ A new version of the NPM package has been published.
+
+            • Repo: ${{ github.repository }}
+            • Branch: ${{ github.ref_name }}
+            • Commit: ${{ github.sha }}
