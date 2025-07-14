@@ -17,6 +17,8 @@
     "Michak Hanak <michal.hanak@coreteq.eu>"
   ],
   "scripts": {
+    "*** temporary ***": "",
+    "build:web": "nx build cdk && nx build kit && nx build web",
     "prepare": "husky",
     "release": "nx release --skip-publish && node scripts/update-version.js",
     "lint": "eslint .",
