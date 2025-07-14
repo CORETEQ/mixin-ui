@@ -1,11 +1,12 @@
 import { InjectionToken, ValueProvider } from '@angular/core';
 import { XUnion } from '@mixin-ui/kit/types';
 
+type Mapper<I, O> = (input: I) => O;
+
 export type XStartOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type XWeekdayFormat = 'min' | 'short';
 export type XMonthFormat = 'short' | 'long';
 export type XCalendarMode = 'days' | 'months' | 'years';
-export type XCalendarMapper = (item: Date) => any;
 
 export interface XCalendarOptions {
   readonly mode: XCalendarMode;
@@ -14,7 +15,14 @@ export interface XCalendarOptions {
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
   readonly weekdayFormat: XWeekdayFormat;
   readonly monthFormat: XMonthFormat;
-  readonly mapper?: XCalendarMapper;
+
+  /** @deprecated
+   * use {@link XCalendarOptions.detail} instead
+   * */
+  readonly mapper?: Mapper<Date, any>;
+
+  readonly detail?: Mapper<Date, any>;
+  readonly disabled?: Mapper<Date, boolean>;
 }
 
 const defaultOptions: XCalendarOptions = {

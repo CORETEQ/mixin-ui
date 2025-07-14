@@ -16,11 +16,12 @@
               [max]="max()"
               [startOfWeek]="startOfWeek()"
               [format]="weekdayFormat()"
-              [mapper]="mapper()"
+              [disabledMapper]="disabled()"
+              [detailMapper]="detail()"
               (dateChange)="setDay($event)">
         @if ($.day) {
           <ng-template x-slot="item" let-ctx>
-            <ng-container *ngTemplateOutlet="$.day; context: { $implicit: ctx }" />
+            <ng-container *ngTemplateOutlet="$.day; context: { $implicit: ctx }"/>
           </ng-template>
         }
       </x-days>
@@ -34,7 +35,7 @@
                 (dateChange)="setMonth($event)">
         @if ($.month) {
           <ng-template x-slot="item" let-ctx>
-            <ng-container *ngTemplateOutlet="$.month; context: { $implicit: ctx }" />
+            <ng-container *ngTemplateOutlet="$.month; context: { $implicit: ctx }"/>
           </ng-template>
         }
       </x-months>
@@ -47,7 +48,7 @@
                (dateChange)="setYear($event)">
         @if ($.year) {
           <ng-template x-slot="item" let-ctx>
-            <ng-container *ngTemplateOutlet="$.year; context: { $implicit: ctx }" />
+            <ng-container *ngTemplateOutlet="$.year; context: { $implicit: ctx }"/>
           </ng-template>
         }
       </x-years>

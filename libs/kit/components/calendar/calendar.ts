@@ -44,7 +44,8 @@ export class XCalendar {
   readonly startOfWeek = input(this.#opt.startOfWeek);
   readonly weekdayFormat = input(this.#opt.weekdayFormat);
   readonly monthFormat = input(this.#opt.monthFormat);
-  readonly mapper = input(this.#opt.mapper);
+  readonly disabled = input(this.#opt.disabled);
+  readonly detail = input(this.#opt.detail);
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
 

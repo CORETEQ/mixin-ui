@@ -9,7 +9,7 @@
 <div class="x-calendar-days">
   @for (day of days(); track day.getTime()) {
     @let actual = day | map: isActual;
-    @let detail = day | map: mapDetail: mapper();
+    @let detail = day | map: mapDetail: detailMapper();
     @let selected = day | map: isSelected: value();
     @let disabled = day | map: isDisabled: min() : max();
     @let adjacent = day | map: isAdjacent: date();
