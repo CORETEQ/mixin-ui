@@ -13,7 +13,7 @@ import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CdkListbox } from '@angular/cdk/listbox';
 import { XTypedOutletPipe } from '@mixin-ui/cdk';
-import { XPopover } from '@mixin-ui/kit/directives';
+import { XPopoverTarget } from '@mixin-ui/kit/directives';
 import { XOption } from './option';
 import { X_LISTBOX_ACCESSOR } from './providers';
 import { X_LISTBOX_OPTIONS } from './options';
@@ -30,11 +30,11 @@ import { X_LISTBOX_OPTIONS } from './options';
     '[class]': '`x-listbox x-size-${size()} x-radius-${radius()}`',
   },
 })
-export class XListboxRoot {
+export class XListbox {
   readonly #opt = inject(X_LISTBOX_OPTIONS);
   readonly #accessor = inject(X_LISTBOX_ACCESSOR);
   readonly #cdkListbox = inject(CdkListbox);
-  readonly #popover = inject(XPopover, { optional: true });
+  readonly #popover = inject(XPopoverTarget, { optional: true });
 
   readonly options = contentChildren(XOption);
   readonly size = input(this.#opt.size);

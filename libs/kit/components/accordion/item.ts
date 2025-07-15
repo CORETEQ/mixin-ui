@@ -13,7 +13,7 @@ import { generateId } from '@mixin-ui/cdk';
 import { X_SLOT, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { XCollapsible } from '@mixin-ui/kit/components/collapsible';
-import { XAccordionRoot } from './accordion';
+import { XAccordion } from './accordion';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -27,7 +27,7 @@ import { XAccordionRoot } from './accordion';
   },
 })
 export class XAccordionItem {
-  readonly #root = inject(XAccordionRoot);
+  readonly #root = inject(XAccordion);
 
   readonly slots = contentChildren(X_SLOT);
   readonly open = model(false);

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { provideButtonOptions, XButton, XGroup, XIcon, XPopover, XTooltip } from '@mixin-ui/kit';
+import { provideButtonOptions, XButton, XGroup, XIcon, XPopoverTarget, XTooltip } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-group-basic-example',
   templateUrl: './basic.html',
-  imports: [XGroup, XButton, XIcon, XTooltip, XPopover],
+  imports: [XGroup, XButton, XIcon, XTooltip, XPopoverTarget],
   providers: [provideButtonOptions({ variant: 'outline', color: 'gray' })],
 })
 export class GroupBasicExample {

@@ -25,7 +25,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
   imports: [XButton, XIcon, XGroup],
   providers: [
     provideMask(X_NUMBER_MASK_FACTORY),
-    provideControlAccessor(forwardRef(() => XNumberRoot)),
+    provideControlAccessor(forwardRef(() => XInputNumber)),
     provideButtonOptions({ variant: 'outline', color: 'gray', radius: 'none' }),
   ],
   hostDirectives: [
@@ -40,7 +40,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
     '(keydown.arrowDown)': 'handleArrowDown($event)',
   },
 })
-export class XNumberRoot implements XControlAccessor<number | null> {
+export class XInputNumber implements XControlAccessor<number | null> {
   readonly #opt = inject(X_INPUT_NUMBER_OPTIONS);
   readonly #input = inject(XInput);
   readonly #mask = injectMask<number | null, XNumberMaskOptions>();

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CdkListbox, CdkOption } from '@angular/cdk/listbox';
-import { XPopover } from '@mixin-ui/kit/directives';
+import { XPopoverTarget } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 
 @Component({
@@ -32,9 +32,9 @@ import { XIcon } from '@mixin-ui/kit/components/icon';
 export class XOption {
   readonly #cdkListbox = inject(CdkListbox);
   readonly #cdkOption = inject(CdkOption, { self: true });
-  readonly #popover = inject(XPopover, { skipSelf: true, optional: true });
+  readonly #popover = inject(XPopoverTarget, { skipSelf: true, optional: true });
 
-  readonly hasSelfPopover = !!inject(XPopover, { self: true, optional: true });
+  readonly hasSelfPopover = !!inject(XPopoverTarget, { self: true, optional: true });
 
   protected handlePopoverClose(): void {
     if (!this.#cdkListbox.multiple && this.#cdkOption.isSelected()) {

@@ -23,7 +23,7 @@ import {
   providePopoverOptions,
   XControlAccessor,
   XInput,
-  XPopover,
+  XPopoverTarget,
 } from '@mixin-ui/kit/directives';
 import { provideCalendarAccessor, XCalendarAccessor } from '@mixin-ui/kit/components/calendar';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
@@ -38,8 +38,8 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   imports: [XIcon, XButton],
   providers: [
     provideMask(X_DATE_MASK_FACTORY),
-    provideControlAccessor(forwardRef(() => XDateRoot)),
-    provideCalendarAccessor(forwardRef(() => XDateRoot)),
+    provideControlAccessor(forwardRef(() => XInputDate)),
+    provideCalendarAccessor(forwardRef(() => XInputDate)),
     provideButtonOptions({ color: 'gray', radius: 'none', variant: 'outline' }),
     providePopoverOptions({ autoFocus: false, stretch: 'auto' }),
   ],
@@ -49,7 +49,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
       inputs: ['variant', 'size', 'radius'],
     },
     {
-      directive: XPopover,
+      directive: XPopoverTarget,
       inputs: [
         'x-popover-fixed: popoverFixed',
         'x-popover-stretch: popoverStretch',
@@ -64,11 +64,11 @@ import { X_INPUT_DATE_OPTIONS } from './options';
     '(focusout)': 'handleFocusOut($event)',
   },
 })
-export class XDateRoot implements XControlAccessor<Date | null>, XCalendarAccessor {
+export class XInputDate implements XControlAccessor<Date | null>, XCalendarAccessor {
   readonly #opt = inject(X_INPUT_DATE_OPTIONS);
   readonly #mask = injectMask<Date | null, XDateMaskOptions>();
   readonly #input = inject(XInput, { self: true });
-  readonly #popover = inject(XPopover, { self: true });
+  readonly #popover = inject(XPopoverTarget, { self: true });
   readonly #calendarChanges = new Subject<Date | null>();
 
   readonly size = this.#input.size;

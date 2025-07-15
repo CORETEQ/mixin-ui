@@ -12,7 +12,7 @@ import {
   provideControlAccessor,
   XControlAccessor,
   XInput,
-  XPopover,
+  XPopoverTarget,
 } from '@mixin-ui/kit/directives';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 import { X_COMBOBOX_OPTIONS } from './options';
@@ -25,8 +25,8 @@ import { X_COMBOBOX_OPTIONS } from './options';
   templateUrl: './combobox.html',
   imports: [],
   providers: [
-    provideControlAccessor(forwardRef(() => XComboboxRoot)),
-    provideListboxAccessor(forwardRef(() => XComboboxRoot)),
+    provideControlAccessor(forwardRef(() => XCombobox)),
+    provideListboxAccessor(forwardRef(() => XCombobox)),
   ],
   hostDirectives: [
     {
@@ -41,11 +41,11 @@ import { X_COMBOBOX_OPTIONS } from './options';
     '(click)': 'togglePopover(!open())',
   },
 })
-export class XComboboxRoot<T>
+export class XCombobox<T>
   implements XControlAccessor<T | readonly T[] | null>, XListboxAccessor<T>
 {
   readonly #opt = inject(X_COMBOBOX_OPTIONS);
-  readonly #popover = inject(XPopover, { self: true });
+  readonly #popover = inject(XPopoverTarget, { self: true });
 
   readonly open = this.#popover.open;
   readonly multiple = input(false);

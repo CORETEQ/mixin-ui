@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { XTextRoot } from '@mixin-ui/kit';
+import { XInputText } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-combobox-basic-example',
   templateUrl: './basic.html',
   imports: [
-    XTextRoot,
+    XInputText,
   ],
 })
 export class ComboboxBasicExample {}

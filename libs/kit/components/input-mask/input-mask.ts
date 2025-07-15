@@ -7,7 +7,7 @@ import { EMPTY } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-mask',
   templateUrl: './input-mask.html',
-  providers: [provideControlAccessor(forwardRef(() => XMaskRoot))],
+  providers: [provideControlAccessor(forwardRef(() => XInputMask))],
   hostDirectives: [
     {
       directive: XInput,
@@ -18,7 +18,7 @@ import { EMPTY } from 'rxjs';
     class: 'x-mask',
   },
 })
-export class XMaskRoot implements XControlAccessor<string> {
+export class XInputMask implements XControlAccessor<string> {
   valueChanges = EMPTY;
 
   handleControlValue(value: string): void {}

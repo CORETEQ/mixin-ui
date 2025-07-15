@@ -1,10 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { XButton, XSelect } from '@mixin-ui/kit';
+import {XButton, XListbox, XOption, XPopover, XSelect} from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-select-popover-example',
   templateUrl: './popover.html',
-  imports: [XButton, XSelect],
+  imports: [XButton, XSelect, XListbox, XPopover, XOption],
 })
 export class SelectPopoverExample {
   readonly sizes = [{

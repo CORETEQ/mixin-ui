@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { XSelect } from '@mixin-ui/kit';
+import {XListbox, XOption, XPopover, XSelect, XValue} from '@mixin-ui/kit';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-select-objects-example',
   templateUrl: './objects.html',
-  imports: [XSelect, FormsModule],
+  imports: [XSelect, FormsModule, XValue, XPopover, XOption, XListbox],
 })
 export class SelectObjectsExample {
   value = { value: 'us', label: 'United States' };

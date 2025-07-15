@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { createCva } from '@mixin-ui/cdk';
-import { X_SLOT, XPopover, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
+import { X_SLOT, XPopoverTarget, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { provideButtonOptions } from '@mixin-ui/kit/components/button';
 import { XDays } from './grids/days';
 import { XMonths } from './grids/months';
@@ -37,7 +37,7 @@ export class XCalendar {
   readonly #opt = inject(X_CALENDAR_OPTIONS);
   readonly #cva = createCva<Date | null>({ defaultValue: null, transform: value => value });
   readonly #accessor = inject(X_CALENDAR_ACCESSOR, { optional: true });
-  readonly #popover = inject(XPopover, { optional: true });
+  readonly #popover = inject(XPopoverTarget, { optional: true });
 
   readonly slots = contentChildren(X_SLOT);
   readonly mode = model(this.#opt.mode);

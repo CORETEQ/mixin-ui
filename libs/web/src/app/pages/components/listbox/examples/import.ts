@@ -1,1 +1,4 @@
-import { XListbox } from '@mixin-ui/kit';
+import {
+  XListbox,
+  XOption
+} from '@mixin-ui/kit';

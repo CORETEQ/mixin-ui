@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { XButton, XPopover } from '@mixin-ui/kit';
+import { XButton, XPopoverTarget } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-popover-basic-example',
   templateUrl: './basic.html',
-  imports: [XPopover, XButton],
+  imports: [XPopoverTarget, XButton],
 })
 export class PopoverBasicExample {}

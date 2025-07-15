@@ -12,7 +12,7 @@ import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { getFocusableElement, isPureEscape, typedOutlet } from '@mixin-ui/cdk';
-import { XPopover } from './popover';
+import { XPopoverTarget } from './popover';
 import { X_POPOVER } from './providers';
 
 @Component({
@@ -25,7 +25,7 @@ import { X_POPOVER } from './providers';
   host: { class: 'x-popover' },
 })
 export class XPopoverContainer {
-  readonly #popover = inject(XPopover);
+  readonly #popover = inject(XPopoverTarget);
   readonly #overlay = inject(X_POPOVER);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
 

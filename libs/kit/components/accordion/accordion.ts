@@ -19,7 +19,7 @@ import { X_ACCORDION_OPTIONS } from './options';
     '[class]': '`x-accordion x-size-${size()} x-radius-${radius()}`',
   },
 })
-export class XAccordionRoot {
+export class XAccordion {
   readonly #opt = inject(X_ACCORDION_OPTIONS);
 
   readonly id = input(generateId());

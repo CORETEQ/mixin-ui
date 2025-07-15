@@ -27,7 +27,7 @@
     </div>
   } @else {
     <div class="x-accordion-content">
-      <ng-content select="[x-slot='content']" />
+      <ng-content select="[x-slot='content']:not(ng-template)" />
     </div>
   }
 </x-collapsible>

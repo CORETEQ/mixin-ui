@@ -1,1 +1,1 @@
-import { XPopover } from '@mixin-ui/kit';
+import { XPopoverTarget } from '@mixin-ui/kit';
