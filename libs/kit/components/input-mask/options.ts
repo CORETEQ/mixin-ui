@@ -1,9 +1,13 @@
 import { FactoryProvider, inject, InjectionToken } from '@angular/core';
 import { X_PATTERN_MASK_OPTIONS, XPatternMaskOptions } from '@mixin-ui/cdk';
 
-export interface XInputMaskOptions extends XPatternMaskOptions {}
+export interface XInputMaskOptions extends XPatternMaskOptions {
+  resetUncompleted: boolean;
+}
 
-const defaultOptions: Omit<XInputMaskOptions, keyof XPatternMaskOptions> = {};
+const defaultOptions: Omit<XInputMaskOptions, keyof XPatternMaskOptions> = {
+  resetUncompleted: false,
+};
 
 const defaultOptionsFactory = () => ({
   ...inject(X_PATTERN_MASK_OPTIONS),

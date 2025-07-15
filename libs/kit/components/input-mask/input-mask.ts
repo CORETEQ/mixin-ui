@@ -2,6 +2,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  effect,
   forwardRef,
   inject,
   input,
@@ -9,6 +10,7 @@ import {
 } from '@angular/core';
 import {
   injectMask,
+  isElement,
   provideMask,
   X_PATTERN_MASK_FACTORY,
   XPatternMaskOptions,
@@ -33,6 +35,7 @@ import { X_INPUT_MASK_OPTIONS } from './options';
   ],
   host: {
     class: 'x-input-mask',
+    '(focusout)': 'handleFocusOut($event)',
   },
 })
 export class XInputMask implements XControlAccessor<string> {
@@ -42,13 +45,29 @@ export class XInputMask implements XControlAccessor<string> {
   readonly pattern = input(this.#opt.pattern);
   readonly showFiller = input(this.#opt.showFiller, { transform: booleanAttribute });
   readonly fillerChar = input(this.#opt.fillerChar);
+  readonly resetUncompleted = input(this.#opt.resetUncompleted, { transform: booleanAttribute });
 
   readonly valueChanges = this.#mask.valueChanges;
 
   constructor() {
-    this.#mask.updateOptions({
-      pattern: this.pattern(),
+    effect(() => {
+      this.#mask.updateOptions({
+        pattern: this.pattern(),
+        showFiller: this.showFiller(),
+        fillerChar: this.fillerChar(),
+      });
     });
+  }
+
+  handleFocusOut(e: FocusEvent): void {
+    if (
+      this.resetUncompleted() &&
+      !this.#mask.completed &&
+      isElement(e.target) &&
+      e.target.matches('input')
+    ) {
+      this.#mask.setValue('');
+    }
   }
 
   handleControlValue(value: string): void {
