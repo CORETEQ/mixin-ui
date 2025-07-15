@@ -13,10 +13,10 @@ import { EMPTY_FN } from '@mixin-ui/cdk/utils';
 /**
  * Universal mask interface for input formatting and validation.
  *
- * @template TRaw - The raw (unformatted) value type
+ * @template TModel - The model (unformatted) value type
  * @template TOpt - Configuration options type
  */
-export interface XMask<TRaw, TOpt extends Record<string, any>> {
+export interface XMask<TModel, TOpt extends Record<string, any>> {
   /**
    * Initializes the mask on the target element.
    */
@@ -36,17 +36,17 @@ export interface XMask<TRaw, TOpt extends Record<string, any>> {
    * Emits raw values on user input only.
    * Does not emit for programmatic value changes.
    */
-  readonly valueChanges: Observable<TRaw>;
+  readonly valueChanges: Observable<TModel>;
 
   /**
    * Programmatically sets the raw value and updates the input display.
    */
-  readonly setValue: (value: TRaw) => void;
+  readonly setValue: (value: TModel) => void;
 
   /**
    * Gets the current raw (unformatted) value.
    */
-  get rawValue(): TRaw;
+  get modelValue(): TModel;
 
   /**
    * Gets the current formatted (display) value.
@@ -72,7 +72,7 @@ class NoopMask implements XMask<any, Record<string, any>> {
   setValue = EMPTY_FN;
   valueChanges = EMPTY;
   maskedValue = '';
-  rawValue = null;
+  modelValue = null;
   completed = false;
 }
 

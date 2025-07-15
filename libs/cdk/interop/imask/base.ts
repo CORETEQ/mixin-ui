@@ -13,7 +13,7 @@ import IMask from 'imask/holder';
 
 import { XMask } from '@mixin-ui/cdk/providers';
 
-export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<TRaw, TOpt> {
+export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMask<TModel, TOpt> {
   static readonly Mask = IMask;
 
   readonly #init$ = new ReplaySubject<void>(1);
@@ -22,6 +22,7 @@ export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<
   #mask: InputMask<FactoryArg> | null = null;
   #options: TOpt;
   #modelUpdating = false;
+  #optionsUpdating = false;
 
   constructor(
     private readonly adapter: (options: TOpt) => FactoryArg,
@@ -30,7 +31,7 @@ export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<
     this.#options = { ...options };
   }
 
-  get rawValue(): TRaw {
+  get modelValue(): TModel {
     return this.#mask?.typedValue;
   }
 
@@ -44,14 +45,14 @@ export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<
 
   readonly valueChanges = this.#init$.pipe(
     switchMap(() => {
-      return new Observable<TRaw>(subscriber => {
-        const updateFn = () => subscriber.next(this.rawValue);
+      return new Observable<TModel>(subscriber => {
+        const updateFn = () => subscriber.next(this.modelValue);
         this.#mask?.on('accept', updateFn);
         return () => this.#mask?.off('accept', updateFn);
       });
     }),
     distinctUntilChanged(),
-    filter(() => !this.#modelUpdating),
+    filter(() => this.shouldPropagateChanges),
     takeUntil(this.#destroy$)
   );
 
@@ -64,7 +65,7 @@ export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<
     this.#init$.next();
   }
 
-  setValue(value: TRaw): void {
+  setValue(value: TModel): void {
     this.handleModelUpdate(() => {
       if (!this.#mask) {
         return;
@@ -79,8 +80,10 @@ export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<
   }
 
   updateOptions(options: Partial<TOpt>): void {
-    this.#options = { ...this.#options, ...options };
-    this.#mask?.updateOptions(this.adapter(this.#options) as UpdateOpts<FactoryArg>);
+    this.handleOptionsUpdate(() => {
+      this.#options = { ...this.#options, ...options };
+      this.#mask?.updateOptions(this.adapter(this.#options) as UpdateOpts<FactoryArg>);
+    });
   }
 
   destroy(): void {
@@ -89,12 +92,38 @@ export class IMaskImpl<TRaw, TOpt extends Record<string, any>> implements XMask<
     this.#mask = null;
   }
 
+  private get shouldPropagateChanges(): boolean {
+    if (this.#modelUpdating) {
+      return false;
+    }
+
+    if (this.#optionsUpdating && this.#mask) {
+      const { unmaskedValue, rawInputValue, masked } = this.#mask;
+
+      // exclude https://github.com/uNmAnNeR/imaskjs/blob/master/packages/imask/src/controls/input.ts#L225
+      // since updating the options with `lazy: false` causes an undesired emission during control initialization
+      // due to a mismatch between the model value and the raw input value with a placeholder.
+      return unmaskedValue !== masked.unmaskedValue || rawInputValue !== masked.rawInputValue;
+    }
+
+    return true;
+  }
+
   private handleModelUpdate(fn: () => void): void {
     this.#modelUpdating = true;
     try {
       fn();
     } finally {
       this.#modelUpdating = false;
+    }
+  }
+
+  private handleOptionsUpdate(fn: () => void): void {
+    this.#optionsUpdating = true;
+    try {
+      fn();
+    } finally {
+      this.#optionsUpdating = false;
     }
   }
 }
