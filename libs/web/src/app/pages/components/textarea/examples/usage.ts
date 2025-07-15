@@ -1,6 +1,6 @@
 @Component({
   template: `
-    <textarea x-textarea></textarea>
+    <textarea x-textarea [(ngModel)]="value"></textarea>
   `
 })
 export class Usage {
