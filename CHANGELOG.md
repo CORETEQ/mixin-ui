@@ -1,3 +1,13 @@
+## 0.0.1-alpha.6 (2025-07-15)
+
+### 🚀 Features
+
+- **kit:** update `XDateRoot` template ([b412d29](https://github.com/CORETEQ/mixin-ui/commit/b412d29))
+- **kit:** implement `invalid` and disabled states for `XCheckbox` and `XSwitch` ([ce57de8](https://github.com/CORETEQ/mixin-ui/commit/ce57de8))
+- **kit:** remove grouped imports defined as a constant for composite components ([fbec31f](https://github.com/CORETEQ/mixin-ui/commit/fbec31f))
+- **kit:** rename `XPopover` to `XPopoverTarget`, `XPopoverContent` to `XPopover` ([c124760](https://github.com/CORETEQ/mixin-ui/commit/c124760))
+- **kit:** implement `XTextarea` styles ([403a373](https://github.com/CORETEQ/mixin-ui/commit/403a373))
+
 ## 0.0.1-alpha.5 (2025-07-14)
 
 ### 🚀 Features
