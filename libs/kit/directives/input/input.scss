@@ -159,6 +159,7 @@
     }
 
     @include invalid {
+      --x-bg-color: var(--x-error-50);
       --x-border-color: var(--x-error-500);
       --x-selection-color: var(--x-error-200);
 
