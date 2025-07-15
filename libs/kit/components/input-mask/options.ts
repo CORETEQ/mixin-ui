@@ -6,7 +6,7 @@ export interface XInputMaskOptions extends XPatternMaskOptions {
 }
 
 const defaultOptions: Omit<XInputMaskOptions, keyof XPatternMaskOptions> = {
-  resetUncompleted: false,
+  resetUncompleted: true,
 };
 
 const defaultOptionsFactory = () => ({
