@@ -1,5 +1,5 @@
 import { Directive, ElementRef, inject } from '@angular/core';
-import { XPopover } from '@mixin-ui/kit/directives';
+import { XPopoverTarget } from '@mixin-ui/kit/directives';
 import { CDK_MENU } from '@angular/cdk/menu';
 import { FocusOrigin } from '@angular/cdk/a11y';
 import { hasModifierKey } from '@angular/cdk/keycodes';
@@ -13,7 +13,7 @@ import { hasModifierKey } from '@angular/cdk/keycodes';
 })
 export class XMenuTrigger {
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
-  readonly #overlay = inject(XPopover, { self: true });
+  readonly #overlay = inject(XPopoverTarget, { self: true });
   readonly #parentMenu = inject(CDK_MENU, { optional: true });
 
   readonly open = this.#overlay.open;

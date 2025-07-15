@@ -32,14 +32,14 @@ import {
     '[class.x-overlay-opened]': 'open()',
   },
 })
-export class XPopover {
+export class XPopoverTarget {
   readonly #opt = inject(X_POPOVER_OPTIONS);
   readonly #overlay = inject(X_POPOVER);
   readonly #position = inject(X_POPOVER_POSITION_OPTIONS);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
   readonly #close$ = inject(X_POPOVER_CLOSE);
 
-  readonly childContent = contentChild(XPopoverContent, { read: TemplateRef });
+  readonly childContent = contentChild(XPopover, { read: TemplateRef });
   readonly inputContent = input<XOutlet>(null, { alias: 'x-popover' });
   readonly direction = input(this.#position.direction, { alias: 'x-popover-direction' });
   readonly position = input(this.#position.position, { alias: 'x-popover-position' });
@@ -146,4 +146,4 @@ export class XPopover {
 }
 
 @Directive({ selector: 'ng-template[x-popover]' })
-export class XPopoverContent {}
+export class XPopover {}
