@@ -17,6 +17,7 @@ import {
 } from '@mixin-ui/cdk';
 import { provideControlAccessor, XControlAccessor, XInput } from '@mixin-ui/kit/directives';
 import { X_INPUT_MASK_OPTIONS } from './options';
+import { merge, Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -41,13 +42,14 @@ import { X_INPUT_MASK_OPTIONS } from './options';
 export class XInputMask implements XControlAccessor<string> {
   readonly #opt = inject(X_INPUT_MASK_OPTIONS);
   readonly #mask = injectMask<string, XPatternMaskOptions>();
+  readonly #innerValueChanges = new Subject<string>();
 
   readonly pattern = input(this.#opt.pattern);
   readonly showFiller = input(this.#opt.showFiller, { transform: booleanAttribute });
   readonly fillerChar = input(this.#opt.fillerChar);
   readonly resetUncompleted = input(this.#opt.resetUncompleted, { transform: booleanAttribute });
 
-  readonly valueChanges = this.#mask.valueChanges;
+  readonly valueChanges = merge(this.#mask.valueChanges, this.#innerValueChanges);
 
   constructor() {
     effect(() => {
@@ -67,6 +69,7 @@ export class XInputMask implements XControlAccessor<string> {
       e.target.matches('input')
     ) {
       this.#mask.setValue('');
+      this.#innerValueChanges.next('');
     }
   }
 

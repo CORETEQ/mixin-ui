@@ -1,4 +1,4 @@
 import {
   XInputNumber,
-  XControl,
+  XControl
 } from '@mixin-ui/kit';

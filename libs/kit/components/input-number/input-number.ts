@@ -103,7 +103,7 @@ export class XInputNumber implements XControlAccessor<number | null> {
   }
 
   get normalizedValue(): number {
-    return this.#mask.rawValue || 0;
+    return this.#mask.modelValue || 0;
   }
 
   plus(step = 1): void {

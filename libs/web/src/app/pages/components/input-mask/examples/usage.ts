@@ -1,6 +1,6 @@
 @Component({
   template: `
-    <x-input-mask>
+    <x-input-mask pattern="+{421} 000 000 000">
       <input x-control [(ngModel)]="value" />
     </x-input-mask>
   `

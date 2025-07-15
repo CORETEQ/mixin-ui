@@ -1,4 +1,4 @@
 import {
   XInputMask,
-  XControl,
+  XControl
 } from '@mixin-ui/kit';
