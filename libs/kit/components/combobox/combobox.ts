@@ -49,7 +49,7 @@ export class XCombobox<T>
 
   readonly open = this.#popover.open;
   readonly multiple = input(false);
-  readonly compareFn = input(this.#opt.compareFn);
+  readonly comparator = input(this.#opt.compareFn);
   readonly value = linkedSignal(() => (this.multiple() ? [] : null));
 
   readonly valueChanges = new Subject<T | readonly T[] | null>();

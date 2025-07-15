@@ -11,7 +11,8 @@ import type { InputMask } from 'imask';
 import type { FactoryArg, UpdateOpts } from 'imask/masked/factory';
 import IMask from 'imask/holder';
 
-import { XMask } from '@mixin-ui/cdk/providers';
+import type { XMask } from '@mixin-ui/cdk/providers';
+import { isObject } from '@mixin-ui/cdk/utils';
 
 export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMask<TModel, TOpt> {
   static readonly Mask = IMask;
@@ -71,7 +72,7 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
         return;
       }
 
-      if (value && typeof value === 'object') {
+      if (isObject(value)) {
         this.#mask.typedValue = value;
       } else {
         this.#mask.unmaskedValue = String(value);

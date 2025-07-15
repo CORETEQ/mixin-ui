@@ -46,12 +46,12 @@ export class XListbox {
     effect(() => {
       const value = this.#accessor.value();
       const multiple = this.#accessor.multiple();
-      const compareFn = this.#accessor.compareFn();
+      const comparator = this.#accessor.comparator();
 
       untracked(() => {
         this.#cdkListbox.value = value;
         this.#cdkListbox.multiple = multiple;
-        this.#cdkListbox.compareWith = compareFn;
+        this.#cdkListbox.compareWith = comparator;
       });
     });
 

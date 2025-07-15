@@ -1,4 +1,4 @@
-<x-select placeholder="Select" [(ngModel)]="value" [compareFn]="compareFn">
+<x-select placeholder="Select" [(ngModel)]="value" [comparator]="compareFn">
   <span *x-value="let value" class="flex items-center gap-2">
     <span class="fi fi-{{value.value}}"></span>
     {{ value.label }}
