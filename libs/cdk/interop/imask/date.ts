@@ -14,7 +14,7 @@ type Block = {
   };
 };
 
-const BLOCKS = {
+const RANGES = {
   yyyy: { from: 1900, to: 2100 },
   yy: { from: 0, to: 99 },
 
@@ -50,12 +50,12 @@ const adapter = (options: XDateMaskOptions): FactoryArg => {
   const uniqueTokens = Array.from(new Set(tokens));
 
   for (const token of uniqueTokens) {
-    const config = BLOCKS[token as keyof typeof BLOCKS];
+    const range = RANGES[token as keyof typeof RANGES];
 
-    if (config) {
+    if (range) {
       blocks[token] = {
         mask: IMaskImpl.Mask.MaskedRange,
-        ...config,
+        ...range,
       };
     }
   }
