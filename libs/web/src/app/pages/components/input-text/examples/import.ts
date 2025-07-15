@@ -1,4 +1,1 @@
-import {
-  XInputText,
-  XControl,
-} from '@mixin-ui/kit';
+import { XInputText } from '@mixin-ui/kit';
