@@ -1,3 +1,17 @@
+## 0.0.1-alpha.8 (2025-07-15)
+
+### 🚀 Features
+
+- **kit:** implement `resetUncompleted` option for `XInputMask` ([35a75cd](https://github.com/CORETEQ/mixin-ui/commit/35a75cd))
+- **kit:** update `x-input` invalid styles ([01680b8](https://github.com/CORETEQ/mixin-ui/commit/01680b8))
+- **kit:** set default value of `resetUncompleted` to true in `XInputMaskOptions` ([d38f1b7](https://github.com/CORETEQ/mixin-ui/commit/d38f1b7))
+
+### 🩹 Fixes
+
+- **cdk:** update default `pattern` value in default options of `XPatternMaskOptions` ([45314f0](https://github.com/CORETEQ/mixin-ui/commit/45314f0))
+- **cdk:** implement `shouldPropagateChanges` getter to avoid unnecessary emissions ([acc6de4](https://github.com/CORETEQ/mixin-ui/commit/acc6de4))
+- **kit:** add `innerValueChanges` subject to `XInputMask` for the correct model's value reset ([c6bcb69](https://github.com/CORETEQ/mixin-ui/commit/c6bcb69))
+
 ## 0.0.1-alpha.7 (2025-07-15)
 
 ### 🚀 Features
