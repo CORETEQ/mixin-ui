@@ -1,15 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  contentChild,
+  ElementRef,
   forwardRef,
   inject,
   input,
-  linkedSignal,
+  signal,
   ViewEncapsulation,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import {
   provideControlAccessor,
+  providePopoverOptions,
+  XControl,
   XControlAccessor,
   XInput,
   XPopoverTarget,
@@ -27,42 +31,72 @@ import { X_COMBOBOX_OPTIONS } from './options';
   providers: [
     provideControlAccessor(forwardRef(() => XCombobox)),
     provideListboxAccessor(forwardRef(() => XCombobox)),
+    providePopoverOptions({ autoFocus: false }),
   ],
   hostDirectives: [
     {
       directive: XInput,
       inputs: ['variant', 'size', 'radius'],
     },
+    {
+      directive: XPopoverTarget,
+      inputs: [
+        'x-popover-fixed: popoverFixed',
+        'x-popover-stretch: popoverStretch',
+        'x-popover-min-width: popoverMinWidth',
+        'x-popover-max-width: popoverMaxWidth',
+      ],
+    },
   ],
   host: {
     role: 'combobox',
     class: 'x-combobox',
-    '(keydown.arrowDown)': '$event.preventDefault(); togglePopover(true)',
+    '(input)': 'togglePopover(true)',
     '(click)': 'togglePopover(!open())',
   },
 })
-export class XCombobox<T>
-  implements XControlAccessor<T | readonly T[] | null>, XListboxAccessor<T>
-{
+export class XCombobox<T> implements XControlAccessor<T | null>, XListboxAccessor<T> {
   readonly #opt = inject(X_COMBOBOX_OPTIONS);
   readonly #popover = inject(XPopoverTarget, { self: true });
 
+  readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly open = this.#popover.open;
-  readonly multiple = input(false);
   readonly comparator = input(this.#opt.compareFn);
-  readonly value = linkedSignal(() => (this.multiple() ? [] : null));
+  readonly multiple = signal(false).asReadonly();
+  readonly value = signal<T | null>(null);
+  readonly valueChanges = new Subject<T | null>();
 
-  readonly valueChanges = new Subject<T | readonly T[] | null>();
+  readonly stringify = (value: T | null) => String(value);
 
   togglePopover(open: boolean): void {
     this.#popover.toggle(open);
   }
 
-  handleControlValue(value: T | readonly T[] | null): void {
-    // this.value.set(value);
+  handleOptions(values: readonly T[]): void {
+    this.updateModelValue(values.at(0) || null); // @TODO: process value
+    this.updateNativeValue('value'); // @TODO: add stringify
   }
 
-  handleOptions(values: readonly T[]): void {
-    this.valueChanges.next(this.multiple() ? values : values.at(0) ?? null);
+  handleControlValue(value: T | null): void {
+    this.updateListBoxValue(value);
+    this.updateNativeValue(this.stringify(value)); // @TODO: add stringify
+  }
+
+  private get inputEl(): HTMLInputElement {
+    return this.input().nativeElement;
+  }
+
+  private updateModelValue(value: T | null): void {
+    // @TODO
+  }
+
+  private updateListBoxValue(value: T | null): void {
+    // @TODO
+    // warn! if value doesnt match any option from options list it will be thrown
+    // solve?
+  }
+
+  private updateNativeValue(value: string): void {
+    this.inputEl.value = value;
   }
 }

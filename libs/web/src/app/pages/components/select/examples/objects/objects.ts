@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class SelectObjectsExample {
   value = { value: 'us', label: 'United States' };
-  compareFn = (o1: any, o2: any) => o1 && o2 && o1.value === o2.value;
   options = [
     { value: 'us', label: 'United States' },
     { value: 'gb', label: 'United Kingdom' },

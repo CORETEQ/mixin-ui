@@ -9,19 +9,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { createCva, isObject, relatedTo, watch } from '@mixin-ui/cdk';
+import { createCva, relatedTo, watch } from '@mixin-ui/cdk';
+import { createKeyComparator } from '@mixin-ui/kit/providers';
 import { X_SLOT, XInput, XPopoverTarget, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 import { X_SELECT_OPTIONS } from './options';
-
-const compareByKey = <T = any>(a: T, b: T) => {
-  if (!isObject(a) || !isObject(b)) {
-    throw new Error('Cannot compare by key if one of the values is not an object');
-  }
-
-  return a[key] === b[key];
-};
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -66,7 +59,9 @@ export class XSelect<T> implements XListboxAccessor<T> {
   readonly compareFn = input(this.#opt.compareFn);
   readonly key = input<string>();
   readonly tabIndex = computed(() => (this.disabled() ? null : '0'));
-  readonly comparator = computed(() => (this.key() ? compareByKey.bind(this) : this.compareFn()));
+  readonly comparator = computed(() =>
+    this.key() ? createKeyComparator(this.key()!) : this.compareFn()
+  );
 
   readonly #cva = createCva<T | readonly T[] | null>({
     defaultValue: () => (this.multiple() ? [] : null),
