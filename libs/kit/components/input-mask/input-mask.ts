@@ -1,13 +1,30 @@
-import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  forwardRef,
+  inject,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
+import {
+  injectMask,
+  provideMask,
+  X_PATTERN_MASK_FACTORY,
+  XPatternMaskOptions,
+} from '@mixin-ui/cdk';
 import { provideControlAccessor, XControlAccessor, XInput } from '@mixin-ui/kit/directives';
-import { EMPTY } from 'rxjs';
+import { X_INPUT_MASK_OPTIONS } from './options';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'x-mask',
+  selector: 'x-input-mask',
   templateUrl: './input-mask.html',
-  providers: [provideControlAccessor(forwardRef(() => XInputMask))],
+  providers: [
+    provideMask(X_PATTERN_MASK_FACTORY),
+    provideControlAccessor(forwardRef(() => XInputMask)),
+  ],
   hostDirectives: [
     {
       directive: XInput,
@@ -15,15 +32,34 @@ import { EMPTY } from 'rxjs';
     },
   ],
   host: {
-    class: 'x-mask',
+    class: 'x-input-mask',
   },
 })
 export class XInputMask implements XControlAccessor<string> {
-  valueChanges = EMPTY;
+  readonly #opt = inject(X_INPUT_MASK_OPTIONS);
+  readonly #mask = injectMask<string, XPatternMaskOptions>();
 
-  handleControlValue(value: string): void {}
+  readonly pattern = input(this.#opt.pattern);
+  readonly showFiller = input(this.#opt.showFiller, { transform: booleanAttribute });
+  readonly fillerChar = input(this.#opt.fillerChar);
 
-  handleControlInit(el: HTMLInputElement): void {}
+  readonly valueChanges = this.#mask.valueChanges;
 
-  handleControlDestroy(): void {}
+  constructor() {
+    this.#mask.updateOptions({
+      pattern: this.pattern(),
+    });
+  }
+
+  handleControlValue(value: string): void {
+    this.#mask.setValue(value);
+  }
+
+  handleControlInit(el: HTMLInputElement): void {
+    this.#mask.init(el);
+  }
+
+  handleControlDestroy(): void {
+    this.#mask.destroy();
+  }
 }
