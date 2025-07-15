@@ -43,7 +43,6 @@ export class XListbox {
   readonly empty = computed(() => this.options().length === 0);
 
   constructor() {
-    // <-| from accessor
     effect(() => {
       const value = this.#accessor.value();
       const multiple = this.#accessor.multiple();
@@ -56,7 +55,6 @@ export class XListbox {
       });
     });
 
-    // to accessor |->
     this.#cdkListbox.valueChange.pipe(takeUntilDestroyed()).subscribe(({ value }) => {
       this.#accessor.handleOptions(value);
 

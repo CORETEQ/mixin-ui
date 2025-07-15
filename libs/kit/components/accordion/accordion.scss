@@ -17,7 +17,7 @@
   inline-size: 100%;
 
   @include size(sm) {
-    --x-size: var(--x-size-sm);
+    --x-size: calc(var(--x-size-sm) * 1.25);
     --x-side: 0.5rem;
 
     font-size: 0.815rem;
@@ -25,7 +25,7 @@
   }
 
   @include size(md) {
-    --x-size: var(--x-size-md);
+    --x-size: calc(var(--x-size-md) * 1.25);
     --x-side: 0.625rem;
 
     font-size: 0.875rem;
@@ -33,7 +33,7 @@
   }
 
   @include size(lg) {
-    --x-size: var(--x-size-lg);
+    --x-size: calc(var(--x-size-lg) * 1.25);
     --x-side: 0.75rem;
 
     font-size: 0.935rem;

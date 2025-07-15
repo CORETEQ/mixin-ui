@@ -12,9 +12,9 @@ body {
 }
 
 body {
-  color: #09090b;
+  color: var(--x-gray-950);
   font-family: Inter, sans-serif;
-  background: #fff;
+  background: var(--x-white);
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

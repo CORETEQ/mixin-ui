@@ -26,7 +26,7 @@ import { XIcon } from '@mixin-ui/kit/components/icon';
     '(click)': 'handlePopoverClose()',
     '(keydown.enter)': 'handlePopoverClose()',
     '(keydown.space)': 'handlePopoverClose()',
-    '(mouseenter)': 'setActiveOption()',
+    '(pointerenter)': 'handlePointerEnter()',
   },
 })
 export class XOption {
@@ -36,14 +36,14 @@ export class XOption {
 
   readonly hasSelfPopover = !!inject(XPopoverTarget, { self: true, optional: true });
 
-  protected handlePopoverClose(): void {
+  handlePopoverClose(): void {
     if (!this.#cdkListbox.multiple && this.#cdkOption.isSelected()) {
       this.#popover?.toggle(false);
       this.#popover?.focusOrigin();
     }
   }
 
-  protected setActiveOption(): void {
+  handlePointerEnter(): void {
     this.#cdkListbox._setActiveOption(this.#cdkOption);
   }
 }
