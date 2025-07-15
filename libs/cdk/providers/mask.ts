@@ -101,6 +101,31 @@ export function injectMask<TRaw, TOpt extends Record<string, any>>(): XMask<TRaw
 
 // Built-in contracts
 
+// Pattern
+export interface XPatternMaskOptions {
+  /** A string pattern that defines the expected input format */
+  readonly pattern: string;
+
+  /** Show filler characters for empty positions */
+  readonly showFiller: boolean;
+
+  /** Character to use as a filler for empty positions */
+  readonly fillerChar: string;
+}
+
+const defaultPatternOptions: XPatternMaskOptions = {
+  pattern: '+{421} 000 000 000',
+  showFiller: true,
+  fillerChar: '_',
+};
+
+export const X_PATTERN_MASK_OPTIONS = new InjectionToken<XPatternMaskOptions>(
+  'PATTERN_MASK_OPTIONS',
+  {
+    factory: () => defaultPatternOptions,
+  }
+);
+
 // Number
 export interface XNumberMaskOptions {
   /** Thousands separator character */
@@ -141,36 +166,23 @@ const defaultNumberOptions: XNumberMaskOptions = {
   padDecimals: true,
 };
 
-export const X_NUMBER_MASK_OPTIONS = new InjectionToken<XNumberMaskOptions>(
-  'NUMBER_FORMATTER_OPTIONS',
-  { factory: () => defaultNumberOptions }
-);
+export const X_NUMBER_MASK_OPTIONS = new InjectionToken<XNumberMaskOptions>('NUMBER_MASK_OPTIONS', {
+  factory: () => defaultNumberOptions,
+});
 
 // Date
-export interface XDateMaskOptions {
-  /** Minimum allowed date value */
-  readonly min: Date;
-
-  /** Maximum allowed date value */
-  readonly max: Date;
-
-  /**
-   * Date format pattern using characters: d, M, y,
-   * For example, 'dd/MM/yyyy' for dates like '25/12/2024'
-   */
-  readonly pattern: string;
-
+export interface XDateMaskOptions extends XPatternMaskOptions {
   /**
    * Automatically fix invalid date parts when possible,
    * For example, converting '33' to '03' for days
    */
   readonly autofix: boolean;
 
-  /** Show filler characters for empty positions */
-  readonly showFiller: boolean;
+  /** Minimum allowed date value */
+  readonly min: Date;
 
-  /** Character to use as a filler for empty positions */
-  readonly fillerChar: string;
+  /** Maximum allowed date value */
+  readonly max: Date;
 }
 
 const defaultDateOptions: XDateMaskOptions = {
@@ -182,6 +194,6 @@ const defaultDateOptions: XDateMaskOptions = {
   fillerChar: '_',
 };
 
-export const X_DATE_MASK_OPTIONS = new InjectionToken<XDateMaskOptions>('DATE_FORMATTER_OPTIONS', {
+export const X_DATE_MASK_OPTIONS = new InjectionToken<XDateMaskOptions>('DATE_MASK_OPTIONS', {
   factory: () => defaultDateOptions,
 });
