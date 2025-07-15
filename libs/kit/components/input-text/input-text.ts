@@ -4,7 +4,7 @@ import { XInput } from '@mixin-ui/kit/directives';
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'x-text',
+  selector: 'x-input-text',
   templateUrl: './input-text.html',
   hostDirectives: [
     {

@@ -35,7 +35,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
     },
   ],
   host: {
-    class: 'x-number',
+    class: 'x-input-number',
     '(keydown.arrowUp)': 'handleArrowUp($event)',
     '(keydown.arrowDown)': 'handleArrowDown($event)',
   },
