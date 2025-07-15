@@ -1,3 +1,11 @@
+## 0.0.1-alpha.7 (2025-07-15)
+
+### 🚀 Features
+
+- **cdk:** implement new mask type `pattern` with a built-in interface ([4c55460](https://github.com/CORETEQ/mixin-ui/commit/4c55460))
+- **kit:** rename `x-text` selector to `x-input-text` ([9d4d9aa](https://github.com/CORETEQ/mixin-ui/commit/9d4d9aa))
+- **kit:** add `XInputMaskOptions` interface and provider, expose `XInputMask` inputs ([ac63073](https://github.com/CORETEQ/mixin-ui/commit/ac63073))
+
 ## 0.0.1-alpha.6 (2025-07-15)
 
 ### 🚀 Features
