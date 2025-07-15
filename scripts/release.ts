@@ -2,6 +2,7 @@ import { releaseChangelog, releaseVersion } from 'nx/release';
 import * as yargs from 'yargs';
 import path from 'path';
 import fs from 'fs';
+import { execSync } from 'child_process';
 
 (async () => {
   const options = await yargs
@@ -30,12 +31,14 @@ import fs from 'fs';
   });
 
   const { newVersion } = projectsVersionData.kit;
+
   if (!options.dryRun) {
     const versionFilePath = path.join(__dirname, '../libs/web/src/app/core/version.ts');
     const content = `// This file is generated automatically. Do not edit manually!
 export const MIXIN_UI_VERSION = '${newVersion}';
 `;
     fs.writeFileSync(versionFilePath, content);
+    execSync(`git add ${versionFilePath}`, { stdio: 'inherit' });
   }
   console.log(`Mixin UI version updated: ${newVersion}`);
 
