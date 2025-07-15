@@ -114,16 +114,14 @@ export interface XPatternMaskOptions {
 }
 
 const defaultPatternOptions: XPatternMaskOptions = {
-  pattern: '+{421} 000 000 000',
+  pattern: '',
   showFiller: true,
   fillerChar: '_',
 };
 
 export const X_PATTERN_MASK_OPTIONS = new InjectionToken<XPatternMaskOptions>(
   'PATTERN_MASK_OPTIONS',
-  {
-    factory: () => defaultPatternOptions,
-  }
+  { factory: () => defaultPatternOptions }
 );
 
 // Number
