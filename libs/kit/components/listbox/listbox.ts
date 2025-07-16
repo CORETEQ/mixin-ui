@@ -1,4 +1,5 @@
 import {
+  afterRenderEffect,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -6,13 +7,14 @@ import {
   effect,
   inject,
   input,
+  OnDestroy,
   untracked,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CdkListbox } from '@angular/cdk/listbox';
-import { XTypedOutletPipe } from '@mixin-ui/cdk';
+import { EMPTY_FN, XTypedOutletPipe } from '@mixin-ui/cdk';
 import { XPopoverTarget } from '@mixin-ui/kit/directives';
 import { XOption } from './option';
 import { X_LISTBOX_ACCESSOR } from './providers';
@@ -30,9 +32,9 @@ import { X_LISTBOX_OPTIONS } from './options';
     '[class]': '`x-listbox x-size-${size()} x-radius-${radius()}`',
   },
 })
-export class XListbox {
+export class XListbox implements OnDestroy {
   readonly #opt = inject(X_LISTBOX_OPTIONS);
-  readonly #accessor = inject(X_LISTBOX_ACCESSOR);
+  readonly #accessor = inject(X_LISTBOX_ACCESSOR, { optional: true });
   readonly #cdkListbox = inject(CdkListbox);
   readonly #popover = inject(XPopoverTarget, { optional: true });
 
@@ -43,10 +45,13 @@ export class XListbox {
   readonly empty = computed(() => this.options().length === 0);
 
   constructor() {
+    // @TODO: remove after refactoring of XListbox to new cdk approach
+    (this.#cdkListbox as Record<string, any>)._verifyOptionValues = EMPTY_FN;
+
     effect(() => {
-      const value = this.#accessor.value();
-      const multiple = this.#accessor.multiple();
-      const comparator = this.#accessor.comparator();
+      const value = this.#accessor?.value();
+      const multiple = this.#accessor?.multiple() || false;
+      const comparator = this.#accessor?.comparator();
 
       untracked(() => {
         this.#cdkListbox.value = value;
@@ -55,13 +60,31 @@ export class XListbox {
       });
     });
 
+    afterRenderEffect(() => {
+      const handler = this.#accessor?.handleListboxOptions;
+
+      if (handler) {
+        const options = this.options();
+
+        untracked(() => {
+          handler(options.map(option => option.value()));
+        });
+      }
+    });
+
     this.#cdkListbox.valueChange.pipe(takeUntilDestroyed()).subscribe(({ value }) => {
-      this.#accessor.handleOptions(value);
+      this.#accessor?.handleListboxValue(value);
 
       if (!this.#cdkListbox.multiple) {
         this.#popover?.toggle(false);
         this.#popover?.focusOrigin();
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.#accessor?.handleListboxOptions) {
+      this.#accessor.handleListboxOptions(null);
+    }
   }
 }
