@@ -2,11 +2,13 @@ import { inject, InjectionToken } from '@angular/core';
 import { X_COMPARATOR, XComparator } from '@mixin-ui/kit/providers';
 
 export interface XComboboxOptions {
+  readonly strict: boolean;
   readonly compareFn?: XComparator;
 }
 
 const defaultOptionsFactory = () => ({
   compareFn: inject(X_COMPARATOR),
+  strict: true,
 });
 
 export const X_COMBOBOX_OPTIONS = new InjectionToken<XComboboxOptions>('COMBOBOX_OPTIONS', {
