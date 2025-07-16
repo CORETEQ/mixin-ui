@@ -53,14 +53,14 @@ jobs:
         run: pnpm ci:publish
         shell: bash
 
-      - name: Send Email Notification
+      - name: Send email notification
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.office365.com
           server_port: 587
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "🚀 Mixin UI ${{ github.ref_name }} has been released"
+          subject: "🚀 Mixin UI ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }} has been released"
           to: fe-devs@coreteq.sk
           from: Mixin UI Bot <${{ secrets.SMTP_USERNAME }}>
           secure: false
@@ -69,12 +69,12 @@ jobs:
 
             We’re excited to announce that a new version of Mixin UI has just been released and published to our private registry.
 
-            🔖 Version: ${{ github.ref_name }}
+            🔖 Version: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
             📦 Repository: ${{ github.repository }}
             🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
 
             📘 Release Notes:
-            https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.ref_name }}
+            https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
 
             🧩 Documentation:
             https://mixin.coreteq.cloud
