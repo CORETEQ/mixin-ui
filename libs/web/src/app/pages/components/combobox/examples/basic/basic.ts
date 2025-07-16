@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   ],
 })
 export class ComboboxBasicExample {
-  readonly value = signal('Angular');
+  readonly value = signal('Angular2');
   readonly query = signal('');
   readonly options = signal(['Angular', 'React', 'Vue']);
 

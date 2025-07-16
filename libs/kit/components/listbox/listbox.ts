@@ -61,15 +61,11 @@ export class XListbox implements OnDestroy {
     });
 
     afterRenderEffect(() => {
-      const handler = this.#accessor?.handleListboxOptions;
+      const options = this.options();
 
-      if (handler) {
-        const options = this.options();
-
-        untracked(() => {
-          handler(options.map(option => option.value()));
-        });
-      }
+      untracked(() => {
+        this.#accessor?.handleListboxOptions?.(options.map(option => option.value()));
+      });
     });
 
     this.#cdkListbox.valueChange.pipe(takeUntilDestroyed()).subscribe(({ value }) => {
@@ -83,8 +79,8 @@ export class XListbox implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.#accessor?.handleListboxOptions) {
-      this.#accessor.handleListboxOptions(null);
-    }
+    setTimeout(() => {
+      this.#accessor?.handleListboxOptions?.(null);
+    });
   }
 }

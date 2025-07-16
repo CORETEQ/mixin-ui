@@ -96,14 +96,13 @@ export class XSelect<T> implements XListboxAccessor<T> {
     this.#popover.toggle(open);
   }
 
-  handleOptions(values: readonly T[]): void {
-    this.#cva.updateValue(this.multiple() ? values : values.at(0) ?? null);
+  handleBlur(e: FocusEvent): void {
+    if (!relatedTo(e, this.#popover.overlayElement)) {
+      this.#cva.markAsTouched();
+    }
   }
 
-  handleBlur(e: FocusEvent): void {
-    if (relatedTo(e, this.#popover.overlayElement)) {
-      return;
-    }
-    this.#cva.markAsTouched();
+  handleListboxValue(values: readonly T[]): void {
+    this.#cva.updateValue(this.multiple() ? values : values.at(0) ?? null);
   }
 }

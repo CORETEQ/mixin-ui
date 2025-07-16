@@ -1,11 +1,12 @@
 import { Component, signal } from '@angular/core';
-import {XListbox, XOption, XPopover, XSelect} from '@mixin-ui/kit';
+import { XPopover, XSelect } from '@mixin-ui/kit';
 import { FormsModule } from '@angular/forms';
+import { Test } from './test';
 
 @Component({
   selector: 'app-select-multiple-example',
   templateUrl: './multiple.html',
-  imports: [XSelect, FormsModule, XListbox, XPopover, XOption],
+  imports: [XSelect, FormsModule, XPopover, Test],
 })
 export class SelectMultipleExample {
   readonly options = signal(['Angular', 'React', 'Vue', 'Svelte']);

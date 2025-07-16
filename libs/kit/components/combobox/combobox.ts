@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   contentChild,
@@ -20,6 +21,7 @@ import {
 } from '@mixin-ui/kit/directives';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 import { X_COMBOBOX_OPTIONS } from './options';
+import { watch } from '@mixin-ui/cdk';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -27,7 +29,6 @@ import { X_COMBOBOX_OPTIONS } from './options';
   selector: 'x-combobox',
   styleUrl: './combobox.scss',
   templateUrl: './combobox.html',
-  imports: [],
   providers: [
     provideControlAccessor(forwardRef(() => XCombobox)),
     provideListboxAccessor(forwardRef(() => XCombobox)),
@@ -51,54 +52,115 @@ import { X_COMBOBOX_OPTIONS } from './options';
   host: {
     role: 'combobox',
     class: 'x-combobox',
-    '(input)': 'togglePopover(true)',
+    '(input)': 'handleInput()',
     '(click)': 'togglePopover(!open())',
   },
 })
-export class XCombobox<T> implements XControlAccessor<T | null>, XListboxAccessor<T> {
+export class XCombobox<T> implements XControlAccessor<T | string | null>, XListboxAccessor<T> {
   readonly #opt = inject(X_COMBOBOX_OPTIONS);
   readonly #popover = inject(XPopoverTarget, { self: true });
 
   readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly open = this.#popover.open;
-  readonly comparator = input(this.#opt.compareFn);
+  readonly compareFn = input(this.#opt.compareFn);
+  readonly stringifyFn = input(this.#opt.stringifyFn);
+  readonly strict = input(this.#opt.strict, { transform: booleanAttribute });
+  readonly comparator = this.compareFn;
   readonly multiple = signal(false).asReadonly();
   readonly value = signal<T | null>(null);
-  readonly valueChanges = new Subject<T | null>();
+  readonly valueChanges = new Subject<T | string | null>();
 
-  readonly stringify = (value: T | null) => (value ? String(value) : '');
+  #options: readonly T[] | null = null;
+
+  constructor() {
+    watch(this.open, open => {
+      if (!open && this.strict() && !this.hasOption(this.inputEl.value)) {
+        this.updateModel(null);
+        this.updateListbox(null);
+        this.updateNative('', true);
+      }
+    });
+  }
 
   togglePopover(open: boolean): void {
     this.#popover.toggle(open);
   }
 
-  handleOptions(values: readonly T[]): void {
-    const value = values.at(0) ?? null;
+  handleInput(): void {
+    this.togglePopover(true);
 
-    this.updateModelValue(value);
-    this.updateNativeValue(this.stringify(value));
+    const { value } = this.inputEl;
+    const option = this.findOption(value);
+
+    this.updateModel(option || value);
+    this.updateListbox(option ? option : null);
+
+    if (option) {
+      this.updateNative(this.stringify(option));
+    }
   }
 
-  handleControlValue(value: T | null): void {
-    this.updateListBoxValue(value);
-    this.updateNativeValue(this.stringify(value));
+  handleListboxValue(options: readonly T[]): void {
+    const value = options.at(0) || null;
+    this.updateModel(value);
+    this.updateNative(this.stringify(value));
+    this.updateListbox(value);
+  }
+
+  handleControlValue(value: T | string | null): void {
+    this.updateNative(this.stringify(value));
+    this.updateListbox(value as T); // @TODO: resolve
+  }
+
+  handleListboxOptions(options: readonly T[] | null): void {
+    this.#options = options;
+
+    if (this.#options?.length) {
+      const value = this.findOption(this.inputEl.value);
+      this.updateListbox(value ? value : null);
+    }
   }
 
   private get inputEl(): HTMLInputElement {
     return this.input().nativeElement;
   }
 
-  private updateModelValue(value: T | null): void {
+  private stringify(value: T | string | null): string {
+    return this.stringifyFn()(value);
+  }
+
+  private hasOption(value: string): boolean {
+    return !!this.#options?.some(
+      option => this.stringify(option).toLowerCase() === value.toLowerCase()
+    );
+  }
+
+  private findOption(value: T | string | null): T | null {
+    return (
+      this.#options?.find(
+        option => this.stringify(option).toLowerCase() === this.stringify(value).toLowerCase()
+      ) || null
+    );
+  }
+
+  private updateModel(value: T | string | null): void {
     this.valueChanges.next(value);
   }
 
-  private updateListBoxValue(value: T | null): void {
-    // @TODO
-    // warn! if value doesnt match any option from options list it will be thrown
-    // solve?
+  private updateListbox(value: T | null): void {
+    this.value.set(value);
   }
 
-  private updateNativeValue(value: string): void {
+  private updateNative(value: string, dispatch = false): void {
     this.inputEl.value = value;
+
+    if (dispatch) {
+      this.inputEl.dispatchEvent(
+        new InputEvent('input', {
+          inputType: 'insertText',
+          data: '',
+        })
+      );
+    }
   }
 }
