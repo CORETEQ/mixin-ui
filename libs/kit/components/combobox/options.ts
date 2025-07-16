@@ -17,6 +17,9 @@ export const X_COMBOBOX_OPTIONS = new InjectionToken<XComboboxOptions>('COMBOBOX
   factory: defaultOptionsFactory,
 });
 
-export function provideComboboxOptions(options: Partial<XComboboxOptions>): XComboboxOptions {
-  return { ...defaultOptionsFactory(), ...options };
+export function provideComboboxOptions(options: Partial<XComboboxOptions>): FactoryProvider {
+  return {
+    provide: X_COMBOBOX_OPTIONS,
+    useFactory: () => ({ ...defaultOptionsFactory(), ...options }),
+  };
 }
