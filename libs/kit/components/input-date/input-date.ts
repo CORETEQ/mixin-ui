@@ -2,6 +2,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  contentChild,
   effect,
   forwardRef,
   inject,
@@ -9,18 +10,21 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, Subject } from 'rxjs';
 import {
   injectMask,
   isMatchingTarget,
   provideMask,
+  watch,
   X_DATE_MASK_FACTORY,
   XDateMaskOptions,
 } from '@mixin-ui/cdk';
 import {
   provideControlAccessor,
   providePopoverOptions,
+  XControl,
   XControlAccessor,
   XInput,
   XPopoverTarget,
@@ -71,6 +75,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly #popover = inject(XPopoverTarget, { self: true });
   readonly #calendarChanges = new Subject<Date | null>();
 
+  readonly control = contentChild(XControl, { read: NgControl });
   readonly size = this.#input.size;
   readonly open = this.#popover.open;
   readonly value = signal<Date | null>(null);
@@ -105,6 +110,12 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly valueChanges = merge(this.#mask.valueChanges, this.#calendarChanges);
 
   constructor() {
+    watch(this.open, open => {
+      if (!open) {
+        this.control()?.control?.markAsTouched();
+      }
+    });
+
     effect(() => {
       this.#mask.updateOptions({
         min: this.min(),
