@@ -47,7 +47,7 @@ export class XInputMask implements XControlAccessor<string> {
   readonly pattern = input(this.#opt.pattern);
   readonly showFiller = input(this.#opt.showFiller, { transform: booleanAttribute });
   readonly fillerChar = input(this.#opt.fillerChar);
-  readonly resetUncompleted = input(this.#opt.resetUncompleted, { transform: booleanAttribute });
+  readonly strict = input(this.#opt.strict, { transform: booleanAttribute });
 
   readonly valueChanges = merge(this.#mask.valueChanges, this.#innerValueChanges);
 
@@ -62,7 +62,7 @@ export class XInputMask implements XControlAccessor<string> {
   }
 
   handleFocusOut(e: FocusEvent): void {
-    if (this.resetUncompleted() && !this.#mask.completed && isMatchingTarget(e, 'input')) {
+    if (this.strict() && !this.#mask.completed && isMatchingTarget(e, 'input')) {
       this.#mask.setValue('');
       this.#innerValueChanges.next('');
     }
