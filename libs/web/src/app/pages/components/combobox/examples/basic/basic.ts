@@ -21,6 +21,6 @@ export class ComboboxBasicExample {
 
   readonly filteredOptions = computed(() => {
     const query = this.query();
-    return this.options().filter(option => option.includes(query));
+    return this.options().filter(option => option.toLowerCase().includes(query.toLowerCase()));
   });
 }

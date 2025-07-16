@@ -4,7 +4,9 @@
       <input x-control [(ngModel)]="value" (input)="query.set(el.value)" #el />
       <x-listbox *x-popover>
         @for(option of filteredOptions(); track option) {
-          <x-option [value]="option">{{ option }}</x-option>
+          <x-option [value]="option">
+            {{ option }}
+          </x-option>
         }
       </x-listbox>
     </x-combobox>

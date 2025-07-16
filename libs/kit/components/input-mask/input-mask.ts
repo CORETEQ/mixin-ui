@@ -8,16 +8,16 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { merge, Subject } from 'rxjs';
 import {
   injectMask,
-  isElement,
+  isMatchingTarget,
   provideMask,
   X_PATTERN_MASK_FACTORY,
   XPatternMaskOptions,
 } from '@mixin-ui/cdk';
 import { provideControlAccessor, XControlAccessor, XInput } from '@mixin-ui/kit/directives';
 import { X_INPUT_MASK_OPTIONS } from './options';
-import { merge, Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -62,12 +62,7 @@ export class XInputMask implements XControlAccessor<string> {
   }
 
   handleFocusOut(e: FocusEvent): void {
-    if (
-      this.resetUncompleted() &&
-      !this.#mask.completed &&
-      isElement(e.target) &&
-      e.target.matches('input')
-    ) {
+    if (this.resetUncompleted() && !this.#mask.completed && isMatchingTarget(e, 'input')) {
       this.#mask.setValue('');
       this.#innerValueChanges.next('');
     }

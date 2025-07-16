@@ -52,7 +52,6 @@ export class XListbox {
         this.#cdkListbox.value = value;
         this.#cdkListbox.multiple = multiple;
         this.#cdkListbox.compareWith = comparator;
-        this.#cdkListbox.useActiveDescendant = true;
       });
     });
 

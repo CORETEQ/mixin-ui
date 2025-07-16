@@ -8,7 +8,7 @@ export interface XControlAccessor<T> {
 
   handleControlValue(value: T): void;
 
-  handleControlInit?(element: HTMLInputElement): void;
+  handleControlInit?(el: HTMLInputElement): void;
 
   handleControlDestroy?(): void;
 }

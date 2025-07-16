@@ -66,20 +66,22 @@ export class XCombobox<T> implements XControlAccessor<T | null>, XListboxAccesso
   readonly value = signal<T | null>(null);
   readonly valueChanges = new Subject<T | null>();
 
-  readonly stringify = (value: T | null) => String(value);
+  readonly stringify = (value: T | null) => (value ? String(value) : '');
 
   togglePopover(open: boolean): void {
     this.#popover.toggle(open);
   }
 
   handleOptions(values: readonly T[]): void {
-    this.updateModelValue(values.at(0) || null); // @TODO: process value
-    this.updateNativeValue('value'); // @TODO: add stringify
+    const value = values.at(0) ?? null;
+
+    this.updateModelValue(value);
+    this.updateNativeValue(this.stringify(value));
   }
 
   handleControlValue(value: T | null): void {
     this.updateListBoxValue(value);
-    this.updateNativeValue(this.stringify(value)); // @TODO: add stringify
+    this.updateNativeValue(this.stringify(value));
   }
 
   private get inputEl(): HTMLInputElement {
@@ -87,7 +89,7 @@ export class XCombobox<T> implements XControlAccessor<T | null>, XListboxAccesso
   }
 
   private updateModelValue(value: T | null): void {
-    // @TODO
+    this.valueChanges.next(value);
   }
 
   private updateListBoxValue(value: T | null): void {

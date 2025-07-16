@@ -13,7 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, Subject } from 'rxjs';
 import {
   injectMask,
-  isElement,
+  isMatchingTarget,
   provideMask,
   X_DATE_MASK_FACTORY,
   XDateMaskOptions,
@@ -129,6 +129,18 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
     this.#popover.toggle(open);
   }
 
+  handleFocusIn(e: FocusEvent): void {
+    if (isMatchingTarget(e, 'input') && this.popoverOnFocus()) {
+      this.#popover.toggle(true);
+    }
+  }
+
+  handleFocusOut(e: FocusEvent): void {
+    if (isMatchingTarget(e, 'input') && !this.#mask.completed) {
+      this.#mask.setValue(null);
+    }
+  }
+
   handleDate(value: Date | null): void {
     this.value.set(value);
     this.#calendarChanges.next(value);
@@ -145,17 +157,5 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
 
   handleControlDestroy(): void {
     this.#mask.destroy();
-  }
-
-  handleFocusIn(e: FocusEvent): void {
-    if (isElement(e.target) && e.target.matches('input') && this.popoverOnFocus()) {
-      this.#popover.toggle(true);
-    }
-  }
-
-  handleFocusOut(e: FocusEvent): void {
-    if (isElement(e.target) && e.target.matches('input') && !this.#mask.completed) {
-      this.#mask.setValue(null);
-    }
   }
 }
