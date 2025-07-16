@@ -6,7 +6,9 @@ export interface XListboxAccessor<T = any> {
   readonly multiple: Signal<boolean>;
   readonly comparator: Signal<XComparator<T> | undefined>;
 
-  handleOptions(values: readonly T[]): void;
+  handleListboxValue(value: readonly T[]): void;
+
+  handleListboxOptions?(options: readonly T[] | null): void;
 }
 
 export const X_LISTBOX_ACCESSOR = new InjectionToken<XListboxAccessor>('LISTBOX_ACCESSOR');
