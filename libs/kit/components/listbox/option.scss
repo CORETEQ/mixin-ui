@@ -27,13 +27,13 @@
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
-  background-color: var(--x-track-bg);
+  background-color: var(--x-bg);
   outline: none;
   border-radius: 4px;
   cursor: default;
 
   @include active {
-    --x-track-bg: var(--x-gray-200);
+    --x-bg: var(--x-gray-200);
   }
 
   @include selected {
