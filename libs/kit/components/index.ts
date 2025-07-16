@@ -13,6 +13,7 @@ export * from '@mixin-ui/kit/components/input-date';
 export * from '@mixin-ui/kit/components/input-mask';
 export * from '@mixin-ui/kit/components/input-number';
 export * from '@mixin-ui/kit/components/input-text';
+export * from '@mixin-ui/kit/components/label';
 export * from '@mixin-ui/kit/components/listbox';
 export * from '@mixin-ui/kit/components/select';
 export * from '@mixin-ui/kit/components/spinner';
