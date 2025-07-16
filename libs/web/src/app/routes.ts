@@ -104,7 +104,7 @@ export const ROUTES: Route[] = [
                 loadComponent: () => import('./pages/components/input-date'),
               }),
               page({
-                path: 'input-imask',
+                path: 'input-mask',
                 title: 'Input Mask',
                 loadComponent: () => import('./pages/components/input-mask'),
               }),
