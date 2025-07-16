@@ -1,3 +1,22 @@
+## 0.0.1-alpha.9 (2025-07-16)
+
+### 🚀 Features
+
+- **cdk:** add `isMatchingTarget` function to dom utils ([d8fbc16](https://github.com/CORETEQ/mixin-ui/commit/d8fbc16))
+- **kit:** rename `resetUncompleted` to `strict` in `XInputMask` ([5af0969](https://github.com/CORETEQ/mixin-ui/commit/5af0969))
+- **kit:** remove self-popover arrow from `XOption` ([4bd409b](https://github.com/CORETEQ/mixin-ui/commit/4bd409b))
+- **kit:** update `XListboxAccessor` interface, rename from `handleOptions` to `handleListboxValue` ([b6474a3](https://github.com/CORETEQ/mixin-ui/commit/b6474a3))
+- **kit:** make `value` input of `XOption` required, add generic for value type ([373e2c2](https://github.com/CORETEQ/mixin-ui/commit/373e2c2))
+- **kit:** add `strict` property for `XComboboxOptions` ([e6ccf92](https://github.com/CORETEQ/mixin-ui/commit/e6ccf92))
+- **kit:** make accessor injection in `XListbox` optional, refactor based on new accessor interface ([c7514d1](https://github.com/CORETEQ/mixin-ui/commit/c7514d1))
+- **kit:** add `stringifyFn` to `XComboboxOptions` ([b6887a1](https://github.com/CORETEQ/mixin-ui/commit/b6887a1))
+- **kit:** implement `XCombobox` ([d7fb4ab](https://github.com/CORETEQ/mixin-ui/commit/d7fb4ab))
+
+### 🩹 Fixes
+
+- **kit:** ensure `markAsTouched` is called on popover close in `XInputDate` ([4cc9094](https://github.com/CORETEQ/mixin-ui/commit/4cc9094))
+- **kit:** fix `provideComboboxOptions` return type and value ([37fa881](https://github.com/CORETEQ/mixin-ui/commit/37fa881))
+
 ## 0.0.1-alpha.8 (2025-07-15)
 
 ### 🚀 Features
