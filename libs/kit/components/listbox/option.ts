@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 import { CdkListbox, CdkOption } from '@angular/cdk/listbox';
 import { XPopoverTarget } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
@@ -13,12 +20,7 @@ import { XIcon } from '@mixin-ui/kit/components/icon';
   hostDirectives: [
     {
       directive: CdkOption,
-      inputs: [
-        'id',
-        'cdkOption: value',
-        'cdkOptionDisabled: disabled',
-        'cdkOptionTypeaheadLabel: typeaheadLabel',
-      ],
+      inputs: ['id', 'cdkOptionDisabled: disabled', 'cdkOptionTypeaheadLabel: typeaheadLabel'],
     },
   ],
   host: {
@@ -29,12 +31,18 @@ import { XIcon } from '@mixin-ui/kit/components/icon';
     '(pointerenter)': 'handlePointerEnter()',
   },
 })
-export class XOption {
+export class XOption<V> {
   readonly #cdkListbox = inject(CdkListbox);
   readonly #cdkOption = inject(CdkOption, { self: true });
   readonly #popover = inject(XPopoverTarget, { skipSelf: true, optional: true });
 
-  readonly hasSelfPopover = !!inject(XPopoverTarget, { self: true, optional: true });
+  readonly value = input.required<V>();
+
+  constructor() {
+    effect(() => {
+      this.#cdkOption.value = this.value();
+    });
+  }
 
   handlePopoverClose(): void {
     if (!this.#cdkListbox.multiple && this.#cdkOption.isSelected()) {
