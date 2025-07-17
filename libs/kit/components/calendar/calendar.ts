@@ -5,7 +5,6 @@ import {
   contentChildren,
   inject,
   input,
-  linkedSignal,
   model,
   signal,
   ViewEncapsulation,
@@ -40,7 +39,7 @@ export class XCalendar {
   readonly #popover = inject(XPopoverTarget, { optional: true });
 
   readonly slots = contentChildren(X_SLOT);
-  readonly month = input(new Date());
+  readonly month = model(new Date());
   readonly mode = model(this.#opt.mode);
   readonly startOfWeek = input(this.#opt.startOfWeek);
   readonly weekdayFormat = input(this.#opt.weekdayFormat);
@@ -55,7 +54,6 @@ export class XCalendar {
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
 
-  readonly activeMonth = linkedSignal(() => this.value() || this.month());
   readonly value = computed(() => this.#accessor?.value() || this.#cva.value());
   readonly min = this.#accessor?.min || signal(null);
   readonly max = this.#accessor?.max || signal(null);
@@ -71,13 +69,13 @@ export class XCalendar {
   }
 
   setMonth(month: Date): void {
-    this.activeMonth.set(month);
+    this.month.set(month);
     this.setMode('days');
     this.updateValue(month);
   }
 
   setYear(year: Date): void {
-    this.activeMonth.set(year);
+    this.month.set(year);
     this.setMode('months');
     this.updateValue(year);
   }
