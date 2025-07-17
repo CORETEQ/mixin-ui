@@ -140,10 +140,10 @@
   }
 
   @include variant(outline) {
-    --x-text-color: var(--x-gray-900);
+    --x-text-color: var(--x-neutral-900);
     --x-bg-color: var(--x-white);
-    --x-border-color: var(--x-gray-400);
-    --x-placeholder-color: var(--x-gray-600);
+    --x-border-color: var(--x-neutral-400);
+    --x-placeholder-color: var(--x-neutral-600);
     --x-spinner-color: var(--x-main-600);
     --x-autofill-color: var(--x-main-200);
     --x-selection-color: var(--x-main-200);
@@ -171,7 +171,7 @@
     }
 
     @include readonly {
-      --x-bg-color: var(--x-gray-50);
+      --x-bg-color: var(--x-neutral-50);
     }
 
     @include disabled {

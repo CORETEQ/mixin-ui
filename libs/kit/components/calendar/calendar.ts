@@ -27,7 +27,7 @@ import { XCalendarNav } from './nav';
   styleUrl: './calendar.scss',
   templateUrl: './calendar.html',
   imports: [NgTemplateOutlet, XDays, XYears, XMonths, XSlotsPipe, XSlot, XCalendarNav],
-  providers: [provideButtonOptions({ variant: 'subtle', color: 'gray', size: 'sm' })],
+  providers: [provideButtonOptions({ variant: 'subtle', color: 'neutral', size: 'sm' })],
   host: {
     '[class]': '`x-calendar x-size-${size()} x-radius-${radius()}`',
   },

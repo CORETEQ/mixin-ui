@@ -33,7 +33,7 @@
   cursor: default;
 
   @include active {
-    --x-bg: var(--x-gray-200);
+    --x-bg: var(--x-neutral-200);
   }
 
   @include selected {

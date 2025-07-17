@@ -45,7 +45,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
     provideControlAccessor(forwardRef(() => XInputDate)),
     provideCalendarAccessor(forwardRef(() => XInputDate)),
     providePopoverOptions({ autoFocus: false, stretch: 'auto' }),
-    provideButtonOptions({ color: 'gray', radius: 'none', variant: 'outline' }),
+    provideButtonOptions({ variant: 'outline', color: 'neutral', radius: 'none' }),
   ],
   hostDirectives: [
     {
@@ -140,32 +140,38 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
     this.#popover.toggle(open);
   }
 
+  /** @internal */
   handleFocusIn(e: FocusEvent): void {
     if (isMatchingTarget(e, 'input') && this.popoverOnFocus()) {
       this.#popover.toggle(true);
     }
   }
 
+  /** @internal */
   handleFocusOut(e: FocusEvent): void {
     if (isMatchingTarget(e, 'input') && !this.#mask.completed) {
       this.#mask.setValue(null);
     }
   }
 
+  /** @internal */
   handleCalendarValue(value: Date | null): void {
     this.value.set(value);
     this.#calendarChanges.next(value);
   }
 
+  /** @internal */
   handleControlValue(value: Date | null): void {
     this.value.set(value);
     this.#mask.setValue(value);
   }
 
+  /** @internal */
   handleControlInit(el: HTMLInputElement): void {
     this.#mask.init(el);
   }
 
+  /** @internal */
   handleControlDestroy(): void {
     this.#mask.destroy();
   }

@@ -27,10 +27,10 @@
   cursor: default;
 
   @include hover {
-    --x-track-bg: var(--x-gray-200);
+    --x-track-bg: var(--x-neutral-200);
   }
 
   @include focus-visible {
-    --x-track-bg: var(--x-gray-200);
+    --x-track-bg: var(--x-neutral-200);
   }
 }

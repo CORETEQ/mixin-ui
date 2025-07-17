@@ -45,7 +45,7 @@
 }
 
 .x-switch {
-  --x-track-bg: var(--x-gray-400);
+  --x-track-bg: var(--x-neutral-400);
   --t-thumb-bg: var(--x-white);
 
   position: relative;
@@ -64,7 +64,7 @@
   cursor: pointer;
 
   @include active {
-    --x-track-bg: var(--x-gray-500);
+    --x-track-bg: var(--x-neutral-500);
   }
 
   @include invalid {

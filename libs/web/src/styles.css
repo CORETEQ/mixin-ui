@@ -12,7 +12,7 @@ body {
 }
 
 body {
-  color: var(--x-gray-950);
+  color: var(--x-neutral-950);
   font-family: Inter, sans-serif;
   background: var(--x-white);
   text-rendering: optimizelegibility;

@@ -38,11 +38,11 @@
 
   &:where(.x-variant-dark) {
     --x-color: var(--x-white);
-    --x-bg-color: var(--x-gray-900);
+    --x-bg-color: var(--x-neutral-900);
   }
 
   &:where(.x-variant-light) {
-    --x-color: var(--x-gray-900);
+    --x-color: var(--x-neutral-900);
     --x-bg-color: var(--x-white);
   }
 

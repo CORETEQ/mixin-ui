@@ -26,7 +26,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
   providers: [
     provideMask(X_NUMBER_MASK_FACTORY),
     provideControlAccessor(forwardRef(() => XInputNumber)),
-    provideButtonOptions({ variant: 'outline', color: 'gray', radius: 'none' }),
+    provideButtonOptions({ variant: 'outline', color: 'neutral', radius: 'none' }),
   ],
   hostDirectives: [
     {
