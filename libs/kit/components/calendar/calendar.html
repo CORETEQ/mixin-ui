@@ -1,6 +1,6 @@
 @let $ = slots() | asRecord;
 
-<x-calendar-nav [(month)]="month"
+<x-calendar-nav [(month)]="activeMonth"
                 [monthFormat]="monthFormat()"
                 [mode]="mode()"
                 [radius]="radius()"
@@ -10,7 +10,7 @@
 <div class="x-calendar-content">
   @switch (mode()) {
     @case ('days') {
-      <x-days [date]="month()"
+      <x-days [date]="activeMonth()"
               [value]="value()"
               [min]="min()"
               [max]="max()"
@@ -27,7 +27,7 @@
       </x-days>
     }
     @case ('months') {
-      <x-months [date]="month()"
+      <x-months [date]="activeMonth()"
                 [value]="value()"
                 [min]="min()"
                 [max]="max()"
@@ -41,7 +41,7 @@
       </x-months>
     }
     @case ('years') {
-      <x-years [date]="month()"
+      <x-years [date]="activeMonth()"
                [value]="value()"
                [min]="min()"
                [max]="max()"
