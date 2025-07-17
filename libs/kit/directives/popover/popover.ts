@@ -140,7 +140,7 @@ export class XPopoverTarget {
     this.#overlay.updatePosition(position);
   }
 
-  focusOrigin(): void {
+  focus(): void {
     this.#el.focus();
   }
 }

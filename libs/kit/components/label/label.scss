@@ -1,3 +1,17 @@
 .x-label {
-  /* empty */
+  display: flex;
+  gap: 0.625rem;
+  font: var(--x-text-sm);
+
+  &:has(> .x-size-sm) {
+    font: var(--x-text-xs);
+  }
+
+  &:has(> .x-size-md) {
+    font: var(--x-text-sm);
+  }
+
+  &:has(> .x-size-lg) {
+    font: var(--x-text-md);
+  }
 }

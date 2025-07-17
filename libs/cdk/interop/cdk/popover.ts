@@ -30,7 +30,7 @@ import {
   take,
   takeUntil,
 } from 'rxjs';
-import { isElement } from '../dom';
+import { isElement } from '@mixin-ui/cdk/utils';
 
 export type XPopoverDirection = 'horizontal' | 'vertical' | 'both';
 export type XPopoverPosition = 'top' | 'end' | 'bottom' | 'start';
@@ -57,26 +57,26 @@ export class XPopoverImpl {
   readonly #vcr = inject(ViewContainerRef);
   readonly #destroyRef = inject(DestroyRef);
   readonly #dragDrop = inject(DragDropRegistry);
-  readonly #open$ = new BehaviorSubject(false);
-  readonly #ref$ = this.#open$.pipe(switchMap(open => (open && this.#ref ? of(this.#ref) : EMPTY)));
+  readonly #openChanges = new BehaviorSubject(false);
+  readonly #refEnables = this.#openChanges.pipe(
+    switchMap(open => (open && this.#ref ? of(this.#ref) : EMPTY))
+  );
 
-  readonly openChanges = this.#open$.asObservable();
+  readonly openChanges = this.#openChanges.asObservable();
 
-  readonly positionChanges = this.#ref$.pipe(
-    switchMap(overlayRef =>
-      coerceStrategy(overlayRef).positionChanges.pipe(
-        map(event => fromCdkPosition(event.connectionPair))
-      )
+  readonly positionChanges = this.#refEnables.pipe(
+    switchMap(ref =>
+      coerceStrategy(ref).positionChanges.pipe(map(event => fromCdkPosition(event.connectionPair)))
     )
   );
 
-  readonly keydownEvents = this.#ref$.pipe(switchMap(overlayRef => overlayRef.keydownEvents()));
+  readonly keydownEvents = this.#refEnables.pipe(switchMap(ref => ref.keydownEvents()));
 
-  readonly backdropEvents = this.#ref$.pipe(switchMap(overlayRef => overlayRef.backdropClick()));
+  readonly backdropEvents = this.#refEnables.pipe(switchMap(ref => ref.backdropClick()));
 
-  readonly outsidePointerEvents = this.#ref$.pipe(
-    switchMap(overlayRef =>
-      overlayRef.outsidePointerEvents().pipe(
+  readonly outsidePointerEvents = this.#refEnables.pipe(
+    switchMap(ref =>
+      ref.outsidePointerEvents().pipe(
         filter(e => !onBackdrop(e) && !this.#el.contains(e.target as Node)),
         takeUntil(this.#dragDrop.pointerMove.pipe(take(1))),
         repeat({ delay: () => this.#dragDrop.pointerUp.pipe(delay(0)) })
@@ -90,8 +90,8 @@ export class XPopoverImpl {
   constructor() {
     this.#destroyRef.onDestroy(() => {
       this.#ref?.dispose();
-      this.#open$.next(false);
-      this.#open$.complete();
+      this.#openChanges.next(false);
+      this.#openChanges.complete();
     });
   }
 
@@ -110,7 +110,7 @@ export class XPopoverImpl {
     }
 
     this.#ref.attach(new ComponentPortal(component, this.#vcr));
-    this.#open$.next(true);
+    this.#openChanges.next(true);
   }
 
   close(): void {
@@ -119,7 +119,7 @@ export class XPopoverImpl {
     }
 
     this.#ref?.detach();
-    this.#open$.next(false);
+    this.#openChanges.next(false);
   }
 
   updatePosition(options?: Partial<XPopoverPositionOptions>): void {
@@ -159,7 +159,7 @@ export class XPopoverImpl {
 }
 
 function onBackdrop(e: MouseEvent): boolean {
-  return isElement(e.target) && e.target.classList.contains('cdk-popover-backdrop');
+  return isElement(e.target) && e.target.classList.contains('cdk-overlay-backdrop');
 }
 
 function coerceStrategy(overlayRef: OverlayRef): FlexibleConnectedPositionStrategy {

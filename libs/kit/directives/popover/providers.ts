@@ -1,16 +1,6 @@
 import { ElementRef, inject, InjectionToken, Provider } from '@angular/core';
 import { InputModalityDetector } from '@angular/cdk/a11y';
-import {
-  asapScheduler,
-  debounceTime,
-  EMPTY,
-  filter,
-  fromEvent,
-  map,
-  Observable,
-  race,
-  switchMap,
-} from 'rxjs';
+import { EMPTY, filter, fromEvent, map, Observable, race, switchMap } from 'rxjs';
 import {
   createPopover,
   isPureEscape,
@@ -19,13 +9,13 @@ import {
   XPopoverPositionOptions,
 } from '@mixin-ui/cdk';
 
-export const X_POPOVER = new InjectionToken<XPopoverImpl>('OVERLAY');
+export const X_POPOVER = new InjectionToken<XPopoverImpl>('POPOVER');
 
 export const X_POPOVER_POSITION_OPTIONS = new InjectionToken<XPopoverPositionOptions>(
   'POPOVER_POSITION_OPTIONS'
 );
 
-export const X_POPOVER_CLOSE = new InjectionToken<Observable<boolean>>('OVERLAY_CLOSE');
+export const X_POPOVER_CLOSE = new InjectionToken<Observable<boolean>>('POPOVER_CLOSE');
 
 export const X_POPOVER_PROVIDERS: Provider[] = [
   {
@@ -64,7 +54,6 @@ export const X_POPOVER_PROVIDERS: Provider[] = [
               )
             : EMPTY;
         }),
-        debounceTime(0, asapScheduler),
         map(() => false)
       ),
   },

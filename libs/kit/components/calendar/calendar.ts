@@ -64,7 +64,7 @@ export class XCalendar {
 
   setDay(day: Date): void {
     this.#popover?.toggle(false);
-    this.#popover?.focusOrigin();
+    this.#popover?.focus();
     this.updateValue(day);
   }
 

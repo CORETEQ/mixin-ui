@@ -1,11 +1,22 @@
 @Component({
   template: `
-    <label x-label>
+    <x-control>
       Label
       <x-input-text>
-        <input [(ngModel)]="value" />
+        <input x-model [(ngModel)]="value" />
       </x-input-text>
-    </label>
+      <x-error>Error message</x-error>
+    </x-control>
+
+    <x-control>
+      <button x-switch></button>
+      Label
+    </x-control>
+
+    <x-control>
+      <button x-checkbox></button>
+      Label
+    </x-control>
   `
 })
 export class Usage {

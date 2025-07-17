@@ -22,27 +22,29 @@ import { X_POPOVER } from './providers';
   styleUrl: './container.scss',
   templateUrl: './container.html',
   imports: [NgComponentOutlet, NgTemplateOutlet],
-  host: { class: 'x-popover' },
+  host: {
+    class: 'x-popover',
+  },
 })
 export class XPopoverContainer {
-  readonly #popover = inject(XPopoverTarget);
-  readonly #overlay = inject(X_POPOVER);
+  readonly #target = inject(XPopoverTarget);
+  readonly #popover = inject(X_POPOVER);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
 
   readonly injector = inject(INJECTOR);
-  readonly content = computed(() => typedOutlet(this.#popover.content()));
-  readonly close = () => this.#popover.toggle(false);
+  readonly content = computed(() => typedOutlet(this.#target.content()));
+  readonly close = () => this.#target.toggle(false);
 
   constructor() {
-    this.#overlay.keydownEvents
+    this.#popover.keydownEvents
       .pipe(
         filter(e => isPureEscape(e) || e.key === 'Tab' || (e.shiftKey && e.key === 'Tab')),
         takeUntilDestroyed()
       )
-      .subscribe(() => this.#popover.focusOrigin());
+      .subscribe(() => this.#target.focus());
 
     afterNextRender(() => {
-      if (!this.#popover.autoFocus()) {
+      if (!this.#target.autoFocus()) {
         return;
       }
 

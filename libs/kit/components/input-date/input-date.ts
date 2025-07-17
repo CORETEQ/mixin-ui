@@ -44,8 +44,8 @@ import { X_INPUT_DATE_OPTIONS } from './options';
     provideMask(X_DATE_MASK_FACTORY),
     provideControlAccessor(forwardRef(() => XInputDate)),
     provideCalendarAccessor(forwardRef(() => XInputDate)),
-    provideButtonOptions({ color: 'gray', radius: 'none', variant: 'outline' }),
     providePopoverOptions({ autoFocus: false, stretch: 'auto' }),
+    provideButtonOptions({ color: 'gray', radius: 'none', variant: 'outline' }),
   ],
   hostDirectives: [
     {

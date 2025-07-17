@@ -73,7 +73,7 @@ export class XListbox implements OnDestroy {
 
       if (!this.#cdkListbox.multiple) {
         this.#popover?.toggle(false);
-        this.#popover?.focusOrigin();
+        this.#popover?.focus();
       }
     });
   }

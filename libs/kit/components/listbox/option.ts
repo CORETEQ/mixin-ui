@@ -47,7 +47,7 @@ export class XOption<V> {
   handlePopoverClose(): void {
     if (!this.#cdkListbox.multiple && this.#cdkOption.isSelected()) {
       this.#popover?.toggle(false);
-      this.#popover?.focusOrigin();
+      this.#popover?.focus();
     }
   }
 
