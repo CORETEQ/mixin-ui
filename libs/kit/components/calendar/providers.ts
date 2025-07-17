@@ -5,7 +5,7 @@ export interface XCalendarAccessor {
   readonly max: Signal<Date | null>;
   readonly value: Signal<Date | null>;
 
-  handleDate(value: Date | null): void;
+  handleCalendarValue(value: Date | null): void;
 }
 
 export const X_CALENDAR_ACCESSOR = new InjectionToken<XCalendarAccessor>('CALENDAR_ACCESSOR');

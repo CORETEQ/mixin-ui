@@ -152,7 +152,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
     }
   }
 
-  handleDate(value: Date | null): void {
+  handleCalendarValue(value: Date | null): void {
     this.value.set(value);
     this.#calendarChanges.next(value);
   }
