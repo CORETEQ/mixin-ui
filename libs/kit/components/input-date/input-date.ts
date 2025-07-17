@@ -2,6 +2,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  computed,
   contentChild,
   effect,
   forwardRef,
@@ -71,13 +72,16 @@ import { X_INPUT_DATE_OPTIONS } from './options';
 export class XInputDate implements XControlAccessor<Date | null>, XCalendarAccessor {
   readonly #opt = inject(X_INPUT_DATE_OPTIONS);
   readonly #mask = injectMask<Date | null, XDateMaskOptions>();
-  readonly #input = inject(XInput, { self: true });
-  readonly #popover = inject(XPopoverTarget, { self: true });
+  readonly #input = inject(XInput);
+  readonly #popover = inject(XPopoverTarget);
   readonly #calendarChanges = new Subject<Date | null>();
 
   readonly control = contentChild(XControl, { read: NgControl });
   readonly size = this.#input.size;
   readonly open = this.#popover.open;
+  readonly disabled = computed(
+    () => this.#input.state()?.disabled || this.#input.state()?.readOnly
+  );
   readonly value = signal<Date | null>(null);
 
   /** Show calendar popover when input field receives focus (defaults to true) */

@@ -61,6 +61,7 @@ export class XInputMask implements XControlAccessor<string> {
     });
   }
 
+  /** @internal */
   handleFocusOut(e: FocusEvent): void {
     if (this.strict() && !this.#mask.completed && isMatchingTarget(e, 'input')) {
       this.#mask.setValue('');
@@ -68,14 +69,17 @@ export class XInputMask implements XControlAccessor<string> {
     }
   }
 
+  /** @internal */
   handleControlValue(value: string): void {
     this.#mask.setValue(value);
   }
 
+  /** @internal */
   handleControlInit(el: HTMLInputElement): void {
     this.#mask.init(el);
   }
 
+  /** @internal */
   handleControlDestroy(): void {
     this.#mask.destroy();
   }

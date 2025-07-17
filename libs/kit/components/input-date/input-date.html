@@ -2,7 +2,7 @@
 <ng-content />
 
 <span class="x-input-suffix">
-  <button x-icon (click)="togglePopover(!open())">
+  <button x-icon [disabled]="disabled()" (click)="togglePopover(!open())">
     <x-icon src="calendar" />
   </button>
 </span>

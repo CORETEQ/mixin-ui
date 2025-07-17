@@ -77,17 +77,16 @@ export class XInputNumber implements XControlAccessor<number | null> {
   /** Step value for incrementing/decrementing the number (default is 1) */
   readonly step = input(this.#opt.step, { transform: numberAttribute });
 
-  readonly disabled = computed(() => this.#input.state()?.disabled);
-  readonly enabled = computed(
-    () => !this.#input.state()?.disabled && !this.#input.state()?.readOnly
+  readonly disabled = computed(
+    () => this.#input.state()?.disabled || this.#input.state()?.readOnly
   );
-  readonly plusDisabled = computed(() => !this.enabled() || this.normalizedValue >= this.max());
-  readonly minusDisabled = computed(() => !this.enabled() || this.normalizedValue <= this.min());
+  readonly plusDisabled = computed(() => this.disabled() || this.normalizedValue >= this.max());
+  readonly minusDisabled = computed(() => this.disabled() || this.normalizedValue <= this.min());
 
   readonly valueChanges = this.#mask.valueChanges;
 
   constructor() {
-    effect(() =>
+    effect(() => {
       this.#mask.updateOptions({
         min: this.min(),
         max: this.max(),
@@ -98,8 +97,8 @@ export class XInputNumber implements XControlAccessor<number | null> {
         decimalScale: this.decimalScale(),
         normalizeZeros: this.normalizeZeros(),
         padDecimals: this.padDecimals(),
-      })
-    );
+      });
+    });
   }
 
   get normalizedValue(): number {
@@ -107,29 +106,18 @@ export class XInputNumber implements XControlAccessor<number | null> {
   }
 
   plus(step = 1): void {
-    if (this.enabled()) {
+    if (!this.disabled()) {
       this.#mask.setValue(Math.min(this.max(), this.normalizedValue + step));
     }
   }
 
   minus(step = 1): void {
-    if (this.enabled()) {
+    if (!this.disabled()) {
       this.#mask.setValue(Math.max(this.min(), this.normalizedValue - step));
     }
   }
 
-  handleControlValue(value: number | null): void {
-    this.#mask.setValue(value);
-  }
-
-  handleControlInit(el: HTMLInputElement): void {
-    this.#mask.init(el);
-  }
-
-  handleControlDestroy(): void {
-    this.#mask.destroy();
-  }
-
+  /** @internal */
   handleArrowUp(e: KeyboardEvent): void {
     if (this.step()) {
       e.preventDefault();
@@ -137,6 +125,7 @@ export class XInputNumber implements XControlAccessor<number | null> {
     }
   }
 
+  /** @internal */
   handleArrowDown(e: KeyboardEvent): void {
     if (this.step()) {
       e.preventDefault();
@@ -144,8 +133,24 @@ export class XInputNumber implements XControlAccessor<number | null> {
     }
   }
 
+  /** @internal */
   handleSpin(e: PointerEvent): void {
     e.preventDefault();
     this.#input.focus();
+  }
+
+  /** @internal */
+  handleControlValue(value: number | null): void {
+    this.#mask.setValue(value);
+  }
+
+  /** @internal */
+  handleControlInit(el: HTMLInputElement): void {
+    this.#mask.init(el);
+  }
+
+  /** @internal */
+  handleControlDestroy(): void {
+    this.#mask.destroy();
   }
 }
