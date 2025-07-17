@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { isObject } from '@mixin-ui/cdk';
 
-export type XComparator<T = unknown> = (a: T, b: T) => boolean;
+export type XComparator<T = any> = (a: T, b: T) => boolean;
 
 export const createKeyComparator = (key: string): XComparator => {
   return (a, b) => {
