@@ -11,6 +11,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Subject } from 'rxjs';
+import { watch } from '@mixin-ui/cdk';
 import {
   provideControlAccessor,
   providePopoverOptions,
@@ -21,7 +22,6 @@ import {
 } from '@mixin-ui/kit/directives';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 import { X_COMBOBOX_OPTIONS } from './options';
-import { watch } from '@mixin-ui/cdk';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -74,7 +74,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
   constructor() {
     watch(this.open, open => {
-      if (!open && this.strict() && !this.hasOption(this.inputEl.value)) {
+      if (!open && this.strict() && !this.hasOption(this.nativeValue)) {
         this.updateModel(null);
         this.updateListbox(null);
         this.updateNative('', true);
@@ -89,10 +89,8 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   handleInput(): void {
     this.togglePopover(true);
 
-    const { value } = this.inputEl;
-    const option = this.findOption(value);
-
-    this.updateModel(option || value);
+    const option = this.findOption(this.nativeValue);
+    this.updateModel(option || this.nativeValue);
     this.updateListbox(option ? option : null);
 
     if (option) {
@@ -116,13 +114,17 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     this.#options = options;
 
     if (this.#options?.length) {
-      const value = this.findOption(this.inputEl.value);
+      const value = this.findOption(this.nativeValue);
       this.updateListbox(value ? value : null);
     }
   }
 
   private get inputEl(): HTMLInputElement {
     return this.input().nativeElement;
+  }
+
+  private get nativeValue(): string {
+    return this.inputEl.value;
   }
 
   private stringify(value: T | string | null): string {
