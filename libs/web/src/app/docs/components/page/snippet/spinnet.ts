@@ -27,13 +27,14 @@ import { XButton, XIcon, XTooltip } from '@mixin-ui/kit';
   },
 })
 export class DocsSnippet {
+  readonly tabs = contentChildren(DocsSnippetContent);
   readonly withHeader = input(false, { transform: booleanAttribute });
   readonly showButtons = input(true, { transform: booleanAttribute });
   readonly activeIndex = model<number>(0);
   readonly align = input<'start' | 'center' | 'end'>('center');
   readonly justify = input<'start' | 'center' | 'end'>('center');
   readonly height = input<'min' | 'auto'>('min');
-  readonly tabs = contentChildren(DocsSnippetContent);
+  readonly figmaUrl = input<string>();
   readonly activeTab = computed(() => this.tabs().at(this.activeIndex()));
   readonly content = computed(() => this.activeTab()?.template());
 

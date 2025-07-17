@@ -17,7 +17,22 @@
     }
 
     @if (showButtons()) {
-      <div class="flex gap-0.5 ml-auto">
+      <div class="flex items-center gap-0.5 ml-auto">
+        @if (figmaUrl()) {
+          <a x-icon
+             target="_blank"
+             size="sm"
+             color="gray"
+             variant="ghost"
+             class="!text-[#52525B] hover:!text-[#09090B]"
+             [href]="figmaUrl()"
+          >
+            <x-icon src="figma-color" size="15" raw />
+          </a>
+
+          <div class="h-[1rem] w-[1px] mx-1.5 block bg-[#E2E2E2]"></div>
+        }
+
         <button x-icon
                 x-tooltip="Very soon..."
                 size="sm"
