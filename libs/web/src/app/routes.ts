@@ -119,6 +119,11 @@ export const ROUTES: Route[] = [
                 loadComponent: () => import('./pages/components/input-text'),
               }),
               page({
+                path: 'label',
+                title: 'Label',
+                loadComponent: () => import('./pages/components/label'),
+              }),
+              page({
                 path: 'listbox',
                 title: 'Listbox',
                 loadComponent: () => import('./pages/components/listbox'),
