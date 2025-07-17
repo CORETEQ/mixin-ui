@@ -1,3 +1,14 @@
+## 0.0.1-alpha.10 (2025-07-17)
+
+### 🚀 Features
+
+- **kit:** rename `handleDate` method to `handleCalendarValue` in `XCalendarAccessor` interface ([687baf3](https://github.com/CORETEQ/mixin-ui/commit/687baf3))
+- **kit:** add `month` input to `XCalendar` ([3145e94](https://github.com/CORETEQ/mixin-ui/commit/3145e94))
+
+### 🩹 Fixes
+
+- **kit:** update `XComparator` generic default type to `any` ([230446a](https://github.com/CORETEQ/mixin-ui/commit/230446a))
+
 ## 0.0.1-alpha.9 (2025-07-16)
 
 ### 🚀 Features
