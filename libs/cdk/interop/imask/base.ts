@@ -7,9 +7,9 @@ import {
   switchMap,
   takeUntil,
 } from 'rxjs';
-import type { InputMask } from 'imask';
-import type { FactoryArg, UpdateOpts } from 'imask/masked/factory';
 import IMask from 'imask/holder';
+import type { FactoryArg, InputMask } from 'imask';
+import type { UpdateOpts } from 'imask/masked/factory';
 
 import type { XMask } from '@mixin-ui/cdk/providers';
 import { isObject } from '@mixin-ui/cdk/utils';
@@ -60,8 +60,8 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
   init(el: HTMLElement): void {
     try {
       this.#mask = IMask(el, this.adapter(this.options));
-    } catch {
-      throw new Error('Mask initialization failed');
+    } catch (cause) {
+      throw new Error('Mask initialization failed', { cause });
     }
     this.#init$.next();
   }
