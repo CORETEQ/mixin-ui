@@ -79,9 +79,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly control = contentChild(XControl, { read: NgControl });
   readonly size = this.#input.size;
   readonly open = this.#popover.open;
-  readonly disabled = computed(
-    () => this.#input.state()?.disabled || this.#input.state()?.readOnly
-  );
+  readonly disabled = computed(() => this.#input.state()?.disabled);
   readonly value = signal<Date | null>(null);
 
   /** Show calendar popover when input field receives focus (defaults to true) */
