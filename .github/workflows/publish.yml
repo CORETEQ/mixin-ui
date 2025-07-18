@@ -64,7 +64,7 @@ jobs:
         with:
           url: ${{ secrets.VAULT_ADDRESS }}
           token: ${{ secrets.VAULT_TOKEN }}
-          caCertificate: ${{ secrets.VAULT_CA_CERT }}
+          tlsSkipVerify: true
           secrets: |
               secrets/data/prod/mixin-ui/mixin-ui-server-key id_ed | SSH_PRIVATE_KEY ;
               secrets/data/prod/mixin-ui/docker_registry docker_registry | DOCKER_REGISTRY ;
