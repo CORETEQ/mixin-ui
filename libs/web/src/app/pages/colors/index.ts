@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { DocsPage } from '@/docs/components';
 import { TitleCasePipe } from '@angular/common';
 
-export const COLOR_PALETTES = ['gray', 'main', 'success', 'warn', 'error'] as const;
+export const COLOR_PALETTES = ['neutral', 'main', 'success', 'warn', 'error'] as const;
 
 export const COLOR_STEPS = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950] as const;
 

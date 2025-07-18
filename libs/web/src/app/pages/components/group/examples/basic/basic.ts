@@ -5,7 +5,7 @@ import { provideButtonOptions, XButton, XGroup, XIcon, XPopoverTarget, XTooltip 
   selector: 'app-group-basic-example',
   templateUrl: './basic.html',
   imports: [XGroup, XButton, XIcon, XTooltip, XPopoverTarget],
-  providers: [provideButtonOptions({ variant: 'outline', color: 'gray' })],
+  providers: [provideButtonOptions({ variant: 'outline', color: 'neutral' })],
 })
 export class GroupBasicExample {
   readonly active = new Set<string>();

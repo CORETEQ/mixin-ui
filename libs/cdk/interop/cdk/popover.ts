@@ -24,7 +24,6 @@ import {
   EMPTY,
   filter,
   map,
-  of,
   repeat,
   switchMap,
   take,
@@ -57,30 +56,31 @@ export class XPopoverImpl {
   readonly #vcr = inject(ViewContainerRef);
   readonly #destroyRef = inject(DestroyRef);
   readonly #dragDrop = inject(DragDropRegistry);
-  readonly #openChanges = new BehaviorSubject(false);
-  readonly #refEnables = this.#openChanges.pipe(
-    switchMap(open => (open && this.#ref ? of(this.#ref) : EMPTY))
-  );
+  readonly #open$ = new BehaviorSubject(false);
+  readonly #ref$ = this.#open$.pipe(map(open => (open && this.#ref ? this.#ref : null)));
 
-  readonly openChanges = this.#openChanges.asObservable();
+  readonly openChanges = this.#open$.asObservable();
 
-  readonly positionChanges = this.#refEnables.pipe(
+  readonly positionChanges = this.#ref$.pipe(
     switchMap(ref =>
-      coerceStrategy(ref).positionChanges.pipe(map(event => fromCdkPosition(event.connectionPair)))
+      (ref ? coerceStrategy(ref).positionChanges : EMPTY).pipe(
+        map(event => fromCdkPosition(event.connectionPair))
+      )
     )
   );
 
-  readonly keydownEvents = this.#refEnables.pipe(switchMap(ref => ref.keydownEvents()));
+  readonly keydownEvents = this.#ref$.pipe(switchMap(ref => ref?.keydownEvents() || EMPTY));
 
-  readonly backdropEvents = this.#refEnables.pipe(switchMap(ref => ref.backdropClick()));
+  readonly backdropEvents = this.#ref$.pipe(switchMap(ref => ref?.backdropClick() || EMPTY));
 
-  readonly outsidePointerEvents = this.#refEnables.pipe(
-    switchMap(ref =>
-      ref.outsidePointerEvents().pipe(
-        filter(e => !onBackdrop(e) && !this.#el.contains(e.target as Node)),
-        takeUntil(this.#dragDrop.pointerMove.pipe(take(1))),
-        repeat({ delay: () => this.#dragDrop.pointerUp.pipe(delay(0)) })
-      )
+  readonly outsidePointerEvents = this.#ref$.pipe(
+    switchMap(
+      ref =>
+        ref?.outsidePointerEvents().pipe(
+          filter(e => !onBackdrop(e) && !this.#el.contains(e.target as Node)),
+          takeUntil(this.#dragDrop.pointerMove.pipe(take(1))),
+          repeat({ delay: () => this.#dragDrop.pointerUp.pipe(delay(0)) })
+        ) || EMPTY
     )
   );
 
@@ -90,8 +90,8 @@ export class XPopoverImpl {
   constructor() {
     this.#destroyRef.onDestroy(() => {
       this.#ref?.dispose();
-      this.#openChanges.next(false);
-      this.#openChanges.complete();
+      this.#open$.next(false);
+      this.#open$.complete();
     });
   }
 
@@ -110,7 +110,7 @@ export class XPopoverImpl {
     }
 
     this.#ref.attach(new ComponentPortal(component, this.#vcr));
-    this.#openChanges.next(true);
+    this.#open$.next(true);
   }
 
   close(): void {
@@ -119,7 +119,7 @@ export class XPopoverImpl {
     }
 
     this.#ref?.detach();
-    this.#openChanges.next(false);
+    this.#open$.next(false);
   }
 
   updatePosition(options?: Partial<XPopoverPositionOptions>): void {
