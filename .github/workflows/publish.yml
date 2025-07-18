@@ -18,6 +18,8 @@ jobs:
       contents: write
       packages: write
       pull-requests: write
+    env:
+      IMAGE_VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -79,10 +81,8 @@ jobs:
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_PASSWORD }}
           
-      - name: Debug workspace
-        run: |
-          echo "Listing $PWD:"
-          ls -R .
+      - name: Debug image version
+        run: echo ${IMAGE_VERSION}
           
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
