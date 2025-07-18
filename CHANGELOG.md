@@ -1,3 +1,14 @@
+## 0.0.1-alpha.11 (2025-07-18)
+
+### 🚀 Features
+
+- **kit:** refactor `month` input to model in `XCalendar` ([8a09ce3](https://github.com/CORETEQ/mixin-ui/commit/8a09ce3))
+- **kit:** rename `gray` color scale to `neutral`, update `XColor` union type ([b9b4aae](https://github.com/CORETEQ/mixin-ui/commit/b9b4aae))
+
+### 🩹 Fixes
+
+- **kit:** implement disabled state for `XInputDate` ([e3768ab](https://github.com/CORETEQ/mixin-ui/commit/e3768ab))
+
 ## 0.0.1-alpha.10 (2025-07-17)
 
 ### 🚀 Features
