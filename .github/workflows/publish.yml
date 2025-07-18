@@ -79,12 +79,12 @@ jobs:
           registry: ${{ env.DOCKER_REGISTRY }}
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_PASSWORD }}
-
+    
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ../Dockerfile
+          file: Dockerfile  
           push: true
           ssh: default
           tags: |
