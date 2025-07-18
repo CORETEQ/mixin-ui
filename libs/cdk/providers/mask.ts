@@ -76,8 +76,8 @@ class NoopMask implements XMask<any, Record<string, any>> {
   completed = false;
 }
 
-export function provideMask<TRaw, TOpt extends Record<string, any>>(
-  token: ProviderToken<() => XMask<TRaw, TOpt>>
+export function provideMask<TModel, TOpt extends Record<string, any>>(
+  token: ProviderToken<() => XMask<TModel, TOpt>>
 ): FactoryProvider {
   return {
     provide: X_MASK,
@@ -95,16 +95,16 @@ export function provideMask<TRaw, TOpt extends Record<string, any>>(
 /**
  * Injects the current mask instance with proper typing
  */
-export function injectMask<TRaw, TOpt extends Record<string, any>>(): XMask<TRaw, TOpt> {
-  return inject(X_MASK) as XMask<TRaw, TOpt>;
+export function injectMask<TModel, TOpt extends Record<string, any>>(): XMask<TModel, TOpt> {
+  return inject(X_MASK) as XMask<TModel, TOpt>;
 }
 
 // Built-in contracts
 
 // Pattern
 export interface XPatternMaskOptions {
-  /** A string pattern that defines the expected input format */
-  readonly pattern: string;
+  /** A pattern that defines the expected input format */
+  readonly pattern: string | null;
 
   /** Show filler characters for empty positions */
   readonly showFiller: boolean;
@@ -170,6 +170,15 @@ export const X_NUMBER_MASK_OPTIONS = new InjectionToken<XNumberMaskOptions>('NUM
 
 // Date
 export interface XDateMaskOptions extends XPatternMaskOptions {
+  /** A string pattern that defines the expected input format */
+  readonly pattern: string;
+
+  /** Show filler characters for empty positions */
+  readonly showFiller: boolean;
+
+  /** Character to use as a filler for empty positions */
+  readonly fillerChar: string;
+
   /**
    * Automatically fix invalid date parts when possible,
    * For example, converting '33' to '03' for days
