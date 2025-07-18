@@ -74,7 +74,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
   constructor() {
     watch(this.open, open => {
-      if (!open && this.strict() && !this.hasOption(this.nativeValue)) {
+      if (!open && this.strict() && this.nativeValue !== '' && !this.hasOption(this.nativeValue)) {
         this.updateModel(null);
         this.updateListbox(null);
         this.updateNative('', true);
