@@ -1,6 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { XCombobox, XControl, XListbox, XOption, XPopover } from '@mixin-ui/kit';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-combobox-basic-example',
@@ -11,11 +12,12 @@ import { FormsModule } from '@angular/forms';
     XListbox,
     XPopover,
     XOption,
-    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class ComboboxBasicExample {
-  readonly value = signal('Angular');
+  readonly control = new FormControl('', { validators: Validators.required });
+
   readonly query = signal('');
   readonly options = signal(['Angular', 'React', 'Vue']);
 
@@ -23,4 +25,8 @@ export class ComboboxBasicExample {
     const query = this.query();
     return this.options().filter(option => option.toLowerCase().includes(query.toLowerCase()));
   });
+
+  constructor() {
+    this.control.events.pipe(takeUntilDestroyed()).subscribe(console.log);
+  }
 }

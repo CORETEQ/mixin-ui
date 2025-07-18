@@ -1,5 +1,8 @@
 <x-combobox>
-  <input x-control [(ngModel)]="value" (input)="query.set(el.value)" #el />
+  <input x-control
+         placeholder="Start typing..."
+         [formControl]="control"
+         (input)="query.set(el.value)" #el />
   <x-listbox *x-popover>
     @for (option of filteredOptions(); track option) {
       <x-option [value]="option">{{ option }}</x-option>
