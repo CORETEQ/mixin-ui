@@ -93,7 +93,7 @@ jobs:
           push: true
           ssh: default
           tags: |
-            ${{ env.REGISTRY }}/mixin-ui-server:latest
+            ${{ env.DOCKER_REGISTRY }}/mixin-ui-server:latest
 
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
