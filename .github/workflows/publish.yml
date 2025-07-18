@@ -78,12 +78,16 @@ jobs:
           registry: ${{ env.DOCKER_REGISTRY }}
           username: ${{ env.DOCKER_USERNAME }}
           password: ${{ env.DOCKER_PASSWORD }}
-    
+          
+      - name: Debug workspace
+        run: |
+          echo "Listing $PWD:"
+          ls -R .
+          
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: Dockerfile  
           push: true
           ssh: default
           tags: |
