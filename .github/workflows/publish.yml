@@ -66,10 +66,10 @@ jobs:
           token: ${{ secrets.VAULT_TOKEN }}
           caCertificate: ${{ secrets.VAULT_CA_CERT }}
           secrets: |
-              secret/data/prod/mixin-ui/mixin-ui-server-key | SSH_PRIVATE_KEY
-              secret/data/prod/mixin-ui/docker_registry | DOCKER_REGISTRY
-              secret/data/prod/mixin-ui/docker_username | DOCKER_USERNAME
-              secret/data/prod/mixin-ui/docker_password | DOCKER_PASSWORD              
+              secrets/data/prod/mixin-ui/mixin-ui-server-key | SSH_PRIVATE_KEY
+              secrets/data/prod/mixin-ui/docker_registry | DOCKER_REGISTRY
+              secrets/data/prod/mixin-ui/docker_username | DOCKER_USERNAME
+              secrets/data/prod/mixin-ui/docker_password | DOCKER_PASSWORD              
 
       - name: Load SSH key for private repos
         uses: webfactory/ssh-agent@v0.9.0
