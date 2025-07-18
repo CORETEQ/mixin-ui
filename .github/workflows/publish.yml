@@ -93,7 +93,6 @@ jobs:
           push: true
           ssh: default
           tags: |
-            ${{ env.REGISTRY }}/mixin-ui-server:${{ env.IMAGE_VERSION }}
             ${{ env.REGISTRY }}/mixin-ui-server:latest
 
       - name: Send email notification
