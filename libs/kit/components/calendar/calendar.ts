@@ -3,14 +3,18 @@ import {
   Component,
   computed,
   contentChildren,
+  ElementRef,
   inject,
   input,
+  linkedSignal,
   model,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { createCva } from '@mixin-ui/cdk';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { fromEvent } from 'rxjs';
+import { createCva, preventDefault } from '@mixin-ui/cdk';
 import { X_SLOT, XPopoverTarget, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { provideButtonOptions } from '@mixin-ui/kit/components/button';
 import { XDays } from './grids/days';
@@ -35,11 +39,12 @@ import { XCalendarNav } from './nav';
 export class XCalendar {
   readonly #opt = inject(X_CALENDAR_OPTIONS);
   readonly #cva = createCva<Date | null>({ defaultValue: null, transform: value => value });
+  readonly #el = inject(ElementRef).nativeElement;
   readonly #accessor = inject(X_CALENDAR_ACCESSOR, { optional: true });
   readonly #popover = inject(XPopoverTarget, { optional: true });
 
   readonly slots = contentChildren(X_SLOT);
-  readonly month = model(new Date());
+  readonly month = model<Date>();
   readonly mode = model(this.#opt.mode);
   readonly startOfWeek = input(this.#opt.startOfWeek);
   readonly weekdayFormat = input(this.#opt.weekdayFormat);
@@ -53,25 +58,67 @@ export class XCalendar {
   readonly min = this.#accessor?.min || signal(null);
   readonly max = this.#accessor?.max || signal(null);
 
-  setMode(mode: XCalendarMode): void {
+  protected readonly visibleMonth = linkedSignal(() => {
+    const valueMonth = this.value();
+    const explicitMonth = this.month();
+
+    if (valueMonth) {
+      return valueMonth;
+    }
+
+    if (explicitMonth) {
+      return explicitMonth;
+    }
+
+    const min = this.min();
+    const max = this.max();
+    const now = Date.now();
+
+    if (min || max) {
+      if (min && now < min.getTime()) {
+        return min;
+      }
+
+      if (max && now > max.getTime()) {
+        return max;
+      }
+    }
+
+    return new Date();
+  });
+
+  constructor() {
+    if (this.#popover && !this.#popover.autoFocus()) {
+      fromEvent<PointerEvent>(this.#el, 'pointerdown')
+        .pipe(preventDefault(), takeUntilDestroyed())
+        .subscribe();
+    }
+  }
+
+  updateVisibleMonth(month: Date): void {
+    this.visibleMonth.set(month);
+    this.month.set(month);
+  }
+
+  updateMode(mode: XCalendarMode): void {
     this.mode.update(curr => (curr === mode ? 'days' : mode));
   }
 
-  setDay(day: Date): void {
+  updateDay(day: Date): void {
     this.#popover?.toggle(false);
     this.#popover?.focus();
     this.updateValue(day);
   }
 
-  setMonth(month: Date): void {
+  updateMonth(month: Date): void {
     this.month.set(month);
-    this.setMode('days');
+    this.updateMode('days');
     this.updateValue(month);
   }
 
-  setYear(year: Date): void {
+  updateYear(year: Date): void {
     this.month.set(year);
-    this.setMode('months');
+    this.updateMode('months');
     this.updateValue(year);
   }
 

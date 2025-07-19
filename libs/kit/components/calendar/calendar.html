@@ -1,16 +1,17 @@
 @let $ = slots() | asRecord;
 
-<x-calendar-nav [(month)]="month"
+<x-calendar-nav [month]="visibleMonth()"
                 [monthFormat]="monthFormat()"
                 [mode]="mode()"
                 [radius]="radius()"
-                (modeChange)="setMode($event)">
+                (monthChange)="updateVisibleMonth($event)"
+                (modeChange)="updateMode($event)">
 </x-calendar-nav>
 
 <div class="x-calendar-content">
   @switch (mode()) {
     @case ('days') {
-      <x-days [date]="month()"
+      <x-days [date]="visibleMonth()"
               [value]="value()"
               [min]="min()"
               [max]="max()"
@@ -18,7 +19,7 @@
               [format]="weekdayFormat()"
               [disabledMapper]="disabled()"
               [detailMapper]="detail()"
-              (dateChange)="setDay($event)">
+              (dateChange)="updateDay($event)">
         @if ($.day) {
           <ng-template x-slot="item" let-ctx>
             <ng-container *ngTemplateOutlet="$.day; context: { $implicit: ctx }"/>
@@ -27,12 +28,12 @@
       </x-days>
     }
     @case ('months') {
-      <x-months [date]="month()"
+      <x-months [date]="visibleMonth()"
                 [value]="value()"
                 [min]="min()"
                 [max]="max()"
                 [format]="monthFormat()"
-                (dateChange)="setMonth($event)">
+                (dateChange)="updateMonth($event)">
         @if ($.month) {
           <ng-template x-slot="item" let-ctx>
             <ng-container *ngTemplateOutlet="$.month; context: { $implicit: ctx }"/>
@@ -41,11 +42,11 @@
       </x-months>
     }
     @case ('years') {
-      <x-years [date]="month()"
+      <x-years [date]="visibleMonth()"
                [value]="value()"
                [min]="min()"
                [max]="max()"
-               (dateChange)="setYear($event)">
+               (dateChange)="updateYear($event)">
         @if ($.year) {
           <ng-template x-slot="item" let-ctx>
             <ng-container *ngTemplateOutlet="$.year; context: { $implicit: ctx }"/>
