@@ -54,9 +54,10 @@ export class XCalendar {
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
 
-  readonly value = computed(() => this.#accessor?.value() || this.#cva.value());
   readonly min = this.#accessor?.min || signal(null);
   readonly max = this.#accessor?.max || signal(null);
+
+  protected readonly value = linkedSignal(() => this.#accessor?.value() || this.#cva.value());
 
   protected readonly visibleMonth = linkedSignal(() => {
     const valueMonth = this.value();
@@ -88,7 +89,7 @@ export class XCalendar {
   });
 
   constructor() {
-    if (this.#popover && !this.#popover.autoFocus()) {
+    if (!this.#popover?.autoFocus()) {
       fromEvent<PointerEvent>(this.#el, 'pointerdown')
         .pipe(preventDefault(), takeUntilDestroyed())
         .subscribe();
@@ -96,8 +97,8 @@ export class XCalendar {
   }
 
   updateVisibleMonth(month: Date): void {
-    this.visibleMonth.set(month);
     this.month.set(month);
+    this.visibleMonth.set(month);
   }
 
   updateMode(mode: XCalendarMode): void {
@@ -113,17 +114,21 @@ export class XCalendar {
   updateMonth(month: Date): void {
     this.month.set(month);
     this.updateMode('days');
-    this.updateValue(month);
+    this.updateValue(month, false);
   }
 
   updateYear(year: Date): void {
     this.month.set(year);
     this.updateMode('months');
-    this.updateValue(year);
+    this.updateValue(year, false);
   }
 
-  private updateValue(date: Date | null): void {
-    this.#accessor?.handleCalendarValue(date);
-    this.#cva.updateValue(date);
+  private updateValue(date: Date | null, dispatch = true): void {
+    this.value.set(date);
+
+    if (dispatch) {
+      this.#accessor?.handleCalendarValue(date);
+      this.#cva.updateValue(date);
+    }
   }
 }
