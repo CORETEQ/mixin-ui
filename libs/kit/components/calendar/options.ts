@@ -15,12 +15,6 @@ export interface XCalendarOptions {
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
   readonly weekdayFormat: XWeekdayFormat;
   readonly monthFormat: XMonthFormat;
-
-  /** @deprecated
-   * use {@link XCalendarOptions.detail} instead
-   * */
-  readonly mapper?: Mapper<Date, any>;
-
   readonly detail?: Mapper<Date, any>;
   readonly disabled?: Mapper<Date, boolean>;
 }
