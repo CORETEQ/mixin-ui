@@ -46,11 +46,6 @@ export class XCalendar {
   readonly monthFormat = input(this.#opt.monthFormat);
   readonly disabled = input(this.#opt.disabled);
   readonly detail = input(this.#opt.detail);
-
-  /** @deprecated
-   * use [detail] instead
-   * */
-  readonly mapper = input(this.#opt.mapper);
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
 
