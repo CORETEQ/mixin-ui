@@ -1,3 +1,23 @@
+## 0.0.1-alpha.12 (2025-07-20)
+
+### 🚀 Features
+
+- **cdk:** make pattern nullable in `XPatternMaskOptions` to support disabling masking ([d701d0e](https://github.com/CORETEQ/mixin-ui/commit/d701d0e))
+- **cdk:** update default token ranges for date mask adapter ([65c6250](https://github.com/CORETEQ/mixin-ui/commit/65c6250))
+- **kit:** remove deprecated `mapper` input in `XCalendar` ([ee17716](https://github.com/CORETEQ/mixin-ui/commit/ee17716))
+- **kit:** improve visible month calculation and add popover focus handling in `XCalendar` ([5de8b86](https://github.com/CORETEQ/mixin-ui/commit/5de8b86))
+- **kit:** remove deprecated `mapper` property from `XCalendarOptions` interface ([6b4d6ae](https://github.com/CORETEQ/mixin-ui/commit/6b4d6ae))
+- **kit:** rename `value` property to `calendar` in `XCalendarAccessor` interface ([264e3bf](https://github.com/CORETEQ/mixin-ui/commit/264e3bf))
+- **kit:** add additional check before model update propagation in `XControl` ([b7dc25f](https://github.com/CORETEQ/mixin-ui/commit/b7dc25f))
+
+### 🩹 Fixes
+
+- **cdk:** preserve error cause for better debugging in `IMaskImpl` ([bd5313b](https://github.com/CORETEQ/mixin-ui/commit/bd5313b))
+- **cdk:** update pattern mask adapter to allow switching between pattern-based and nullable mask ([43b200a](https://github.com/CORETEQ/mixin-ui/commit/43b200a))
+- **kit:** prevent value update on close when the native value is empty in `XCombobox` ([7026d6e](https://github.com/CORETEQ/mixin-ui/commit/7026d6e))
+- **kit:** resolve propagation of value changes in cases when a month/year is selected in `XCalendar` ([3185a67](https://github.com/CORETEQ/mixin-ui/commit/3185a67))
+- **kit:** resolve correct model value reset on focusout with incompleted mask `XInputDate` ([bb8f1f0](https://github.com/CORETEQ/mixin-ui/commit/bb8f1f0))
+
 ## 0.0.1-alpha.11 (2025-07-18)
 
 ### 🚀 Features
