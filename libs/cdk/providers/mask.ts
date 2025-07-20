@@ -44,14 +44,14 @@ export interface XMask<TModel, TOpt extends Record<string, any>> {
   readonly setValue: (value: TModel) => void;
 
   /**
-   * Gets the current raw (unformatted) value.
+   * Gets the typed (model) value.
    */
   get modelValue(): TModel;
 
   /**
-   * Gets the current formatted (display) value.
+   * Gets the raw (display) value.
    */
-  get maskedValue(): string;
+  get rawValue(): string;
 
   /**
    * Indicates whether the current mask value satisfies all validation rules.
@@ -71,7 +71,7 @@ class NoopMask implements XMask<any, Record<string, any>> {
   updateOptions = EMPTY_FN;
   setValue = EMPTY_FN;
   valueChanges = EMPTY;
-  maskedValue = '';
+  rawValue = '';
   modelValue = null;
   completed = false;
 }
