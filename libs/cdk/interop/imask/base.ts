@@ -9,7 +9,7 @@ import {
 } from 'rxjs';
 import IMask from 'imask/holder';
 import type { FactoryArg, InputMask } from 'imask';
-import type { UpdateOpts } from 'imask/masked/factory';
+import type { FactoryOpts } from 'imask/masked/factory';
 
 import type { XMask } from '@mixin-ui/cdk/providers';
 import { isObject } from '@mixin-ui/cdk/utils';
@@ -26,7 +26,7 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
   #optionsUpdating = false;
 
   constructor(
-    private readonly adapter: (options: TOpt) => FactoryArg,
+    private readonly adapter: (options: TOpt) => FactoryOpts,
     private readonly options: TOpt
   ) {
     this.#options = { ...options };
@@ -63,6 +63,22 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
     } catch (cause) {
       throw new Error('Mask initialization failed', { cause });
     }
+
+    if (this.#mask) {
+      const update = this.#mask.updateOptions.bind(this.#mask);
+
+      this.#mask.updateOptions = (options: FactoryOpts) => {
+        const maskEquals = this.#mask?.maskEquals(options.mask);
+
+        update(options);
+
+        if (!maskEquals) {
+          this.#mask?.masked.updateOptions(options as object);
+          this.#mask?.updateControl();
+        }
+      };
+    }
+
     this.#init$.next();
   }
 
@@ -83,7 +99,7 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
   updateOptions(options: Partial<TOpt>): void {
     this.handleOptionsUpdate(() => {
       this.#options = { ...this.#options, ...options };
-      this.#mask?.updateOptions(this.adapter(this.#options) as UpdateOpts<FactoryArg>);
+      this.#mask?.updateOptions(this.adapter(this.#options));
     });
   }
 

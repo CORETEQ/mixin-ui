@@ -1,7 +1,6 @@
 import { inject, InjectionToken } from '@angular/core';
 import { format, parse } from 'date-fns';
 import 'imask/masked/date';
-import type { FactoryArg } from 'imask/masked/factory';
 import { IMaskImpl } from './base';
 
 import { X_DATE_MASK_OPTIONS, XDateMaskOptions } from '@mixin-ui/cdk/providers';
@@ -39,7 +38,7 @@ const RANGES = {
 
 const TOKEN_REGEX = /yyyy|yy|MM|M|dd|d|HH|H|hh|h|mm|m|ss|s/g;
 
-const adapter = (options: XDateMaskOptions): FactoryArg => {
+const adapter = (options: XDateMaskOptions) => {
   const tokens = options.pattern.match(TOKEN_REGEX) || [];
 
   if (tokens.length === 0) {

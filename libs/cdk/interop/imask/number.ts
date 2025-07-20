@@ -3,7 +3,7 @@ import 'imask/masked/number';
 import 'imask/masked/dynamic';
 import 'imask/masked/pattern';
 import type { MaskedNumber } from 'imask';
-import type { FactoryArg } from 'imask/masked/factory';
+import type { FactoryOpts } from 'imask/masked/factory';
 import { IMaskImpl } from './base';
 
 import { X_NUMBER_MASK_OPTIONS, XNumberMaskOptions } from '@mixin-ui/cdk/providers';
@@ -34,7 +34,7 @@ const adapter = (options: XNumberMaskOptions) => {
         },
       },
     ],
-  } as FactoryArg;
+  } as FactoryOpts;
 };
 
 export const X_NUMBER_MASK_FACTORY = new InjectionToken('NUMBER_MASK_FACTORY', {
