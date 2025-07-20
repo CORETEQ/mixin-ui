@@ -15,7 +15,7 @@ type Block = {
 };
 
 const RANGES = {
-  yyyy: { from: 1900, to: 2100 },
+  yyyy: { from: 0, to: 9999 },
   yy: { from: 0, to: 99 },
 
   MM: { from: 1, to: 12 },
