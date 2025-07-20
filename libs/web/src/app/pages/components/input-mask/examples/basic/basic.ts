@@ -9,7 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [XInputMask, XControl, ReactiveFormsModule],
 })
 export class InputMaskBasicExample {
-  readonly control = new FormControl('421951171645', { nonNullable: true, validators: [Validators.required] });
+  readonly control = new FormControl('', { nonNullable: true, validators: [Validators.required] });
 
   readonly pattern = signal('+{421} 000 000 000');
 
