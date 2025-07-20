@@ -75,12 +75,11 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly #input = inject(XInput);
   readonly #popover = inject(XPopoverTarget);
   readonly #calendarChanges = new Subject<Date | null>();
+  readonly #valueReset = new Subject<null>();
 
   readonly control = contentChild(XControl, { read: NgControl });
   readonly size = this.#input.size;
   readonly open = this.#popover.open;
-  readonly disabled = computed(() => this.#input.state()?.disabled);
-  readonly value = signal<Date | null>(null);
 
   /** Show calendar popover when input field receives focus (defaults to true) */
   readonly popoverOnFocus = input(this.#opt.popoverOnFocus, { transform: booleanAttribute });
@@ -109,7 +108,13 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   /** Character to use as a filler for empty positions */
   readonly fillerChar = input(this.#opt.fillerChar);
 
-  readonly valueChanges = merge(this.#mask.valueChanges, this.#calendarChanges);
+  readonly disabled = computed(() => this.#input.state()?.disabled);
+
+  /** @internal */
+  readonly calendar = signal<Date | null>(null);
+
+  /** @internal */
+  readonly valueChanges = merge(this.#mask.valueChanges, this.#calendarChanges, this.#valueReset);
 
   constructor() {
     watch(this.open, open => {
@@ -130,10 +135,16 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
     });
 
     this.#mask.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
-      this.value.set(value);
+      this.calendar.set(value);
     });
 
     this.#calendarChanges.pipe(takeUntilDestroyed()).subscribe(value => {
+      this.calendar.set(value);
+      this.#mask.setValue(value);
+    });
+
+    this.#valueReset.pipe(takeUntilDestroyed()).subscribe(value => {
+      this.calendar.set(value);
       this.#mask.setValue(value);
     });
   }
@@ -152,19 +163,18 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   /** @internal */
   handleFocusOut(e: FocusEvent): void {
     if (isMatchingTarget(e, 'input') && !this.#mask.completed) {
-      this.#mask.setValue(null);
+      this.#valueReset.next(null);
     }
   }
 
   /** @internal */
   handleCalendarValue(value: Date | null): void {
-    this.value.set(value);
     this.#calendarChanges.next(value);
   }
 
   /** @internal */
   handleControlValue(value: Date | null): void {
-    this.value.set(value);
+    this.calendar.set(value);
     this.#mask.setValue(value);
   }
 

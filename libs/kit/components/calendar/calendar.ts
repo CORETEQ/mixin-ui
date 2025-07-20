@@ -57,7 +57,7 @@ export class XCalendar {
   readonly min = this.#accessor?.min || signal(null);
   readonly max = this.#accessor?.max || signal(null);
 
-  protected readonly value = linkedSignal(() => this.#accessor?.value() || this.#cva.value());
+  protected readonly value = linkedSignal(() => this.#accessor?.calendar() || this.#cva.value());
 
   protected readonly visibleMonth = linkedSignal(() => {
     const valueMonth = this.value();
