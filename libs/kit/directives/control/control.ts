@@ -42,7 +42,13 @@ export class XControl<T> implements ControlValueAccessor, OnDestroy {
       this.#accessor.handleControlInit(this.#el);
     }
 
-    this.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => this.onChange(value));
+    this.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
+      if (this.modelValue === value) {
+        return;
+      }
+
+      this.onChange(value);
+    });
   }
 
   writeValue(value: T | null): void {
@@ -79,6 +85,10 @@ export class XControl<T> implements ControlValueAccessor, OnDestroy {
     } else {
       return fromEvent(this.#el, 'input').pipe(map(() => this.#el.value));
     }
+  }
+
+  private get modelValue(): T | null {
+    return this.control?.control?.value || null;
   }
 
   private get control(): NgControl | null {
