@@ -8,7 +8,8 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { merge, Subject } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { map, merge, Subject } from 'rxjs';
 import {
   injectMask,
   isMatchingTarget,
@@ -42,14 +43,14 @@ import { X_INPUT_MASK_OPTIONS } from './options';
 export class XInputMask implements XControlAccessor<string> {
   readonly #opt = inject(X_INPUT_MASK_OPTIONS);
   readonly #mask = injectMask<string, XPatternMaskOptions>();
-  readonly #innerValueChanges = new Subject<string>();
+  readonly #reset = new Subject<void>();
 
   readonly pattern = input(this.#opt.pattern);
   readonly showFiller = input(this.#opt.showFiller, { transform: booleanAttribute });
   readonly fillerChar = input(this.#opt.fillerChar);
   readonly strict = input(this.#opt.strict, { transform: booleanAttribute });
 
-  readonly valueChanges = merge(this.#mask.valueChanges, this.#innerValueChanges);
+  readonly valueChanges = merge(this.#mask.valueChanges, this.#reset.pipe(map(() => '')));
 
   constructor() {
     effect(() => {
@@ -59,13 +60,21 @@ export class XInputMask implements XControlAccessor<string> {
         fillerChar: this.fillerChar(),
       });
     });
+
+    this.#reset.pipe(takeUntilDestroyed()).subscribe(() => {
+      this.#mask.setValue('');
+    });
   }
 
   /** @internal */
   handleFocusOut(e: FocusEvent): void {
-    if (this.strict() && !this.#mask.completed && isMatchingTarget(e, 'input')) {
-      this.#mask.setValue('');
-      this.#innerValueChanges.next('');
+    if (
+      this.strict() &&
+      !this.#mask.completed &&
+      this.#mask.rawValue !== '' &&
+      isMatchingTarget(e, 'input')
+    ) {
+      this.#reset.next();
     }
   }
 
