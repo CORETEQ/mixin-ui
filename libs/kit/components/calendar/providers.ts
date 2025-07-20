@@ -3,7 +3,7 @@ import { ExistingProvider, InjectionToken, Signal, Type } from '@angular/core';
 export interface XCalendarAccessor {
   readonly min: Signal<Date | null>;
   readonly max: Signal<Date | null>;
-  readonly value: Signal<Date | null>;
+  readonly calendar: Signal<Date | null>;
 
   handleCalendarValue(value: Date | null): void;
 }
