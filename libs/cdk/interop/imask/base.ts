@@ -36,8 +36,8 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
     return this.#mask?.typedValue;
   }
 
-  get maskedValue(): string {
-    return this.#mask?.value || '';
+  get rawValue(): string {
+    return this.#mask?.rawInputValue || '';
   }
 
   get completed(): boolean {
