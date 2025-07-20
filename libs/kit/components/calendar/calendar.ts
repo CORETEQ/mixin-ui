@@ -1,13 +1,13 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   contentChildren,
   ElementRef,
   inject,
   input,
   linkedSignal,
   model,
-  signal,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
@@ -45,6 +45,8 @@ export class XCalendar {
   readonly slots = contentChildren(X_SLOT);
   readonly month = model<Date>();
   readonly mode = model(this.#opt.mode);
+  readonly _min = input(this.#opt.min, { alias: 'min' });
+  readonly _max = input(this.#opt.max, { alias: 'max' });
   readonly startOfWeek = input(this.#opt.startOfWeek);
   readonly weekdayFormat = input(this.#opt.weekdayFormat);
   readonly monthFormat = input(this.#opt.monthFormat);
@@ -52,9 +54,8 @@ export class XCalendar {
   readonly detail = input(this.#opt.detail);
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
-
-  readonly min = this.#accessor?.min || signal(null);
-  readonly max = this.#accessor?.max || signal(null);
+  readonly min = computed(() => this.#accessor?.min() || this._min());
+  readonly max = computed(() => this.#accessor?.max() || this._max());
 
   protected readonly value = linkedSignal(() => this.#accessor?.calendar() || this.#cva.value());
 

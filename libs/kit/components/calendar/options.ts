@@ -9,6 +9,8 @@ export type XMonthFormat = 'short' | 'long';
 export type XCalendarMode = 'days' | 'months' | 'years';
 
 export interface XCalendarOptions {
+  readonly min: Date | null;
+  readonly max: Date | null;
   readonly mode: XCalendarMode;
   readonly startOfWeek: XStartOfWeek;
   readonly size: XUnion<'xs' | 'sm' | 'md' | 'lg' | 'xl'>;
@@ -20,6 +22,8 @@ export interface XCalendarOptions {
 }
 
 const defaultOptions: XCalendarOptions = {
+  min: new Date(1900, 0, 1),
+  max: new Date(2100, 11, 31),
   mode: 'days',
   startOfWeek: 1,
   size: 'md',
