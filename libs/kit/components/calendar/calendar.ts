@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   contentChildren,
   ElementRef,
   inject,
@@ -123,7 +122,7 @@ export class XCalendar {
     this.updateValue(year, false);
   }
 
-  private updateValue(date: Date | null, dispatch = true): void {
+  private updateValue(date: Date, dispatch = true): void {
     this.value.set(date);
 
     if (dispatch) {

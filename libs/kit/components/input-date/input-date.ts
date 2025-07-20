@@ -74,7 +74,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly #mask = injectMask<Date | null, XDateMaskOptions>();
   readonly #input = inject(XInput);
   readonly #popover = inject(XPopoverTarget);
-  readonly #calendarChanges = new Subject<Date | null>();
+  readonly #calendarChanges = new Subject<Date>();
   readonly #valueReset = new Subject<null>();
 
   readonly control = contentChild(XControl, { read: NgControl });
@@ -168,7 +168,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   }
 
   /** @internal */
-  handleCalendarValue(value: Date | null): void {
+  handleCalendarValue(value: Date): void {
     this.#calendarChanges.next(value);
   }
 
