@@ -64,20 +64,19 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
       throw new Error('Mask initialization failed', { cause });
     }
 
-    if (this.#mask) {
-      const update = this.#mask.updateOptions.bind(this.#mask);
+    const updateOptions = this.#mask.updateOptions.bind(this.#mask);
 
-      this.#mask.updateOptions = (options: FactoryOpts) => {
-        const maskEquals = this.#mask?.maskEquals(options.mask);
+    // fix the issue with updating options when the mask type changes
+    this.#mask.updateOptions = (options: FactoryOpts) => {
+      const maskEquals = this.#mask?.maskEquals(options.mask);
 
-        update(options);
+      updateOptions(options);
 
-        if (!maskEquals) {
-          this.#mask?.masked.updateOptions(options as object);
-          this.#mask?.updateControl();
-        }
-      };
-    }
+      if (!maskEquals) {
+        this.#mask?.masked.updateOptions(options as object);
+        this.#mask?.updateControl();
+      }
+    };
 
     this.#init$.next();
   }
