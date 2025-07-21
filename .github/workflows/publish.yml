@@ -27,79 +27,79 @@ jobs:
         run: |
           echo "::set-output name=image_version::${IMAGE_VERSION}"
 
-      # - name: Checkout repository
-      #   uses: actions/checkout@v4
-      #   with:
-      #     fetch-depth: 0
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      # - name: Setup pnpm
-      #   uses: pnpm/action-setup@v4
-      #   with:
-      #     version: 9.12.0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
 
-      # - name: Setup node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20.19.0
-      #     cache: 'pnpm'
+      - name: Setup node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.0
+          cache: 'pnpm'
 
-      # - name: Install dependencies
-      #   run: pnpm install
+      - name: Install dependencies
+        run: pnpm install
 
-      # - name: Build libraries
-      #   run: pnpm ci:build
+      - name: Build libraries
+        run: pnpm ci:build
 
-      # - name: Set up npm auth for Nexus (basic auth)
-      #   run: |
-      #     echo "@mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/" >> ~/.npmrc
-      #     echo "//repo.coreteq.cloud/repository/libs-release-npm/:_auth=$(echo -n '${{ secrets.NPM_USERNAME }}:${{ secrets.NPM_PASSWORD }}' | base64)" >> ~/.npmrc
-      #     echo "//repo.coreteq.cloud/repository/libs-release-npm/:email=${{ secrets.NPM_EMAIL }}" >> ~/.npmrc
-      #     echo "//repo.coreteq.cloud/repository/libs-release-npm/:always-auth=true" >> ~/.npmrc
+      - name: Set up npm auth for Nexus (basic auth)
+        run: |
+          echo "@mixin-ui:registry=https://repo.coreteq.cloud/repository/libs-release-npm/" >> ~/.npmrc
+          echo "//repo.coreteq.cloud/repository/libs-release-npm/:_auth=$(echo -n '${{ secrets.NPM_USERNAME }}:${{ secrets.NPM_PASSWORD }}' | base64)" >> ~/.npmrc
+          echo "//repo.coreteq.cloud/repository/libs-release-npm/:email=${{ secrets.NPM_EMAIL }}" >> ~/.npmrc
+          echo "//repo.coreteq.cloud/repository/libs-release-npm/:always-auth=true" >> ~/.npmrc
 
-      # - name: Publish packages
-      #   run: pnpm ci:publish
-      #   shell: bash
+      - name: Publish packages
+        run: pnpm ci:publish
+        shell: bash
 
-      # - name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      # - name: Import Secrets
-      #   uses: hashicorp/vault-action@v2.4.0
-      #   with:
-      #     url: ${{ secrets.VAULT_ADDRESS }}
-      #     token: ${{ secrets.VAULT_TOKEN }}
-      #     tlsSkipVerify: true
-      #     secrets: |
-      #         secrets/data/prod/mixin-ui/mixin-ui-server-key id_ed | SSH_PRIVATE_KEY ;
-      #         secrets/data/prod/mixin-ui/docker_registry docker_registry | DOCKER_REGISTRY ;
-      #         secrets/data/prod/mixin-ui/docker_username docker_username | DOCKER_USERNAME ;
-      #         secrets/data/prod/mixin-ui/docker_password docker_password | DOCKER_PASSWORD ;           
-      #         secrets/data/prod/mixin-ui/argocd server | ARGOCD_SERVER ;        
-      #         secrets/data/prod/mixin-ui/argocd token | ARGOCD_AUTH_TOKEN            
+      - name: Import Secrets
+        uses: hashicorp/vault-action@v2.4.0
+        with:
+          url: ${{ secrets.VAULT_ADDRESS }}
+          token: ${{ secrets.VAULT_TOKEN }}
+          tlsSkipVerify: true
+          secrets: |
+              secrets/data/prod/mixin-ui/mixin-ui-server-key id_ed | SSH_PRIVATE_KEY ;
+              secrets/data/prod/mixin-ui/docker_registry docker_registry | DOCKER_REGISTRY ;
+              secrets/data/prod/mixin-ui/docker_username docker_username | DOCKER_USERNAME ;
+              secrets/data/prod/mixin-ui/docker_password docker_password | DOCKER_PASSWORD ;
+              secrets/data/prod/mixin-ui/argocd server | ARGOCD_SERVER ;
+              secrets/data/prod/mixin-ui/argocd token | ARGOCD_AUTH_TOKEN
 
-      # - name: Load SSH key for private repos
-      #   uses: webfactory/ssh-agent@v0.9.0
-      #   with:
-      #     ssh-private-key: ${{ env.SSH_PRIVATE_KEY }}
+      - name: Load SSH key for private repos
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ env.SSH_PRIVATE_KEY }}
 
-      # - name: Log in to Docker registry
-      #   uses: docker/login-action@v2
-      #   with:
-      #     registry: ${{ env.DOCKER_REGISTRY }}
-      #     username: ${{ env.DOCKER_USERNAME }}
-      #     password: ${{ env.DOCKER_PASSWORD }}
-          
+      - name: Log in to Docker registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ env.DOCKER_USERNAME }}
+          password: ${{ env.DOCKER_PASSWORD }}
+
       - name: Debug image version
         run: echo ${IMAGE_VERSION}
-          
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@v4
-      #   with:
-      #     context: .
-      #     push: true
-      #     ssh: default
-      #     tags: |
-      #       ${{ env.DOCKER_REGISTRY }}/mixin-ui-server:latest
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          ssh: default
+          tags: |
+            ${{ env.DOCKER_REGISTRY }}/mixin-ui-server:latest
 
   argo_sync:
       name: Sync Argo CD & Notify
@@ -116,10 +116,10 @@ jobs:
             token: ${{ secrets.VAULT_TOKEN }}
             tlsSkipVerify: true
             secrets: |
-                secrets/data/prod/mixin-ui/docker_registry docker_registry | DOCKER_REGISTRY ;   
-                secrets/data/prod/mixin-ui/argocd server | ARGOCD_SERVER ;        
-                secrets/data/prod/mixin-ui/argocd token | ARGOCD_AUTH_TOKEN   
-        
+                secrets/data/prod/mixin-ui/docker_registry docker_registry | DOCKER_REGISTRY ;
+                secrets/data/prod/mixin-ui/argocd server | ARGOCD_SERVER ;
+                secrets/data/prod/mixin-ui/argocd token | ARGOCD_AUTH_TOKEN
+
         - name: Debug Argo CD env
           run: |
             echo "ARGOCD_SERVER = $ARGOCD_SERVER"
@@ -129,19 +129,19 @@ jobs:
             else
               echo "ARGOCD_AUTH_TOKEN has length ${#ARGOCD_AUTH_TOKEN}"
             fi
-        
+
         - name: Install Argo CD CLI
           run: |
             curl -sSL -o argocd \
               https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
             chmod +x argocd && sudo mv argocd /usr/local/bin/
-    
+
         - name: Check Argo CD version
           run: |
             argocd \
               --insecure \
               version
-    
+
         - name: Restart Deployment via Argo CD
           run: |
             argocd \
@@ -163,19 +163,19 @@ jobs:
             secure: false
             body: |
               Hello team,
-  
+
               We’re excited to announce that a new version of Mixin UI has just been released and published to our private registry.
-  
+
               🔖 Version:${{ env.IMAGE_VERSION }}
               📦 Repository: ${{ github.repository }}
               🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
-  
+
               📘 Release Notes:
               https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
-  
+
               🧩 Documentation:
               https://mixin.coreteq.cloud
-  
+
               Please pull the latest changes and try it out. Let us know if you notice anything unusual.
-  
+
               — Mixin UI Bot
