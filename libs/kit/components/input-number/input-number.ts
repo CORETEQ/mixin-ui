@@ -115,10 +115,10 @@ export class XInputNumber implements XControlAccessor<number | null> {
     });
 
     effect(() => {
-      const el = this.input().nativeElement;
+      const input = this.input().nativeElement;
       const mode = this.decimalScale() ? 'decimal' : 'numeric';
 
-      this.#r2.setProperty(el, 'inputMode', mode);
+      this.#r2.setProperty(input, 'inputMode', mode);
     });
   }
 
