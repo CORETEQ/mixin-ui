@@ -150,7 +150,7 @@ jobs:
             server_port: 587
             username: ${{ secrets.SMTP_USERNAME }}
             password: ${{ secrets.SMTP_PASSWORD }}
-            subject: "🚀 Mixin UI ${{ env.IMAGE_VERSION }} deployed"
+            subject: "🚀 Mixin UI ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }} has been released"
             to: fe-devs@coreteq.sk
             from: Mixin UI Bot <${{ secrets.SMTP_USERNAME }}>
             secure: false
@@ -159,7 +159,7 @@ jobs:
 
               We’re excited to announce that a new version of Mixin UI has just been released and published to our private registry.
 
-              🔖 Version:${{ env.IMAGE_VERSION }}
+              🔖 Version: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
               📦 Repository: ${{ github.repository }}
               🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
 
@@ -167,7 +167,7 @@ jobs:
               https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
 
               🧩 Documentation:
-              https://mixin.coreteq.cloud
+              https://mixin.coreteq.lan
 
               Please pull the latest changes and try it out. Let us know if you notice anything unusual.
 
