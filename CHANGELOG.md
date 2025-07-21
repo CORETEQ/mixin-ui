@@ -1,3 +1,10 @@
+## 0.0.1-alpha.14 (2025-07-21)
+
+### 🚀 Features
+
+- **kit:** remove `handleControlInit`, `handleControlDestroy` methods in `XControlAccessor` ([a9b8ea3](https://github.com/CORETEQ/mixin-ui/commit/a9b8ea3))
+- **kit:** implement `inputMode` binding to a native input based on `decimalScale` in `XInputNumber` ([e3b890c](https://github.com/CORETEQ/mixin-ui/commit/e3b890c))
+
 ## 0.0.1-alpha.13 (2025-07-21)
 
 ### 🚀 Features
