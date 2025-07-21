@@ -79,7 +79,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly #valueReset = new Subject<null>();
 
   readonly input = contentChild.required(XControl, { read: ElementRef });
-  readonly control = contentChild.required(XControl, { read: NgControl });
+  readonly control = contentChild(XControl, { read: NgControl });
   readonly size = this.#input.size;
   readonly open = this.#popover.open;
 
@@ -136,7 +136,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
 
     watch(this.open, open => {
       if (!open) {
-        this.control().control?.markAsTouched();
+        this.control()?.control?.markAsTouched();
       }
     });
 
