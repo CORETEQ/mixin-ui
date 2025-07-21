@@ -1,3 +1,17 @@
+## 0.0.1-alpha.13 (2025-07-21)
+
+### 🚀 Features
+
+- **cdk:** rename `maskedValue` to `rawValue` in `XMask` interface, update tsdoc ([0c49480](https://github.com/CORETEQ/mixin-ui/commit/0c49480))
+- **cdk:** update `rawValue` getter in `IMaskImpl` ([79f8aaf](https://github.com/CORETEQ/mixin-ui/commit/79f8aaf))
+- **kit:** improve `handleCalendarValue` typing in `XCalendarAccessor` ([c08d92c](https://github.com/CORETEQ/mixin-ui/commit/c08d92c))
+- **kit:** add `min` / `max` props to `XCalendarOptions` interface, expose their respective inputs ([350ebe6](https://github.com/CORETEQ/mixin-ui/commit/350ebe6))
+
+### 🩹 Fixes
+
+- **cdk:** patch `updateOptions` function to fix imask internal problem with options updating ([10c6c53](https://github.com/CORETEQ/mixin-ui/commit/10c6c53))
+- **kit:** fix unnecessary model changes when value reset if strict is enabled in `XInputMask` ([83bd34e](https://github.com/CORETEQ/mixin-ui/commit/83bd34e))
+
 ## 0.0.1-alpha.12 (2025-07-20)
 
 ### 🚀 Features
