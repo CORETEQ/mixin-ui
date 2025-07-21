@@ -119,6 +119,16 @@ jobs:
                 secrets/data/prod/mixin-ui/argocd server | ARGOCD_SERVER ;        
                 secrets/data/prod/mixin-ui/argocd token | ARGOCD_AUTH_TOKEN   
         
+        - name: Debug Argo CD env
+          run: |
+            echo "ARGOCD_SERVER = $ARGOCD_SERVER"
+            if [ -z "$ARGOCD_AUTH_TOKEN" ]; then
+              echo "ARGOCD_AUTH_TOKEN is empty!"
+              exit 1
+            else
+              echo "ARGOCD_AUTH_TOKEN has length ${#ARGOCD_AUTH_TOKEN}"
+            fi
+        
         - name: Install Argo CD CLI
           run: |
             curl -sSL -o argocd \
