@@ -76,7 +76,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly #input = inject(XInput);
   readonly #popover = inject(XPopoverTarget);
   readonly #calendarChanges = new Subject<Date>();
-  readonly #valueReset = new Subject<null>();
+  readonly #reset = new Subject<null>();
 
   readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly control = contentChild(XControl, { read: NgControl });
@@ -116,7 +116,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly calendar = signal<Date | null>(null);
 
   /** @internal */
-  readonly controlChanges = merge(this.#mask.valueChanges, this.#calendarChanges, this.#valueReset);
+  readonly controlChanges = merge(this.#mask.valueChanges, this.#calendarChanges, this.#reset);
 
   constructor() {
     effect(() => {
@@ -149,7 +149,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
       this.#mask.setValue(value);
     });
 
-    this.#valueReset.pipe(takeUntilDestroyed()).subscribe(value => {
+    this.#reset.pipe(takeUntilDestroyed()).subscribe(value => {
       this.calendar.set(value);
       this.#mask.setValue(value);
     });
@@ -169,7 +169,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   /** @internal */
   handleFocusOut(e: FocusEvent): void {
     if (isMatchingTarget(e, 'input') && !this.#mask.completed) {
-      this.#valueReset.next(null);
+      this.#reset.next(null);
     }
   }
 
