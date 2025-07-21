@@ -96,19 +96,8 @@ export class XInputNumber implements XControlAccessor<number | null> {
   readonly controlChanges = this.#mask.valueChanges;
 
   constructor() {
-    effect(onCleanup => {
-      const el = this.input().nativeElement;
-
-      this.#mask.init(el);
-
-      onCleanup(() => this.#mask.destroy());
-    });
-
     effect(() => {
-      const el = this.input().nativeElement;
-      const mode = this.decimalScale() ? 'decimal' : 'numeric';
-
-      this.#r2.setProperty(el, 'inputMode', mode);
+      this.#mask.init(this.input().nativeElement);
     });
 
     effect(() => {
@@ -123,6 +112,13 @@ export class XInputNumber implements XControlAccessor<number | null> {
         normalizeZeros: this.normalizeZeros(),
         padDecimals: this.padDecimals(),
       });
+    });
+
+    effect(() => {
+      const el = this.input().nativeElement;
+      const mode = this.decimalScale() ? 'decimal' : 'numeric';
+
+      this.#r2.setProperty(el, 'inputMode', mode);
     });
   }
 

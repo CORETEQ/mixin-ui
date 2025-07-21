@@ -119,18 +119,8 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly controlChanges = merge(this.#mask.valueChanges, this.#calendarChanges, this.#valueReset);
 
   constructor() {
-    effect(onCleanup => {
-      const el = this.input().nativeElement;
-
-      this.#mask.init(el);
-
-      onCleanup(() => this.#mask.destroy());
-    });
-
-    watch(this.open, open => {
-      if (!open) {
-        this.control().control?.markAsTouched();
-      }
+    effect(() => {
+      this.#mask.init(this.input().nativeElement);
     });
 
     effect(() => {
@@ -142,6 +132,12 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
         showFiller: this.showFiller(),
         fillerChar: this.fillerChar(),
       });
+    });
+
+    watch(this.open, open => {
+      if (!open) {
+        this.control().control?.markAsTouched();
+      }
     });
 
     this.#mask.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {

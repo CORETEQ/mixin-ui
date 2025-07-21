@@ -61,12 +61,8 @@ export class XInputMask implements XControlAccessor<string> {
   readonly controlChanges = merge(this.#mask.valueChanges, this.#reset.pipe(map(() => '')));
 
   constructor() {
-    effect(onCleanup => {
-      const el = this.input().nativeElement;
-
-      this.#mask.init(el);
-
-      onCleanup(() => this.#mask.destroy());
+    effect(() => {
+      this.#mask.init(this.input().nativeElement);
     });
 
     effect(() => {
