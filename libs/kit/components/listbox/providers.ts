@@ -2,7 +2,7 @@ import { ExistingProvider, InjectionToken, Signal, Type } from '@angular/core';
 import { XComparator } from '@mixin-ui/kit/providers';
 
 export interface XListboxAccessor<T = any> {
-  readonly value: Signal<T | readonly T[] | null>;
+  readonly listbox: Signal<T | readonly T[] | null>;
   readonly multiple: Signal<boolean>;
   readonly comparator: Signal<XComparator<T> | undefined>;
 
