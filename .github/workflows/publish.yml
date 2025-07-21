@@ -129,6 +129,7 @@ jobs:
           run: |
             argocd login ${{ env.ARGOCD_SERVER }} \
               --grpc-web \
+              --insecure \
               --auth-token ${{ env.ARGOCD_AUTH_TOKEN }}
   
         - name: Override image tag
