@@ -74,9 +74,7 @@ jobs:
               secrets/data/prod/mixin-ui/mixin-ui-server-key id_ed | SSH_PRIVATE_KEY ;
               secrets/data/prod/mixin-ui/docker_registry docker_registry | DOCKER_REGISTRY ;
               secrets/data/prod/mixin-ui/docker_username docker_username | DOCKER_USERNAME ;
-              secrets/data/prod/mixin-ui/docker_password docker_password | DOCKER_PASSWORD ;
-              secrets/data/prod/mixin-ui/argocd server | ARGOCD_SERVER ;
-              secrets/data/prod/mixin-ui/argocd token | ARGOCD_AUTH_TOKEN
+              secrets/data/prod/mixin-ui/docker_password docker_password | DOCKER_PASSWORD
 
       - name: Load SSH key for private repos
         uses: webfactory/ssh-agent@v0.9.0
@@ -121,27 +119,11 @@ jobs:
                 secrets/data/prod/mixin-ui/argocd server | ARGOCD_SERVER ;
                 secrets/data/prod/mixin-ui/argocd token | ARGOCD_AUTH_TOKEN
 
-        - name: Debug Argo CD env
-          run: |
-            echo "ARGOCD_SERVER = $ARGOCD_SERVER"
-            if [ -z "$ARGOCD_AUTH_TOKEN" ]; then
-              echo "ARGOCD_AUTH_TOKEN is empty!"
-              exit 1
-            else
-              echo "ARGOCD_AUTH_TOKEN has length ${#ARGOCD_AUTH_TOKEN}"
-            fi
-
         - name: Install Argo CD CLI
           run: |
             curl -sSL -o argocd \
               https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
             chmod +x argocd && sudo mv argocd /usr/local/bin/
-
-        - name: Check Argo CD version
-          run: |
-            argocd \
-              --insecure \
-              version
 
         - name: Restart Deployment via Argo CD
           run: |
@@ -149,8 +131,18 @@ jobs:
               --server $ARGOCD_SERVER \
               --insecure \
               --auth-token $ARGOCD_AUTH_TOKEN \
+              --grpc-web \
               app actions run $APP_NAME restart --kind Deployment --resource-name $RESOURCE_NAME
-
+        
+        - name: Wait for rollout
+          run: |
+            argocd \
+              --server $ARGOCD_SERVER \
+              --insecure \
+              --auth-token $ARGOCD_AUTH_TOKEN \
+              --grpc-web \
+              app wait $APP_NAME --health --timeout 120
+        
         - name: Send email notification
           uses: dawidd6/action-send-mail@v3
           with:
