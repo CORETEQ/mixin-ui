@@ -135,26 +135,18 @@ jobs:
             curl -sSL -o argocd \
               https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
             chmod +x argocd && sudo mv argocd /usr/local/bin/
-  
-        - name: Debug image version
+    
+        - name: Check Argo CD version
           run: |
-            echo "image version: ${{ needs.version.outputs.image-version }}"
-
-        - name: Install Argo CD CLI
-          run: |
-            curl -sSL -o argocd \
-              https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-            chmod +x argocd && sudo mv argocd /usr/local/bin/
-  
-        - name: Restart Deployment via Argo CD
+            argocd version
+    
+        - name: Restart Deployment via Argo CD
           run: |
             argocd --server $ARGOCD_SERVER \
                    --insecure \
-                   --auth-token $ARGOCD_TOKEN \
-                   app actions run $APP_NAME restart \
-                     --kind Deployment \
-                     --resource-name $RESOURCE_NAME
-  
+                   --auth-token $ARGOCD_AUTH_TOKEN \
+                   app actions run $APP_NAME restart --kind Deployment --resource-name $RESOURCE_NAME
+
         - name: Send email notification
           uses: dawidd6/action-send-mail@v3
           with:
