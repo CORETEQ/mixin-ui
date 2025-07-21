@@ -12,6 +12,7 @@ on:
 
 jobs:
   version:
+    name: Publish new version
     timeout-minutes: 15
     runs-on: self-hosted
     permissions:
