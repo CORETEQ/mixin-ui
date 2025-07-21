@@ -11,7 +11,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { map, merge, Subject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import {
   injectMask,
   isMatchingTarget,
@@ -50,7 +50,7 @@ import { X_INPUT_MASK_OPTIONS } from './options';
 export class XInputMask implements XControlAccessor<string> {
   readonly #opt = inject(X_INPUT_MASK_OPTIONS);
   readonly #mask = injectMask<string, XPatternMaskOptions>();
-  readonly #reset = new Subject<void>();
+  readonly #reset = new Subject<''>();
 
   readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly pattern = input(this.#opt.pattern);
@@ -58,7 +58,7 @@ export class XInputMask implements XControlAccessor<string> {
   readonly fillerChar = input(this.#opt.fillerChar);
   readonly strict = input(this.#opt.strict, { transform: booleanAttribute });
 
-  readonly controlChanges = merge(this.#mask.valueChanges, this.#reset.pipe(map(() => '')));
+  readonly controlChanges = merge(this.#mask.valueChanges, this.#reset);
 
   constructor() {
     effect(() => {
@@ -73,8 +73,8 @@ export class XInputMask implements XControlAccessor<string> {
       });
     });
 
-    this.#reset.pipe(takeUntilDestroyed()).subscribe(() => {
-      this.#mask.setValue('');
+    this.#reset.pipe(takeUntilDestroyed()).subscribe(value => {
+      this.#mask.setValue(value);
     });
   }
 
@@ -86,7 +86,7 @@ export class XInputMask implements XControlAccessor<string> {
       this.#mask.rawValue !== '' &&
       isMatchingTarget(e, 'input')
     ) {
-      this.#reset.next();
+      this.#reset.next('');
     }
   }
 
