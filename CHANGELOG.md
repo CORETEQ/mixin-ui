@@ -1,3 +1,11 @@
+## 0.0.1-alpha.15 (2025-07-21)
+
+### 🚀 Features
+
+- **kit:** add `matcher` property to `XComboboxOptions`, rename `compareFn` / `stringifyFn` ([4e00de8](https://github.com/CORETEQ/mixin-ui/commit/4e00de8))
+- **kit:** expose new inputs for `XCombobox` based on new options interface ([9d89867](https://github.com/CORETEQ/mixin-ui/commit/9d89867))
+- **kit:** implement aria properties binding in `XCombobox` ([80a02b6](https://github.com/CORETEQ/mixin-ui/commit/80a02b6))
+
 ## 0.0.1-alpha.14 (2025-07-21)
 
 ### 🚀 Features
