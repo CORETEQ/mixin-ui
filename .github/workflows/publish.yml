@@ -138,14 +138,17 @@ jobs:
     
         - name: Check Argo CD version
           run: |
-            argocd version
+            argocd |
+              --insecure \
+              version
     
         - name: Restart Deployment via Argo CD
           run: |
-            argocd --server $ARGOCD_SERVER \
-                   --insecure \
-                   --auth-token $ARGOCD_AUTH_TOKEN \
-                   app actions run $APP_NAME restart --kind Deployment --resource-name $RESOURCE_NAME
+            argocd \
+              --server $ARGOCD_SERVER \
+              --insecure \
+              --auth-token $ARGOCD_AUTH_TOKEN \
+              app actions run $APP_NAME restart --kind Deployment --resource-name $RESOURCE_NAME
 
         - name: Send email notification
           uses: dawidd6/action-send-mail@v3
