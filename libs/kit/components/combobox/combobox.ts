@@ -68,7 +68,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   readonly comparator = this.compareFn;
   readonly multiple = signal(false).asReadonly();
   readonly value = signal<T | null>(null);
-  readonly valueChanges = new Subject<T | string | null>();
+  readonly controlChanges = new Subject<T | string | null>();
 
   #options: readonly T[] | null = null;
 
@@ -146,7 +146,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   private updateModel(value: T | string | null): void {
-    this.valueChanges.next(value);
+    this.controlChanges.next(value);
   }
 
   private updateListbox(value: T | null): void {

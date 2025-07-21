@@ -2,7 +2,9 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  contentChild,
   effect,
+  ElementRef,
   forwardRef,
   inject,
   input,
@@ -17,7 +19,12 @@ import {
   X_PATTERN_MASK_FACTORY,
   XPatternMaskOptions,
 } from '@mixin-ui/cdk';
-import { provideControlAccessor, XControlAccessor, XInput } from '@mixin-ui/kit/directives';
+import {
+  provideControlAccessor,
+  XControl,
+  XControlAccessor,
+  XInput,
+} from '@mixin-ui/kit/directives';
 import { X_INPUT_MASK_OPTIONS } from './options';
 
 @Component({
@@ -45,14 +52,23 @@ export class XInputMask implements XControlAccessor<string> {
   readonly #mask = injectMask<string, XPatternMaskOptions>();
   readonly #reset = new Subject<void>();
 
+  readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly pattern = input(this.#opt.pattern);
   readonly showFiller = input(this.#opt.showFiller, { transform: booleanAttribute });
   readonly fillerChar = input(this.#opt.fillerChar);
   readonly strict = input(this.#opt.strict, { transform: booleanAttribute });
 
-  readonly valueChanges = merge(this.#mask.valueChanges, this.#reset.pipe(map(() => '')));
+  readonly controlChanges = merge(this.#mask.valueChanges, this.#reset.pipe(map(() => '')));
 
   constructor() {
+    effect(onCleanup => {
+      const el = this.input().nativeElement;
+
+      this.#mask.init(el);
+
+      onCleanup(() => this.#mask.destroy());
+    });
+
     effect(() => {
       this.#mask.updateOptions({
         pattern: this.pattern(),
@@ -81,15 +97,5 @@ export class XInputMask implements XControlAccessor<string> {
   /** @internal */
   handleControlValue(value: string): void {
     this.#mask.setValue(value);
-  }
-
-  /** @internal */
-  handleControlInit(el: HTMLInputElement): void {
-    this.#mask.init(el);
-  }
-
-  /** @internal */
-  handleControlDestroy(): void {
-    this.#mask.destroy();
   }
 }

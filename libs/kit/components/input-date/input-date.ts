@@ -5,6 +5,7 @@ import {
   computed,
   contentChild,
   effect,
+  ElementRef,
   forwardRef,
   inject,
   input,
@@ -77,7 +78,8 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly #calendarChanges = new Subject<Date>();
   readonly #valueReset = new Subject<null>();
 
-  readonly control = contentChild(XControl, { read: NgControl });
+  readonly input = contentChild.required(XControl, { read: ElementRef });
+  readonly control = contentChild.required(XControl, { read: NgControl });
   readonly size = this.#input.size;
   readonly open = this.#popover.open;
 
@@ -114,12 +116,20 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly calendar = signal<Date | null>(null);
 
   /** @internal */
-  readonly valueChanges = merge(this.#mask.valueChanges, this.#calendarChanges, this.#valueReset);
+  readonly controlChanges = merge(this.#mask.valueChanges, this.#calendarChanges, this.#valueReset);
 
   constructor() {
+    effect(onCleanup => {
+      const el = this.input().nativeElement;
+
+      this.#mask.init(el);
+
+      onCleanup(() => this.#mask.destroy());
+    });
+
     watch(this.open, open => {
       if (!open) {
-        this.control()?.control?.markAsTouched();
+        this.control().control?.markAsTouched();
       }
     });
 
@@ -176,15 +186,5 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   handleControlValue(value: Date | null): void {
     this.calendar.set(value);
     this.#mask.setValue(value);
-  }
-
-  /** @internal */
-  handleControlInit(el: HTMLInputElement): void {
-    this.#mask.init(el);
-  }
-
-  /** @internal */
-  handleControlDestroy(): void {
-    this.#mask.destroy();
   }
 }
