@@ -63,7 +63,7 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Import Secrets
+      - name: Import secrets
         uses: hashicorp/vault-action@v2.4.0
         with:
           url: ${{ secrets.VAULT_ADDRESS }}
@@ -102,7 +102,7 @@ jobs:
             ${{ env.DOCKER_REGISTRY }}/mixin-ui-server:latest
 
   argo_sync:
-      name: Sync Argo CD & Notify
+      name: Sync Argo CD & Notify
       needs: version
       runs-on: self-hosted
       env:
@@ -120,7 +120,7 @@ jobs:
                 secrets/data/prod/mixin-ui/argocd server | ARGOCD_SERVER ;
                 secrets/data/prod/mixin-ui/argocd token | ARGOCD_AUTH_TOKEN
 
-        - name: Debug Argo CD env
+        - name: Debug Argo CD env
           run: |
             echo "ARGOCD_SERVER = $ARGOCD_SERVER"
             if [ -z "$ARGOCD_AUTH_TOKEN" ]; then
@@ -130,19 +130,19 @@ jobs:
               echo "ARGOCD_AUTH_TOKEN has length ${#ARGOCD_AUTH_TOKEN}"
             fi
 
-        - name: Install Argo CD CLI
+        - name: Install Argo CD CLI
           run: |
             curl -sSL -o argocd \
               https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
             chmod +x argocd && sudo mv argocd /usr/local/bin/
 
-        - name: Check Argo CD version
+        - name: Check Argo CD version
           run: |
             argocd \
               --insecure \
               version
 
-        - name: Restart Deployment via Argo CD
+        - name: Restart Deployment via Argo CD
           run: |
             argocd \
               --server $ARGOCD_SERVER \
