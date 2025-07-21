@@ -71,12 +71,12 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   readonly asString = input(this.#opt.stringify, { alias: 'stringify' });
   readonly match = input(this.#opt.matcher, { alias: 'matcher' });
   readonly strict = input(this.#opt.strict, { transform: booleanAttribute });
-  readonly key = input<string>();
+  readonly key = input<PropertyKey>();
   readonly comparator = computed(() =>
-    this.key() ? createKeyComparator(this.key()!) : this.compare()
+    this.key() != null ? createKeyComparator(this.key()!) : this.compare()
   );
   readonly multiple = signal(false).asReadonly();
-  readonly value = signal<T | null>(null);
+  readonly listbox = signal<T | null>(null);
 
   readonly controlChanges = new Subject<T | string | null>();
 
@@ -87,6 +87,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
       const input = this.input().nativeElement;
       const open = this.open();
 
+      this.#r2.setAttribute(input, 'autocomplete', 'false');
       this.#r2.setAttribute(input, 'role', 'combobox');
       this.#r2.setAttribute(input, 'aria-haspopup', 'listbox');
       this.#r2.setAttribute(input, 'aria-expanded', String(open));
@@ -164,17 +165,18 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   private updateListboxValue(value: T | null): void {
-    this.value.set(value);
+    this.listbox.set(value);
   }
 
-  private updateNativeValue(value: string, dispatch = false): void {
+  private updateNativeValue(value: string, reset = false): void {
     this.inputEl.value = value;
 
-    if (dispatch) {
+    if (reset) {
       this.inputEl.dispatchEvent(
         new InputEvent('input', {
-          inputType: 'insertText',
-          data: '',
+          inputType: 'deleteContent',
+          bubbles: true,
+          data: null,
         })
       );
     }

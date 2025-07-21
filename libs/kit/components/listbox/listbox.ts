@@ -49,7 +49,7 @@ export class XListbox implements OnDestroy {
     (this.#cdkListbox as Record<string, any>)._verifyOptionValues = EMPTY_FN;
 
     effect(() => {
-      const value = this.#accessor?.value();
+      const value = this.#accessor?.listbox();
       const multiple = this.#accessor?.multiple() || false;
       const comparator = this.#accessor?.comparator();
 

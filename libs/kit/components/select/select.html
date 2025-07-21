@@ -8,7 +8,7 @@
   } @else if (hasValue()) {
     <span class="x-select-value">
       @if ($.value) {
-        <ng-container *ngTemplateOutlet="$.value; context: { $implicit: value() }" />
+        <ng-container *ngTemplateOutlet="$.value; context: { $implicit: listbox() }" />
       } @else {
         {{ valueAsString() }}
       }

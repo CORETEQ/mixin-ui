@@ -57,10 +57,10 @@ export class XSelect<T> implements XListboxAccessor<T> {
   readonly placeholder = input<string>();
   readonly multiple = input(false);
   readonly compareFn = input(this.#opt.compareFn);
-  readonly key = input<string>();
+  readonly key = input<PropertyKey>();
   readonly tabIndex = computed(() => (this.disabled() ? null : '0'));
   readonly comparator = computed(() =>
-    this.key() ? createKeyComparator(this.key()!) : this.compareFn()
+    this.key() != null ? createKeyComparator(this.key()!) : this.compareFn()
   );
 
   readonly #cva = createCva<T | readonly T[] | null>({
@@ -68,17 +68,17 @@ export class XSelect<T> implements XListboxAccessor<T> {
     transform: value => value,
   });
 
-  readonly value = this.#cva.value;
+  readonly listbox = this.#cva.value;
   readonly disabled = this.#cva.disabled;
   readonly open = this.#popover.open;
 
   readonly hasValue = computed(() => {
-    const value = this.value();
+    const value = this.listbox();
     return Array.isArray(value) ? value.length > 0 : !!value;
   });
 
   readonly valueAsString = computed(() => {
-    const value = this.value();
+    const value = this.listbox();
     return Array.isArray(value) ? value.join(', ') : value ?? '';
   });
 
