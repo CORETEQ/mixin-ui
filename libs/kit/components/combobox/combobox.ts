@@ -60,7 +60,7 @@ import { createKeyComparator } from '@mixin-ui/kit/providers';
 })
 export class XCombobox<T> implements XControlAccessor<T | string | null>, XListboxAccessor<T> {
   readonly #opt = inject(X_COMBOBOX_OPTIONS);
-  readonly #popover = inject(XPopoverTarget, { self: true });
+  readonly #popover = inject(XPopoverTarget);
 
   readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly open = this.#popover.open;
