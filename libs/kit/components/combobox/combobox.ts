@@ -97,7 +97,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
       if (!open && this.strict() && this.nativeValue !== '' && !this.hasOption(this.nativeValue)) {
         this.updateModel(null);
         this.updateListbox(null);
-        this.updateNative('', { inputType: 'deleteContent', bubbles: true, data: null });
+        this.updateNative('', { inputType: 'deleteContent', data: null });
       }
     });
   }
@@ -168,11 +168,11 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     this.listbox.set(value);
   }
 
-  private updateNative(value: string, event?: InputEventInit): void {
+  private updateNative(value: string, emitEvent?: InputEventInit): void {
     this.inputEl.value = value;
 
-    if (event) {
-      this.inputEl.dispatchEvent(new InputEvent('input', event));
+    if (emitEvent) {
+      this.inputEl.dispatchEvent(new InputEvent('input', emitEvent));
     }
   }
 
