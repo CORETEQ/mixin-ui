@@ -138,7 +138,7 @@ jobs:
     
         - name: Check Argo CD version
           run: |
-            argocd |
+            argocd \
               --insecure \
               version
     
