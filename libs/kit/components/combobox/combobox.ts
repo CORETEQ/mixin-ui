@@ -95,9 +95,9 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
     watch(this.open, open => {
       if (!open && this.strict() && this.nativeValue !== '' && !this.hasOption(this.nativeValue)) {
-        this.updateModelValue(null);
-        this.updateListboxValue(null);
-        this.updateNativeValue('', true);
+        this.updateModel(null);
+        this.updateListbox(null);
+        this.updateNative('', { inputType: 'deleteContent', bubbles: true, data: null });
       }
     });
   }
@@ -115,24 +115,24 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
     const option = this.findOption(this.nativeValue);
 
-    this.updateModelValue(option || this.nativeValue);
-    this.updateListboxValue(option ? option : null);
+    this.updateModel(option || this.nativeValue);
+    this.updateListbox(option ? option : null);
 
     if (option) {
-      this.updateNativeValue(this.stringify(option));
+      this.updateNative(this.stringify(option));
     }
   }
 
   handleListboxValue(options: readonly T[]): void {
     const value = options.at(0) || null;
-    this.updateModelValue(value);
-    this.updateNativeValue(this.stringify(value));
-    this.updateListboxValue(value);
+    this.updateModel(value);
+    this.updateNative(this.stringify(value));
+    this.updateListbox(value);
   }
 
   handleControlValue(value: T | string | null): void {
-    this.updateNativeValue(this.stringify(value));
-    this.updateListboxValue(value === '' ? null : (value as T));
+    this.updateNative(this.stringify(value));
+    this.updateListbox(value === '' ? null : (value as T));
   }
 
   handleListboxOptions(options: readonly T[] | null): void {
@@ -140,7 +140,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
     if (this.#options?.length) {
       const value = this.findOption(this.nativeValue);
-      this.updateListboxValue(value ? value : null);
+      this.updateListbox(value ? value : null);
     }
   }
 
@@ -160,25 +160,19 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     return this.#options?.find(option => this.matcher(value, option)) || null;
   }
 
-  private updateModelValue(value: T | string | null): void {
+  private updateModel(value: T | string | null): void {
     this.controlChanges.next(value);
   }
 
-  private updateListboxValue(value: T | null): void {
+  private updateListbox(value: T | null): void {
     this.listbox.set(value);
   }
 
-  private updateNativeValue(value: string, reset = false): void {
+  private updateNative(value: string, event?: InputEventInit): void {
     this.inputEl.value = value;
 
-    if (reset) {
-      this.inputEl.dispatchEvent(
-        new InputEvent('input', {
-          inputType: 'deleteContent',
-          bubbles: true,
-          data: null,
-        })
-      );
+    if (event) {
+      this.inputEl.dispatchEvent(new InputEvent('input', event));
     }
   }
 
