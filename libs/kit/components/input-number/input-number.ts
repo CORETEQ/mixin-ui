@@ -3,15 +3,23 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  contentChild,
   effect,
+  ElementRef,
   forwardRef,
   inject,
   input,
   numberAttribute,
+  Renderer2,
   ViewEncapsulation,
 } from '@angular/core';
 import { injectMask, provideMask, X_NUMBER_MASK_FACTORY, XNumberMaskOptions } from '@mixin-ui/cdk';
-import { provideControlAccessor, XControlAccessor, XInput } from '@mixin-ui/kit/directives';
+import {
+  provideControlAccessor,
+  XControl,
+  XControlAccessor,
+  XInput,
+} from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { XGroup } from '@mixin-ui/kit/components/group';
 import { provideButtonOptions, XButton } from '@mixin-ui/kit/components/button';
@@ -44,7 +52,9 @@ export class XInputNumber implements XControlAccessor<number | null> {
   readonly #opt = inject(X_INPUT_NUMBER_OPTIONS);
   readonly #input = inject(XInput);
   readonly #mask = injectMask<number | null, XNumberMaskOptions>();
+  readonly #r2 = inject(Renderer2);
 
+  readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly size = this.#input.size;
 
   /** Minimum allowed value */
@@ -83,9 +93,24 @@ export class XInputNumber implements XControlAccessor<number | null> {
   readonly plusDisabled = computed(() => this.disabled() || this.normalizedValue >= this.max());
   readonly minusDisabled = computed(() => this.disabled() || this.normalizedValue <= this.min());
 
-  readonly valueChanges = this.#mask.valueChanges;
+  readonly controlChanges = this.#mask.valueChanges;
 
   constructor() {
+    effect(onCleanup => {
+      const el = this.input().nativeElement;
+
+      this.#mask.init(el);
+
+      onCleanup(() => this.#mask.destroy());
+    });
+
+    effect(() => {
+      const el = this.input().nativeElement;
+      const mode = this.decimalScale() ? 'decimal' : 'numeric';
+
+      this.#r2.setProperty(el, 'inputMode', mode);
+    });
+
     effect(() => {
       this.#mask.updateOptions({
         min: this.min(),
@@ -142,15 +167,5 @@ export class XInputNumber implements XControlAccessor<number | null> {
   /** @internal */
   handleControlValue(value: number | null): void {
     this.#mask.setValue(value);
-  }
-
-  /** @internal */
-  handleControlInit(el: HTMLInputElement): void {
-    this.#mask.init(el);
-  }
-
-  /** @internal */
-  handleControlDestroy(): void {
-    this.#mask.destroy();
   }
 }
