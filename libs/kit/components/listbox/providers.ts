@@ -1,10 +1,12 @@
 import { ExistingProvider, InjectionToken, Signal, Type } from '@angular/core';
 import { XComparator } from '@mixin-ui/kit/providers';
+import { Observable } from 'rxjs';
 
 export interface XListboxAccessor<T = any> {
-  readonly listbox: Signal<T | readonly T[] | null>;
+  readonly value: Signal<T | readonly T[] | null>;
   readonly multiple: Signal<boolean>;
   readonly comparator: Signal<XComparator<T> | undefined>;
+  readonly keyboardEvents: Observable<KeyboardEvent>;
 
   handleListboxValue(value: readonly T[]): void;
 

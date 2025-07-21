@@ -63,7 +63,7 @@ export class XControl<T> implements ControlValueAccessor {
 
   private get valueChanges(): Observable<T> {
     if (this.#accessor) {
-      return this.#accessor.controlChanges;
+      return this.#accessor.valueChanges;
     } else {
       return fromEvent(this.#el, 'input').pipe(map(() => this.#el.value));
     }

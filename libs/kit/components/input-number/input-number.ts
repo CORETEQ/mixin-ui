@@ -93,7 +93,7 @@ export class XInputNumber implements XControlAccessor<number | null> {
   readonly plusDisabled = computed(() => this.disabled() || this.normalizedValue >= this.max());
   readonly minusDisabled = computed(() => this.disabled() || this.normalizedValue <= this.min());
 
-  readonly controlChanges = this.#mask.valueChanges;
+  readonly valueChanges = this.#mask.valueChanges;
 
   constructor() {
     effect(() => {

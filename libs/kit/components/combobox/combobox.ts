@@ -13,7 +13,7 @@ import {
   signal,
   ViewEncapsulation,
 } from '@angular/core';
-import { Subject } from 'rxjs';
+import { fromEvent, Subject } from 'rxjs';
 import { watch } from '@mixin-ui/cdk';
 import {
   provideControlAccessor,
@@ -63,7 +63,9 @@ import { createKeyComparator } from '@mixin-ui/kit/providers';
 export class XCombobox<T> implements XControlAccessor<T | string | null>, XListboxAccessor<T> {
   readonly #opt = inject(X_COMBOBOX_OPTIONS);
   readonly #popover = inject(XPopoverTarget);
+  readonly #el = inject(ElementRef).nativeElement;
   readonly #r2 = inject(Renderer2);
+  readonly #valueChanges = new Subject<T | string | null>();
 
   readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly open = this.#popover.open;
@@ -76,9 +78,11 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     this.key() != null ? createKeyComparator(this.key()!) : this.compare()
   );
   readonly multiple = signal(false).asReadonly();
-  readonly listbox = signal<T | null>(null);
 
-  readonly controlChanges = new Subject<T | string | null>();
+  readonly value = signal<T | null>(null);
+
+  readonly keyboardEvents = fromEvent<KeyboardEvent>(this.#el, 'keydown');
+  readonly valueChanges = this.#valueChanges.asObservable();
 
   #options: readonly T[] | null = null;
 
@@ -161,11 +165,11 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   private updateModel(value: T | string | null): void {
-    this.controlChanges.next(value);
+    this.#valueChanges.next(value);
   }
 
   private updateListbox(value: T | null): void {
-    this.listbox.set(value);
+    this.value.set(value);
   }
 
   private updateNative(value: string, emitEvent?: InputEventInit): void {

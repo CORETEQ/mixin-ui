@@ -58,7 +58,7 @@ export class XInputMask implements XControlAccessor<string> {
   readonly fillerChar = input(this.#opt.fillerChar);
   readonly strict = input(this.#opt.strict, { transform: booleanAttribute });
 
-  readonly controlChanges = merge(this.#mask.valueChanges, this.#reset);
+  readonly valueChanges = merge(this.#mask.valueChanges, this.#reset);
 
   constructor() {
     effect(() => {

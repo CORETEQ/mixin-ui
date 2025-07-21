@@ -15,6 +15,7 @@ import { X_SLOT, XInput, XPopoverTarget, XSlotsPipe } from '@mixin-ui/kit/direct
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 import { X_SELECT_OPTIONS } from './options';
+import { EMPTY } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -68,21 +69,23 @@ export class XSelect<T> implements XListboxAccessor<T> {
     transform: value => value,
   });
 
-  readonly listbox = this.#cva.value;
+  readonly value = this.#cva.value;
   readonly disabled = this.#cva.disabled;
   readonly open = this.#popover.open;
 
   readonly hasValue = computed(() => {
-    const value = this.listbox();
+    const value = this.value();
     return Array.isArray(value) ? value.length > 0 : !!value;
   });
 
   readonly valueAsString = computed(() => {
-    const value = this.listbox();
+    const value = this.value();
     return Array.isArray(value) ? value.join(', ') : value ?? '';
   });
 
   readonly placeholderShown = computed(() => !!this.placeholder() && !this.hasValue());
+
+  readonly keyboardEvents = EMPTY;
 
   constructor() {
     watch(this.open, open => {
