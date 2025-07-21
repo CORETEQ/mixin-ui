@@ -3,10 +3,12 @@ import { isObject } from '@mixin-ui/cdk';
 
 export type XComparator<T = any> = (a: T, b: T) => boolean;
 
-export const createKeyComparator = (key: string): XComparator => {
-  return (a, b) => {
+export const createKeyComparator = (key: PropertyKey): XComparator => {
+  return (a: Record<PropertyKey, unknown>, b: Record<PropertyKey, unknown>) => {
     if (!isObject(a) || !isObject(b)) {
-      throw new Error(`Cannot compare by key "${key}" if one of the values is not an object`);
+      throw new Error(
+        `Cannot compare by key "${key.toString()}" if one of the values is not an object`
+      );
     }
 
     return a[key] === b[key];
