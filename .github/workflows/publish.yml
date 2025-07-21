@@ -20,7 +20,13 @@ jobs:
       pull-requests: write
     env:
       IMAGE_VERSION: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
+    outputs:
+      image-version: ${{ steps.set_outputs.outputs.image_version }}
     steps:
+      - id: set_outputs
+        run: |
+          echo "::set-output name=image_version::${IMAGE_VERSION}"
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -101,8 +107,18 @@ jobs:
       runs-on: ubuntu-latest
       env:
         APP_NAME: prod-mixin-ui
-        IMAGE: ${{ env.DOCKER_REGISTRY }}/mixin-ui-server:${{ env.IMAGE_VERSION }}
       steps:
+        - name: Import ArgoCD Secrets
+          uses: hashicorp/vault-action@v2.4.0
+          with:
+            url: ${{ secrets.VAULT_ADDRESS }}
+            token: ${{ secrets.VAULT_TOKEN }}
+            tlsSkipVerify: true
+            secrets: |
+                secrets/data/prod/mixin-ui/docker_registry docker_registry | DOCKER_REGISTRY ;   
+                secrets/data/prod/mixin-ui/argocd server | ARGOCD_SERVER ;        
+                secrets/data/prod/mixin-ui/argocd token | ARGOCD_AUTH_TOKEN   
+        
         - name: Install Argo CD CLI
           run: |
             curl -sSL -o argocd \
@@ -118,7 +134,7 @@ jobs:
         - name: Override image tag
           run: |
             argocd app set $APP_NAME \
-              --images $IMAGE
+              --images ${{ env.DOCKER_REGISTRY }}/mixin-ui-server:${{ needs.version.outputs.image-version }}
   
         - name: Sync application
           run: |
