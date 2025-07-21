@@ -2,6 +2,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  computed,
   contentChild,
   ElementRef,
   forwardRef,
@@ -22,6 +23,7 @@ import {
 } from '@mixin-ui/kit/directives';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 import { X_COMBOBOX_OPTIONS } from './options';
+import { createKeyComparator } from '@mixin-ui/kit/providers';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -52,7 +54,7 @@ import { X_COMBOBOX_OPTIONS } from './options';
   host: {
     role: 'combobox',
     class: 'x-combobox',
-    '(input)': 'handleInput()',
+    '(input)': 'handleInput($event)',
     '(click)': 'togglePopover(!open())',
   },
 })
@@ -62,12 +64,17 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
   readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly open = this.#popover.open;
-  readonly compareFn = input(this.#opt.compareFn);
-  readonly stringifyFn = input(this.#opt.stringifyFn);
+  readonly compareFn = input(this.#opt.comparator, { alias: 'comparator' });
+  readonly toStringFn = input(this.#opt.stringify, { alias: 'stringify' });
+  readonly matchFn = input(this.#opt.matcher, { alias: 'matcher' });
   readonly strict = input(this.#opt.strict, { transform: booleanAttribute });
-  readonly comparator = this.compareFn;
+  readonly key = input<string>();
+  readonly comparator = computed(() =>
+    this.key() ? createKeyComparator(this.key()!) : this.compareFn()
+  );
   readonly multiple = signal(false).asReadonly();
   readonly value = signal<T | null>(null);
+
   readonly controlChanges = new Subject<T | string | null>();
 
   #options: readonly T[] | null = null;
@@ -75,9 +82,9 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   constructor() {
     watch(this.open, open => {
       if (!open && this.strict() && this.nativeValue !== '' && !this.hasOption(this.nativeValue)) {
-        this.updateModel(null);
-        this.updateListbox(null);
-        this.updateNative('', true);
+        this.updateModelValue(null);
+        this.updateListboxValue(null);
+        this.updateNativeValue('', true);
       }
     });
   }
@@ -86,28 +93,33 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     this.#popover.toggle(open);
   }
 
-  handleInput(): void {
+  handleInput(e: InputEvent): void {
+    if (e.target !== this.inputEl) {
+      return;
+    }
+
     this.togglePopover(true);
 
     const option = this.findOption(this.nativeValue);
-    this.updateModel(option || this.nativeValue);
-    this.updateListbox(option ? option : null);
+
+    this.updateModelValue(option || this.nativeValue);
+    this.updateListboxValue(option ? option : null);
 
     if (option) {
-      this.updateNative(this.stringify(option));
+      this.updateNativeValue(this.stringify(option));
     }
   }
 
   handleListboxValue(options: readonly T[]): void {
     const value = options.at(0) || null;
-    this.updateModel(value);
-    this.updateNative(this.stringify(value));
-    this.updateListbox(value);
+    this.updateModelValue(value);
+    this.updateNativeValue(this.stringify(value));
+    this.updateListboxValue(value);
   }
 
   handleControlValue(value: T | string | null): void {
-    this.updateNative(this.stringify(value));
-    this.updateListbox(value as T); // @TODO: resolve
+    this.updateNativeValue(this.stringify(value));
+    this.updateListboxValue(value as T); // @TODO: resolve
   }
 
   handleListboxOptions(options: readonly T[] | null): void {
@@ -115,7 +127,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
     if (this.#options?.length) {
       const value = this.findOption(this.nativeValue);
-      this.updateListbox(value ? value : null);
+      this.updateListboxValue(value ? value : null);
     }
   }
 
@@ -127,33 +139,23 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     return this.inputEl.value;
   }
 
-  private stringify(value: T | string | null): string {
-    return this.stringifyFn()(value);
-  }
-
   private hasOption(value: string): boolean {
-    return !!this.#options?.some(
-      option => this.stringify(option).toLowerCase() === value.toLowerCase()
-    );
+    return Boolean(this.#options?.some(option => this.matcher(value, option)));
   }
 
-  private findOption(value: T | string | null): T | null {
-    return (
-      this.#options?.find(
-        option => this.stringify(option).toLowerCase() === this.stringify(value).toLowerCase()
-      ) || null
-    );
+  private findOption(value: string): T | null {
+    return this.#options?.find(option => this.matcher(value, option)) || null;
   }
 
-  private updateModel(value: T | string | null): void {
+  private updateModelValue(value: T | string | null): void {
     this.controlChanges.next(value);
   }
 
-  private updateListbox(value: T | null): void {
+  private updateListboxValue(value: T | null): void {
     this.value.set(value);
   }
 
-  private updateNative(value: string, dispatch = false): void {
+  private updateNativeValue(value: string, dispatch = false): void {
     this.inputEl.value = value;
 
     if (dispatch) {
@@ -164,5 +166,13 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
         })
       );
     }
+  }
+
+  private stringify(value: T | string | null): string {
+    return this.toStringFn()(value);
+  }
+
+  private matcher(value: string, option: T): boolean {
+    return this.matchFn()(value, this.stringify(option));
   }
 }
