@@ -107,6 +107,7 @@ jobs:
       runs-on: self-hosted
       env:
         APP_NAME: prod-mixin-ui
+        RESOURCE_NAME: mixin-ui-server
       steps:
         - name: Import ArgoCD Secrets
           uses: hashicorp/vault-action@v2.4.0
@@ -145,32 +146,14 @@ jobs:
               https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
             chmod +x argocd && sudo mv argocd /usr/local/bin/
   
-        - name: Override image tag
+        - name: Restart Deployment via Argo CD
           run: |
-            argocd \
-              --server $ARGOCD_SERVER \
-              --insecure \
-              --auth-token $ARGOCD_AUTH_TOKEN \
-              app set $APP_NAME \
-                --images ${{ env.DOCKER_REGISTRY }}/mixin-ui-server:${{ needs.version.outputs.image-version }}
-  
-        - name: Sync application
-          run: |
-            argocd \
-              --server $ARGOCD_SERVER \
-              --insecure \
-              --auth-token $ARGOCD_AUTH_TOKEN \
-              app sync $APP_NAME
-  
-        - name: Wait for healthy rollout
-          run: |
-            argocd \
-              --server $ARGOCD_SERVER \
-              --insecure \
-              --auth-token $ARGOCD_AUTH_TOKEN \
-              app wait $APP_NAME \
-                --health \
-                --timeout 120s
+            argocd --server $ARGOCD_SERVER \
+                   --insecure \
+                   --auth-token $ARGOCD_TOKEN \
+                   app actions run $APP_NAME restart \
+                     --kind Deployment \
+                     --resource-name $RESOURCE_NAME
   
         - name: Send email notification
           uses: dawidd6/action-send-mail@v3
