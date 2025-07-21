@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 export const X_CONTROL_ACCESSOR = new InjectionToken<XControlAccessor<any>>('CONTROL_ACCESSOR');
 
 export interface XControlAccessor<T> {
-  readonly controlChanges: Observable<T>;
+  readonly valueChanges: Observable<T>;
 
   handleControlValue(value: T): void;
 }
