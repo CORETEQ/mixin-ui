@@ -1,4 +1,5 @@
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -45,7 +46,7 @@ import { EMPTY } from 'rxjs';
     class: 'x-select',
     '[attr.tabindex]': 'tabIndex()',
     '[attr.aria-expanded]': 'open()',
-    '(keydown.arrowDown)': '$event.preventDefault(); togglePopover(true)',
+    '(keydown.arrowDown)': 'handleArrowDown($event)',
     '(click)': 'togglePopover(!open())',
     '(blur)': 'handleBlur($event)',
   },
@@ -56,12 +57,12 @@ export class XSelect<T> implements XListboxAccessor<T> {
 
   readonly slots = contentChildren(X_SLOT);
   readonly placeholder = input<string>();
-  readonly multiple = input(false);
-  readonly compareFn = input(this.#opt.compareFn);
+  readonly multiple = input(false, { transform: booleanAttribute });
+  readonly _comparator = input(this.#opt.comparator, { alias: 'comparator' });
   readonly key = input<PropertyKey>();
   readonly tabIndex = computed(() => (this.disabled() ? null : '0'));
   readonly comparator = computed(() =>
-    this.key() != null ? createKeyComparator(this.key()!) : this.compareFn()
+    this.key() != null ? createKeyComparator(this.key()!) : this._comparator()
   );
 
   readonly #cva = createCva<T | readonly T[] | null>({
@@ -99,12 +100,24 @@ export class XSelect<T> implements XListboxAccessor<T> {
     this.#popover.toggle(open);
   }
 
+  /** @internal */
+  handleArrowDown(e: KeyboardEvent): void {
+    if (e.defaultPrevented) {
+      return;
+    }
+
+    e.preventDefault();
+    this.togglePopover(true);
+  }
+
+  /** @internal */
   handleBlur(e: FocusEvent): void {
     if (!relatedTo(e, this.#popover.overlayElement)) {
       this.#cva.markAsTouched();
     }
   }
 
+  /** @internal */
   handleListboxValue(values: readonly T[]): void {
     this.#cva.updateValue(this.multiple() ? values : values.at(0) ?? null);
   }
