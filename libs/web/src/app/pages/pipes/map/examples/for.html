@@ -1,0 +1,14 @@
+@for (year of years(); track year.getTime()) {
+  @let actual = year | map: isActual;
+  @let selected = year | map: isSelected: value();
+  @let disabled = year | map: isDisabled: min() : max();
+
+  <button
+    type="button"
+    [class.actual]="actual"
+    [class.selected]="selected"
+    [class.disabled]="disabled"
+  >
+    {{ year }}
+  </button>
+}

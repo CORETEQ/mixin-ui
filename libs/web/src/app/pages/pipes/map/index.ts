@@ -3,6 +3,7 @@ import { DocsPage } from '@/docs/components';
 
 import imp from './examples/import?raw&lang=ts';
 import usage from './examples/usage?raw&lang=ts';
+import forExample from './examples/for.html?raw&lang=html';
 
 @Component({
   selector: 'app-map',
@@ -14,4 +15,5 @@ import usage from './examples/usage?raw&lang=ts';
 export default class Map {
   imp = imp;
   usage = usage;
+  forExample = forExample;
 }
