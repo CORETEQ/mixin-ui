@@ -28,6 +28,10 @@
 
 Read the docs here: https://mixin-ui.dev/installation
 
+## Contributing
+
+Please follow our [contributing guidelines](./.github/CONTRIBUTING.md).
+
 ## License
 
-Licensed under the [Apache 2.0](/LICENSE) License, Copyright © 2025-present.
+Licensed under the [Apache 2.0](./.github/LICENSE) License, Copyright © 2025-present.
