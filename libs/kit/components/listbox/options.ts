@@ -5,12 +5,14 @@ import { XUnion } from '@mixin-ui/kit/types';
 export interface XListboxOptions {
   readonly size: XUnion<'md' | 'lg' | 'xl'>;
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
+  readonly wrapNavigation: boolean;
   readonly emptyContent: XOutlet;
 }
 
 const defaultOptions: XListboxOptions = {
   size: 'md',
   radius: 'md',
+  wrapNavigation: true,
   emptyContent: 'No data',
 };
 
