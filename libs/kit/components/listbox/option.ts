@@ -28,12 +28,8 @@ import { XListbox } from './listbox';
     '[attr.aria-disabled]': 'disabled',
     '[attr.aria-selected]': 'selected',
     '[class.x-active]': 'active()',
-
-    // to remove
-    '(click)': 'handlePopoverClose()',
-    '(keydown.enter)': 'handlePopoverClose()',
-    '(keydown.space)': 'handlePopoverClose()',
     '(pointerenter)': 'handlePointerEnter()',
+    '(click)': 'handleClick($event)',
   },
 })
 export class XOption<V> implements FocusableOption, Highlightable {
@@ -59,6 +55,7 @@ export class XOption<V> implements FocusableOption, Highlightable {
     this.#focusMonitor.focusVia(this.#el, origin || 'program');
   }
 
+  /** @internal */
   setActiveStyles(): void {
     this.active.set(true);
 
@@ -67,8 +64,18 @@ export class XOption<V> implements FocusableOption, Highlightable {
     }
   }
 
+  /** @internal */
   setInactiveStyles(): void {
     this.active.set(false);
+  }
+
+  handleClick(e: MouseEvent): void {
+    this.#listbox.handleOptionClick(this, e);
+  }
+
+  /** @internal */
+  handlePointerEnter(): void {
+    this.#listbox.handleOptionPointerEnter(this);
   }
 
   handlePopoverClose(): void {
@@ -76,9 +83,5 @@ export class XOption<V> implements FocusableOption, Highlightable {
     //   this.#popover?.toggle(false);
     //   this.#popover?.focus();
     // }
-  }
-
-  handlePointerEnter(): void {
-    this.#listbox.setActiveOption(this);
   }
 }

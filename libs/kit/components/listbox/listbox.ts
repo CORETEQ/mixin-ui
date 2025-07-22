@@ -9,13 +9,14 @@ import {
   effect,
   ElementRef,
   inject,
+  INJECTOR,
   input,
   OnDestroy,
   untracked,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { relatedTo, XTypedOutletPipe } from '@mixin-ui/cdk';
+import { relatedTo, watch, XTypedOutletPipe } from '@mixin-ui/cdk';
 import { XPopoverTarget } from '@mixin-ui/kit/directives';
 import { XOption } from './option';
 import { X_LISTBOX_ACCESSOR } from './providers';
@@ -49,6 +50,8 @@ class ListboxSelectionModel<T> extends SelectionModel<T> {
   }
 }
 
+const OPTION_SELECTOR = '.x-option';
+
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,6 +71,7 @@ export class XListbox<T> implements OnDestroy {
   readonly #accessor = inject(X_LISTBOX_ACCESSOR, { optional: true });
   readonly #popover = inject(XPopoverTarget, { optional: true });
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
+  readonly #injector = inject(INJECTOR);
   readonly #selectionModel = new ListboxSelectionModel<T>();
 
   readonly options = contentChildren(XOption<T>);
@@ -79,12 +83,7 @@ export class XListbox<T> implements OnDestroy {
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly empty = computed(() => this.options().length === 0);
 
-  readonly #keyManager = computed(() => {
-    return new ActiveDescendantKeyManager(this.options())
-      .withWrap(this.wrapNavigation())
-      .withAllowedModifierKeys(['shiftKey'])
-      .withHomeAndEnd();
-  });
+  #keyManager!: ActiveDescendantKeyManager<XOption<T>>;
 
   get value(): readonly T[] {
     return this.#selectionModel.selected;
@@ -105,7 +104,12 @@ export class XListbox<T> implements OnDestroy {
       untracked(() => {
         this.value = value;
         this.multiple = multiple;
+        this.#selectionModel.compareWith = comparator;
       });
+    });
+
+    watch(this.options, () => {
+      this.#keyManager.setActiveItem(-1);
     });
 
     afterRenderEffect(() => {
@@ -117,16 +121,21 @@ export class XListbox<T> implements OnDestroy {
     });
 
     afterNextRender(() => {
+      this.#keyManager = new ActiveDescendantKeyManager(this.options, this.#injector)
+        .withWrap(this.wrapNavigation())
+        .withAllowedModifierKeys(['shiftKey'])
+        .withHomeAndEnd();
+
       const selected = this.#selectionModel.selected.at(0);
 
       if (selected) {
         const option = this.options().find(option => option.value() === selected);
 
         if (option) {
-          this.#keyManager().setActiveItem(option);
+          this.#keyManager.setActiveItem(option);
         }
       } else {
-        this.#keyManager().setFirstItemActive();
+        this.#keyManager.setFirstItemActive();
       }
     });
 
@@ -135,14 +144,11 @@ export class XListbox<T> implements OnDestroy {
       .subscribe(e => this.handleKeydown(e));
   }
 
-  setActiveOption(option: XOption<T>): void {
-    this.#keyManager().setActiveItem(option);
-  }
-
   isSelected(option: XOption<T>): boolean {
     return this.#selectionModel.isSelected(option.value());
   }
 
+  /** @internal */
   handleKeydown(e: KeyboardEvent): void {
     if (this.disabled()) {
       return;
@@ -150,26 +156,38 @@ export class XListbox<T> implements OnDestroy {
 
     if (e.key === 'Enter') {
       e.preventDefault();
-      const activeOption = this.#keyManager().activeItem;
+      const activeOption = this.#keyManager.activeItem;
       this.selectOption(activeOption);
     }
 
-    const keyManager = this.#keyManager();
+    const keyManager = this.#keyManager;
     keyManager.onKeydown(e);
   }
 
+  /** @internal */
   handlePointerDown(e: PointerEvent): void {
     if (this.useActiveDescendant()) {
       e.preventDefault();
     }
   }
 
+  /** @internal */
   handlePointerOut(e: PointerEvent): void {
-    if (relatedTo(e, '.x-option')) {
-      return;
+    if (!relatedTo(e, OPTION_SELECTOR)) {
+      this.#keyManager.setActiveItem(-1);
     }
+  }
 
-    this.#keyManager().setActiveItem(-1);
+  /** @internal */
+  handleOptionClick(option: XOption<T>, e: MouseEvent): void {
+    e.preventDefault();
+    this.#keyManager.setActiveItem(option);
+    this.selectOption(option);
+  }
+
+  /** @internal */
+  handleOptionPointerEnter(option: XOption<T>): void {
+    this.#keyManager.setActiveItem(option);
   }
 
   ngOnDestroy(): void {
