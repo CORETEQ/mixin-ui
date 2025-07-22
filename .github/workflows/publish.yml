@@ -45,7 +45,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build libraries
         run: pnpm ci:build
@@ -133,7 +133,7 @@ jobs:
               --auth-token $ARGOCD_AUTH_TOKEN \
               --grpc-web \
               app actions run $APP_NAME restart --kind Deployment --resource-name $RESOURCE_NAME
-        
+
         - name: Wait for rollout
           run: |
             argocd \
@@ -142,7 +142,7 @@ jobs:
               --auth-token $ARGOCD_AUTH_TOKEN \
               --grpc-web \
               app wait $APP_NAME --health --timeout 120
-        
+
         - name: Send email notification
           uses: dawidd6/action-send-mail@v3
           with:
