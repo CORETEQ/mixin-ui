@@ -1,8 +1,8 @@
-<p align="center">
+<div align="center">
   <a href="https://mixin-ui.dev" target="_blank" rel="noopener noreferrer">
     <img width="120" src="./mixin.svg" alt="Mixin logo">
   </a>
-</p>
+</div>
 
 <h1 align="center">Open source Angular tools ⚡️</h1>
 <br />
