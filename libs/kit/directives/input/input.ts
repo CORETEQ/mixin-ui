@@ -13,6 +13,7 @@ import { NgControl } from '@angular/forms';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import {
   combineLatest,
+  debounceTime,
   EMPTY,
   filter,
   fromEvent,
@@ -88,6 +89,7 @@ export class XInput {
         return control
           ? combineLatest([
               control.events.pipe(
+                debounceTime(0),
                 startWith(null),
                 map(() => control)
               ),
