@@ -12,29 +12,31 @@
 }
 
 .x-accordion {
+  --x-size-scale: 1.25;
+
   display: inline-flex;
   flex-direction: column;
   inline-size: 100%;
 
   @include size(sm) {
-    --x-size: calc(var(--x-size-sm) * 1.25);
-    --x-side: 0.5rem;
+    --x-label-height: calc(var(--x-size-sm) * var(--x-size-scale));
+    --x-label-padidng: 0.5rem;
 
     font-size: 0.815rem;
     line-height: 1rem;
   }
 
   @include size(md) {
-    --x-size: calc(var(--x-size-md) * 1.25);
-    --x-side: 0.625rem;
+    --x-label-height: calc(var(--x-size-md) * var(--x-size-scale));
+    --x-label-padidng: 0.625rem;
 
     font-size: 0.875rem;
     line-height: 1.25rem;
   }
 
   @include size(lg) {
-    --x-size: calc(var(--x-size-lg) * 1.25);
-    --x-side: 0.75rem;
+    --x-label-height: calc(var(--x-size-lg) * var(--x-size-scale));
+    --x-label-padidng: 0.75rem;
 
     font-size: 0.935rem;
     line-height: 1.5rem;
