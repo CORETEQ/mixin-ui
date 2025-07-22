@@ -28,6 +28,14 @@
 
 Read the docs here: https://mixin-ui.dev/installation
 
+## Releases
+
+For changelogs, refer to the [automatically generated changelog](/CHANGELOG).
+
+## Contributing
+
+Please follow our [contributing guidelines](/CONTRIBUTING.md).
+
 ## License
 
 Licensed under the [Apache 2.0](/LICENSE) License, Copyright © 2025-present.
