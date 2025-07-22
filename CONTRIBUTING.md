@@ -14,9 +14,9 @@ In order to make your contribution please make a fork of the repository. After y
 ## Pull Request Process
 
 1. We follow [Conventional Commits](https://www.conventionalcommits.org/) in our commit messages with the following scopes:
-  - `cdk`: Changes to the CDK package
-  - `kit`: Changes to the Kit package
-  - `web`: Changes to the Demo project
+  - `cdk`: changes to the cdk package
+  - `kit`: changes to the kit package
+  - `web`: changes to the demo project
 
    Example: `feat(kit): add new button component`
 
@@ -35,9 +35,9 @@ When filing issues, please use the appropriate templates:
 
 This project is organized as an Nx monorepo with the following packages:
 
-- **Cdk**: Core development kit with foundational utilities
-- **Kit**: Component library built on top of CDK
-- **Web**: Web-specific implementations and examples
+- **cdk**: core development kit with foundational utilities
+- **kit**: component library built on top of CDK
+- **web**: landing and examples
 
 ## Testing
 
