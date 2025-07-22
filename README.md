@@ -28,6 +28,10 @@
 
 Read the docs here: https://mixin-ui.dev/installation
 
+## Releases
+
+For changelogs, refer to the [automatically generated changelog](/CHANGELOG).
+
 ## Contributing
 
 Please follow our [contributing guidelines](/CONTRIBUTING.md).
