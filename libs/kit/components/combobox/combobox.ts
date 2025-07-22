@@ -58,6 +58,7 @@ import { createKeyComparator } from '@mixin-ui/kit/providers';
     class: 'x-combobox',
     '(input)': 'handleInput($event)',
     '(click)': 'togglePopover(!open())',
+    '(keydown.arrowDown)': 'handleArrowDown($event)',
   },
 })
 export class XCombobox<T> implements XControlAccessor<T | string | null>, XListboxAccessor<T> {
@@ -69,13 +70,13 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
   readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly open = this.#popover.open;
-  readonly compare = input(this.#opt.comparator, { alias: 'comparator' });
-  readonly asString = input(this.#opt.stringify, { alias: 'stringify' });
-  readonly match = input(this.#opt.matcher, { alias: 'matcher' });
+  readonly _comparator = input(this.#opt.comparator, { alias: 'comparator' });
+  readonly _stringify = input(this.#opt.stringify, { alias: 'stringify' });
+  readonly _matcher = input(this.#opt.matcher, { alias: 'matcher' });
   readonly strict = input(this.#opt.strict, { transform: booleanAttribute });
   readonly key = input<PropertyKey>();
   readonly comparator = computed(() =>
-    this.key() != null ? createKeyComparator(this.key()!) : this.compare()
+    this.key() != null ? createKeyComparator(this.key()!) : this._comparator()
   );
   readonly multiple = signal(false).asReadonly();
 
@@ -108,6 +109,15 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
   togglePopover(open: boolean): void {
     this.#popover.toggle(open);
+  }
+
+  handleArrowDown(e: KeyboardEvent): void {
+    if (e.defaultPrevented) {
+      return;
+    }
+
+    e.preventDefault();
+    this.togglePopover(true);
   }
 
   handleInput(e: InputEvent): void {
@@ -181,10 +191,10 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   private stringify(value: T | string | null): string {
-    return this.asString()(value);
+    return this._stringify()(value);
   }
 
   private matcher(value: string, option: T): boolean {
-    return this.match()(value, this.stringify(option));
+    return this._matcher()(value, this.stringify(option));
   }
 }
