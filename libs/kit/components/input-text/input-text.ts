@@ -12,6 +12,8 @@ import { XInput } from '@mixin-ui/kit/directives';
       inputs: ['variant', 'size', 'radius'],
     },
   ],
-  host: { class: 'x-input-text' },
+  host: {
+    class: 'x-input-text',
+  },
 })
 export class XInputText {}
