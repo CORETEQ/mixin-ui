@@ -198,6 +198,22 @@ export const ROUTES: Route[] = [
             ],
           }),
           group({
+            path: 'pipes',
+            title: 'Pipes',
+            children: [
+              page({
+                path: 'map',
+                title: 'Map',
+                loadComponent: () => import('./pages/pipes/map'),
+              }),
+              page({
+                path: 'typed-outlet',
+                title: 'Typed Outlet',
+                loadComponent: () => import('./pages/pipes/typed-outlet'),
+              }),
+            ],
+          }),
+          group({
             path: 'utils',
             title: 'Utils',
             children: [
