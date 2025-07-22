@@ -1,3 +1,22 @@
+## 0.0.1-alpha.16 (2025-07-22)
+
+### 🚀 Features
+
+- **kit:** improve `createKeyComparator` fn, change the type of key from `string` to `PropertyKey` ([10ac8a2](https://github.com/CORETEQ/mixin-ui/commit/10ac8a2))
+- **kit:** rename `value` to `listbox` in `XListboxAccessor` interface ([5752077](https://github.com/CORETEQ/mixin-ui/commit/5752077))
+- **kit:** rename `controlChanges` to `valueChanges` in `XControlAccessor` ([c7eef5a](https://github.com/CORETEQ/mixin-ui/commit/c7eef5a))
+- **kit:** add `keyboardEvents` property to `XListboxAccessor` ([169f8c8](https://github.com/CORETEQ/mixin-ui/commit/169f8c8))
+- **kit:** rename `compareFn` to `comparator` in `XSelectOptions` ([9ce790b](https://github.com/CORETEQ/mixin-ui/commit/9ce790b))
+- **web:** add `pipes` documentation ([4ee788a](https://github.com/CORETEQ/mixin-ui/commit/4ee788a))
+
+### 🩹 Fixes
+
+- **kit:** improve keyboard interaction in `XCombobox` ([171047e](https://github.com/CORETEQ/mixin-ui/commit/171047e))
+
+### 🔥 Performance
+
+- improve `state` stream performance ([6b9c0ac](https://github.com/CORETEQ/mixin-ui/commit/6b9c0ac))
+
 ## 0.0.1-alpha.15 (2025-07-21)
 
 ### 🚀 Features
