@@ -112,8 +112,10 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
 
   readonly disabled = computed(() => this.#input.state()?.disabled);
 
+  /** @internal */
   readonly calendar = signal<Date | null>(null);
 
+  /** @internal */
   readonly valueChanges = merge(this.#mask.valueChanges, this.#calendarChanges, this.#valueReset);
 
   constructor() {
