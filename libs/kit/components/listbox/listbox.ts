@@ -42,6 +42,7 @@ export class XListbox implements OnDestroy {
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
   readonly emptyContent = input(this.#opt.emptyContent);
+  readonly useActiveDescendant = input(false);
   readonly empty = computed(() => this.options().length === 0);
 
   constructor() {
@@ -52,11 +53,13 @@ export class XListbox implements OnDestroy {
       const value = this.#accessor?.value();
       const multiple = this.#accessor?.multiple() || false;
       const comparator = this.#accessor?.comparator();
+      const useActiveDescendant = this.useActiveDescendant();
 
       untracked(() => {
         this.#cdkListbox.value = value;
         this.#cdkListbox.multiple = multiple;
         this.#cdkListbox.compareWith = comparator;
+        this.#cdkListbox.useActiveDescendant = useActiveDescendant;
       });
     });
 
@@ -76,6 +79,12 @@ export class XListbox implements OnDestroy {
         this.#popover?.focus();
       }
     });
+
+    if (this.#accessor) {
+      this.#accessor.keyboardEvents.pipe(takeUntilDestroyed()).subscribe(event => {
+        (this.#cdkListbox as any)._handleKeydown(event);
+      });
+    }
   }
 
   ngOnDestroy(): void {

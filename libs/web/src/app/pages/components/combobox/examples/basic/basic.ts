@@ -19,7 +19,7 @@ export class ComboboxBasicExample {
   readonly control = new FormControl('', { validators: Validators.required });
 
   readonly query = signal('');
-  readonly options = signal(['Angular', 'React', 'Vue']);
+  readonly options = signal(['Angular', 'React', 'Vue', 'Svelte', 'Qwick', 'EmberJS', 'AngularJS', 'SolidJS', 'Mol', 'Preact', 'Nuxt', 'AnalogJS', 'NextJS']);
 
   readonly filteredOptions = computed(() => {
     const query = this.query();
