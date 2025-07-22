@@ -21,9 +21,9 @@
   position: relative;
   display: flex;
   align-items: center;
-  block-size: var(--x-size, 2rem);
+  block-size: var(--x-label-height, 1.5rem);
   margin-block-end: -1px;
-  padding: 0 var(--x-side, 1rem);
+  padding: 0 var(--x-label-padding, 1rem);
   background: transparent;
   outline: none;
   border-block-end: 1px solid var(--x-neutral-400);

@@ -1,6 +1,6 @@
 // states
 @mixin active {
-  &:where(.cdk-option-active:not([aria-disabled='true'])) {
+  &:where(.x-active:not([aria-disabled='true'])) {
     @content;
   }
 }

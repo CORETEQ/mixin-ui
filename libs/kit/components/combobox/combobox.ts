@@ -80,9 +80,13 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   );
   readonly multiple = signal(false).asReadonly();
 
+  /** @internal */
   readonly value = signal<T | null>(null);
 
+  /** @internal */
   readonly keyboardEvents = fromEvent<KeyboardEvent>(this.#el, 'keydown');
+
+  /** @internal */
   readonly valueChanges = this.#valueChanges.asObservable();
 
   #options: readonly T[] | null = null;
@@ -111,6 +115,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     this.#popover.toggle(open);
   }
 
+  /** @internal */
   handleArrowDown(e: KeyboardEvent): void {
     if (e.defaultPrevented) {
       return;
@@ -120,6 +125,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     this.togglePopover(true);
   }
 
+  /** @internal */
   handleInput(e: InputEvent): void {
     if (e.target !== this.inputEl) {
       return;
@@ -128,15 +134,14 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     this.togglePopover(true);
 
     const option = this.findOption(this.nativeValue);
-
     this.updateModel(option || this.nativeValue);
     this.updateListbox(option ? option : null);
-
     if (option) {
       this.updateNative(this.stringify(option));
     }
   }
 
+  /** @internal */
   handleListboxValue(options: readonly T[]): void {
     const value = options.at(0) || null;
     this.updateModel(value);
@@ -144,17 +149,19 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     this.updateListbox(value);
   }
 
+  /** @internal */
   handleControlValue(value: T | string | null): void {
     this.updateNative(this.stringify(value));
     this.updateListbox(value === '' ? null : (value as T));
   }
 
+  /** @internal */
   handleListboxOptions(options: readonly T[] | null): void {
     this.#options = options;
 
     if (this.#options?.length) {
-      const value = this.findOption(this.nativeValue);
-      this.updateListbox(value ? value : null);
+      const option = this.findOption(this.nativeValue);
+      this.updateListbox(option ? option : null);
     }
   }
 
