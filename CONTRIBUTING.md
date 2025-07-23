@@ -16,7 +16,7 @@ In order to make your contribution please make a fork of the repository. After y
 1. We follow [Conventional Commits](https://www.conventionalcommits.org/) in our commit messages with the following scopes:
   - `cdk`: changes to the cdk package
   - `kit`: changes to the kit package
-  - `web`: changes to the demo project
+  - `web`: changes to the demo app
 
    Example: `feat(kit): add new button component`
 
@@ -37,7 +37,7 @@ This project is organized as an Nx monorepo with the following packages:
 
 - **cdk**: core development kit with foundational utilities
 - **kit**: component library built on top of CDK
-- **web**: landing and examples
+- **web**: demmo app (landing, examples)
 
 ## Testing
 
