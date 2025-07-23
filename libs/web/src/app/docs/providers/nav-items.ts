@@ -1,6 +1,6 @@
 import { inject, InjectionToken } from '@angular/core';
 import { Route, Router } from '@angular/router';
-import { DocsNavItem, DocsPageStatus } from '../types';
+import { DocsNavItem, DocsPageStatus } from '@/docs/types';
 
 export const DOCS_NAV_ITEMS = new InjectionToken<DocsNavItem[]>('NAV_ITEMS', {
   factory: () => {

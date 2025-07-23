@@ -14,9 +14,9 @@ import { DocsPageService } from '@/docs/services';
   selector: 'docs-page-nav',
 })
 export class DocsPageNav {
-  protected readonly page = toSignal(inject(DocsPageService), { requireSync: true });
+  readonly page = toSignal(inject(DocsPageService), { requireSync: true });
 
-  protected readonly rlaOptions: IsActiveMatchOptions = {
+  readonly rlaOptions: IsActiveMatchOptions = {
     paths: 'exact',
     fragment: 'exact',
     queryParams: 'ignored',

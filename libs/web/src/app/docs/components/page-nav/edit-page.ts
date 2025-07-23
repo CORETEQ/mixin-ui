@@ -6,7 +6,10 @@ import { fromRouterEvent } from '@mixin-ui/cdk';
 import { XIcon } from '@mixin-ui/kit';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   selector: 'docs-edit-page',
+  imports: [XIcon],
   template: `
     <a
       class="flex items-center gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]"
@@ -17,9 +20,6 @@ import { XIcon } from '@mixin-ui/kit';
       <x-icon src="arrow-up-right" class="mt-0.5" />
     </a>
   `,
-  imports: [XIcon],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocsEditPage {
   readonly #router = inject(Router);

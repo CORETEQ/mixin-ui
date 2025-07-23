@@ -7,7 +7,6 @@ import {
   computed,
   contentChildren,
   effect,
-  ElementRef,
   inject,
   INJECTOR,
   input,
@@ -16,16 +15,16 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
+import { SelectionModel } from '@angular/cdk/collections';
+import { coerceArray } from '@angular/cdk/coercion';
+import { EMPTY, merge } from 'rxjs';
 import { relatedTo, watch, XTypedOutletPipe } from '@mixin-ui/cdk';
 import { XPopoverTarget } from '@mixin-ui/kit/directives';
 import { XOption } from './option';
 import { X_LISTBOX_ACCESSOR } from './providers';
 import { X_LISTBOX_OPTIONS } from './options';
-import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { EMPTY, merge } from 'rxjs';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { SelectionModel } from '@angular/cdk/collections';
-import { coerceArray } from '@angular/cdk/coercion';
 
 class ListboxSelectionModel<T> extends SelectionModel<T> {
   constructor(
@@ -50,8 +49,6 @@ class ListboxSelectionModel<T> extends SelectionModel<T> {
   }
 }
 
-const OPTION_SELECTOR = '.x-option';
-
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,19 +57,18 @@ const OPTION_SELECTOR = '.x-option';
   templateUrl: './listbox.html',
   imports: [XTypedOutletPipe, NgComponentOutlet, NgTemplateOutlet],
   host: {
+    role: 'listbox',
     '[class]': '`x-listbox x-size-${size()} x-radius-${radius()}`',
     '(keydown)': 'handleKeydown($event)',
-    '(pointerdown)': 'handlePointerDown($event)',
-    '(pointerout)': 'handlePointerOut($event)',
+    '(pointerdown)': 'handlePointerdown($event)',
+    '(pointerout)': 'handlePointerout($event)',
   },
 })
 export class XListbox<T> implements OnDestroy {
   readonly #opt = inject(X_LISTBOX_OPTIONS);
   readonly #accessor = inject(X_LISTBOX_ACCESSOR, { optional: true });
   readonly #popover = inject(XPopoverTarget, { optional: true });
-  readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
   readonly #injector = inject(INJECTOR);
-  readonly #selectionModel = new ListboxSelectionModel<T>();
 
   readonly options = contentChildren(XOption<T>);
   readonly size = input(this.#opt.size);
@@ -83,28 +79,39 @@ export class XListbox<T> implements OnDestroy {
   readonly disabled = input(false, { transform: booleanAttribute });
   readonly empty = computed(() => this.options().length === 0);
 
-  #keyManager!: ActiveDescendantKeyManager<XOption<T>>;
+  readonly #model = new ListboxSelectionModel<T>();
+
+  readonly #keyManager = new ActiveDescendantKeyManager(this.options, this.#injector)
+    .skipPredicate(option => option.disabled)
+    .withAllowedModifierKeys(['shiftKey'])
+    .withHomeAndEnd();
 
   get value(): readonly T[] {
-    return this.#selectionModel.selected;
+    return this.#model.selected;
   }
 
-  set value(value: readonly T[]) {
-    this.#selectionModel.setSelection(...this.coerceValue(value));
+  get multiple(): boolean {
+    return this.#model.isMultipleSelection();
   }
-
-  multiple = false;
 
   constructor() {
     effect(() => {
-      const value = this.#accessor?.value();
-      const multiple = this.#accessor?.multiple() || false;
-      const comparator = this.#accessor?.comparator();
+      const wrap = this.wrapNavigation();
 
       untracked(() => {
-        this.value = value;
-        this.multiple = multiple;
-        this.#selectionModel.compareWith = comparator;
+        this.#keyManager.withWrap(wrap);
+      });
+    });
+
+    effect(() => {
+      const value = this.#accessor?.selection();
+      const multiple = this.#accessor?.multiple?.() || false;
+      const comparator = this.#accessor?.comparator?.();
+
+      untracked(() => {
+        this.#model.setSelection(...this.coerceValue(value));
+        this.#model.multiple = multiple;
+        this.#model.compareWith = comparator;
       });
     });
 
@@ -121,12 +128,7 @@ export class XListbox<T> implements OnDestroy {
     });
 
     afterNextRender(() => {
-      this.#keyManager = new ActiveDescendantKeyManager(this.options, this.#injector)
-        .withWrap(this.wrapNavigation())
-        .withAllowedModifierKeys(['shiftKey'])
-        .withHomeAndEnd();
-
-      const selected = this.#selectionModel.selected.at(0);
+      const selected = this.#model.selected.at(0);
 
       if (selected) {
         const option = this.options().find(option => option.value() === selected);
@@ -145,7 +147,7 @@ export class XListbox<T> implements OnDestroy {
   }
 
   isSelected(option: XOption<T>): boolean {
-    return this.#selectionModel.isSelected(option.value());
+    return this.#model.isSelected(option.value());
   }
 
   /** @internal */
@@ -156,38 +158,36 @@ export class XListbox<T> implements OnDestroy {
 
     if (e.key === 'Enter') {
       e.preventDefault();
-      const activeOption = this.#keyManager.activeItem;
-      this.selectOption(activeOption);
+      this.updateValue(this.activeOption);
     }
 
-    const keyManager = this.#keyManager;
-    keyManager.onKeydown(e);
+    this.#keyManager.onKeydown(e);
   }
 
   /** @internal */
-  handlePointerDown(e: PointerEvent): void {
+  handlePointerdown(e: PointerEvent): void {
     if (this.useActiveDescendant()) {
       e.preventDefault();
     }
   }
 
   /** @internal */
-  handlePointerOut(e: PointerEvent): void {
-    if (!relatedTo(e, OPTION_SELECTOR)) {
-      this.#keyManager.setActiveItem(-1);
+  handlePointerout(e: PointerEvent): void {
+    if (!relatedTo(e, '.x-option')) {
+      this.setActiveOption(null);
     }
   }
 
   /** @internal */
   handleOptionClick(option: XOption<T>, e: MouseEvent): void {
     e.preventDefault();
-    this.#keyManager.setActiveItem(option);
-    this.selectOption(option);
+    this.setActiveOption(option);
+    this.updateValue(option);
   }
 
   /** @internal */
-  handleOptionPointerEnter(option: XOption<T>): void {
-    this.#keyManager.setActiveItem(option);
+  handleOptionPointerenter(option: XOption<T>): void {
+    this.setActiveOption(option);
   }
 
   ngOnDestroy(): void {
@@ -196,26 +196,38 @@ export class XListbox<T> implements OnDestroy {
     });
   }
 
-  private selectOption(option: XOption<T> | null): void {
+  private get activeOption(): XOption<T> | null {
+    return this.#keyManager.activeItem;
+  }
+
+  private setActiveOption(option: XOption<T> | null): void {
+    if (option) {
+      this.#keyManager.setActiveItem(option);
+    } else {
+      this.#keyManager.setActiveItem(-1);
+    }
+  }
+
+  private updateValue(option: XOption<T> | null): void {
     if (!option || option.disabled) {
       return;
     }
 
     const changed = this.multiple
-      ? this.#selectionModel.toggle(option.value())
-      : this.#selectionModel.select(option.value());
+      ? this.#model.toggle(option.value())
+      : this.#model.select(option.value());
 
     if (changed) {
       this.#accessor?.handleListboxValue(this.value);
+    }
 
-      if (!this.multiple) {
-        this.#popover?.toggle(false);
-        this.#popover?.focus();
-      }
+    if (!this.multiple) {
+      this.#popover?.toggle(false);
+      this.#popover?.focus();
     }
   }
 
-  private coerceValue(value: readonly T[]): readonly T[] {
+  private coerceValue(value: T | readonly T[] | null): readonly T[] {
     return value == null ? [] : coerceArray(value);
   }
 }

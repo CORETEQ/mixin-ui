@@ -66,8 +66,8 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   ],
   host: {
     class: 'x-input-date',
-    '(focusin)': 'handleFocusIn($event)',
-    '(focusout)': 'handleFocusOut($event)',
+    '(focusin)': 'handleFocusin($event)',
+    '(focusout)': 'handleFocusout($event)',
   },
 })
 export class XInputDate implements XControlAccessor<Date | null>, XCalendarAccessor {
@@ -160,14 +160,14 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   }
 
   /** @internal */
-  handleFocusIn(e: FocusEvent): void {
+  handleFocusin(e: FocusEvent): void {
     if (isMatchingTarget(e, 'input') && this.popoverOnFocus()) {
       this.#popover.toggle(true);
     }
   }
 
   /** @internal */
-  handleFocusOut(e: FocusEvent): void {
+  handleFocusout(e: FocusEvent): void {
     if (isMatchingTarget(e, 'input') && !this.#mask.completed) {
       this.#valueReset.next(null);
     }

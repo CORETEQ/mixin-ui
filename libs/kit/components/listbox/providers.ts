@@ -3,10 +3,10 @@ import { XComparator } from '@mixin-ui/kit/providers';
 import { Observable } from 'rxjs';
 
 export interface XListboxAccessor<T = any> {
-  readonly value: Signal<T | readonly T[] | null>;
-  readonly multiple: Signal<boolean>;
-  readonly comparator: Signal<XComparator<T> | undefined>;
-  readonly keyboardEvents: Observable<KeyboardEvent>;
+  readonly selection: Signal<T | readonly T[] | null>;
+  readonly multiple?: Signal<boolean>;
+  readonly comparator?: Signal<XComparator<T>>;
+  readonly keyboardEvents?: Observable<KeyboardEvent>;
 
   handleListboxValue(value: readonly T[]): void;
 

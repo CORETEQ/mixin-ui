@@ -2,7 +2,7 @@ import { inject, InjectionToken } from '@angular/core';
 import { X_COMPARATOR, XComparator } from '@mixin-ui/kit/providers';
 
 export interface XSelectOptions {
-  readonly comparator?: XComparator;
+  readonly comparator: XComparator;
 }
 
 const defaultOptionsFactory = () => ({

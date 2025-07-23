@@ -9,7 +9,9 @@ type Outlet<T extends Type, O extends XOutlet> = {
 };
 
 type ComponentOutlet<C> = Outlet<'component', Component<C>>;
+
 type TemplateOutlet<C> = Outlet<'template', TemplateRef<C>>;
+
 type ValueOutlet = Outlet<'value', string | null | undefined>;
 
 export type XOutlet<C = unknown> = Component<C> | TemplateRef<C> | string | null | undefined;

@@ -23,9 +23,9 @@ import {
   XInput,
   XPopoverTarget,
 } from '@mixin-ui/kit/directives';
+import { createKeyComparator } from '@mixin-ui/kit/providers';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 import { X_COMBOBOX_OPTIONS } from './options';
-import { createKeyComparator } from '@mixin-ui/kit/providers';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -66,7 +66,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   readonly #popover = inject(XPopoverTarget);
   readonly #el = inject(ElementRef).nativeElement;
   readonly #r2 = inject(Renderer2);
-  readonly #valueChanges = new Subject<T | string | null>();
+  readonly #modelChanges = new Subject<T | string | null>();
 
   readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly open = this.#popover.open;
@@ -78,16 +78,15 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   readonly comparator = computed(() =>
     this.key() != null ? createKeyComparator(this.key()!) : this._comparator()
   );
-  readonly multiple = signal(false).asReadonly();
 
   /** @internal */
-  readonly value = signal<T | null>(null);
+  readonly selection = signal<T | null>(null);
 
   /** @internal */
   readonly keyboardEvents = fromEvent<KeyboardEvent>(this.#el, 'keydown');
 
   /** @internal */
-  readonly valueChanges = this.#valueChanges.asObservable();
+  readonly valueChanges = this.#modelChanges.asObservable();
 
   #options: readonly T[] | null = null;
 
@@ -182,11 +181,11 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   private updateModel(value: T | string | null): void {
-    this.#valueChanges.next(value);
+    this.#modelChanges.next(value);
   }
 
   private updateListbox(value: T | null): void {
-    this.value.set(value);
+    this.selection.set(value);
   }
 
   private updateNative(value: string, emitEvent?: InputEventInit): void {

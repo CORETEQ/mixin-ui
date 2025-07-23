@@ -25,10 +25,10 @@ import { XListbox } from './listbox';
     role: 'option',
     class: 'x-option',
     '[id]': 'id()',
+    '[class.x-active]': 'active()',
     '[attr.aria-disabled]': 'disabled',
     '[attr.aria-selected]': 'selected',
-    '[class.x-active]': 'active()',
-    '(pointerenter)': 'handlePointerEnter()',
+    '(pointerenter)': 'handlePointerenter()',
     '(click)': 'handleClick($event)',
   },
 })
@@ -40,7 +40,7 @@ export class XOption<V> implements FocusableOption, Highlightable {
 
   readonly id = input(generateId());
   readonly value = input.required<V>();
-  readonly _disabled = input(false, { transform: booleanAttribute });
+  readonly _disabled = input(false, { alias: 'disabled', transform: booleanAttribute });
   readonly active = signal(false);
 
   get disabled(): boolean {
@@ -69,19 +69,13 @@ export class XOption<V> implements FocusableOption, Highlightable {
     this.active.set(false);
   }
 
+  /** @internal */
   handleClick(e: MouseEvent): void {
     this.#listbox.handleOptionClick(this, e);
   }
 
   /** @internal */
-  handlePointerEnter(): void {
-    this.#listbox.handleOptionPointerEnter(this);
-  }
-
-  handlePopoverClose(): void {
-    // if (!this.#cdkListbox.multiple && this.#cdkOption.isSelected()) {
-    //   this.#popover?.toggle(false);
-    //   this.#popover?.focus();
-    // }
+  handlePointerenter(): void {
+    this.#listbox.handleOptionPointerenter(this);
   }
 }

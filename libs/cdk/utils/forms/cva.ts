@@ -43,7 +43,9 @@ class CvaImpl<T> implements ControlValueAccessor, XCva<T> {
   readonly #value: WritableSignal<T>;
 
   readonly value = computed(() => this.#value() ?? this.defaultValue);
+
   readonly disabled = signal(false);
+
   readonly control = toSignal(
     timer(0).pipe(
       switchMap(() => {
@@ -59,6 +61,7 @@ class CvaImpl<T> implements ControlValueAccessor, XCva<T> {
     ),
     { initialValue: null }
   );
+
   readonly required = computed(() => !!this.control()?.hasValidator(Validators.required));
 
   constructor(readonly options: XCvaOptions<T>) {
