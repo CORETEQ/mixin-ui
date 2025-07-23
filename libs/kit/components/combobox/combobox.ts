@@ -185,7 +185,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   private hasOption(value: string): boolean {
-    return Boolean(this.#options?.some(option => this.matcher(value, option.value())));
+    return !!this.#options?.some(option => this.matcher(value, option.value()));
   }
 
   private findOption(value: string): T | null {
