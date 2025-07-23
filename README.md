@@ -30,7 +30,7 @@ Read the docs here: https://mixin-ui.dev/installation
 
 ## Releases
 
-For changelogs, refer to the [automatically generated changelog](/CHANGELOG).
+For changelogs, refer to the [automatically generated changelog](/CHANGELOG.md).
 
 ## Contributing
 
