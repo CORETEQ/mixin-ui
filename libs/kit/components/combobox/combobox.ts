@@ -24,7 +24,11 @@ import {
   XPopoverTarget,
 } from '@mixin-ui/kit/directives';
 import { createKeyComparator } from '@mixin-ui/kit/providers';
-import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
+import {
+  provideListboxAccessor,
+  XListboxAccessor,
+  XOption,
+} from '@mixin-ui/kit/components/listbox';
 import { X_COMBOBOX_OPTIONS } from './options';
 
 @Component({
@@ -88,16 +92,20 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   /** @internal */
   readonly valueChanges = this.#modelChanges.asObservable();
 
-  #options: readonly T[] | null = null;
+  readonly #activeDescendant = signal<string | null>(null);
+
+  #options: readonly XOption<T>[] | null = null;
 
   constructor() {
     effect(() => {
+      const id = this.#activeDescendant();
       const input = this.input().nativeElement;
       const open = this.open();
 
-      this.#r2.setAttribute(input, 'autocomplete', 'false');
       this.#r2.setAttribute(input, 'role', 'combobox');
+      this.#r2.setAttribute(input, 'autocomplete', 'false');
       this.#r2.setAttribute(input, 'aria-haspopup', 'listbox');
+      this.#r2.setAttribute(input, 'aria-activedescendant', id || '');
       this.#r2.setAttribute(input, 'aria-expanded', String(open));
     });
 
@@ -155,13 +163,17 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   /** @internal */
-  handleListboxOptions(options: readonly T[] | null): void {
+  handleListboxOptions(options: readonly XOption<T>[] | null): void {
     this.#options = options;
 
     if (this.#options?.length) {
-      const option = this.findOption(this.nativeValue);
-      this.updateListbox(option ? option : null);
+      this.updateListbox(this.findOption(this.nativeValue) || null);
     }
+  }
+
+  /** @internal */
+  handleListboxActiveDescendant(option: XOption<T> | null): void {
+    this.#activeDescendant.set(option?.id() || null);
   }
 
   private get inputEl(): HTMLInputElement {
@@ -173,11 +185,11 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   private hasOption(value: string): boolean {
-    return Boolean(this.#options?.some(option => this.matcher(value, option)));
+    return Boolean(this.#options?.some(option => this.matcher(value, option.value())));
   }
 
   private findOption(value: string): T | null {
-    return this.#options?.find(option => this.matcher(value, option)) || null;
+    return this.#options?.find(option => this.matcher(value, option.value()))?.value() || null;
   }
 
   private updateModel(value: T | string | null): void {

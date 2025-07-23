@@ -95,6 +95,24 @@ export class XListbox<T> implements OnDestroy {
   }
 
   constructor() {
+    afterNextRender(() => {
+      const selected = this.#model.selected.at(0);
+
+      if (selected) {
+        const option = this.options().find(option => option.value() === selected);
+
+        if (option) {
+          this.#keyManager.setActiveItem(option);
+        }
+      } else {
+        this.#keyManager.setFirstItemActive();
+      }
+    });
+
+    watch(this.options, () => {
+      this.resetActiveOption();
+    });
+
     effect(() => {
       const wrap = this.wrapNavigation();
 
@@ -115,35 +133,22 @@ export class XListbox<T> implements OnDestroy {
       });
     });
 
-    watch(this.options, () => {
-      this.#keyManager.setActiveItem(-1);
-    });
-
     afterRenderEffect(() => {
       const options = this.options();
 
       untracked(() => {
-        this.#accessor?.handleListboxOptions?.(options.map(option => option.value()));
+        this.#accessor?.handleListboxOptions?.(options);
       });
-    });
-
-    afterNextRender(() => {
-      const selected = this.#model.selected.at(0);
-
-      if (selected) {
-        const option = this.options().find(option => option.value() === selected);
-
-        if (option) {
-          this.#keyManager.setActiveItem(option);
-        }
-      } else {
-        this.#keyManager.setFirstItemActive();
-      }
     });
 
     merge(this.#accessor?.keyboardEvents || EMPTY)
       .pipe(takeUntilDestroyed())
       .subscribe(e => this.handleKeydown(e));
+
+    this.#keyManager.change.pipe(takeUntilDestroyed()).subscribe(index => {
+      const option = this.options()[index];
+      this.#accessor?.handleListboxActiveDescendant?.(option);
+    });
   }
 
   isSelected(option: XOption<T>): boolean {
@@ -174,7 +179,7 @@ export class XListbox<T> implements OnDestroy {
   /** @internal */
   handlePointerout(e: PointerEvent): void {
     if (!relatedTo(e, '.x-option')) {
-      this.setActiveOption(null);
+      this.resetActiveOption();
     }
   }
 
@@ -200,12 +205,12 @@ export class XListbox<T> implements OnDestroy {
     return this.#keyManager.activeItem;
   }
 
-  private setActiveOption(option: XOption<T> | null): void {
-    if (option) {
-      this.#keyManager.setActiveItem(option);
-    } else {
-      this.#keyManager.setActiveItem(-1);
-    }
+  private setActiveOption(option: XOption<T>): void {
+    this.#keyManager.setActiveItem(option);
+  }
+
+  private resetActiveOption(): void {
+    this.#keyManager.setActiveItem(-1);
   }
 
   private updateValue(option: XOption<T> | null): void {
@@ -213,9 +218,8 @@ export class XListbox<T> implements OnDestroy {
       return;
     }
 
-    const changed = this.multiple
-      ? this.#model.toggle(option.value())
-      : this.#model.select(option.value());
+    const value = option.value();
+    const changed = this.multiple ? this.#model.toggle(value) : this.#model.select(value);
 
     if (changed) {
       this.#accessor?.handleListboxValue(this.value);

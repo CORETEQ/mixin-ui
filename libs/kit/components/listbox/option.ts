@@ -10,7 +10,6 @@ import {
 } from '@angular/core';
 import { FocusableOption, FocusMonitor, FocusOrigin, Highlightable } from '@angular/cdk/a11y';
 import { generateId } from '@mixin-ui/cdk';
-import { XPopoverTarget } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { XListbox } from './listbox';
 
@@ -35,7 +34,6 @@ import { XListbox } from './listbox';
 export class XOption<V> implements FocusableOption, Highlightable {
   readonly #listbox = inject(XListbox);
   readonly #focusMonitor = inject(FocusMonitor);
-  readonly #popover = inject(XPopoverTarget, { skipSelf: true, optional: true });
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
 
   readonly id = input(generateId());
