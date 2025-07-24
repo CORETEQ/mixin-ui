@@ -24,7 +24,7 @@ module.exports = [
     },
   },
   {
-    files: ['**/*.json'],
+    files: ['**/package.json'],
     languageOptions: {
       parser: jsoncParser,
     },
