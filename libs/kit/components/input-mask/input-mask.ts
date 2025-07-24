@@ -81,10 +81,10 @@ export class XInputMask implements XControlAccessor<string> {
   /** @internal */
   handleFocusOut(e: FocusEvent): void {
     if (
+      isMatchingTarget(e, 'input') &&
       this.strict() &&
-      !this.#mask.completed &&
       this.#mask.rawValue !== '' &&
-      isMatchingTarget(e, 'input')
+      !this.#mask.completed
     ) {
       this.#reset.next('');
     }
