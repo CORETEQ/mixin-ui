@@ -2,6 +2,7 @@ import {
   booleanAttribute,
   ChangeDetectionStrategy,
   Component,
+  computed,
   ElementRef,
   inject,
   input,
@@ -25,6 +26,7 @@ import { XListbox } from './listbox';
     class: 'x-option',
     '[id]': 'id()',
     '[class.x-active]': 'active()',
+    '[attr.tabindex]': 'tabIndex()',
     '[attr.aria-disabled]': 'disabled',
     '[attr.aria-selected]': 'selected',
     '(pointerenter)': 'handlePointerenter()',
@@ -40,6 +42,9 @@ export class XOption<V> implements FocusableOption, Highlightable {
   readonly value = input.required<V>();
   readonly _disabled = input(false, { alias: 'disabled', transform: booleanAttribute });
   readonly active = signal(false);
+  readonly tabIndex = computed(() =>
+    !this.#listbox.useActiveDescendant() && this.active() ? '0' : '-1'
+  );
 
   get disabled(): boolean {
     return this._disabled();

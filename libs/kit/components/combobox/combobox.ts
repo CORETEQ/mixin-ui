@@ -27,6 +27,7 @@ import {
 import { createKeyComparator } from '@mixin-ui/kit/providers';
 import {
   provideListboxAccessor,
+  provideListboxOptions,
   XListboxAccessor,
   XOption,
 } from '@mixin-ui/kit/components/listbox';
@@ -41,6 +42,7 @@ import { X_COMBOBOX_OPTIONS } from './options';
   providers: [
     provideControlAccessor(forwardRef(() => XCombobox)),
     provideListboxAccessor(forwardRef(() => XCombobox)),
+    provideListboxOptions({ useActiveDescendant: true }),
     providePopoverOptions({ autoFocus: false }),
   ],
   hostDirectives: [

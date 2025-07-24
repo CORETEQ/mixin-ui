@@ -59,6 +59,7 @@ class ListboxSelectionModel<T> extends SelectionModel<T> {
   host: {
     role: 'listbox',
     '[class]': '`x-listbox x-size-${size()} x-radius-${radius()}`',
+    '[attr.tabindex]': 'tabIndex()',
     '(keydown)': 'handleKeydown($event)',
     '(pointerdown)': 'handlePointerdown($event)',
     '(pointerout)': 'handlePointerout($event)',
@@ -74,9 +75,10 @@ export class XListbox<T> implements OnDestroy {
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
   readonly wrapNavigation = input(this.#opt.wrapNavigation, { transform: booleanAttribute });
+  readonly useActiveDescendant = input(this.#opt.useActiveDescendant);
   readonly emptyContent = input(this.#opt.emptyContent);
-  readonly useActiveDescendant = input(true);
   readonly disabled = input(false, { transform: booleanAttribute });
+  readonly tabIndex = computed(() => (this.disabled() || this.useActiveDescendant() ? null : '0'));
   readonly empty = computed(() => this.options().length === 0);
 
   readonly #model = new ListboxSelectionModel<T>();
@@ -89,9 +91,10 @@ export class XListbox<T> implements OnDestroy {
   constructor() {
     afterNextRender(() => {
       const selected = this.#model.selected.at(0);
+      const comparator = this.#model.compareWith || Object.is;
 
       if (selected) {
-        const option = this.options().find(option => option.value() === selected);
+        const option = this.options().find(option => comparator(option.value(), selected));
 
         if (option) {
           this.#keyManager.setActiveItem(option);
@@ -101,16 +104,11 @@ export class XListbox<T> implements OnDestroy {
       }
     });
 
-    watch(this.options, () => {
-      this.resetActiveOption();
-    });
+    watch(this.options, () => this.resetActiveOption());
 
     effect(() => {
       const wrap = this.wrapNavigation();
-
-      untracked(() => {
-        this.#keyManager.withWrap(wrap);
-      });
+      untracked(() => this.#keyManager.withWrap(wrap));
     });
 
     effect(() => {
@@ -127,10 +125,7 @@ export class XListbox<T> implements OnDestroy {
 
     afterRenderEffect(() => {
       const options = this.options();
-
-      untracked(() => {
-        this.#accessor?.handleListboxOptions?.(options);
-      });
+      untracked(() => this.#accessor?.handleListboxOptions?.(options));
     });
 
     merge(this.#accessor?.keyboardEvents || EMPTY)
@@ -140,6 +135,7 @@ export class XListbox<T> implements OnDestroy {
     this.#keyManager.change.pipe(takeUntilDestroyed()).subscribe(index => {
       const option = this.options()[index];
       this.#accessor?.handleListboxActiveDescendant?.(option);
+      this.focusActiveOption();
     });
   }
 
@@ -211,6 +207,12 @@ export class XListbox<T> implements OnDestroy {
 
   private resetActiveOption(): void {
     this.#keyManager.setActiveItem(-1);
+  }
+
+  private focusActiveOption(): void {
+    if (!this.useActiveDescendant()) {
+      this.activeOption?.focus();
+    }
   }
 
   private updateValue(option: XOption<T> | null): void {
