@@ -3,7 +3,6 @@ import 'imask/masked/number';
 import 'imask/masked/dynamic';
 import 'imask/masked/pattern';
 import type { MaskedNumber } from 'imask';
-import type { FactoryOpts } from 'imask/masked/factory';
 import { IMaskImpl } from './base';
 
 import { X_NUMBER_MASK_OPTIONS, XNumberMaskOptions } from '@mixin-ui/cdk/providers';
@@ -23,7 +22,6 @@ const adapter = (options: XNumberMaskOptions) => {
             normalizeZeros: options.normalizeZeros,
             radix: options.decimalSeparator,
             scale: options.decimalScale,
-            signed: options.min < 0,
             min: options.min,
             max: options.max,
           },
@@ -32,9 +30,9 @@ const adapter = (options: XNumberMaskOptions) => {
           const value = this.unmaskedValue;
           return value === '' ? null : Number(value);
         },
-      },
+      } as object,
     ],
-  } as FactoryOpts;
+  };
 };
 
 export const X_NUMBER_MASK_FACTORY = new InjectionToken('NUMBER_MASK_FACTORY', {
