@@ -6,14 +6,11 @@ export function fromRouterEvent<T extends RouterEvent>(
   event: { new (...args: any[]): T },
   options?: { injector: Injector }
 ): Observable<T> {
-  let router: Router;
-
-  if (!options?.injector) {
+  if (ngDevMode && !options?.injector) {
     assertInInjectionContext(fromRouterEvent);
-    router = inject(Router);
-  } else {
-    router = options.injector.get(Router);
   }
 
-  return router.events.pipe(filter((e: unknown): e is T => e instanceof event));
+  return (options?.injector.get(Router) || inject(Router)).events.pipe(
+    filter((e: unknown): e is T => e instanceof event)
+  );
 }
