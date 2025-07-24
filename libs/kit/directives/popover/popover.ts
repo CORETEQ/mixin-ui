@@ -6,6 +6,7 @@ import {
   ElementRef,
   inject,
   input,
+  linkedSignal,
   PLATFORM_ID,
   TemplateRef,
   untracked,
@@ -41,6 +42,7 @@ export class XPopoverTarget {
 
   readonly childContent = contentChild(XPopover, { read: TemplateRef });
   readonly inputContent = input<XOutlet>(null, { alias: 'x-popover' });
+  readonly _disabled = input(false, { alias: 'x-popover-disabled' });
   readonly direction = input(this.#position.direction, { alias: 'x-popover-direction' });
   readonly position = input(this.#position.position, { alias: 'x-popover-position' });
   readonly align = input(this.#position.align, { alias: 'x-popover-align' });
@@ -54,6 +56,7 @@ export class XPopoverTarget {
   readonly autoFocus = input(this.#opt.autoFocus, { alias: 'x-popover-auto-focus' });
   readonly content = computed(() => this.inputContent() || this.childContent());
   readonly open = toSignal(this.#overlay.openChanges, { requireSync: true });
+  readonly #disabled = linkedSignal(() => this._disabled());
 
   readonly rules = toSignal(
     toObservable(this.stretch).pipe(
@@ -75,6 +78,16 @@ export class XPopoverTarget {
     if (isPlatformServer(inject(PLATFORM_ID))) {
       return;
     }
+
+    effect(() => {
+      const disabled = this.#disabled();
+
+      untracked(() => {
+        if (disabled) {
+          this.toggle(false);
+        }
+      });
+    });
 
     effect(() => {
       const open = this.open();
@@ -119,7 +132,7 @@ export class XPopoverTarget {
   }
 
   toggle(open: boolean): void {
-    if (open && this.content()) {
+    if (open && this.content() && !this.#disabled()) {
       this.#overlay.open(XPopoverContainer, {
         direction: this.direction(),
         position: this.position(),
@@ -130,6 +143,10 @@ export class XPopoverTarget {
     } else if (!open) {
       this.#overlay.close();
     }
+  }
+
+  setDisabled(disabled: boolean): void {
+    this.#disabled.set(disabled);
   }
 
   updateSize(value: OverlaySizeConfig): void {
