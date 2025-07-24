@@ -86,14 +86,6 @@ export class XListbox<T> implements OnDestroy {
     .withAllowedModifierKeys(['shiftKey'])
     .withHomeAndEnd();
 
-  get value(): readonly T[] {
-    return this.#model.selected;
-  }
-
-  get multiple(): boolean {
-    return this.#model.isMultipleSelection();
-  }
-
   constructor() {
     afterNextRender(() => {
       const selected = this.#model.selected.at(0);
@@ -149,6 +141,14 @@ export class XListbox<T> implements OnDestroy {
       const option = this.options()[index];
       this.#accessor?.handleListboxActiveDescendant?.(option);
     });
+  }
+
+  get value(): readonly T[] {
+    return this.#model.selected;
+  }
+
+  get multiple(): boolean {
+    return this.#model.isMultipleSelection();
   }
 
   isSelected(option: XOption<T>): boolean {

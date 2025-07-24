@@ -33,7 +33,7 @@ import { XListbox } from './listbox';
 })
 export class XOption<V> implements FocusableOption, Highlightable {
   readonly #listbox = inject(XListbox);
-  readonly #focusMonitor = inject(FocusMonitor);
+  readonly #fm = inject(FocusMonitor);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
 
   readonly id = input(generateId());
@@ -50,7 +50,7 @@ export class XOption<V> implements FocusableOption, Highlightable {
   }
 
   focus(origin?: FocusOrigin): void {
-    this.#focusMonitor.focusVia(this.#el, origin || 'program');
+    this.#fm.focusVia(this.#el, origin || 'program');
   }
 
   /** @internal */

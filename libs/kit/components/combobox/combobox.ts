@@ -155,7 +155,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
     const option = this.findOption(this.nativeValue);
 
-    if (option && !option.disabled) {
+    if (option) {
       const value = option.value();
 
       this.updateModelValue(value);
@@ -188,7 +188,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
 
     if (this.#options?.length) {
       const option = this.findOption(this.nativeValue);
-      this.updateSelection(option && !option?.disabled ? option.value() : null);
+      this.updateSelection(option ? option.value() : null);
     }
   }
 
@@ -206,11 +206,11 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   private hasOption(value: string): boolean {
-    return !!this.#options?.some(option => this.matches(value, option));
+    return !!this.#options?.some(option => !option.disabled && this.matches(value, option));
   }
 
   private findOption(value: string): XOption<T> | null {
-    return this.#options?.find(option => this.matches(value, option)) || null;
+    return this.#options?.find(option => !option.disabled && this.matches(value, option)) || null;
   }
 
   private updateSelection(value: T | null): void {
