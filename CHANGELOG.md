@@ -1,3 +1,19 @@
+## 0.0.1-alpha.17 (2025-07-24)
+
+### 🚀 Features
+
+- **cdk:** implement new overloads for `relatedTo` fn ([2448628](https://github.com/CORETEQ/mixin-ui/commit/2448628))
+- **cdk:** update rxjs interop operators ([0afe4ac](https://github.com/CORETEQ/mixin-ui/commit/0afe4ac))
+- **kit:** add `wrapNavigation` property to `XListboxOptions` interface ([be1b3e5](https://github.com/CORETEQ/mixin-ui/commit/be1b3e5))
+- **kit:** refactor `.x-accordion` css variables names ([7357e47](https://github.com/CORETEQ/mixin-ui/commit/7357e47))
+- **kit:** add `handleListboxActiveDescendant` to `XListboxAccessor`, update typing ([36a1452](https://github.com/CORETEQ/mixin-ui/commit/36a1452))
+- **kit:** improve combobox aria ([5d66662](https://github.com/CORETEQ/mixin-ui/commit/5d66662))
+- **kit:** implement `setDisabled` for `XPopoverTarget` ([60a002b](https://github.com/CORETEQ/mixin-ui/commit/60a002b))
+
+### 🩹 Fixes
+
+- **kit:** fix popover when select is disabled ([51c3960](https://github.com/CORETEQ/mixin-ui/commit/51c3960))
+
 ## 0.0.1-alpha.16 (2025-07-22)
 
 ### 🚀 Features
