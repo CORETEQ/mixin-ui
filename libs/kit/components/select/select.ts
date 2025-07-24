@@ -4,9 +4,11 @@ import {
   Component,
   computed,
   contentChildren,
+  effect,
   forwardRef,
   inject,
   input,
+  untracked,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
@@ -90,6 +92,14 @@ export class XSelect<T> implements XListboxAccessor<T> {
       if (!open) {
         this.#cva.markAsTouched();
       }
+    });
+
+    effect(() => {
+      const disabled = this.disabled();
+
+      untracked(() => {
+        this.#popover.setDisabled(disabled);
+      });
     });
   }
 
