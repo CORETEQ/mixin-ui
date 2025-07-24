@@ -77,7 +77,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   readonly #modelChanges = new Subject<T | string | null>();
 
   readonly open = this.#popover.open;
-  readonly native = contentChild.required(XControl, { read: ElementRef });
+  readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly stringify = input(this.#opt.stringify);
   readonly matcher = input(this.#opt.matcher);
   readonly _comparator = input(this.#opt.comparator, { alias: 'comparator' });
@@ -104,14 +104,6 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   #options: readonly XOption<T>[] | null = null;
 
   constructor() {
-    watch(this.open, open => {
-      if (!open && this.strict() && this.nativeValue !== '' && !this.hasOption(this.nativeValue)) {
-        this.updateModelValue(null);
-        this.updateSelection(null);
-        this.resetNativeValue();
-      }
-    });
-
     effect(() => {
       const input = this.nativeElement;
       const activeId = this.#activeDescendant();
@@ -125,11 +117,15 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     });
 
     effect(() => {
-      const disabled = this.disabled();
+      this.#popover.setDisabled(this.disabled());
+    });
 
-      untracked(() => {
-        this.#popover.setDisabled(disabled);
-      });
+    watch(this.open, open => {
+      if (!open && this.strict() && this.nativeValue !== '' && !this.hasOption(this.nativeValue)) {
+        this.updateModelValue(null);
+        this.updateSelection(null);
+        this.resetNativeValue();
+      }
     });
   }
 
@@ -200,7 +196,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   }
 
   private get nativeElement(): HTMLInputElement {
-    return untracked(this.native).nativeElement;
+    return untracked(this.input).nativeElement;
   }
 
   private get nativeValue(): string {

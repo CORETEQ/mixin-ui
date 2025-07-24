@@ -10,7 +10,6 @@ import {
   inject,
   input,
   signal,
-  untracked,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
@@ -121,6 +120,10 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
 
   constructor() {
     effect(() => {
+      this.#popover.setDisabled(this.disabled());
+    });
+
+    effect(() => {
       this.#mask.init(this.input().nativeElement);
     });
 
@@ -132,14 +135,6 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
         pattern: this.pattern(),
         showFiller: this.showFiller(),
         fillerChar: this.fillerChar(),
-      });
-    });
-
-    effect(() => {
-      const disabled = this.disabled();
-
-      untracked(() => {
-        this.#popover.setDisabled(disabled);
       });
     });
 

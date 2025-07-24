@@ -8,7 +8,6 @@ import {
   forwardRef,
   inject,
   input,
-  untracked,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
@@ -88,18 +87,14 @@ export class XSelect<T> implements XListboxAccessor<T> {
   readonly placeholderShown = computed(() => !!this.placeholder() && !this.hasValue());
 
   constructor() {
+    effect(() => {
+      this.#popover.setDisabled(this.disabled());
+    });
+
     watch(this.open, open => {
       if (!open) {
         this.#cva.markAsTouched();
       }
-    });
-
-    effect(() => {
-      const disabled = this.disabled();
-
-      untracked(() => {
-        this.#popover.setDisabled(disabled);
-      });
     });
   }
 
