@@ -10,6 +10,7 @@ import {
   inject,
   input,
   signal,
+  untracked,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
@@ -78,10 +79,10 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   readonly #calendarChanges = new Subject<Date>();
   readonly #valueReset = new Subject<null>();
 
-  readonly input = contentChild.required(XControl, { read: ElementRef });
-  readonly control = contentChild(XControl, { read: NgControl });
   readonly size = this.#input.size;
   readonly open = this.#popover.open;
+  readonly input = contentChild.required(XControl, { read: ElementRef });
+  readonly control = contentChild(XControl, { read: NgControl });
 
   /** Show calendar popover when input field receives focus (defaults to true) */
   readonly popoverOnFocus = input(this.#opt.popoverOnFocus, { transform: booleanAttribute });
@@ -110,7 +111,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   /** Character to use as a filler for empty positions */
   readonly fillerChar = input(this.#opt.fillerChar);
 
-  readonly disabled = computed(() => this.#input.state()?.disabled);
+  readonly disabled = computed(() => !!this.#input.state()?.disabled);
 
   /** @internal */
   readonly calendar = signal<Date | null>(null);
@@ -131,6 +132,14 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
         pattern: this.pattern(),
         showFiller: this.showFiller(),
         fillerChar: this.fillerChar(),
+      });
+    });
+
+    effect(() => {
+      const disabled = this.disabled();
+
+      untracked(() => {
+        this.#popover.setDisabled(disabled);
       });
     });
 
