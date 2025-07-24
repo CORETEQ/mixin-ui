@@ -10,7 +10,7 @@ export interface XListboxAccessor<T = any> {
   readonly comparator?: Signal<XComparator<T>>;
   readonly keyboardEvents?: Observable<KeyboardEvent>;
 
-  handleListboxValue(value: readonly T[]): void;
+  handleListboxSelection(values: readonly T[]): void;
 
   handleListboxOptions?(options: readonly XOption<T>[] | null): void;
 

@@ -125,7 +125,7 @@ export class XSelect<T> implements XListboxAccessor<T> {
   }
 
   /** @internal */
-  handleListboxValue(values: readonly T[]): void {
+  handleListboxSelection(values: readonly T[]): void {
     this.#cva.updateValue(this.multiple() ? values : values.at(0) ?? null);
   }
 }

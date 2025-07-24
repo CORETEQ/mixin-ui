@@ -222,7 +222,7 @@ export class XListbox<T> implements OnDestroy {
     const changed = this.multiple ? this.#model.toggle(value) : this.#model.select(value);
 
     if (changed) {
-      this.#accessor?.handleListboxValue(this.value);
+      this.#accessor?.handleListboxSelection(this.value);
     }
 
     if (!this.multiple) {
