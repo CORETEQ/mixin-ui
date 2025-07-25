@@ -1,3 +1,19 @@
+## 0.0.1-alpha.18 (2025-07-25)
+
+### 🚀 Features
+
+- **cdk:** introduce `observe` utility ([df6ede4](https://github.com/CORETEQ/mixin-ui/commit/df6ede4))
+- **kit:** rename `handleListboxValue` to `handleListboxSelection` in `XListboxAccessor` interface ([c8241cb](https://github.com/CORETEQ/mixin-ui/commit/c8241cb))
+- **kit:** add `useActiveDescendant` property to `XListboxOptions` ([8091113](https://github.com/CORETEQ/mixin-ui/commit/8091113))
+- **kit:** improve listbox keyboard navigation ([a7cbd58](https://github.com/CORETEQ/mixin-ui/commit/a7cbd58))
+- **kit:** rename `XInput` to `XInputBase` ([b9e8fe7](https://github.com/CORETEQ/mixin-ui/commit/b9e8fe7))
+
+### 🩹 Fixes
+
+- **kit:** fix `XCombobox` popover when state is disabled ([56012af](https://github.com/CORETEQ/mixin-ui/commit/56012af))
+- **kit:** exclude disabled options from autocomplete when native value changes ([ce6db95](https://github.com/CORETEQ/mixin-ui/commit/ce6db95))
+- **kit:** fix `XInputDate` popover when state is disabled ([5d71d83](https://github.com/CORETEQ/mixin-ui/commit/5d71d83))
+
 ## 0.0.1-alpha.17 (2025-07-24)
 
 ### 🚀 Features
