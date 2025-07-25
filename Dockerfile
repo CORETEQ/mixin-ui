@@ -1,19 +1,20 @@
-FROM node:20.19.0-alpine AS builder
+FROM nginx
 
-RUN apk add --no-cache git openssh-client
+# Create nginx configuration file
+RUN cat <<EOF > /etc/nginx/conf.d/default.conf
+server {
+    listen 80;
 
-WORKDIR /app
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        try_files \$uri \$uri/ /app/index.html;
+        etag off;
+    }
+}
+EOF 
 
-RUN --mount=type=ssh \
-    GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" \
-    git clone git@github.com:CORETEQ/mixin-ui.git --branch main --single-branch ./mixin-ui \
- && cd mixin-ui \
- && npm install --global pnpm \
- && pnpm install \
- && pnpm run build:web
+# Copy the built Angular application to the nginx html directory
+COPY dist/libs/web/analog/public /usr/share/nginx/html/app/
 
-EXPOSE 3000
 
-WORKDIR /app/mixin-ui
-
-CMD ["node", "dist/libs/web/analog/server/index.mjs"]
