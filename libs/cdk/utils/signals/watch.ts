@@ -3,49 +3,28 @@ import {
   effect,
   EffectCleanupRegisterFn,
   EffectRef,
-  Signal,
   untracked,
 } from '@angular/core';
 
-type WatchCallback<T = any> = (value: T, onCleanup: EffectCleanupRegisterFn) => void;
+type WatchCallback<V = any> = (value: V, onCleanup: EffectCleanupRegisterFn) => void;
 
-type MapSignals<T> = T extends Signal<infer V>
-  ? V
-  : T extends readonly [...infer A]
-  ? { [K in keyof A]: A[K] extends Signal<infer V> ? V : never }
-  : T extends object
-  ? T
-  : never;
-
-export function watch<T extends Signal<any>>(
-  signal: T,
-  fn: WatchCallback<MapSignals<T>>,
-  options?: CreateEffectOptions
-): EffectRef;
-export function watch<T extends Signal<any>[]>(
-  signals: [...T],
-  fn: WatchCallback<MapSignals<T>>,
-  options?: CreateEffectOptions
-): EffectRef;
-export function watch<T = any>(
-  signalOrMultiSignals: Signal<T> | Signal<any>[],
-  fn: WatchCallback<MapSignals<T>>,
+export function watch<S>(
+  source: () => S,
+  fn: WatchCallback<S>,
   options?: CreateEffectOptions
 ): EffectRef {
-  let initialized = false;
+  let wasCalled = false;
 
   return effect(onCleanup => {
-    const args = Array.isArray(signalOrMultiSignals)
-      ? signalOrMultiSignals.map(signal => signal())
-      : signalOrMultiSignals();
+    execute: {
+      const dep = source();
 
-    untracked(() => {
-      if (!initialized) {
-        initialized = true;
-        return;
+      if (!wasCalled) {
+        wasCalled = true;
+        break execute;
       }
 
-      fn(args as any, onCleanup);
-    });
+      untracked(() => fn(dep, onCleanup));
+    }
   }, options);
 }
