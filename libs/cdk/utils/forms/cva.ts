@@ -37,8 +37,8 @@ class CvaImpl<T> implements ControlValueAccessor, XCva<T> {
   readonly #ngc = inject(NgControl, { self: true, optional: true });
   readonly #cdr = inject(ChangeDetectorRef);
 
-  #onChange = EMPTY_FN;
-  #onTouched = EMPTY_FN;
+  #setModelValue = EMPTY_FN;
+  #markAsTouched = EMPTY_FN;
 
   readonly #value: WritableSignal<T>;
 
@@ -71,7 +71,9 @@ class CvaImpl<T> implements ControlValueAccessor, XCva<T> {
       this.#ngc.valueAccessor = this;
     }
 
-    watch(this.value, value => this.#onChange(value));
+    watch(this.value, value => {
+      this.#setModelValue(value);
+    });
   }
 
   updateValue(updater: T | ((current: T) => T)): void {
@@ -81,7 +83,7 @@ class CvaImpl<T> implements ControlValueAccessor, XCva<T> {
   }
 
   markAsTouched(): void {
-    this.#onTouched();
+    this.#markAsTouched();
     this.#cdr.markForCheck();
   }
 
@@ -91,11 +93,11 @@ class CvaImpl<T> implements ControlValueAccessor, XCva<T> {
   }
 
   registerOnChange(fn: (value: T) => void): void {
-    this.#onChange = fn;
+    this.#setModelValue = fn;
   }
 
   registerOnTouched(fn: () => void): void {
-    this.#onTouched = fn;
+    this.#markAsTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {

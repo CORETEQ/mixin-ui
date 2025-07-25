@@ -12,10 +12,10 @@ import {
   untracked,
 } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
-import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { OverlaySizeConfig } from '@angular/cdk/overlay';
 import { map, of, switchMap } from 'rxjs';
-import { fromResizeObserver, XOutlet, XPopoverPositionOptions } from '@mixin-ui/cdk';
+import { fromResizeObserver, observe, XOutlet, XPopoverPositionOptions } from '@mixin-ui/cdk';
 import { XPopoverContainer } from './container';
 import { X_POPOVER_OPTIONS } from './options';
 import {
@@ -35,10 +35,10 @@ import {
 })
 export class XPopoverTarget {
   readonly #opt = inject(X_POPOVER_OPTIONS);
-  readonly #overlay = inject(X_POPOVER);
+  readonly #popover = inject(X_POPOVER);
   readonly #position = inject(X_POPOVER_POSITION_OPTIONS);
+  readonly #popoverCloses = inject(X_POPOVER_CLOSE);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
-  readonly #close$ = inject(X_POPOVER_CLOSE);
 
   readonly childContent = contentChild(XPopover, { read: TemplateRef });
   readonly inputContent = input<XOutlet>(null, { alias: 'x-popover' });
@@ -55,7 +55,7 @@ export class XPopoverTarget {
   readonly maxHeight = input(this.#opt.maxHeight, { alias: 'x-popover-max-height' });
   readonly autoFocus = input(this.#opt.autoFocus, { alias: 'x-popover-auto-focus' });
   readonly content = computed(() => this.inputContent() || this.childContent());
-  readonly open = toSignal(this.#overlay.openChanges, { requireSync: true });
+  readonly open = toSignal(this.#popover.openChanges, { requireSync: true });
   readonly #disabled = linkedSignal(() => this._disabled());
 
   readonly rules = toSignal(
@@ -122,18 +122,18 @@ export class XPopoverTarget {
       });
     });
 
-    this.#close$.pipe(takeUntilDestroyed()).subscribe(() => {
+    observe(this.#popoverCloses, () => {
       this.toggle(false);
     });
   }
 
   get overlayElement(): HTMLElement | null {
-    return this.#overlay.element;
+    return this.#popover.element;
   }
 
   toggle(open: boolean): void {
     if (open && this.content() && !this.#disabled()) {
-      this.#overlay.open(XPopoverContainer, {
+      this.#popover.open(XPopoverContainer, {
         direction: this.direction(),
         position: this.position(),
         align: this.align(),
@@ -141,7 +141,7 @@ export class XPopoverTarget {
         fixed: this.fixed(),
       });
     } else if (!open) {
-      this.#overlay.close();
+      this.#popover.close();
     }
   }
 
@@ -150,11 +150,11 @@ export class XPopoverTarget {
   }
 
   updateSize(value: OverlaySizeConfig): void {
-    this.#overlay.updateSize(value);
+    this.#popover.updateSize(value);
   }
 
   updatePosition(position?: Partial<XPopoverPositionOptions>): void {
-    this.#overlay.updatePosition(position);
+    this.#popover.updatePosition(position);
   }
 
   focus(): void {

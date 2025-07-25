@@ -1,8 +1,7 @@
 import { Directive, ElementRef, forwardRef, inject, INJECTOR, Renderer2 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, NgModel } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent, map, Observable } from 'rxjs';
-import { EMPTY_FN } from '@mixin-ui/cdk';
+import { EMPTY_FN, observe } from '@mixin-ui/cdk';
 import { X_CONTROL_ACCESSOR } from './providers';
 
 @Directive({
@@ -17,7 +16,7 @@ import { X_CONTROL_ACCESSOR } from './providers';
   ],
   host: {
     type: 'text',
-    '(blur)': 'onTouched();',
+    '(blur)': 'markAsTouched();',
   },
 })
 export class XControl<T> implements ControlValueAccessor {
@@ -26,16 +25,16 @@ export class XControl<T> implements ControlValueAccessor {
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
   readonly #r2 = inject(Renderer2);
 
-  protected onChange = EMPTY_FN;
-  protected onTouched = EMPTY_FN;
+  protected setModelValue = EMPTY_FN;
+  protected markAsTouched = EMPTY_FN;
 
   constructor() {
-    this.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
+    observe(this.valueChanges, value => {
       if (this.modelValue === value) {
         return;
       }
 
-      this.onChange(value);
+      this.setModelValue(value);
     });
   }
 
@@ -50,11 +49,11 @@ export class XControl<T> implements ControlValueAccessor {
   }
 
   registerOnChange(fn: (value: T) => void): void {
-    this.onChange = fn;
+    this.setModelValue = fn;
   }
 
   registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+    this.markAsTouched = fn;
   }
 
   setDisabledState(disabled: boolean): void {
