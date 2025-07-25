@@ -26,7 +26,7 @@
 
 ## Usage
 
-Read the docs here: <a href="https://mixin-ui.dev/installation" target="_blank" rel="noopener noreferrer">https://mixin-ui.dev/installation</a>.
+Read the docs here: <a href="https://mixin-ui.dev/installation" rel="noopener noreferrer">https://mixin-ui.dev/installation</a>.
 
 ## Releases
 
