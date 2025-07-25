@@ -8,9 +8,9 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { EMPTY, fromEvent, switchMap } from 'rxjs';
-import { stopPropagation } from '@mixin-ui/cdk';
+import { observe } from '@mixin-ui/cdk';
 import { XSpinner } from '@mixin-ui/kit/components/spinner';
 import { X_BUTTON_OPTIONS } from './options';
 
@@ -49,15 +49,13 @@ export class XButton {
   readonly attrType = computed(() => (this.#el.tagName === 'A' ? null : this.type()));
   readonly hasLoadingText = computed(() => !!this.loadingText() && !this.iconOnly);
 
+  readonly #loadingClicks = toObservable(this.loading).pipe(
+    switchMap(loading => (loading ? fromEvent<Event>(this.#el, 'click', { capture: true }) : EMPTY))
+  );
+
   constructor() {
-    toObservable(this.loading)
-      .pipe(
-        switchMap(loading =>
-          loading ? fromEvent<Event>(this.#el, 'click', { capture: true }) : EMPTY
-        ),
-        stopPropagation(),
-        takeUntilDestroyed()
-      )
-      .subscribe();
+    observe(this.#loadingClicks, e => {
+      e.stopPropagation();
+    });
   }
 }
