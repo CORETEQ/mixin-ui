@@ -2,7 +2,7 @@ export * from './dom';
 export * from './forms';
 export * from './keyboard';
 export * from './math';
-export * from './signals';
+export * from './reactivity';
 export * from './format';
 export * from './types';
 export * from './load-styles';
