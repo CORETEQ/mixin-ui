@@ -21,7 +21,7 @@ import {
   providePopoverOptions,
   XControl,
   XControlAccessor,
-  XInput,
+  XInputBase,
   XPopoverTarget,
 } from '@mixin-ui/kit/directives';
 import { createKeyComparator } from '@mixin-ui/kit/providers';
@@ -47,7 +47,7 @@ import { X_COMBOBOX_OPTIONS } from './options';
   ],
   hostDirectives: [
     {
-      directive: XInput,
+      directive: XInputBase,
       inputs: ['variant', 'size', 'radius'],
     },
     {
@@ -71,7 +71,7 @@ import { X_COMBOBOX_OPTIONS } from './options';
 export class XCombobox<T> implements XControlAccessor<T | string | null>, XListboxAccessor<T> {
   readonly #opt = inject(X_COMBOBOX_OPTIONS);
   readonly #popover = inject(XPopoverTarget);
-  readonly #input = inject(XInput);
+  readonly #base = inject(XInputBase);
   readonly #el = inject(ElementRef).nativeElement;
   readonly #r2 = inject(Renderer2);
   readonly #modelChanges = new Subject<T | string | null>();
@@ -86,9 +86,7 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
   readonly comparator = computed(() =>
     this.key() != null ? createKeyComparator(this.key()!) : this._comparator()
   );
-  readonly disabled = computed(
-    () => this.#input.state()?.disabled || this.#input.state()?.readOnly
-  );
+  readonly disabled = computed(() => this.#base.state()?.disabled || this.#base.state()?.readOnly);
 
   /** @internal */
   readonly selection = signal<T | null>(null);

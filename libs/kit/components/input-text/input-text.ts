@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { XInput } from '@mixin-ui/kit/directives';
+import { XInputBase } from '@mixin-ui/kit/directives';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -8,7 +8,7 @@ import { XInput } from '@mixin-ui/kit/directives';
   templateUrl: './input-text.html',
   hostDirectives: [
     {
-      directive: XInput,
+      directive: XInputBase,
       inputs: ['variant', 'size', 'radius'],
     },
   ],

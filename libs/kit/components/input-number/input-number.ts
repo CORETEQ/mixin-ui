@@ -18,7 +18,7 @@ import {
   provideControlAccessor,
   XControl,
   XControlAccessor,
-  XInput,
+  XInputBase,
 } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { XGroup } from '@mixin-ui/kit/components/group';
@@ -38,7 +38,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
   ],
   hostDirectives: [
     {
-      directive: XInput,
+      directive: XInputBase,
       inputs: ['variant', 'size', 'radius'],
     },
   ],
@@ -50,12 +50,12 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
 })
 export class XInputNumber implements XControlAccessor<number | null> {
   readonly #opt = inject(X_INPUT_NUMBER_OPTIONS);
-  readonly #input = inject(XInput);
+  readonly #base = inject(XInputBase);
   readonly #mask = injectMask<number | null, XNumberMaskOptions>();
   readonly #r2 = inject(Renderer2);
 
+  readonly size = this.#base.size;
   readonly input = contentChild.required(XControl, { read: ElementRef });
-  readonly size = this.#input.size;
 
   /** Minimum allowed value */
   readonly min = input(this.#opt.min);
@@ -87,9 +87,7 @@ export class XInputNumber implements XControlAccessor<number | null> {
   /** Step value for incrementing/decrementing the number (default is 1) */
   readonly step = input(this.#opt.step, { transform: numberAttribute });
 
-  readonly disabled = computed(
-    () => this.#input.state()?.disabled || this.#input.state()?.readOnly
-  );
+  readonly disabled = computed(() => this.#base.state()?.disabled || this.#base.state()?.readOnly);
   readonly plusDisabled = computed(() => this.disabled() || this.normalizedValue >= this.max());
   readonly minusDisabled = computed(() => this.disabled() || this.normalizedValue <= this.min());
 
@@ -160,7 +158,7 @@ export class XInputNumber implements XControlAccessor<number | null> {
   /** @internal */
   handleSpin(e: PointerEvent): void {
     e.preventDefault();
-    this.#input.focus();
+    this.#base.focus();
   }
 
   /** @internal */

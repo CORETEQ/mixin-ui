@@ -13,7 +13,7 @@ import {
 import { NgTemplateOutlet } from '@angular/common';
 import { createCva, relatedTo, watch } from '@mixin-ui/cdk';
 import { createKeyComparator } from '@mixin-ui/kit/providers';
-import { X_SLOT, XInput, XPopoverTarget, XSlotsPipe } from '@mixin-ui/kit/directives';
+import { X_SLOT, XInputBase, XPopoverTarget, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { XIcon } from '@mixin-ui/kit/components/icon';
 import { provideListboxAccessor, XListboxAccessor } from '@mixin-ui/kit/components/listbox';
 import { X_SELECT_OPTIONS } from './options';
@@ -28,7 +28,7 @@ import { X_SELECT_OPTIONS } from './options';
   providers: [provideListboxAccessor(forwardRef(() => XSelect))],
   hostDirectives: [
     {
-      directive: XInput,
+      directive: XInputBase,
       inputs: ['variant', 'size', 'radius'],
     },
     {

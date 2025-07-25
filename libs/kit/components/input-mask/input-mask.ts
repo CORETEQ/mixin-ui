@@ -23,7 +23,7 @@ import {
   provideControlAccessor,
   XControl,
   XControlAccessor,
-  XInput,
+  XInputBase,
 } from '@mixin-ui/kit/directives';
 import { X_INPUT_MASK_OPTIONS } from './options';
 
@@ -38,7 +38,7 @@ import { X_INPUT_MASK_OPTIONS } from './options';
   ],
   hostDirectives: [
     {
-      directive: XInput,
+      directive: XInputBase,
       inputs: ['variant', 'size', 'radius'],
     },
   ],

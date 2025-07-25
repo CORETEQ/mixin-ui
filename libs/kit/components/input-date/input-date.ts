@@ -28,7 +28,7 @@ import {
   providePopoverOptions,
   XControl,
   XControlAccessor,
-  XInput,
+  XInputBase,
   XPopoverTarget,
 } from '@mixin-ui/kit/directives';
 import { provideCalendarAccessor, XCalendarAccessor } from '@mixin-ui/kit/components/calendar';
@@ -51,7 +51,7 @@ import { X_INPUT_DATE_OPTIONS } from './options';
   ],
   hostDirectives: [
     {
-      directive: XInput,
+      directive: XInputBase,
       inputs: ['variant', 'size', 'radius'],
     },
     {
@@ -73,12 +73,12 @@ import { X_INPUT_DATE_OPTIONS } from './options';
 export class XInputDate implements XControlAccessor<Date | null>, XCalendarAccessor {
   readonly #opt = inject(X_INPUT_DATE_OPTIONS);
   readonly #mask = injectMask<Date | null, XDateMaskOptions>();
-  readonly #input = inject(XInput);
+  readonly #base = inject(XInputBase);
   readonly #popover = inject(XPopoverTarget);
   readonly #calendarChanges = new Subject<Date>();
   readonly #valueReset = new Subject<null>();
 
-  readonly size = this.#input.size;
+  readonly size = this.#base.size;
   readonly open = this.#popover.open;
   readonly input = contentChild.required(XControl, { read: ElementRef });
   readonly control = contentChild(XControl, { read: NgControl });
@@ -110,7 +110,7 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   /** Character to use as a filler for empty positions */
   readonly fillerChar = input(this.#opt.fillerChar);
 
-  readonly disabled = computed(() => !!this.#input.state()?.disabled);
+  readonly disabled = computed(() => !!this.#base.state()?.disabled);
 
   /** @internal */
   readonly calendar = signal<Date | null>(null);

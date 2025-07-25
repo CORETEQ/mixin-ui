@@ -48,7 +48,7 @@ class XInputStyles {}
     '(pointerdown)': 'onPointerDown($event);',
   },
 })
-export class XInput {
+export class XInputBase {
   readonly #opt = inject(X_INPUT_OPTIONS);
   readonly #selfControl = inject(NgControl, { self: true, optional: true });
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
