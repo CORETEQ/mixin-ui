@@ -112,7 +112,7 @@ jobs:
     needs: version
     runs-on: self-hosted
     env:
-      APP_NAME: prod-mixin-ui
+      APP_NAME: hetzner-mixin-ui
       RESOURCE_NAME: mixin-ui-server
     steps:
     - name: Import ArgoCD Secrets
