@@ -10,11 +10,11 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, Subject } from 'rxjs';
 import {
   injectMask,
   isMatchingTarget,
+  observe,
   provideMask,
   X_PATTERN_MASK_FACTORY,
   XPatternMaskOptions,
@@ -73,7 +73,7 @@ export class XInputMask implements XControlAccessor<string> {
       });
     });
 
-    this.#reset.pipe(takeUntilDestroyed()).subscribe(value => {
+    observe(this.#reset, value => {
       this.#mask.setValue(value);
     });
   }

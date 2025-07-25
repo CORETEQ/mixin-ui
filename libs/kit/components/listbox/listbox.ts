@@ -15,12 +15,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { SelectionModel } from '@angular/cdk/collections';
 import { coerceArray } from '@angular/cdk/coercion';
-import { EMPTY, merge } from 'rxjs';
-import { relatedTo, watch, XTypedOutletPipe } from '@mixin-ui/cdk';
+import { observe, relatedTo, watch, XTypedOutletPipe } from '@mixin-ui/cdk';
 import { XPopoverTarget } from '@mixin-ui/kit/directives';
 import { XOption } from './option';
 import { X_LISTBOX_ACCESSOR } from './providers';
@@ -104,23 +102,18 @@ export class XListbox<T> implements OnDestroy {
       }
     });
 
-    watch(this.options, () => this.resetActiveOption());
-
     effect(() => {
-      const wrap = this.wrapNavigation();
-      untracked(() => this.#keyManager.withWrap(wrap));
+      this.#keyManager.withWrap(this.wrapNavigation());
+    });
+
+    watch(this.options, () => {
+      this.resetActiveOption();
     });
 
     effect(() => {
-      const value = this.#accessor?.selection();
-      const multiple = this.#accessor?.multiple?.() || false;
-      const comparator = this.#accessor?.comparator?.();
-
-      untracked(() => {
-        this.#model.setSelection(...this.coerceValue(value));
-        this.#model.multiple = multiple;
-        this.#model.compareWith = comparator;
-      });
+      this.#model.setSelection(...this.coerceValue(this.#accessor?.selection()));
+      this.#model.multiple = this.#accessor?.multiple?.() || false;
+      this.#model.compareWith = this.#accessor?.comparator?.();
     });
 
     afterRenderEffect(() => {
@@ -128,15 +121,16 @@ export class XListbox<T> implements OnDestroy {
       untracked(() => this.#accessor?.handleListboxOptions?.(options));
     });
 
-    merge(this.#accessor?.keyboardEvents || EMPTY)
-      .pipe(takeUntilDestroyed())
-      .subscribe(e => this.handleKeydown(e));
-
-    this.#keyManager.change.pipe(takeUntilDestroyed()).subscribe(index => {
-      const option = this.options()[index];
-      this.#accessor?.handleListboxActiveDescendant?.(option);
+    observe(this.#keyManager.change, index => {
+      this.#accessor?.handleListboxActiveDescendant?.(this.getOption(index));
       this.focusActiveOption();
     });
+
+    if (this.#accessor?.keyboardEvents) {
+      observe(this.#accessor.keyboardEvents, e => {
+        this.handleKeydown(e);
+      });
+    }
   }
 
   get value(): readonly T[] {
@@ -213,6 +207,10 @@ export class XListbox<T> implements OnDestroy {
     if (!this.useActiveDescendant()) {
       this.activeOption?.focus();
     }
+  }
+
+  private getOption(index: number): XOption<T> | null {
+    return this.options()[index];
   }
 
   private updateValue(option: XOption<T> | null): void {

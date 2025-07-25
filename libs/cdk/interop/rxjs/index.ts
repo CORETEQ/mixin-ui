@@ -5,3 +5,4 @@ export * from './from-intersection-observer';
 export * from './from-router-event';
 export * from './prevent-default';
 export * from './stop-propagation';
+export * from './observe';

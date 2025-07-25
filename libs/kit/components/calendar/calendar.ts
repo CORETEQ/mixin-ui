@@ -11,9 +11,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { fromEvent } from 'rxjs';
-import { createCva, preventDefault } from '@mixin-ui/cdk';
+import { createCva, observe } from '@mixin-ui/cdk';
 import { X_SLOT, XPopoverTarget, XSlot, XSlotsPipe } from '@mixin-ui/kit/directives';
 import { provideButtonOptions } from '@mixin-ui/kit/components/button';
 import { XDays } from './grids/days';
@@ -90,9 +89,9 @@ export class XCalendar {
 
   constructor() {
     if (!this.#popover?.autoFocus()) {
-      fromEvent<PointerEvent>(this.#el, 'pointerdown')
-        .pipe(preventDefault(), takeUntilDestroyed())
-        .subscribe();
+      observe(fromEvent<PointerEvent>(this.#el, 'pointerdown'), e => {
+        e.preventDefault();
+      });
     }
   }
 

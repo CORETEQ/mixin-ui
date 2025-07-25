@@ -118,6 +118,9 @@ export class XInputNumber implements XControlAccessor<number | null> {
       const input = this.input().nativeElement;
       const mode = this.decimalScale() ? 'decimal' : 'numeric';
 
+      this.#r2.setProperty(input, 'role', 'spinbutton');
+      this.#r2.setProperty(input, 'autocomplete', 'off');
+      this.#r2.setProperty(input, 'autocorrect', 'off');
       this.#r2.setProperty(input, 'inputMode', mode);
     });
   }
