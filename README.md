@@ -5,29 +5,21 @@
 </div>
 
 <h1 align="center">Open source Angular tools ⚡️</h1>
-
-<br />
-
 <p align="center">
   <a href="https://mixin-ui.dev/">
-    <img alt="GitHub License" src="https://img.shields.io/github/license/angular/angular">
-  </a>
-
-  <a href="https://mixin-ui.dev/">
-    <img alt="NPM Downloads" src="https://img.shields.io/npm/dw/angular?color=36BC1B">
-  </a>
+    <img alt="NPM Downloads" src="https://img.shields.io/npm/dw/angular?color=blue""></a>
   
   <a href="https://mixin-ui.dev/">
-    <img alt="NPM Bundle size" src="https://img.shields.io/bundlephobia/minzip/angular">
-  </a>
+    <img alt="NPM Bundle size" src="https://img.shields.io/bundlephobia/minzip/angular?color=green"></a>
 
   <a href="https://mixin-ui.dev/">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/angular/angular?style=flat&color=FE6A49">
-  </a>
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/angular/angular?style=flat"></a>
+
+  <a href="https://mixin-ui.dev/">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/angular/angular?color=orange"></a>  
 
   <a href="https://discord.gg/angular">
-    <img alt="Discord" src="https://img.shields.io/discord/660863154703695893.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" />
-  </a>
+    <img alt="Discord" src="https://img.shields.io/discord/660863154703695893.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" /></a>
 </p>
 
 ## Usage
