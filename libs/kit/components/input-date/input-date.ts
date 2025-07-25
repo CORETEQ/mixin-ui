@@ -13,11 +13,11 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { merge, Subject } from 'rxjs';
 import {
   injectMask,
   isMatchingTarget,
+  observe,
   provideMask,
   watch,
   X_DATE_MASK_FACTORY,
@@ -144,16 +144,16 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
       }
     });
 
-    this.#mask.valueChanges.pipe(takeUntilDestroyed()).subscribe(value => {
+    observe(this.#mask.valueChanges, value => {
       this.calendar.set(value);
     });
 
-    this.#calendarChanges.pipe(takeUntilDestroyed()).subscribe(value => {
+    observe(this.#calendarChanges, value => {
       this.calendar.set(value);
       this.#mask.setValue(value);
     });
 
-    this.#valueReset.pipe(takeUntilDestroyed()).subscribe(value => {
+    observe(this.#valueReset, value => {
       this.calendar.set(value);
       this.#mask.setValue(value);
     });
