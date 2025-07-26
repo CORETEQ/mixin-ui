@@ -1,4 +1,10 @@
-import { assertInInjectionContext, DestroyRef, inject, Injector } from '@angular/core';
+import {
+  assertInInjectionContext,
+  assertNotInReactiveContext,
+  DestroyRef,
+  inject,
+  Injector,
+} from '@angular/core';
 import type { Observable } from 'rxjs';
 
 type ObserveCallback<T> = (value: T) => void;
@@ -12,6 +18,10 @@ export function observe<T>(
   fn: ObserveCallback<T>,
   options?: CreateObserveOptions
 ): () => void {
+  if (ngDevMode) {
+    assertNotInReactiveContext(observe);
+  }
+
   if (ngDevMode && !options?.injector) {
     assertInInjectionContext(observe);
   }

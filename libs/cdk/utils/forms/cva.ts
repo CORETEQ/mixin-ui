@@ -10,7 +10,7 @@ import {
 import { ControlValueAccessor, NgControl, NgModel, Validators } from '@angular/forms';
 import { debounceTime, EMPTY, map, startWith, switchMap, timer } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { watch } from '../signals';
+import { watch } from '../reactivity';
 import { EMPTY_FN } from '../empty';
 
 export interface XCva<T> {
