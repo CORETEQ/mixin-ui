@@ -1,0 +1,17 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.4"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="19" cy="19" r="2"  vector-effect="non-scaling-stroke"/>
+  <circle cx="5" cy="5" r="2"  vector-effect="non-scaling-stroke"/>
+  <path d="M6.48 3.66a10 10 0 0 1 13.86 13.86"  vector-effect="non-scaling-stroke"/>
+  <path d="m6.41 6.41 11.18 11.18"  vector-effect="non-scaling-stroke"/>
+  <path d="M3.66 6.48a10 10 0 0 0 13.86 13.86"  vector-effect="non-scaling-stroke"/>
+</svg>

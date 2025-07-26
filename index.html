@@ -1,0 +1,552 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <title>Mixin UI</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=Kumbh+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <link rel="icon" href="/favicon-light.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)">
+  <script type="module" crossorigin="" src="/assets/index-B-9NmBiM.js"></script>
+  <link rel="stylesheet" crossorigin="" href="/assets/style-BzIj4d-p.css">
+<style ng-app-id="ng">.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  inline-size: 100%;
+  background: hsla(0, 0%, 100%, 0.8);
+  border-style: solid;
+  border-color: #e5e5e5;
+  border-bottom-width: 1px;
+  backdrop-filter: saturate(180%) blur(5px);
+  /* stylelint-disable-next-line */
+  -webkit-backdrop-filter: saturate(180%) blur(5px); /* Safari */
+}
+
+.app-header-version {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  block-size: 1.75rem;
+  padding: 0 0.75rem;
+  color: var(--x-neutral-600);
+  font-size: 13.5px;
+  font-weight: 500;
+  background-color: #fff;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
+  border-radius: var(--x-radius-full);
+  cursor: default;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-shadow: 0 1px 1px 0.5px rgb(51 51 51 / 4%), 0 3px 3px -1.5px rgb(51 51 51 / 2%),
+    0 6px 6px -3px rgb(51 51 51 / 4%), 0 12px 12px -6px rgb(51 51 51 / 4%),
+    0 24px 24px -12px rgb(51 51 51 / 4%), 0 48px 48px -24px rgb(51 51 51 / 4%),
+    0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
+}
+.app-header-version:hover {
+  color: #09090b;
+}</style><style ng-app-id="ng">.x-icon {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--x-icon-size, 1em);
+  block-size: var(--x-icon-size, 1em);
+  background: var(--x-icon-color, currentcolor);
+}</style><style ng-app-id="ng">.app-primary-btn {
+  --color-1: 0 100% 63%;
+  --color-2: 270 100% 63%;
+  --color-3: 210 100% 63%;
+  --color-4: 195 100% 63%;
+  --color-5: 90 100% 63%;
+  position: relative;
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 2.75rem;
+  padding: 0.5rem 2rem;
+  color: var(--x-white);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 24px;
+  white-space: nowrap;
+  background-image: linear-gradient(#121213, #121213), linear-gradient(#121213 50%, rgba(18, 18, 19, 0.6) 80%, rgba(18, 18, 19, 0)), linear-gradient(90deg, hsl(var(--color-1)), hsl(var(--color-5)), hsl(var(--color-3)), hsl(var(--color-4)), hsl(var(--color-2)));
+  background-size: 200%;
+  background-clip: padding-box, border-box, border-box;
+  background-origin: border-box;
+  border: 1.25px solid transparent;
+  border-radius: 0.75rem;
+  transition: background-color 0.2s;
+  animation: rainbow 3s linear infinite;
+  cursor: pointer;
+  will-change: background-position;
+}
+.app-primary-btn::before {
+  position: absolute;
+  bottom: -20%;
+  left: 50%;
+  z-index: 0;
+  inline-size: 60%;
+  block-size: 20%;
+  background: linear-gradient(90deg, hsl(var(--color-1)), hsl(var(--color-5)), hsl(var(--color-3)), hsl(var(--color-4)), hsl(var(--color-2)));
+  filter: blur(0.8rem);
+  transform: translateX(-50%);
+  animation: rainbow 3s linear infinite;
+  content: "";
+  will-change: background-position;
+}
+.app-primary-btn::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1098039216);
+  opacity: 0;
+  filter: blur(1.25rem);
+  transition: opacity 150ms ease-in-out;
+  content: "";
+}
+.app-primary-btn .x-icon {
+  transition: transform 0.1s ease-in-out;
+}
+.app-primary-btn:hover::after {
+  opacity: 1;
+}
+.app-primary-btn:hover .x-icon {
+  transform: translate3d(0.25rem, 0, 0);
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0;
+  }
+  100% {
+    background-position: 200%;
+  }
+}</style><style ng-app-id="ng">
+    .line {
+        --tw-gradient-position: to right in oklab;
+        --tw-gradient-from: transparent;
+        --tw-gradient-via: #FD9500;
+        --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) 0%, var(--tw-gradient-via) 50%, var(--tw-gradient-to) 100%;
+        --tw-gradient-to: transparent;
+        --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) 0%, var(--tw-gradient-to) 100%);
+        height: 1px;
+        inline-size: 100%;
+        display: block;
+        background-image: linear-gradient(var(--tw-gradient-stops));
+    }
+
+    .custom-code {
+        code .line {
+            font-size: 20px !important;
+            line-height: 28px !important;
+            height: 28px !important;
+        }
+    }
+
+    .benefits {
+        border-top: 1px dashed #E5E5E5;
+    }
+
+    .h2 {
+        font-size: 45px;
+        line-height: 57px;
+        font-weight: 600;
+    }
+
+    .highlight {
+        position: relative;
+        background: linear-gradient(90deg, #ffae00, #ff9100);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+
+        &::before {
+            position: absolute;
+            content: "";
+            width: calc(100% + 16px);
+            height: 100%;
+            left: 0;
+            transform: translateX(-10px);
+            --mix-background: color-mix(in srgb, #f6990e 10%, transparent);
+            background: var(--mix-background, #F6990EFF);
+            --bg-currentcolor: var(--mix-background, #F6990EFF);
+            border-start-start-radius: 0.5rem;
+            border-end-start-radius: 0.5rem;
+            pointer-events: none;
+            bottom: calc(0.125rem * -1);
+            inset-inline-start: 0;
+            border-inline-end-width: 2px;
+            border-color: currentcolor;
+            color: #fea602;
+        }
+    }
+
+    .highlight-2 {
+        position: relative;
+        background: linear-gradient(90deg, #ffae00, #ff9100);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+
+        &::before {
+            position: absolute;
+            content: "";
+            width: calc(94%);
+            transform: translateX(2px);
+            height: 100%;
+            left: 0;
+            --mix-background: color-mix(in srgb, #f6990e 10%, transparent);
+            background: var(--mix-background, #F6990EFF);
+            --bg-currentcolor: var(--mix-background, #F6990EFF);
+            border-radius: 0.5rem;
+            pointer-events: none;
+            inset-inline-start: 0;
+            border-color: currentcolor;
+            color: #fea602;
+        }
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px;
+        background: white;
+        border: 1px solid #e4e4e4;
+        border-radius: 12px;
+        position: relative;
+
+        &:last-child {
+            border-color: transparent;
+            box-shadow: none;
+            -webkit-text-fill-color: transparent;
+            --pattern-fg: color-mix(in oklab, #3D3D3D 12%, transparent);
+
+            background-image: repeating-linear-gradient(315deg, var(--pattern-fg) 0, var(--pattern-fg) 1px, transparent 0, transparent 50%);
+            background-size: 10px 10px;
+            background-attachment: fixed;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            gap: 0.625rem;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 24px;
+            padding-right: 12px;
+            color: #5C5C5C;
+        }
+    }
+
+    @keyframes rotate-hue {
+        to {
+            filter: hue-rotate(1turn);
+        }
+    }
+</style><style ng-app-id="ng">.app-hero-section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 4.5rem 4rem;
+}
+
+.app-hero-title {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.app-hero-subtitle {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  margin-block-end: 2rem;
+  padding: 0 1.125rem 0 1rem;
+  color: #5c5c5c;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 2rem;
+  letter-spacing: -0.01em;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
+  border-radius: 1rem;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-shadow: 0 1px 1px 0.5px rgb(51 51 51 / 4%), 0 3px 3px -1.5px rgb(51 51 51 / 2%),
+    0 6px 6px -3px rgb(51 51 51 / 4%), 0 12px 12px -6px rgb(51 51 51 / 4%),
+    0 24px 24px -12px rgb(51 51 51 / 4%), 0 48px 48px -24px rgb(51 51 51 / 4%),
+    0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
+}
+
+.app-hero-subtitle-link {
+  margin-inline-start: -0.2rem;
+  text-decoration: underline;
+  text-decoration-color: #b3b3b3;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  text-decoration-style: dotted;
+}
+.app-hero-subtitle-link:hover {
+  color: #09090b;
+}
+
+.app-hero-h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 4.75rem;
+}
+
+.app-hero-h1-decoration {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  inline-size: 4.5rem;
+  block-size: 4.5rem;
+  border: 1px solid #e0e1e7;
+  border-radius: 1rem;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-shadow: 0 1px 1px 0.5px rgb(51 51 51 / 4%), 0 3px 3px -1.5px rgb(51 51 51 / 2%),
+    0 6px 6px -3px rgb(51 51 51 / 4%), 0 12px 12px -6px rgb(51 51 51 / 4%),
+    0 24px 24px -12px rgb(51 51 51 / 4%), 0 48px 48px -24px rgb(51 51 51 / 4%),
+    0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
+}
+
+.app-hero-description {
+  max-inline-size: 40rem;
+  margin-top: 2.5rem;
+  color: #5c5c5c;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.app-hero-preview {
+  position: relative;
+  z-index: 2;
+  inline-size: 100%;
+  block-size: 44rem;
+  overflow: hidden;
+  background-color: #fff;
+  border: 1px solid #dadada;
+  border-radius: 0.75rem;
+}
+
+.app-hero-preview-header {
+  z-index: 10;
+  display: flex;
+  column-gap: 0.25rem;
+  align-items: center;
+  min-block-size: 2.5rem;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.app-hero-preview-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  block-size: 100%;
+  background: linear-gradient(#000 1px, rgba(0, 0, 0, 0) 0), linear-gradient(90deg, #000, rgba(0, 0, 0, 0), #000), linear-gradient(in oklch longer hue -2deg, #a00, #a00);
+  background-size: 100% 2px, 100% 100%, 100% 100%;
+}
+.app-hero-preview-content > iframe {
+  display: block;
+  align-self: flex-start;
+  inline-size: 100%;
+  block-size: calc(100% - 40px);
+}
+
+.app-hero-preview-dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.375rem;
+}
+.app-hero-preview-dots > div {
+  display: block;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  background: #e5e5e5;
+  border-radius: 50%;
+}
+.app-hero-preview-dots > div:nth-child(1) {
+  background: #ff5f57;
+}
+.app-hero-preview-dots > div:nth-child(2) {
+  background: #ffbc2e;
+}
+.app-hero-preview-dots > div:nth-child(3) {
+  background: #2bc840;
+}
+
+.typed-out {
+  inline-size: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1s forwards 150ms;
+}
+
+.app-hero-preview-shadow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  inline-size: 100%;
+  block-size: 100%;
+  background: radial-gradient(ellipse 100% 100% at center, rgba(17, 12, 46, 0.1) 0%, rgba(17, 12, 46, 0.1) 30%, rgba(17, 12, 46, 0.1) 60%, transparent 100%);
+  filter: blur(55px);
+  transform: translate(-50%, -40%);
+}
+
+.app-hero-preview-play-btn {
+  inline-size: 180px;
+  overflow: hidden;
+  color: black;
+  background: #fff !important;
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+  transition-property: inline-size, padding, border-radius, color;
+}
+.app-hero-preview-play-btn .x-icon {
+  transform: translate3d(-0.5rem, 0, 0);
+  transition: transform 0.1s ease-in-out;
+}
+.app-hero-preview-play-btn:hover .x-icon {
+  transform: translate3d(-0.25rem, 0, 0);
+}
+.app-hero-preview-play-btn.loading {
+  inline-size: 44px;
+  padding: 0;
+  border-radius: 9999px;
+}
+.app-hero-preview-play-btn .app-btn-loader {
+  animation-name: wheel-spin;
+  animation-duration: 6s;
+}
+
+@keyframes typing {
+  from {
+    inline-size: 0;
+  }
+  to {
+    inline-size: 100%;
+  }
+}
+@keyframes wheel-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  37.5% {
+    transform: rotate(1800deg);
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+.arrow {
+  position: absolute;
+  top: -155px;
+  right: -10px;
+  z-index: 100;
+  width: 200px;
+  height: 200px;
+  fill: #ffa700;
+}</style><style ng-app-id="ng">
+  .wrap {
+    padding: 24px;
+    border-radius: 12px;
+    /*border: 1px solid #E5E5E5;*/
+    gap: 24px;
+
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 rgb(0 0 0 / 0%)),
+      var(--tw-ring-shadow, 0 0 rgb(0 0 0 / 0%)), var(--tw-shadow);
+
+    --tw-ring-shadow: 0 0 #0000;
+    --tw-ring-offset-shadow: 0 0 #0000;
+    --tw-shadow: 0 1px 1px 0.5px rgb(51 51 51 / 4%), 0 3px 3px -1.5px rgb(51 51 51 / 2%),
+      0 6px 6px -3px rgb(51 51 51 / 4%), 0 12px 12px -6px rgb(51 51 51 / 4%),
+      0 24px 24px -12px rgb(51 51 51 / 4%), 0 48px 48px -24px rgb(51 51 51 / 4%),
+      0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
+
+    &:last-child {
+      border-color: transparent;
+      box-shadow: none;
+      -webkit-text-fill-color: transparent;
+      --pattern-fg: color-mix(in oklab, #3d3d3d 12%, transparent);
+
+      background-image: repeating-linear-gradient(
+        315deg,
+        var(--pattern-fg) 0,
+        var(--pattern-fg) 1px,
+        transparent 0,
+        transparent 50%
+      );
+      background-size: 10px 10px;
+      background-attachment: fixed;
+
+      svg {
+        opacity: 0;
+      }
+    }
+
+    &:first-child {
+      rotate: -0.5deg;
+    }
+
+    &:nth-child(2) {
+      rotate: 0.5deg;
+    }
+
+    &:nth-child(5) {
+      rotate: -0.5deg;
+    }
+  }
+</style><style ng-app-id="ng">.app-footer {
+  display: flex;
+  inline-size: 100%;
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+}
+
+.app-footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+}</style></head>
+<body><!--nghm-->
+<app-root ng-version="19.2.14" class="app-layout" ngh="2" ng-server-context="ssr-analog"><app-header class="app-header" ngh="0"><div class="app-container"><div class="mx-auto px-4 flex items-center justify-between flex-1 h-14"><div class="flex items-center space-x-4"><docs-logo ngh="0"><a routerlink="/" class="flex items-center gap-x-1.5" href="/"><x-icon src="mixin" size="26" raw="" class="x-icon" style="background: url(icons/mixin.svg) no-repeat center / contain; --x-icon-size: 26px;" ngh="0"></x-icon><span class="docs-logo-text">mixin</span></a></docs-logo><div class="app-header-version"> / <span class="text-[#09090B]" style="font-family: ui-monospace, monospace; letter-spacing: -0.5px;"> 0.0.1-alpha.18 </span></div></div><div class="flex items-center"><div class="hidden lg:flex"><nav class="items-center gap-4 text-sm xl:gap-6 hidden md:flex me-6 font-medium"><a routerlink="/installation" class="hover:underline underline-offset-2" href="/installation">Introduction</a><a routerlink="/components" class="hover:underline underline-offset-2" href="/components">Components</a><a routerlink="/colors" class="hover:underline underline-offset-2" href="/colors">Colors</a></nav><div class="flex items-center space-x-0"><a href="https://x.com/" aria-label="Follow me on X formerly known as Twitter" rel="noopener noreferrer" target="_blank" class="flex items-center docs-primary-focus docs-nav__link--base h-8 justify-center w-8"><svg height="1em" width="1em" data-icon="tabler/brand-x" class="h-4.5 w-4.5"><symbol id="ai:local:tabler/brand-x" viewBox="0 0 24 24"><path d="m4 4 11.733 16H20L8.267 4zm0 16 6.768-6.768m2.46-2.46L20 4" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></symbol><use href="#ai:local:tabler/brand-x"></use></svg></a><a href="https://github.com/CORETEQ/mixin-ui" aria-label="Follow me on GitHub" rel="noopener noreferrer" target="_blank" class="flex items-center docs-primary-focus docs-nav__link--base h-8 justify-center w-8"><svg height="1em" width="1em" data-icon="mdi/github" class="h-4.5 w-4.5"><symbol id="ai:local:mdi/github" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" fill="currentColor"></path></symbol><use href="#ai:local:mdi/github"></use></svg></a></div></div></div></div></div></app-header><router-outlet></router-outlet><app-landing ngh="0"><div class="app-container"><app-hero ngh="1"><div class="app-hero-section"><div class="app-hero-title animate__animated animate__fadeIn"><div class="app-hero-subtitle"><span>🚀</span> Powered by <a href="https://coreteq.sk" target="_blank" class="app-hero-subtitle-link">CoreTEQ Technology</a></div><div class="app-hero-h1"><div class="typed-out">Build Reliable Interfaces —</div><div class="inline-flex items-center gap-4"> with <div class="app-hero-h1-decoration"><x-icon size="46" src="angular" raw="" class="x-icon" style="background: url(icons/angular.svg) no-repeat center / contain; --x-icon-size: 46px;" ngh="0"></x-icon></div> Angular &amp; <div class="app-hero-h1-decoration"><x-icon id="mixin-circle" size="56" src="mixin" raw="" class="x-icon app-hero-animated-decor" style="background: url(icons/mixin.svg) no-repeat center / contain; --x-icon-size: 56px;" ngh="0"></x-icon></div> Mixin UI </div></div><p class="app-hero-description"> 25+ lightweight components and tools built with Angular and minimal dependencies. Build dynamic interfaces, speed up development, and deliver polished UI with a flexible layout system and smart utilities. </p><div class="mt-10"><button routerlink="installation" type="button" class="app-primary-btn" tabindex="0"> Browse the docs <x-icon src="chevron-right" class="x-icon" style="mask: url(icons/chevron-right.svg) no-repeat center / contain;" ngh="0"></x-icon></button></div></div><div class="relative block w-full h-full"><div id="demo" class="app-hero-preview"><div class="app-hero-preview-header"><div class="app-hero-preview-dots"><div></div><div></div><div></div></div></div><div class="app-hero-preview-content"><!----><button type="button" class="app-primary-btn app-hero-preview-play-btn"><!----><x-icon src="play" class="x-icon" style="mask: url(icons/play.svg) no-repeat center / contain;" ngh="0"></x-icon> Try the demo <!----></button><!----></div></div><div class="app-hero-preview-shadow"></div></div></div></app-hero><app-features ngh="0"><div class="pb-24 pt-18 gap-14 px-6 flex flex-col items-center justify-center benefits"><div class="h2 flex flex-col items-center justify-center"> Built for developers <div class="highlight">By developers</div></div><div class="grid w-full px-12"><div class="grid grid-cols-3 gap-4"><div class="wrap flex gap-x-5 sm:gap-x-8"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-2 size-8 text-gray-600"><rect width="18" height="10" x="3" y="11" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" x2="8" y1="16" y2="16"></line><line x1="16" x2="16" y1="16" y2="16"></line></svg><div class="grow"><h3 class="text-base sm:text-lg font-semibold text-gray-800">Built on experience</h3><p class="mt-1 text-gray-600"> Learned from real projects to create a stable, scalable foundation </p></div></div><div class="wrap flex gap-x-5 sm:gap-x-8"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-2 size-8 text-gray-600"><path d="m7.5 4.27 9 5.15"></path><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"></path><path d="m3.3 7 8.7 5 8.7-5"></path><path d="M12 22V12"></path></svg><div class="grow"><h3 class="text-base sm:text-lg font-semibold text-gray-800">Minimum dependencies</h3><p class="mt-1 text-gray-600"> Lightweight by design. Fewer dependencies mean faster installs and smaller bundles </p></div></div><div class="wrap flex gap-x-5 sm:gap-x-8"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-2 size-8 text-gray-600"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg><div class="grow"><h3 class="text-base sm:text-lg font-semibold text-gray-800">Well engineered</h3><p class="mt-1 text-gray-600"> Built for developers who care about structure and long-term reliability </p></div></div><div class="wrap flex gap-x-5 sm:gap-x-8"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-2 size-8 text-gray-600"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg><div class="grow"><h3 class="text-base sm:text-lg font-semibold text-gray-800">Simplify to amplify</h3><p class="mt-1 text-gray-600"> Get to market faster using a toolkit crafted for quick development and easy maintainability </p></div></div><div class="wrap flex gap-x-5 sm:gap-x-8"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-2 size-8 text-gray-600"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg><div class="grow"><h3 class="text-base sm:text-lg font-semibold text-gray-800">Designing for people</h3><p class="mt-1 text-gray-600"> Built with accessibility in mind, every component ensures clarity, consistency, and inclusive user experiences </p></div></div><div class="wrap flex gap-x-5 sm:gap-x-8"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-2 size-8 text-gray-600"><path d="M7 10v12"></path><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"></path></svg><div class="grow"><h3 class="text-base sm:text-lg font-semibold text-gray-800">Simple and affordable</h3><p class="mt-1 text-gray-600"></p></div></div></div></div></div></app-features></div><div class="relative overflow-hidden" style="border-top: 1px solid #E5E5E5; padding: 32px 0;"><div class="max-w-[85rem] z-50 relative px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto"><div class="sm:w-1/2 xl:w-1/3 mx-auto text-center mb-6"><h2 class="text-xl font-semibold md:text-2xl md:leading-tight" style="color: #09090B;">Powered by modern stack — open source, teams, and beyond</h2></div><div class="my-8 md:my-16 grid grid-cols-3 sm:flex sm:justify-center gap-6 sm:gap-x-12 lg:gap-x-20"><a href="https://angular.dev/" target="_blank" class="shrink-0 transition hover:-translate-y-1"><svg width="48" height="55" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class="size-6 md:size-10 mx-auto sm:mx-0"><g clip-path="url(#clip0_1160_2587)"><path d="M15.5625 2.6625L15.0125 11.2375L9.7875 0L15.5625 2.6625ZM11.9375 13.75L8 16L4.0625 13.75L4.8625 11.8125H11.15L11.9375 13.75ZM8 4.2625L10.0625 9.2875H5.9375L8 4.2625ZM0.9875 11.2375L0.4375 2.6625L6.2125 0L0.9875 11.2375Z" fill="url(#paint0_linear_1160_2587)"></path><path d="M15.5625 2.6625L15.0125 11.2375L9.7875 0L15.5625 2.6625ZM11.9375 13.75L8 16L4.0625 13.75L4.8625 11.8125H11.15L11.9375 13.75ZM8 4.2625L10.0625 9.2875H5.9375L8 4.2625ZM0.9875 11.2375L0.4375 2.6625L6.2125 0L0.9875 11.2375Z" fill="url(#paint1_linear_1160_2587)"></path></g><defs><linearGradient id="paint0_linear_1160_2587" x1="1.838" y1="10.4662" x2="13.8731" y2="4.747" gradientUnits="userSpaceOnUse"><stop stop-color="#E40035"></stop><stop offset="0.24" stop-color="#F60A48"></stop><stop offset="0.352" stop-color="#F20755"></stop><stop offset="0.494" stop-color="#DC087D"></stop><stop offset="0.745" stop-color="#9717E7"></stop><stop offset="1" stop-color="#6C00F5"></stop></linearGradient><linearGradient id="paint1_linear_1160_2587" x1="3.59162" y1="1.61612" x2="11.4677" y2="10.6006" gradientUnits="userSpaceOnUse"><stop stop-color="#FF31D9"></stop><stop offset="1" stop-color="#FF5BE1" stop-opacity="0"></stop></linearGradient><clipPath id="clip0_1160_2587"><rect width="16" height="16" fill="white"></rect></clipPath></defs></svg></a><a href="https://vite.dev/" target="_blank" class="shrink-0 transition hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="42" viewBox="0 0 16 16" fill="none" class="size-6 md:size-10 mx-auto sm:mx-0"><g clip-path="url(#clip0_1160_2609)"><path d="M15.5958 2.44009L8.4155 15.2798C8.26713 15.545 7.88625 15.5465 7.73588 15.2828L0.413127 2.44159C0.249002 2.15384 0.494627 1.80572 0.820752 1.86384L8.00875 3.14847C8.05463 3.15681 8.10163 3.15681 8.1475 3.14847L15.185 1.86584C15.5098 1.80672 15.7569 2.15197 15.5958 2.44009Z" fill="url(#paint0_linear_1160_2609)"></path><path d="M11.4325 0.17881L6.11926 1.21981C6.07685 1.2281 6.03839 1.25023 6.00993 1.28275C5.98147 1.31526 5.96461 1.3563 5.96201 1.39943L5.63488 6.92043C5.63312 6.95071 5.63844 6.98098 5.6504 7.00885C5.66237 7.03672 5.68066 7.06142 5.70382 7.08099C5.72699 7.10056 5.75439 7.11448 5.78387 7.12163C5.81334 7.12878 5.84407 7.12897 5.87363 7.12218L7.35313 6.78031C7.38499 6.77299 7.41819 6.77378 7.44966 6.78263C7.48114 6.79147 7.50989 6.80807 7.53328 6.83091C7.55667 6.85375 7.57395 6.88211 7.58353 6.91336C7.59311 6.94462 7.5947 6.97778 7.58813 7.00981L7.14851 9.16218C7.14179 9.19531 7.14378 9.22962 7.1543 9.26174C7.16482 9.29387 7.18349 9.32271 7.2085 9.34545C7.23351 9.36819 7.264 9.38405 7.29697 9.39148C7.32995 9.3989 7.36429 9.39764 7.39663 9.38781L8.31013 9.10993C8.45176 9.06693 8.58801 9.19144 8.55826 9.33644L7.85951 12.7173C7.81601 12.9288 8.09726 13.0441 8.21451 12.8628L8.29263 12.7418L12.6226 4.10056C12.6954 3.95556 12.57 3.79056 12.4114 3.82131L10.8883 4.11531C10.8555 4.12168 10.8216 4.11951 10.7899 4.10902C10.7582 4.09853 10.7298 4.08007 10.7073 4.0554C10.6847 4.03074 10.669 4.0007 10.6614 3.96818C10.6539 3.93566 10.6548 3.90174 10.6641 3.86968L11.6579 0.424435C11.6672 0.392265 11.6681 0.358231 11.6605 0.325614C11.6529 0.292997 11.6369 0.262896 11.6143 0.238213C11.5917 0.21353 11.563 0.195098 11.5312 0.184693C11.4993 0.174289 11.4654 0.172262 11.4325 0.17881Z" fill="url(#paint1_linear_1160_2609)"></path></g><defs><linearGradient id="paint0_linear_1160_2609" x1="0.234152" y1="1.40504" x2="9.17088" y2="13.5418" gradientUnits="userSpaceOnUse"><stop stop-color="#41D1FF"></stop><stop offset="1" stop-color="#BD34FE"></stop></linearGradient><linearGradient id="paint1_linear_1160_2609" x1="7.59626" y1="0.461307" x2="9.21287" y2="11.5511" gradientUnits="userSpaceOnUse"><stop stop-color="#FFEA83"></stop><stop offset="0.083" stop-color="#FFDD35"></stop><stop offset="1" stop-color="#FFA800"></stop></linearGradient><clipPath id="clip0_1160_2609"><rect width="16" height="16" fill="white"></rect></clipPath></defs></svg></a><a href="https://www.typescriptlang.org/" target="_blank" class="shrink-0 transition hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="none" class="size-6 md:size-10 mx-auto sm:mx-0"><g clip-path="url(#clip0_1160_2606)"><path d="M2.83376 5.875H15.2925V15.0837H2.83376V5.875Z" fill="white"></path><path d="M0.1875 7.98877V15.8013H15.8125V0.17627H0.1875V7.98877ZM12.7788 7.36377C13.153 7.45062 13.4931 7.64635 13.7563 7.92627C13.9011 8.07709 14.027 8.24499 14.1313 8.42627C14.1313 8.44627 13.4563 8.90252 13.045 9.15752C13.03 9.16752 12.97 9.10252 12.9038 9.00377C12.8287 8.87423 12.722 8.76582 12.5937 8.68866C12.4654 8.6115 12.3196 8.5681 12.17 8.56252C11.6963 8.53002 11.3913 8.77877 11.3938 9.18752C11.39 9.28928 11.4132 9.39022 11.4613 9.48002C11.565 9.69627 11.7588 9.82502 12.3663 10.0875C13.485 10.5688 13.9637 10.8863 14.2612 11.3375C14.5937 11.8375 14.6675 12.645 14.4425 13.2425C14.1925 13.8925 13.58 14.3338 12.7137 14.48C12.3181 14.5254 11.9184 14.5212 11.5238 14.4675C10.919 14.3678 10.3619 14.0775 9.93375 13.6388C9.79 13.48 9.51 13.0663 9.5275 13.0363C9.57304 13.0023 9.6211 12.9718 9.67125 12.945L10.25 12.625L10.6987 12.365L10.7925 12.5038C10.9508 12.7301 11.1521 12.9229 11.385 13.0713C11.885 13.3338 12.5675 13.2975 12.905 12.9938C13.0183 12.8825 13.089 12.7349 13.1048 12.5769C13.1205 12.4188 13.0804 12.2603 12.9913 12.1288C12.8663 11.955 12.6162 11.8088 11.9175 11.5038C11.1112 11.1563 10.7637 10.9413 10.4462 10.5988C10.2481 10.3727 10.1018 10.1061 10.0175 9.81752C9.95469 9.48783 9.94541 9.15017 9.99 8.81752C10.1562 8.03877 10.74 7.49502 11.5925 7.33377C11.9873 7.285 12.3872 7.29595 12.7788 7.36627V7.36377ZM9.11125 8.01877V8.65877H7.0825V14.4375H5.64375V8.65752H3.61V8.03252C3.60362 7.81699 3.60863 7.60127 3.625 7.38627C3.635 7.37502 4.875 7.37502 6.375 7.37502H9.10375L9.11125 8.01877Z" fill="#007ACC"></path></g><defs><clipPath id="clip0_1160_2606"><rect width="16" height="16" fill="white"></rect></clipPath></defs></svg></a><a href="https://rxjs.dev/" target="_blank" class="shrink-0 transition hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="none" class="size-6 md:size-10 mx-auto sm:mx-0"><g clip-path="url(#clip0_1160_2612)"><path d="M0.921875 10.1167C0.59375 9.09473 0.4995 8.01561 0.6885 6.90536C0.7705 6.44486 0.897 6.00298 1.03563 5.55523C1.03563 5.55523 1.90625 2.69736 4.8525 1.39123C4.8525 1.39123 5.86813 0.854985 7.395 0.817485C7.395 0.817485 7.187 0.61536 7.05425 0.526985C6.335 0.047485 5.26275 -0.110265 4.61288 0.56511C4.417 0.766735 4.25288 0.98786 4.07038 1.18961C3.86188 1.41661 3.60938 1.60611 3.31938 1.71299C3.06688 1.80774 2.81438 1.78873 2.55613 1.83311C2.29113 1.87711 2.0195 1.97186 1.80525 2.14224C1.57175 2.33174 1.47713 2.58361 1.45213 2.87411C1.42675 3.10123 1.43313 3.33461 1.42038 3.56161C1.38875 4.23061 1.17438 4.41961 0.694875 4.79211C0.493125 4.94348 0.32275 5.14511 0.19625 5.35998C-0.182125 6.02848 0.42375 6.72223 0.455 7.39761C0.4615 7.53636 0.44875 7.67498 0.3985 7.80773C0.347625 7.95273 0.247125 8.04748 0.165 8.16711C0.0512504 8.32498 -0.0243746 8.51436 0.00750037 8.70961C0.0387504 8.90548 0.13975 9.08848 0.2345 9.25898C0.417625 9.56173 0.644625 9.83274 0.8845 10.0915C0.897 10.0915 0.909375 10.1041 0.922 10.1169" fill="#E32186"></path><path d="M12.96 12.5388C14.4111 11.9079 15.0294 10.8167 15.0294 10.8167C16.3859 8.96806 15.9254 7.01881 15.9254 7.01881C15.0611 8.89869 14.272 9.41631 14.272 9.41631C16.3985 6.17944 14.2847 4.22394 14.2847 4.22394C15.149 6.06619 14.001 8.31181 14.001 8.31181C13.0356 10.3436 11.6665 11.0692 11.6665 11.0692C13.1934 11.3529 14.3165 10.3246 14.3165 10.3246C12.1269 12.6903 9.75487 12.5771 9.75487 12.5771C10.752 13.6938 12.2471 13.5991 12.2471 13.5991C10.2915 14.0594 8.45562 13.4096 6.94775 12.1541C6.66219 11.9199 6.39244 11.6671 6.14025 11.3973C6.14025 11.3973 5.91312 11.1576 5.86862 11.0946L5.86237 11.0883C5.83112 12.2552 7.04837 13.3402 7.04837 13.3402C5.5215 12.7094 4.82137 11.3402 4.82137 11.3402C4.82137 11.3402 3.793 9.58644 4.53762 7.58681C5.28175 5.58681 7.53425 5.15756 7.53425 5.15756C9.39562 6.06006 10.9727 6.34369 10.9727 6.34369C14.2975 6.89881 14.1085 5.27144 14.1085 5.27144C14.1397 3.87056 12.0265 2.38181 12.0265 2.38181C8.25987 -0.413187 4.85312 1.39106 4.85312 1.39106C1.90687 2.69719 1.03625 5.55506 1.03625 5.55506C0.897498 6.00281 0.771248 6.44469 0.689123 6.90506C0.367373 8.77919 0.853123 10.5517 1.90687 12.1293C3.547 14.5771 6.20962 15.4223 6.20962 15.4223C10.1525 16.7597 12.8464 14.7914 12.8464 14.7914C15.3259 13.0877 15.8244 11.1196 15.8244 11.1196C13.8244 12.6846 12.9601 12.5389 12.9601 12.5389L12.96 12.5388ZM9.88137 3.33419C9.92616 3.33402 9.97054 3.34273 10.0119 3.35981C10.0533 3.37689 10.091 3.402 10.1226 3.43369C10.1542 3.46538 10.1793 3.50303 10.1963 3.54446C10.2133 3.58589 10.222 3.63028 10.2217 3.67506C10.2219 3.71981 10.2133 3.76416 10.1962 3.80554C10.1792 3.84691 10.1541 3.88451 10.1225 3.91614C10.0908 3.94778 10.0532 3.97283 10.0119 3.98985C9.97047 4.00688 9.92612 4.01553 9.88137 4.01531C9.8366 4.01554 9.79222 4.00691 9.7508 3.9899C9.70938 3.97289 9.67174 3.94784 9.64004 3.91621C9.60835 3.88458 9.58324 3.84698 9.56615 3.80559C9.54907 3.7642 9.54035 3.71984 9.5405 3.67506C9.54028 3.63024 9.54895 3.58582 9.56601 3.54436C9.58306 3.50291 9.60816 3.46524 9.63986 3.43355C9.67155 3.40185 9.70922 3.37675 9.75067 3.3597C9.79213 3.34264 9.83655 3.33397 9.88137 3.33419Z" fill="url(#paint0_linear_1160_2612)"></path><path d="M14.1012 5.26523C14.1325 3.86435 12.0192 2.3756 12.0192 2.3756C8.25262 -0.413021 4.84587 1.39123 4.84587 1.39123C1.89962 2.69735 1.02899 5.55523 1.02899 5.55523C0.858618 6.0411 0.707243 6.78573 0.707243 6.78573C0.524118 7.71935 0.606118 8.5836 0.606118 8.5836C0.681868 9.41023 0.864868 9.96548 0.864868 9.96548C1.05437 10.5582 1.14237 10.7414 1.14237 10.7414C1.13637 10.7222 1.10474 10.5836 1.10474 10.5836C1.10474 10.5836 0.839493 9.30923 1.08562 8.0851C1.08562 8.0851 1.29999 6.81073 2.17112 5.82685C2.17112 5.82685 3.58424 3.8141 6.21512 4.60273C6.21512 4.60273 6.78299 4.80485 6.97824 4.90548C7.17412 5.00023 7.51449 5.14523 7.51449 5.14523C9.37574 6.0476 10.9529 6.33123 10.9529 6.33123C14.2904 6.89273 14.1014 5.26535 14.1014 5.26535L14.1012 5.26523ZM9.88049 4.0221C9.83571 4.02234 9.79132 4.01369 9.74989 3.99668C9.70846 3.97966 9.67081 3.9546 9.63912 3.92296C9.60743 3.89131 9.58232 3.8537 9.56524 3.8123C9.54816 3.77089 9.53945 3.72652 9.53962 3.68173C9.5394 3.6369 9.54807 3.59248 9.56513 3.55103C9.58218 3.50957 9.60728 3.47191 9.63898 3.44021C9.67067 3.40852 9.70834 3.38342 9.74979 3.36636C9.79125 3.34931 9.83567 3.34064 9.88049 3.34085C9.92528 3.34069 9.96966 3.3494 10.0111 3.36647C10.0525 3.38355 10.0901 3.40866 10.1217 3.44036C10.1534 3.47205 10.1784 3.5097 10.1954 3.55112C10.2125 3.59255 10.2211 3.63694 10.2209 3.68173C10.2211 3.72649 10.2124 3.77085 10.1954 3.81224C10.1784 3.85363 10.1533 3.89124 10.1217 3.92289C10.09 3.95454 10.0524 3.9796 10.011 3.99663C9.96961 4.01366 9.92525 4.02232 9.88049 4.0221Z" fill="url(#paint1_radial_1160_2612)"></path><path d="M7.72313 2.72901L5.57176 2.06001C5.55901 2.06001 5.49613 2.02826 5.38226 2.06001C5.38226 2.06001 4.11413 2.38188 4.33501 3.07563C4.33501 3.07563 4.46776 3.51126 4.82713 3.93363L7.19288 3.82026L7.72313 2.72901Z" fill="url(#paint2_linear_1160_2612)"></path></g><defs><linearGradient id="paint0_linear_1160_2612" x1="2.42956" y1="14.6845" x2="10.2801" y2="6.3326" gradientUnits="userSpaceOnUse"><stop stop-color="#DF1C84"></stop><stop offset="0.401" stop-color="#DE1C85"></stop><stop offset="0.77" stop-color="#932C86"></stop><stop offset="1" stop-color="#5C2F87"></stop></linearGradient><radialGradient id="paint1_radial_1160_2612" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11.0707 4.117) rotate(0.136224) scale(7.6705 6.41397)"><stop stop-color="#DF1C84"></stop><stop offset="0.139" stop-color="#DE1E85"></stop><stop offset="0.285" stop-color="#D62085"></stop><stop offset="0.434" stop-color="#C82286"></stop><stop offset="0.586" stop-color="#B72786"></stop><stop offset="0.739" stop-color="#9C2A86"></stop><stop offset="0.891" stop-color="#7C2E87"></stop><stop offset="1" stop-color="#5C2F87"></stop></radialGradient><linearGradient id="paint2_linear_1160_2612" x1="4.30435" y1="2.98979" x2="7.72118" y2="2.98979" gradientUnits="userSpaceOnUse"><stop stop-color="#DF1C84"></stop><stop offset="0.238" stop-color="#D91E85"></stop><stop offset="0.658" stop-color="#C72085"></stop><stop offset="0.999" stop-color="#B42184"></stop></linearGradient><clipPath id="clip0_1160_2612"><rect width="16" height="16" fill="white"></rect></clipPath></defs></svg></a><a href="https://nx.dev/" target="_blank" class="shrink-0 transition hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" width="50" height="48" viewBox="0 0 32 20" fill="none" class="size-6 md:size-10 mx-auto sm:mx-0"><g clip-path="url(#clip0_1160_2617)"><path d="M4.92125 0L11.9169 11.7775L11.923 6.44637L15.9821 12.7914L11.8056 19.3551L4.88225 8.1195L4.86625 19.8822H0V0H4.92125ZM16.7831 5.5585L18.8085 8.73825L18.8341 8.78238C19.4857 7.79115 20.3735 6.97754 21.4177 6.41479C22.4619 5.85204 23.6297 5.55782 24.8159 5.55863C28.7217 5.55863 31.8977 8.86438 31.9751 12.7564L31.9764 12.8879H31.9727V12.9374C31.9673 13.1811 31.8677 13.4132 31.6947 13.5849C31.5217 13.7567 31.2889 13.8546 31.0451 13.8583C30.8014 13.8619 30.5657 13.7709 30.3877 13.6044C30.2097 13.4379 30.1031 13.2088 30.0905 12.9654L30.0894 12.9307L30.0889 12.886C30.0732 12.2705 29.7347 12.0208 29.2901 11.8366L29.2244 11.81L29.1572 11.7843L29.0889 11.759L28.7341 11.6331L28.6616 11.6065L28.5891 11.579L28.5165 11.5504L28.4802 11.5355L28.4077 11.5048L28.3359 11.4722C28.049 11.3389 27.7746 11.1603 27.5565 10.876L27.531 10.8419L27.5055 10.8062L27.4675 10.7504L27.4165 10.6716L27.2553 10.4136L27.1965 10.3226L27.1502 10.2535L27.118 10.2071L27.0676 10.1374L27.0326 10.0909L26.9961 10.0444L26.9774 10.0212L26.9387 9.97525C26.5587 9.53113 25.9639 9.13212 24.8134 9.13212C24.3423 9.13198 23.8758 9.22466 23.4405 9.40487C23.0053 9.58508 22.6098 9.84929 22.2767 10.1824C21.9435 10.5155 21.6793 10.911 21.4991 11.3463C21.3189 11.7815 21.2262 12.248 21.2264 12.7191C21.2291 12.8546 21.2611 12.9879 21.3202 13.1099L21.3389 13.146L25.6194 19.8822H20.8985L18.8085 16.7281L16.755 19.8822H12.0355L16.541 12.7889L11.9242 5.5585H16.7831ZM31.9814 13.903C32.0295 14.2383 31.982 14.5804 31.8444 14.89C31.6791 15.2723 31.4461 15.3413 31.2909 15.3378L31.2651 15.3365L31.241 15.334L31.2186 15.3308L31.189 15.3247L31.1645 15.3181L31.1329 15.3073L31.1214 15.302L31.1075 15.2941L31.0866 15.2811L31.0697 15.2695L31.0513 15.2557L31.0316 15.2395L31.0216 15.2306L31.0015 15.2111C30.9142 15.1216 30.8361 14.9686 30.9749 14.7555C31.0774 14.597 31.2195 14.508 31.3682 14.4283L31.5184 14.3489C31.6983 14.2519 31.8717 14.1385 31.9814 13.903ZM16.7954 0V5.05463L16.7844 5.11088H11.9242L11.923 5.05463L11.9291 0H16.7954Z" fill="#012F55"></path><path d="M24.296 10.6231C23.7278 10.6122 23.1703 10.7777 22.7 11.0968C22.2298 11.4159 21.87 11.8729 21.6703 12.4049C22.0013 11.91 22.4911 11.5427 23.0589 11.3635C23.6267 11.1843 24.2386 11.2039 24.7938 11.4192C25.3221 11.6344 26.0168 11.9817 26.5671 11.7958C26.3091 11.4338 25.9685 11.1386 25.5735 10.9346C25.1785 10.7306 24.7405 10.6238 24.296 10.6231Z" fill="#96D8E9"></path><path d="M29.8105 13.0151C29.8105 12.4195 29.4865 12.2814 28.8138 12.0367C28.3148 11.863 27.7485 11.6674 27.3364 11.1292C27.2558 11.0229 27.1811 10.903 27.1016 10.7759C26.9236 10.4463 26.6821 10.1553 26.391 9.9196C25.9985 9.6311 25.4835 9.49048 24.8159 9.49048C24.1607 9.49093 23.5204 9.68584 22.9761 10.0505C22.4318 10.4152 22.008 10.9332 21.7584 11.539C22.0755 11.0989 22.5025 10.7497 22.9967 10.5262C23.4909 10.3026 24.035 10.2125 24.5749 10.2648C25.1148 10.3172 25.6315 10.5101 26.0736 10.8244C26.5156 11.1388 26.8675 11.5635 27.0943 12.0562C27.2064 12.2414 27.3758 12.3849 27.5768 12.4653C27.7778 12.5456 27.9995 12.5583 28.2084 12.5015C28.8651 12.3609 28.8199 12.9821 29.8118 13.1925L29.8105 13.0151Z" fill="#48C4E5"></path></g><defs><clipPath id="clip0_1160_2617"><rect width="32" height="20" fill="white"></rect></clipPath></defs></svg></a><a href="https://eslint.org/" target="_blank" class="shrink-0 transition hover:-translate-y-1"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 16 16" fill="none" class="size-6 md:size-10 mx-auto sm:mx-0"><g clip-path="url(#clip0_1160_2621)"><path d="M4.83275 6.08381L7.86525 4.32881C7.90332 4.30973 7.9453 4.2998 7.98788 4.2998C8.03045 4.2998 8.07244 4.30973 8.1105 4.32881L11.1559 6.08381C11.2334 6.12256 11.285 6.21281 11.285 6.29018V9.80018C11.285 9.89056 11.2334 9.96793 11.1559 10.0196L8.12338 11.7746C8.08531 11.7936 8.04333 11.8036 8.00075 11.8036C7.95818 11.8036 7.91619 11.7936 7.87813 11.7746L4.83275 10.0196C4.75525 9.98081 4.70363 9.89056 4.70363 9.80018V6.29018C4.70363 6.21268 4.75525 6.12243 4.83275 6.08381Z" fill="#8080F2"></path><path d="M15.8919 7.68382L12.2656 1.36069C12.1366 1.12844 11.8915 0.960693 11.6205 0.960693H4.36813C4.11013 0.960693 3.86488 1.12844 3.723 1.36069L0.0967509 7.67107C0.0333422 7.78559 7.62939e-05 7.91435 7.62939e-05 8.04526C7.62939e-05 8.17616 0.0333422 8.30492 0.0967509 8.41944L3.723 14.6911C3.852 14.9233 4.09713 15.0394 4.36813 15.0394H11.6334C11.8915 15.0394 12.1366 14.9233 12.2786 14.7039L15.9049 8.43232C16.0339 8.17432 16.0339 7.90319 15.8919 7.68382ZM12.885 10.7163C12.885 10.8067 12.8334 10.8969 12.743 10.9357L8.12325 13.6069C8.08492 13.6321 8.04006 13.6456 7.99419 13.6456C7.94832 13.6456 7.90346 13.6321 7.86513 13.6069L3.23263 10.9487C3.15513 10.8971 3.09063 10.8197 3.09063 10.7293V5.37394C3.09063 5.28369 3.14225 5.19332 3.23263 5.15469L7.86525 2.48344C7.90358 2.45825 7.94845 2.44483 7.99431 2.44483C8.04018 2.44483 8.08505 2.45825 8.12338 2.48344L12.7561 5.15469C12.8335 5.20619 12.898 5.28369 12.898 5.37394V10.7164L12.885 10.7163Z" fill="#4B32C3"></path></g><defs><clipPath id="clip0_1160_2621"><rect width="16" height="16" fill="white"></rect></clipPath></defs></svg></a><a href="https://prettier.io/" target="_blank" class="shrink-0 transition hover:-translate-y-1"><svg width="48" height="48" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" class="size-6 md:size-10 mx-auto sm:mx-0"><path d="M2 8H6V9H2V8ZM2 14H6V15H2V14ZM11 4H14V5H11V4ZM2 2H5V3H2V2Z" fill="#F44336"></path><path d="M9 2H12V3H9V2ZM10 6H14V7H10V6ZM5 12H6V13H5V12ZM2 10H8V11H2V10Z" fill="#F9A825"></path><path d="M2 12H5V13H2V12ZM9 8H14V9H9V8ZM2 4H6V5H2V4ZM5 2H9V3H5V2Z" fill="#26A69A"></path><path d="M2 6H5V7H2V6ZM9 4H11V5H9V4ZM8 10H12V11H8V10Z" fill="#BA68C8"></path></svg></a><a href="https://stylelint.io/" target="_blank" class="shrink-0 transition hover:-translate-y-1"><svg width="48" height="48" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 16" fill="none" class="size-6 md:size-10 mx-auto sm:mx-0"><g clip-path="url(#clip0_1160_2629)"><path d="M8.31859 15.6553C10.1135 9.23808 10.0614 9.20893 11.3586 4.63337L11.6704 4.81387C11.8402 4.91112 11.9789 4.83112 11.9789 4.63583V2.45327C12.3235 1.24793 12.5927 0.315834 12.6723 0.0368652H14.0774L16.4122 2.19893L14.8787 3.52405L16.0385 4.77821L8.39581 15.6553C8.35887 15.7169 8.30678 15.7029 8.31869 15.6553L8.31859 15.6553Z" fill="black"></path><path d="M9.15347 1.82325C9.22322 1.82325 9.279 1.8614 9.279 1.9094V3.02737C9.279 3.07412 9.22281 3.11231 9.15347 3.11231H7.26631C7.19656 3.11231 7.14038 3.07415 7.14038 3.02697V1.90859C7.14038 1.8614 7.19656 1.82243 7.26591 1.82243L9.15347 1.82325ZM11.4837 0.585091L9.407 1.78387C9.43081 1.82078 9.44556 1.86306 9.44556 1.909V3.02775C9.44556 3.08518 9.42259 3.13772 9.38569 3.17956L11.4833 4.39062C11.6261 4.4735 11.7435 4.40581 11.7435 4.24087V0.735247C11.7435 0.569903 11.627 0.502622 11.4838 0.585091H11.4837ZM6.97337 3.02775V1.90859C6.97337 1.86262 6.98813 1.8204 7.01194 1.78387L4.93522 0.584279C4.79244 0.502247 4.67513 0.569497 4.67513 0.734435V4.24009C4.67513 4.40503 4.79247 4.47272 4.93566 4.38984L7.03291 3.17875C6.996 3.1365 6.97381 3.0844 6.97381 3.02693L6.97341 3.02775H6.97337Z" fill="black"></path><path d="M8.01828 15.6553H8.09541C6.30094 9.23808 6.35263 9.20893 5.05541 4.63337L4.74363 4.81387C4.57419 4.91112 4.43509 4.83112 4.43509 4.63583V2.45327C4.09047 1.24837 3.82134 0.315834 3.74178 0.0368652H2.33706L0.00190735 2.19893L1.53503 3.52405L0.37522 4.77862L8.01828 15.6553ZM8.71694 4.88071C8.71694 5.19383 8.4631 5.44768 8.14997 5.44768C7.83685 5.44768 7.583 5.19383 7.583 4.88071C7.583 4.56758 7.83685 4.31374 8.14997 4.31374C8.4631 4.31374 8.71694 4.56758 8.71694 4.88071ZM8.71694 8.25096C8.71694 8.56408 8.4631 8.81793 8.14997 8.81793C7.83685 8.81793 7.583 8.56408 7.583 8.25096C7.583 7.93783 7.83685 7.68399 8.14997 7.68399C8.4631 7.68399 8.71694 7.93783 8.71694 8.25096ZM8.71694 11.6221C8.71694 11.9352 8.4631 12.189 8.14997 12.189C7.83685 12.189 7.583 11.9352 7.583 11.6221C7.583 11.3089 7.83685 11.0551 8.14997 11.0551C8.4631 11.0551 8.71694 11.3089 8.71694 11.6221Z" fill="black"></path></g><defs><clipPath id="clip0_1160_2629"><rect width="16.41" height="16" fill="white"></rect></clipPath></defs></svg></a></div><div class="grid grid-cols-12 sm:flex sm:justify-center gap-6 sm:gap-x-12 lg:gap-x-20"><div class="col-span-6 text-center"><h4 class="highlight-2 text-xl md:text-3xl font-semibold"> 25+ </h4><h4 class="text-sm text-gray-600"> Components </h4></div><div class="col-span-6 text-center"><h4 class="text-xl md:text-3xl font-semibold" style="color: #09090B;"> 100+ </h4><h4 class="text-sm text-gray-600"> Starters &amp; Examples </h4></div><div class="col-start-4 col-span-6 text-center"><h4 class="text-xl md:text-3xl font-semibold" style="color: #09090B;"> 10+ </h4><h4 class="text-sm text-gray-600"> CSS Theme Variations </h4></div></div></div><div aria-hidden="true" class="flex absolute -top-96 start-1/2 transform -translate-x-1/2"><div class="bg-linear-to-r from-gray-100/50 to-gray-100 blur-3xl w-100 h-175 rotate-[-60deg] transform -translate-x-40"></div><div class="bg-linear-to-tl from-gray-50 via-gray-100 to-[#E5E5E5] blur-3xl w-[1440px] h-200 rounded-fulls origin-top-left -rotate-12 -translate-x-60"></div></div></div><app-footer ngh="0"><div class="app-footer"><div class="app-container"><div class="app-footer-content"><div class="flex flex-col gap-8"><span class="text-sm text-[#52525B]"> Copyright © 2025 Mixin. Made with <span class="inline-block mx-0.5">❤️</span> by <a href="https://coreteq.sk" target="_blank" class="font-medium text-[#1470EF] hover:underline">CoreTEQ</a></span></div></div></div></div></app-footer></app-landing><!----></app-root>
+  
+
+
+<script id="ng-state" type="application/json">{"__nghData__":[{},{"t":{"33":"t0","34":"t1"},"c":{"33":[],"34":[{"i":"t1","r":1,"t":{"1":"t2","2":"t3"},"c":{"1":[],"2":[{"i":"t3","r":2}]}}]}},{"c":{"1":[{"i":"c2804539217","r":1}]}}]}</script></body></html>
