@@ -1,12 +1,13 @@
 import { inject, InjectionToken } from '@angular/core';
-import { format, parse } from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 import 'imask/masked/date';
+import { MaskedDate } from 'imask';
 import { IMaskImpl } from './base';
 
 import { X_DATE_MASK_OPTIONS, XDateMaskOptions } from '@mixin-ui/cdk/providers';
 
 type Block = {
-  [key: string]: {
+  [token: string]: {
     mask: typeof IMaskImpl.Mask.MaskedRange;
     from: number;
     to: number;
@@ -14,35 +15,33 @@ type Block = {
 };
 
 const RANGES = {
-  yyyy: { from: 0, to: 9999 },
+  // Numeric: 2 digits + zero padded (02, 20)
   yy: { from: 0, to: 99 },
 
-  MM: { from: 1, to: 12 },
+  // Numeric: 4 digits + zero padded (0002, 2024)
+  yyyy: { from: 0, to: 9999 },
+
+  // Numeric: 1 digit (9, 12)
   M: { from: 1, to: 12 },
 
-  dd: { from: 1, to: 31 },
+  // Numeric: 2 digits + zero padded (09, 12)
+  MM: { from: 1, to: 12 },
+
+  // Numeric: minimum digits (1)
   d: { from: 1, to: 31 },
 
-  HH: { from: 0, to: 23 },
-  H: { from: 0, to: 23 },
-
-  hh: { from: 1, to: 12 },
-  h: { from: 1, to: 12 },
-
-  mm: { from: 0, to: 59 },
-  m: { from: 0, to: 59 },
-
-  ss: { from: 0, to: 59 },
-  s: { from: 0, to: 59 },
+  // Numeric: 2 digits + zero padded (01)
+  dd: { from: 1, to: 31 },
 } as const;
 
-const TOKEN_REGEX = /yyyy|yy|MM|M|dd|d|HH|H|hh|h|mm|m|ss|s/g;
+const TOKEN_REGEX = /yyyy|yy|MM|M|dd|d/g;
 
 const adapter = (options: XDateMaskOptions) => {
-  const tokens = options.pattern.match(TOKEN_REGEX) || [];
+  const pattern = options.pattern.replaceAll('`', '');
+  const tokens = pattern.match(TOKEN_REGEX) || [];
 
   if (tokens.length === 0) {
-    throw new Error(`No valid date-fns tokens found in pattern: ${options.pattern}`);
+    throw new Error(`No valid tokens found in pattern: ${pattern}`);
   }
 
   const blocks: Block = {};
@@ -63,12 +62,20 @@ const adapter = (options: XDateMaskOptions) => {
     mask: Date,
     lazy: !options.showFiller,
     placeholderChar: options.fillerChar,
-    pattern: options.pattern,
-    autofix: options.autofix,
     min: options.min,
     max: options.max,
-    parse: (value: string) => parse(value, options.pattern, Date.now()),
-    format: (value: Date | null) => (value ? format(value, options.pattern) : ''),
+    overwrite: true,
+    autofix: true,
+    validate: function (this: MaskedDate) {
+      return this.isComplete ? isValid(this.date) : true;
+    },
+    parse: (value: string) => {
+      return parse(value, pattern, Date.now());
+    },
+    format: (value: Date | null) => {
+      return value ? format(value, pattern) : '';
+    },
+    pattern: options.pattern,
     blocks,
   };
 };
