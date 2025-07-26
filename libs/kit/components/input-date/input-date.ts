@@ -98,12 +98,6 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
    */
   readonly pattern = input(this.#opt.pattern);
 
-  /**
-   * Automatically fix invalid date parts when possible,
-   * For example, converting '33' to '31' for days
-   */
-  readonly autofix = input(this.#opt.autofix, { transform: booleanAttribute });
-
   /** Show filler characters for empty positions */
   readonly showFiller = input(this.#opt.showFiller, { transform: booleanAttribute });
 
@@ -131,7 +125,6 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
       this.#mask.updateOptions({
         min: this.min(),
         max: this.max(),
-        autofix: this.autofix(),
         pattern: this.pattern(),
         showFiller: this.showFiller(),
         fillerChar: this.fillerChar(),
