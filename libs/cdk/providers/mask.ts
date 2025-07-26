@@ -179,12 +179,6 @@ export interface XDateMaskOptions extends XPatternMaskOptions {
   /** Character to use as a filler for empty positions */
   readonly fillerChar: string;
 
-  /**
-   * Automatically fix invalid date parts when possible,
-   * For example, converting '33' to '03' for days
-   */
-  readonly autofix: boolean;
-
   /** Minimum allowed date value */
   readonly min: Date;
 
@@ -195,8 +189,7 @@ export interface XDateMaskOptions extends XPatternMaskOptions {
 const defaultDateOptions: XDateMaskOptions = {
   min: new Date(1900, 0, 1),
   max: new Date(2100, 11, 31),
-  pattern: 'dd/MM/yyyy',
-  autofix: true,
+  pattern: 'dd/`MM/`yyyy',
   showFiller: false,
   fillerChar: '_',
 };
