@@ -33,10 +33,10 @@ export class Hero {
     afterNextRender(() => {
       const circle = document.getElementById('mixin-circle');
 
-      const loadingAnimation = gsap.to(circle, {
-        rotation: 1800, // 5 оборотов (360 * 5)
-        duration: 2, // Общая длительность анимации
-        ease: 'power2.out', // Эквивалент ease-out
+      gsap.to(circle, {
+        rotation: 1800,
+        duration: 2,
+        ease: 'power2.out',
       });
     });
   }
