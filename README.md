@@ -22,6 +22,11 @@
     <img alt="Discord" src="https://img.shields.io/discord/660863154703695893.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" /></a>
 </p>
 
+> ⚠️ **Alpha Notice**
+>
+> Mixin is currently in **alpha stage**. Expect breaking changes as we iterate and improve the API.
+> Use with caution in production environments.
+
 ## Usage
 
 Read the docs here: <a href="https://mixin-ui.dev/installation" rel="noopener noreferrer">https://mixin-ui.dev/installation</a>.
