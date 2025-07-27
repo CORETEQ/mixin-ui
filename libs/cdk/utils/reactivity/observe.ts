@@ -30,7 +30,6 @@ export interface CreateObserveOptions {
  *
  * @example
  * ```ts
- *
  * constructor() {
  *   // Traditional pattern with takeUntilDestroyed():
  *   changes.pipe(takeUntilDestroyed()).subscribe(value => {
