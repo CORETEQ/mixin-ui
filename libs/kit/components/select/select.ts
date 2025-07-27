@@ -8,6 +8,7 @@ import {
   forwardRef,
   inject,
   input,
+  numberAttribute,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
@@ -55,12 +56,14 @@ export class XSelect<T> implements XListboxAccessor<T> {
   readonly #opt = inject(X_SELECT_OPTIONS);
   readonly #popover = inject(XPopoverTarget, { self: true });
 
+  readonly open = this.#popover.open;
   readonly slots = contentChildren(X_SLOT);
   readonly placeholder = input<string>();
   readonly multiple = input(false, { transform: booleanAttribute });
   readonly _comparator = input(this.#opt.comparator, { alias: 'comparator' });
   readonly key = input<PropertyKey>();
-  readonly tabIndex = computed(() => (this.disabled() ? null : '0'));
+  readonly enabledTabIndex = input(0, { transform: numberAttribute });
+  readonly tabIndex = computed(() => (this.disabled() ? null : String(this.enabledTabIndex())));
   readonly comparator = computed(() =>
     this.key() != null ? createKeyComparator(this.key()!) : this._comparator()
   );
@@ -72,7 +75,6 @@ export class XSelect<T> implements XListboxAccessor<T> {
 
   readonly selection = this.#cva.value;
   readonly disabled = this.#cva.disabled;
-  readonly open = this.#popover.open;
 
   readonly hasValue = computed(() => {
     const value = this.selection();

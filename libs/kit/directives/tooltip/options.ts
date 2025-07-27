@@ -6,7 +6,7 @@ export type XTooltipEvent = 'hover' | 'focus';
 export interface XTooltipOptions {
   readonly on: XTooltipEvent;
   readonly position: XPopoverPosition;
-  readonly variant: 'dark' | 'light';
+  readonly variant: 'dark' | 'light'; // @TODO: complete
   readonly withArrow: boolean;
   readonly offset: number;
   readonly openDelay: number;
