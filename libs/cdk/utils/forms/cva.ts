@@ -25,6 +25,8 @@ export interface XCva<T> {
 
 export interface XCvaOptions<T> {
   readonly defaultValue: T | (() => T);
+
+  // @TODO: make optional
   readonly transform: (value: T | null) => T;
 }
 

@@ -1,5 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
+// @TODO: complete
 export interface XSpinnerOptions {}
 
 const defaultOptions: XSpinnerOptions = {};

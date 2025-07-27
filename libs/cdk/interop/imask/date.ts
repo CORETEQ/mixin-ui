@@ -36,12 +36,12 @@ const RANGES = {
 
 const TOKEN_REGEX = /yyyy|yy|MM|M|dd|d/g;
 
+// @TODO: normalize pattern with '`' to prevent symbols shift back
 const adapter = (options: XDateMaskOptions) => {
-  const pattern = options.pattern.replaceAll('`', '');
-  const tokens = pattern.match(TOKEN_REGEX) || [];
+  const tokens = options.pattern.match(TOKEN_REGEX) || [];
 
   if (tokens.length === 0) {
-    throw new Error(`No valid tokens found in pattern: ${pattern}`);
+    throw new Error(`No valid tokens found in pattern: ${options.pattern}`);
   }
 
   const blocks: Block = {};
@@ -70,10 +70,10 @@ const adapter = (options: XDateMaskOptions) => {
       return this.isComplete ? isValid(this.date) : true;
     },
     parse: (value: string) => {
-      return parse(value, pattern, Date.now());
+      return parse(value, options.pattern, Date.now());
     },
     format: (value: Date | null) => {
-      return value ? format(value, pattern) : '';
+      return value ? format(value, options.pattern) : '';
     },
     pattern: options.pattern,
     blocks,

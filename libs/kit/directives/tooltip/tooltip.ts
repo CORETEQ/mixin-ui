@@ -70,6 +70,7 @@ export class XTooltip {
       });
     });
 
+    // @TODO: refactor with `observe()`
     toObservable(this.event)
       .pipe(
         switchMap(event => merge(this.getHandler(event), this.#keyboard$)),

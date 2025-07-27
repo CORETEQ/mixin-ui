@@ -1,6 +1,0 @@
-@for (tab of tabs(); track $index) { @let isActive = $index === activeIndex();
-
-<button [class]="`x-tab ${isActive && `x-active`}`" (click)="updateIndex($index)">
-  <ng-container [ngTemplateOutlet]="tab.template()" />
-</button>
-}

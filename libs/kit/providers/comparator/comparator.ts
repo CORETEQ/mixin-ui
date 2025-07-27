@@ -15,8 +15,6 @@ export const createKeyComparator = (key: PropertyKey): XComparator => {
   };
 };
 
-const defaultComparator: XComparator = <T>(a: T, b: T) => a === b;
-
 export const X_COMPARATOR = new InjectionToken<XComparator>('COMPARATOR', {
-  factory: () => defaultComparator,
+  factory: () => (a, b) => a === b,
 });

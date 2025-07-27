@@ -1,5 +1,6 @@
 import { isHTMLElement } from './is-element';
 
+// @TODO: complete
 export function getFocusableElement(root: Node): HTMLElement | null {
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT, {
     acceptNode: isFocusable,

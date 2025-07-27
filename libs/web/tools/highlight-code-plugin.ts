@@ -33,6 +33,7 @@ export async function highlightCode(): Promise<Plugin> {
 
       const path = id.replace(RAW_LANG_QUERY, '');
       const lang = id.match(LANG_QUERY)?.at(1) || FALLBACK_LANG;
+
       if (lang === 'markdown') {
         return code;
       }

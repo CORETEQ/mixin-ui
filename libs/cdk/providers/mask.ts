@@ -189,7 +189,7 @@ export interface XDateMaskOptions extends XPatternMaskOptions {
 const defaultDateOptions: XDateMaskOptions = {
   min: new Date(1900, 0, 1),
   max: new Date(2100, 11, 31),
-  pattern: 'dd/`MM/`yyyy',
+  pattern: 'dd/MM/yyyy',
   showFiller: false,
   fillerChar: '_',
 };
