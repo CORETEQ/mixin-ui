@@ -18,5 +18,4 @@ export * from '@mixin-ui/kit/components/listbox';
 export * from '@mixin-ui/kit/components/select';
 export * from '@mixin-ui/kit/components/spinner';
 export * from '@mixin-ui/kit/components/switch';
-export * from '@mixin-ui/kit/components/menu';
 export * from '@mixin-ui/kit/components/textarea';
