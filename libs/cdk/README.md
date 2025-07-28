@@ -4,8 +4,18 @@ A set of utilities and helper functions used across [Mixin UI](https://github.co
 
 ## How to install
 
+`@mixin/cdk` builds on top of [`@angular/cdk`](https://www.npmjs.com/package/@angular/cdk). Make sure to install both:
+
 ```
 npm install @angular/cdk @mixin-ui/cdk
+```
+
+### Add styles
+
+Make sure to include the following stylesheet in your angular.json (for Angular CLI projects) or your global styles:
+
+```
+@angular/cdk/overlay-prebuilt.css
 ```
 
 ## Documentation
