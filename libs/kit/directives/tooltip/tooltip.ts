@@ -1,5 +1,5 @@
 import { Directive, effect, ElementRef, inject, input, untracked } from '@angular/core';
-import { takeUntilDestroyed, toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import {
   delay,
   distinctUntilChanged,
@@ -13,8 +13,9 @@ import {
   switchMap,
 } from 'rxjs';
 import {
-  isPureEscape,
   createPopover,
+  isPureEscape,
+  observe,
   provideFocusMonitor,
   relatedTo,
   X_FOCUS_MONITOR,
@@ -44,15 +45,21 @@ export class XTooltip {
   readonly closeDelay = input(this.#opt.closeDelay, { alias: 'x-tooltip-close-delay' });
   readonly position = toSignal(this.#overlay.positionChanges);
 
-  readonly #keyboard$ = merge(
-    this.#focusChanges.pipe(
-      filter(origin => origin === 'keyboard' || !origin),
-      map(Boolean)
+  readonly #openChanges = toObservable(this.event).pipe(
+    switchMap(event =>
+      merge(
+        this.getHandler(event),
+        this.#focusChanges.pipe(
+          filter(origin => origin === 'keyboard' || !origin),
+          map(Boolean)
+        ),
+        this.#overlay.keydownEvents.pipe(
+          filter(isPureEscape),
+          map(() => false)
+        )
+      )
     ),
-    this.#overlay.keydownEvents.pipe(
-      filter(isPureEscape),
-      map(() => false)
-    )
+    distinctUntilChanged()
   );
 
   constructor() {
@@ -70,14 +77,9 @@ export class XTooltip {
       });
     });
 
-    // @TODO: refactor with `observe()`
-    toObservable(this.event)
-      .pipe(
-        switchMap(event => merge(this.getHandler(event), this.#keyboard$)),
-        distinctUntilChanged(),
-        takeUntilDestroyed()
-      )
-      .subscribe(open => this.toggle(open));
+    observe(this.#openChanges, open => {
+      this.toggle(open);
+    });
   }
 
   toggle(open: boolean): void {
@@ -104,7 +106,7 @@ export class XTooltip {
         return merge(
           fromEvent(this.#el, 'mouseenter').pipe(map(() => true)),
           fromEvent<MouseEvent>(this.#el, 'mouseleave').pipe(
-            filter(e => !this.#overlay.element || !relatedTo(e, this.#overlay.element)),
+            filter(e => !relatedTo(e, this.#overlay.element)),
             map(() => false)
           ),
           this.#overlay.openChanges.pipe(
@@ -122,7 +124,7 @@ export class XTooltip {
       case 'focus':
         return this.#focusChanges.pipe(map(origin => origin === 'mouse'));
       default:
-        console.warn(`Unknown event: ${event}`);
+        console.warn(ngDevMode ? `Unknown event: ${event}` : '');
         return EMPTY;
     }
   }
