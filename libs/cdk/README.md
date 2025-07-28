@@ -15,7 +15,7 @@ npm install @angular/cdk @mixin-ui/cdk
 Make sure to include the following stylesheet in your angular.json (for Angular CLI projects) or your global styles:
 
 ```
-@angular/cdk/overlay-prebuilt.css
+@import '@angular/cdk/overlay-prebuilt.css';
 ```
 
 ## Documentation
