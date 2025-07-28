@@ -17,8 +17,9 @@
     "Michak Hanak <michal.hanak@coreteq.eu>"
   ],
   "scripts": {
-    "*** temporary ***": "",
+    "*** temporary start ***": "",
     "build:web": "nx build cdk && nx build kit && nx build web",
+    "*** temporary end ***": "",
     "prepare": "husky",
     "build": "npx nx run-many -t build --all --exclude=web",
     "lint": "eslint .",
