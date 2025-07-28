@@ -35,7 +35,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "web:build",
-        "port": 4200,
+        "port": 3333,
         "tsConfig": "libs/web/tsconfig.app.json"
       },
       "configurations": {
