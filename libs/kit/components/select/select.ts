@@ -65,7 +65,7 @@ export class XSelect<T> implements XListboxAccessor<T> {
   readonly enabledTabIndex = input(0, { transform: numberAttribute });
   readonly tabIndex = computed(() => (this.disabled() ? null : String(this.enabledTabIndex())));
   readonly comparator = computed(() =>
-    this.key() != null ? createKeyComparator<T>(this.key()!) : this._comparator()
+    this.key() != null ? createKeyComparator(this.key()!) : this._comparator()
   );
 
   readonly #cva = createCva<T | readonly T[] | null>({

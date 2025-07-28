@@ -3,8 +3,8 @@ import { isObject } from '@mixin-ui/cdk';
 
 export type XComparator<T = any> = (a: T, b: T) => boolean;
 
-export const createKeyComparator = (key: PropertyKey): XComparator<Record<PropertyKey, any>> => {
-  return (a, b) => {
+export const createKeyComparator = (key: PropertyKey): XComparator => {
+  return (a: Record<PropertyKey, any>, b: Record<PropertyKey, any>) => {
     if (!isObject(a) || !isObject(b)) {
       throw new Error(
         ngDevMode
