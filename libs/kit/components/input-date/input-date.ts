@@ -178,6 +178,6 @@ export class XInputDate implements XControlAccessor<Date | null>, XCalendarAcces
   /** @internal */
   handleControlValue(value: Date | null): void {
     this.calendar.set(value);
-    this.#mask.setValue(value);
+    Promise.resolve().then(() => this.#mask.setValue(value));
   }
 }

@@ -92,6 +92,6 @@ export class XInputMask implements XControlAccessor<string> {
 
   /** @internal */
   handleControlValue(value: string): void {
-    this.#mask.setValue(value);
+    Promise.resolve().then(() => this.#mask.setValue(value));
   }
 }

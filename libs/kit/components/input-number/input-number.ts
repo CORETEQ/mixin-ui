@@ -163,6 +163,6 @@ export class XInputNumber implements XControlAccessor<number | null> {
 
   /** @internal */
   handleControlValue(value: number | null): void {
-    this.#mask.setValue(value);
+    Promise.resolve().then(() => this.#mask.setValue(value));
   }
 }
