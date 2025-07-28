@@ -66,13 +66,13 @@ const adapter = (options: XDateMaskOptions) => {
     max: options.max,
     overwrite: true,
     autofix: true,
-    validate: function (this: MaskedDate) {
+    validate: function (this: MaskedDate): boolean {
       return this.isComplete ? isValid(this.date) : true;
     },
-    parse: (value: string) => {
+    parse: (value: string): Date => {
       return parse(value, options.pattern, Date.now());
     },
-    format: (value: Date | null) => {
+    format: (value: Date | null): string => {
       return value ? format(value, options.pattern) : '';
     },
     pattern: options.pattern,
