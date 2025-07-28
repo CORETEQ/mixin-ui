@@ -1,7 +1,9 @@
 import { InjectionToken } from '@angular/core';
 
-// @TODO: complete
-export interface XSpinnerOptions {}
+// eslint-disable-next-line
+export interface XSpinnerOptions {
+  // @TODO
+}
 
 const defaultOptions: XSpinnerOptions = {};
 

@@ -3,7 +3,7 @@ const jsoncParser = require('jsonc-eslint-parser');
 
 module.exports = [
   {
-    ignores: ['**/dist'],
+    ignores: ['**/dist', './libs/web/**/pages/**/examples/**', './libs/web/package.json'],
   },
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
