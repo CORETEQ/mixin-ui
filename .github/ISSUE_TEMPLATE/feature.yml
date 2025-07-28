@@ -1,0 +1,59 @@
+name: '🚀 Feature request'
+description: 'Suggest a new feature or enhancement'
+labels: ['needs triage']
+body:
+  - type: 'markdown'
+    attributes:
+      value: |
+        Thank you for contributing to Mixin UI Kit.
+
+        Before submitting a new request, please check if a similar feature has already been discussed or implemented.
+
+        Feature requests that describe a clear use case and motivation are more likely to be accepted and prioritized.
+  - type: 'textarea'
+    id: 'description'
+    attributes:
+      label: 'Feature Description'
+      description: 'Briefly describe the feature or enhancement you are requesting.'
+      placeholder: 'Example: Add support for week selection mode in <x-input-date>.'
+    validations:
+      required: true
+  - type: 'textarea'
+    id: 'use-case'
+    attributes:
+      label: 'Use Case and Justification'
+      description: |
+        What problem does this feature solve?
+        Please describe a real-world scenario where this feature would be useful.
+      placeholder: 'Example: In booking systems, users often choose whole weeks instead of single dates. Week selection would simplify that flow.'
+    validations:
+      required: true
+  - type: 'textarea'
+    id: 'proposed-solution'
+    attributes:
+      label: 'Proposed Solution or API'
+      description: |
+        Describe how the feature could be implemented or exposed via the API.
+        Code snippets or template examples are very helpful.
+      placeholder: |
+        Example:
+        <x-input-date [selectionMode]="'week'">
+          <input x-control />
+          <x-calendar *x-popover />
+        </x-input-date>
+    validations:
+      required: true
+  - type: 'textarea'
+    id: 'alternatives'
+    attributes:
+      label: 'Considered Alternatives'
+      description: |
+        Have you tried workarounds, hacks, or other components to achieve similar behavior?
+      placeholder: 'Example: Tried to use <x-calendar> separately and manage input manually, but it lacks tight integration with mask and validation.'
+  - type: 'textarea'
+    id: 'resources'
+    attributes:
+      label: 'Additional Information'
+      description: |
+        Add any related links, screenshots, design specs, or related issues if available.
+      placeholder: 'Example: Screenshot of another UI library that supports week mode (e.g. PrimeNG, Radix, etc).'
