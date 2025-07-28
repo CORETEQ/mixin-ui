@@ -19,14 +19,14 @@ import {
   fromEvent,
   map,
   merge,
-  share,
+  shareReplay,
   startWith,
   switchMap,
 } from 'rxjs';
 import { fromMutationObserver, isElement, loadStyles } from '@mixin-ui/cdk';
 import { X_INPUT_OPTIONS } from './options';
 
-const FOCUSABLE = 'input, textarea, select, [contenteditable], [tabindex]';
+const FOCUSABLE = 'input, textarea, select, [contenteditable]';
 const INTERACTIVE = `${FOCUSABLE}, button, a`;
 
 @Component({
@@ -53,24 +53,22 @@ export class XInputBase {
   readonly #selfControl = inject(NgControl, { self: true, optional: true });
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
 
-  readonly #mo$ = fromMutationObserver(this.#el, {
+  readonly #editableEl = fromMutationObserver(this.#el, {
     attributeFilter: ['readonly'],
     attributes: true,
     childList: true,
-  }).pipe(share({ resetOnRefCountZero: true }));
+  }).pipe(
+    startWith(null),
+    map(() => this.#el.querySelector(FOCUSABLE)),
+    shareReplay({ bufferSize: 1, refCount: true })
+  );
 
   readonly childControl = contentChild(NgControl);
   readonly variant = input(this.#opt.variant);
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
   readonly control = computed(() => this.childControl()?.control || this.#selfControl?.control);
-
-  readonly focusableEl = toSignal(
-    this.#mo$.pipe(
-      startWith(null),
-      map(() => this.#el.querySelector(FOCUSABLE))
-    )
-  );
+  readonly editableEl = toSignal(this.#editableEl);
 
   readonly focused = toSignal(
     merge(
@@ -93,10 +91,7 @@ export class XInputBase {
                 startWith(null),
                 map(() => control)
               ),
-              this.#mo$.pipe(
-                startWith(null),
-                map(() => this.focusableEl()?.readOnly)
-              ),
+              this.#editableEl.pipe(map(el => el?.readOnly)),
             ])
           : EMPTY;
       }),
@@ -116,11 +111,11 @@ export class XInputBase {
   }
 
   focus(): void {
-    this.focusableEl()?.focus();
+    this.editableEl()?.focus();
   }
 
   protected onPointerDown(e: PointerEvent): void {
-    const focusable = this.focusableEl();
+    const focusable = this.editableEl();
 
     if (!focusable || (isElement(e.target) && e.target.closest(INTERACTIVE))) {
       return;
