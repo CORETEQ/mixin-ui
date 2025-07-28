@@ -23,7 +23,7 @@ import {
   startWith,
   switchMap,
 } from 'rxjs';
-import { fromMutationObserver, isElement, isMatchingTarget, loadStyles } from '@mixin-ui/cdk';
+import { fromMutationObserver, isMatchingTarget, loadStyles } from '@mixin-ui/cdk';
 import { X_INPUT_OPTIONS } from './options';
 
 const EDITABLE = 'input, textarea, select, [contenteditable]';
@@ -62,8 +62,8 @@ export class XInputBase {
 
   readonly focused = toSignal(
     merge(
-      fromEvent<FocusEvent>(this.#el, 'focusin').pipe(
-        filter(e => isElement(e.target) && e.target.matches(FOCUSABLE)),
+      fromEvent<Event>(this.#el, 'focusin').pipe(
+        filter(e => isMatchingTarget(e, FOCUSABLE)),
         map(() => true)
       ),
       fromEvent(this.#el, 'focusout').pipe(map(() => false))
