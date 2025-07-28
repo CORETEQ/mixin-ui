@@ -2,6 +2,11 @@
 
 A set of utilities and helper functions used across [Mixin UI](https://github.com/CORETEQ/mixin-ui/) libraries. This package provides low-level tools for working with the DOM, overlays, focus management, and other common tasks in Angular component development.
 
+> ⚠️ **Alpha Notice**
+>
+> Mixin is currently in **alpha stage**. Expect breaking changes as we iterate and improve the API.
+> Use with caution in production environments.
+
 ## How to install
 
 This package builds on top of [`@angular/cdk`](https://www.npmjs.com/package/@angular/cdk). Make sure to install both:
