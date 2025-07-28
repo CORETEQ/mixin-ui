@@ -61,7 +61,7 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
     try {
       this.#mask = IMask(el, this.adapter(this.options));
     } catch (cause) {
-      throw new Error('Mask initialization failed', { cause });
+      throw new Error(ngDevMode ? 'Mask initialization failed.' : '', { cause });
     }
 
     const updateOptions = this.#mask.updateOptions.bind(this.#mask);
@@ -84,6 +84,9 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
   setValue(value: TModel): void {
     this.handleModelUpdate(() => {
       if (!this.#mask) {
+        if (ngDevMode) {
+          console.warn('Trying to set value to an uninitialized mask.');
+        }
         return;
       }
 

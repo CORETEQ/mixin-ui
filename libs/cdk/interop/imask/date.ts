@@ -41,7 +41,7 @@ const adapter = (options: XDateMaskOptions) => {
   const tokens = options.pattern.match(TOKEN_REGEX) || [];
 
   if (tokens.length === 0) {
-    throw new Error(`No valid tokens found in pattern: ${options.pattern}`);
+    throw new Error(ngDevMode ? `No valid tokens found in pattern: ${options.pattern}` : '');
   }
 
   const blocks: Block = {};
