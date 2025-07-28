@@ -26,7 +26,6 @@ import { X_CHECKBOX_OPTIONS } from './options';
     '[attr.data-state]': 'state()',
     '[attr.aria-checked]': 'ariaChecked()',
     '[attr.aria-required]': 'required()',
-    '[attr.value]': 'value()',
     '(click)': 'handleClick()',
     '(blur)': 'handleBlur()',
   },
@@ -36,7 +35,6 @@ export class XCheckbox {
   readonly #ngc = inject(NgControl, { self: true, optional: true });
   readonly #cva = createCva({ defaultValue: false, transform: Boolean });
 
-  readonly value = input<string>();
   readonly indeterminate = model(false);
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
