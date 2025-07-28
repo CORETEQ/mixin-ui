@@ -13,14 +13,14 @@ module.exports = [
   {
     files: ['**/*'],
     rules: {
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off',
       '@angular-eslint/component-class-suffix': 'off',
       '@angular-eslint/directive-class-suffix': 'off',
       '@angular-eslint/no-input-rename': 'off',
       '@angular-eslint/template/elements-content': 'off',
       '@angular-eslint/template/click-events-have-key-events': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off',
     },
   },
   {

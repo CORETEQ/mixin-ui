@@ -31,7 +31,9 @@ export class XCollapsible {
   readonly #el = inject(ElementRef).nativeElement;
 
   readonly slot = contentChild(X_SLOT, { read: TemplateRef });
+
   readonly open = input(false, { transform: booleanAttribute });
+
   readonly shown = toSignal(
     toObservable(this.open).pipe(
       switchMap(open =>
