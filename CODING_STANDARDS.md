@@ -66,4 +66,4 @@ Using low-specificity selectors:
 - reduces the need for `!important` in userland code
 - allows easier theming and customization
 
-🔗 https://specificity.keegan.st/
+🔗 [CSS Specificity Calculator](https://specificity.keegan.st/)
