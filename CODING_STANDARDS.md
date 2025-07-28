@@ -38,7 +38,7 @@ If needed, consumers can scope styles themselves using class-based selectors lik
 
 To ensure that consumers can easily override styles, we avoid high-specificity selectors. This is especially important for modifier classes (e.g. `.x-size-lg`, `.x-variant-ghost`, etc.).
 
-We recommend using [:where()](https://developer.mozilla.org/en-US/docs/Web/CSS/:where/) for modifiers and state styles. The :where() selector has **zero specificity**, which helps keep the styles flexible and easy to override.
+We recommend using [`:where()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:where/) for modifiers and state styles. The :where() selector has **zero specificity**, which helps keep the styles flexible and easy to override.
 
 ```scss
 /** Do: */
