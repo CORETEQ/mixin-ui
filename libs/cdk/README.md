@@ -4,7 +4,7 @@ A set of utilities and helper functions used across [Mixin UI](https://github.co
 
 ## How to install
 
-`@mixin-ui/cdk` builds on top of [`@angular/cdk`](https://www.npmjs.com/package/@angular/cdk). Make sure to install both:
+This package builds on top of [`@angular/cdk`](https://www.npmjs.com/package/@angular/cdk). Make sure to install both:
 
 ```
 npm install @angular/cdk @mixin-ui/cdk
