@@ -146,6 +146,7 @@ export const ROUTES: Route[] = [
               page({
                 path: 'textarea',
                 title: 'Textarea',
+                disabled: true,
                 loadComponent: () => import('./pages/components/textarea'),
               }),
             ],
@@ -162,6 +163,7 @@ export const ROUTES: Route[] = [
               page({
                 path: 'separator',
                 title: 'Separator',
+                disabled: true,
                 loadComponent: () => import('./pages/directives/separator'),
               }),
               page({
@@ -183,16 +185,19 @@ export const ROUTES: Route[] = [
               page({
                 path: 'dialog',
                 title: 'Dialog',
+                disabled: true,
                 loadComponent: () => import('./pages/services/dialog'),
               }),
               page({
                 path: 'theme',
                 title: 'Theme',
+                disabled: true,
                 loadComponent: () => import('./pages/services/theme'),
               }),
               page({
                 path: 'toaster',
                 title: 'Toaster',
+                disabled: true,
                 loadComponent: () => import('./pages/services/toaster'),
               }),
             ],

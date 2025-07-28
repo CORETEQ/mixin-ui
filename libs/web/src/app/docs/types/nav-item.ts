@@ -4,7 +4,7 @@ export interface DocsNavItem {
   readonly title: string;
   readonly section?: string;
   readonly icon?: string;
-  readonly badge?: string;
+  readonly disabled?: boolean;
   readonly routerLink?: RouterLink['routerLink'];
   readonly children?: DocsNavItem[];
 }

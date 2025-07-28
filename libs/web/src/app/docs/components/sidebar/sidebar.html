@@ -11,11 +11,12 @@
               <a class="docs-sidebar-item"
                  routerLinkActive="active"
                  ariaCurrentWhenActive="page"
-                 [routerLink]="child.routerLink">
-                {{ child.title }}
+                 [class.disabled]="child.disabled"
+                 [routerLink]="child.disabled ? null : child.routerLink">
+                <span class="docs-sidebar-item-text">{{ child.title }}</span>
 
-                @if (child.badge) {
-                  <span class="docs-sidebar-badge">{{ child.badge }}</span>
+                @if (child.disabled) {
+                  <span class="docs-sidebar-badge">soon</span>
                 }
               </a>
             </li>

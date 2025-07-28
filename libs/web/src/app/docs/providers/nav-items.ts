@@ -34,14 +34,14 @@ export const page = (
   item: Omit<Route, 'data'> & {
     status?: DocsPageStatus;
     sourcePath?: string;
-    badge?: string;
+    disabled?: boolean;
   }
 ): Route => ({
   ...item,
   data: {
     ...(item.status && { status: item.status }),
     ...(item.sourcePath && { sourcePath: item.sourcePath }),
-    ...(item.badge && { badge: item.badge }),
+    ...(item.disabled && { disabled: item.disabled }),
   },
 });
 
@@ -51,7 +51,7 @@ const toNavItem = (route: Route, parentPath?: string): DocsNavItem => {
   return {
     section,
     icon: route.data?.icon,
-    badge: route.data?.badge,
+    disabled: route.data?.disabled,
     title: typeof route.title === 'string' ? route.title : 'Untitled',
     routerLink: !section ? `${parentPath ? `/${parentPath}` : ``}/${route.path ?? ''}` : ``,
     children: route.children?.map(child => toNavItem(child, route.path)),
