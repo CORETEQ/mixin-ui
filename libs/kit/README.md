@@ -1,7 +1,13 @@
-# kit
+# @mixin-ui/kit
 
-This library was generated with [Nx](https://nx.dev).
+A collection of reusable UI components for Angular, built on top of [@mixin-ui/cdk](https://github.com/CORETEQ/mixin-ui/tree/main/libs/cdk/). The kit aims to provide flexible building blocks for developing Angular applications.
 
-## Running unit tests
+## How to install
 
-Run `nx test kit` to execute the unit tests.
+```
+npm install @angular/cdk @mixin-ui/cdk @mixin-ui/kit
+```
+
+## Documentation
+
+📚 [View docs on website →](https://mixin-ui.dev/)
