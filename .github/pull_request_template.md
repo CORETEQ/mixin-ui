@@ -1,28 +1,28 @@
-<!---
-Thanks for creating a Pull Request 💖!
+<!--
+Thank you for your contribution.
 
-Please read the following before submitting:
-- PRs that adds new external dependencies might take a while to review.
-- Keep your PR as small as possible.
-- Limit your PR to one type (docs, feature, refactoring, ci, or bugfix)
+Please follow these guidelines:
+- Keep PRs focused: one feature, fix, or refactor per PR.
+- Avoid large, mixed changes.
+- Include context for the reviewer.
 -->
 
-Closes # <!-- Github issue # here -->
+Closes: # <!-- Related issue number -->
 
-## 📝 Description
+## Summary
 
-> Add a brief description
+<!-- Briefly explain the purpose of the PR -->
 
-## ⛳️ Current behavior (updates)
+## What changed
 
-> Please describe the current behavior that you are modifying
+<!-- Describe what was added, removed, or changed -->
 
-## 🚀 New behavior
+## Breaking changes
 
-> Please describe the behavior or changes this PR adds
+<!-- If applicable, describe breaking changes and required migration steps -->
+<!-- Otherwise, write "None" -->
 
-## 💣 Is this a breaking change (Yes/No):
+## Notes
 
-<!-- If Yes, please describe the impact and migration path for existing Chakra users. -->
-
-## 📝 Additional Information
+<!-- Any additional context or implementation details -->
+<!-- Optional -->
