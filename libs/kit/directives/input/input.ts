@@ -14,19 +14,20 @@ import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import {
   combineLatest,
   debounceTime,
+  distinctUntilChanged,
   EMPTY,
   filter,
   fromEvent,
   map,
   merge,
-  shareReplay,
   startWith,
   switchMap,
 } from 'rxjs';
-import { fromMutationObserver, isElement, loadStyles } from '@mixin-ui/cdk';
+import { fromMutationObserver, isElement, isMatchingTarget, loadStyles } from '@mixin-ui/cdk';
 import { X_INPUT_OPTIONS } from './options';
 
-const FOCUSABLE = 'input, textarea, select, [contenteditable]';
+const EDITABLE = 'input, textarea, select, [contenteditable]';
+const FOCUSABLE = `${EDITABLE} [tabindex]`;
 const INTERACTIVE = `${FOCUSABLE}, button, a`;
 
 @Component({
@@ -45,7 +46,7 @@ class XInputStyles {}
     '[class.x-disabled]': 'state()?.disabled',
     '[class.x-pending]': 'state()?.pending',
     '[class.x-invalid]': 'state()?.invalid && state()?.touched',
-    '(pointerdown)': 'onPointerDown($event);',
+    '(pointerdown)': 'handlePointerDown($event);',
   },
 })
 export class XInputBase {
@@ -53,22 +54,11 @@ export class XInputBase {
   readonly #selfControl = inject(NgControl, { self: true, optional: true });
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
 
-  readonly #editableEl = fromMutationObserver(this.#el, {
-    attributeFilter: ['readonly'],
-    attributes: true,
-    childList: true,
-  }).pipe(
-    startWith(null),
-    map(() => this.#el.querySelector(FOCUSABLE)),
-    shareReplay({ bufferSize: 1, refCount: true })
-  );
-
   readonly childControl = contentChild(NgControl);
   readonly variant = input(this.#opt.variant);
   readonly size = input(this.#opt.size);
   readonly radius = input(this.#opt.radius);
   readonly control = computed(() => this.childControl()?.control || this.#selfControl?.control);
-  readonly editableEl = toSignal(this.#editableEl);
 
   readonly focused = toSignal(
     merge(
@@ -91,15 +81,23 @@ export class XInputBase {
                 startWith(null),
                 map(() => control)
               ),
-              this.#editableEl.pipe(map(el => el?.readOnly)),
+              fromMutationObserver(this.#el, {
+                subtree: true,
+                attributes: true,
+                attributeFilter: ['readonly'],
+              }).pipe(
+                startWith(null),
+                map(() => this.#el.querySelector(EDITABLE)?.readOnly),
+                distinctUntilChanged()
+              ),
             ])
           : EMPTY;
       }),
-      map(([{ disabled, invalid, touched, pending }, readOnly]) => ({
-        disabled,
-        invalid,
-        touched,
-        pending,
+      map(([control, readOnly]) => ({
+        disabled: control.disabled,
+        invalid: control.invalid,
+        touched: control.touched,
+        pending: control.pending,
         readOnly,
       }))
     ),
@@ -110,18 +108,14 @@ export class XInputBase {
     loadStyles(XInputStyles);
   }
 
-  focus(): void {
-    this.editableEl()?.focus();
-  }
+  handlePointerDown(e: PointerEvent): void {
+    const focusableEl = this.#el.querySelector(FOCUSABLE);
 
-  protected onPointerDown(e: PointerEvent): void {
-    const focusable = this.editableEl();
-
-    if (!focusable || (isElement(e.target) && e.target.closest(INTERACTIVE))) {
+    if (!focusableEl || isMatchingTarget(e, INTERACTIVE)) {
       return;
     }
 
     e.preventDefault();
-    focusable.focus();
+    focusableEl.focus();
   }
 }
