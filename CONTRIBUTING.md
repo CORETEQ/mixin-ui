@@ -9,7 +9,7 @@ When contributing, it's better to first discuss the change you wish to make via 
 In order to make your contribution please make a fork of the repository. After you've pulled the code, follow these steps to kick-start the development:
 
 1. Run `pnpm install --frozen-lockfile` to install dependencies
-2. Run `pnpm start` to launch demo project
+2. Run `pnpm start` to launch demo app
 
 ## Pull Request Process
 
@@ -28,8 +28,8 @@ In order to make your contribution please make a fork of the repository. After y
 
 When filing issues, please use the appropriate templates:
 
-- **Bug Report**: For reporting bugs or unexpected behavior
-- **Feature Request**: For proposing new features or enhancements
+- **Bug Report**: for reporting bugs or unexpected behavior
+- **Feature Request**: for proposing new features or enhancements
 
 ## Architecture
 
@@ -37,7 +37,7 @@ This project is organized as an Nx monorepo with the following packages:
 
 - **cdk**: core development kit with foundational utilities
 - **kit**: component library built on top of CDK
-- **web**: demmo app (landing, examples)
+- **web**: demo app (landing, examples)
 
 ## Testing
 
