@@ -158,7 +158,7 @@ export class XInputNumber implements XControlAccessor<number | null> {
   /** @internal */
   handleSpin(e: PointerEvent): void {
     e.preventDefault();
-    this.#base.focus();
+    this.input().nativeElement.focus();
   }
 
   /** @internal */

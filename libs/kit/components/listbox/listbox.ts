@@ -106,10 +106,6 @@ export class XListbox<T> implements OnDestroy {
       this.#keyManager.withWrap(this.wrapNavigation());
     });
 
-    watch(this.options, () => {
-      this.resetActiveOption();
-    });
-
     effect(() => {
       this.#model.setSelection(...this.coerceValue(this.#accessor?.selection()));
       this.#model.multiple = this.#accessor?.multiple?.() || false;
@@ -119,6 +115,10 @@ export class XListbox<T> implements OnDestroy {
     afterRenderEffect(() => {
       const options = this.options();
       untracked(() => this.#accessor?.handleListboxOptions?.(options));
+    });
+
+    watch(this.options, () => {
+      this.resetActiveOption();
     });
 
     observe(this.#keyManager.change, index => {
