@@ -19,15 +19,15 @@
     "date-fns": "^4.0.0"
   },
   "optionalDependencies": {
-    "@angular-devkit/schematics": ">=19.2.0",
-    "@schematics/angular": ">=19.2.0"
+    "@angular-devkit/schematics": ">=19.0.0",
+    "@schematics/angular": ">=19.0.0"
   },
   "peerDependencies": {
-    "@angular/common": ">=19.2.0",
-    "@angular/core": ">=19.2.0",
-    "@angular/router": ">=19.2.0",
-    "@angular/forms": ">=19.2.0",
-    "@angular/cdk": ">=19.2.0",
+    "@angular/common": ">=19.0.0",
+    "@angular/core": ">=19.0.0",
+    "@angular/router": ">=19.0.0",
+    "@angular/forms": ">=19.0.0",
+    "@angular/cdk": ">=19.0.0",
     "rxjs": ">=7.0.0"
   },
   "schematics": "./schematics/collection.json"
