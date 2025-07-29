@@ -38,7 +38,7 @@ const adapter = (options: XNumberMaskOptions): Record<string, any> => {
 export const X_NUMBER_MASK_FACTORY = new InjectionToken<
   XMaskFactory<number | null, XNumberMaskOptions>
 >('NUMBER_MASK_FACTORY', {
-  factory: (options = inject(X_NUMBER_MASK_OPTIONS)) => {
-    return () => new IMaskImpl(adapter, options);
+  factory: (defaultOptions = inject(X_NUMBER_MASK_OPTIONS)) => {
+    return () => new IMaskImpl(adapter, defaultOptions);
   },
 });

@@ -20,8 +20,8 @@ const adapter = ({ pattern, showFiller, fillerChar }: XPatternMaskOptions) => {
 export const X_PATTERN_MASK_FACTORY = new InjectionToken<XMaskFactory<string, XPatternMaskOptions>>(
   'PATTERN_MASK_FACTORY',
   {
-    factory: (options = inject(X_PATTERN_MASK_OPTIONS)) => {
-      return () => new IMaskImpl(adapter, options);
+    factory: (defaultOptions = inject(X_PATTERN_MASK_OPTIONS)) => {
+      return () => new IMaskImpl(adapter, defaultOptions);
     },
   }
 );

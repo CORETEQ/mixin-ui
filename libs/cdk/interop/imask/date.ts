@@ -83,8 +83,8 @@ const adapter = (options: XDateMaskOptions) => {
 export const X_DATE_MASK_FACTORY = new InjectionToken<XMaskFactory<Date | null, XDateMaskOptions>>(
   'DATE_MASK_FACTORY',
   {
-    factory: (options = inject(X_DATE_MASK_OPTIONS)) => {
-      return () => new IMaskImpl(adapter, options);
+    factory: (defaultOptions = inject(X_DATE_MASK_OPTIONS)) => {
+      return () => new IMaskImpl(adapter, defaultOptions);
     },
   }
 );
