@@ -1,3 +1,9 @@
+## 0.0.1-alpha.28 (2025-07-29)
+
+### 🚀 Features
+
+- **cdk:** test schematics ([34eeca0](https://github.com/CORETEQ/mixin-ui/commit/34eeca0))
+
 ## 0.0.1-alpha.27 (2025-07-29)
 
 ### 🚀 Features
