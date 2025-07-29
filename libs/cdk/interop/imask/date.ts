@@ -60,6 +60,7 @@ const adapter = (options: XDateMaskOptions) => {
 
   return {
     mask: Date,
+    pattern: options.pattern,
     lazy: !options.showFiller,
     placeholderChar: options.fillerChar,
     min: options.min,
@@ -75,7 +76,6 @@ const adapter = (options: XDateMaskOptions) => {
     format: (value: Date | null): string => {
       return value ? format(value, options.pattern) : '';
     },
-    pattern: options.pattern,
     blocks,
   };
 };

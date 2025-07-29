@@ -40,7 +40,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       analog({
-        ssr: false,
+        ssr: true,
         prerender: {
           routes: ['/', ...pages()],
         },
@@ -53,15 +53,15 @@ export default defineConfig(({ mode }) => {
       nxViteTsPaths(),
       devtoolsJson(),
       tailwindcss(),
-      // viteStaticCopy({
-      //   structured: false,
-      //   targets: [
-      //     {
-      //       src: '../../libs/kit/icons/**/*',
-      //       dest: 'icons',
-      //     },
-      //   ],
-      // }),
+      viteStaticCopy({
+        structured: false,
+        targets: [
+          {
+            src: '../../libs/kit/icons/**/*',
+            dest: 'icons',
+          },
+        ],
+      }),
     ],
     define: {
       'import.meta.vitest': mode !== 'production',

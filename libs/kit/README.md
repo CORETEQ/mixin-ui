@@ -8,9 +8,19 @@ A collection of reusable UI components for Angular, built on top of [@mixin-ui/c
 > Use with caution in production environments.
 
 ## How to install
+This package builds on top of [`@angular/cdk`](https://www.npmjs.com/package/@angular/cdk) and [`@mixin-ui/cdk`](https://www.npmjs.com/package/@mixin-ui/cdk). Make sure to install both:
 
 ```
 npm install @angular/cdk @mixin-ui/cdk @mixin-ui/kit
+```
+
+### Add styles
+
+Make sure to include the following stylesheet in your angular.json (for Angular CLI projects) or your global styles:
+
+```
+@import '@angular/cdk/overlay-prebuilt.css';
+@import '@mixin-ui/kit/styles/index.scss';
 ```
 
 ## Documentation
