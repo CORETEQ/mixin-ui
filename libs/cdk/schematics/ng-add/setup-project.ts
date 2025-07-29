@@ -43,7 +43,7 @@ function addStyles(options: Schema) {
       logger.error(
         `Could not read the default style file within the project ` + `(${styleFilePath})`
       );
-      logger.info(`Please consider manually setting up the Roboto font.`);
+      logger.info(`Please consider manually setting up the Inter font.`);
       return;
     }
 
