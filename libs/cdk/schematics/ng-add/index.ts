@@ -8,7 +8,7 @@ import {
 } from '@schematics/angular/utility/dependencies';
 import { Schema } from './schema';
 
-const CDK_PEER_VERSION = '>=19.2.0';
+const CDK_PEER_VERSION = '^19.2.0';
 const MIXIN_UI_CDK = '@mixin-ui/cdk';
 const MIXIN_UI_KIT = '@mixin-ui/kit';
 const ANGULAR_CDK = '@angular/cdk';

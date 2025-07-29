@@ -1,1 +1,1 @@
-ng add mixin-ui
+ng add @mixin-ui/cdk
