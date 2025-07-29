@@ -5,6 +5,12 @@
       "description": "Add mixin-ui to your project",
       "factory": "./ng-add/index#ngAdd",
       "schema": "./ng-add/schema.json"
+    },
+    "ng-add-setup-project": {
+      "description": "Sets up the specified project after the ng-add dependencies have been installed.",
+      "factory": "./ng-add/setup-project",
+      "schema": "./ng-add/schema.json",
+      "private": true
     }
   }
 }

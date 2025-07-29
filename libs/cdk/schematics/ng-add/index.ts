@@ -1,11 +1,12 @@
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schematics/tasks';
 import {
   addPackageJsonDependency,
   getPackageJsonDependency,
   NodeDependency,
   NodeDependencyType,
 } from '@schematics/angular/utility/dependencies';
+import { Schema } from './schema';
 
 const CDK_PEER_VERSION = '>=19.2.0';
 const MIXIN_UI_CDK = '@mixin-ui/cdk';
@@ -52,9 +53,10 @@ function addDependencies(tree: Tree, context: SchematicContext): void {
   context.addTask(new NodePackageInstallTask());
 }
 
-export function ngAdd(): Rule {
+export default function (options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     addDependencies(tree, context);
-    return tree;
+    const installTaskId = context.addTask(new NodePackageInstallTask());
+    context.addTask(new RunSchematicTask('ng-add-setup-project', options), [installTaskId]);
   };
 }
