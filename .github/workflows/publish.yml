@@ -37,7 +37,7 @@ jobs:
       uses: ./.github/workflows/composite
 
     - name: Build libraries
-      run: pnpm ci:build
+      run: pnpm build
 
     - name: Set up npm auth for Nexus (basic auth)
       run: |
