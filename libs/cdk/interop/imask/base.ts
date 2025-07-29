@@ -17,18 +17,18 @@ import { isObject } from '@mixin-ui/cdk/utils';
 export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMask<TModel, TOpt> {
   static readonly Mask = IMask;
 
-  readonly #init$ = new ReplaySubject<void>(1);
-  readonly #destroy$ = new Subject<void>();
+  readonly #initialized = new ReplaySubject<void>(1);
+  readonly #destroyed = new Subject<void>();
+
+  readonly #adapter: (options: TOpt) => FactoryOpts;
 
   #mask: InputMask<FactoryArg> | null = null;
   #options: TOpt;
-  #modelUpdating = false;
+  #externalUpdating = false;
   #optionsUpdating = false;
 
-  constructor(
-    private readonly adapter: (options: TOpt) => FactoryOpts,
-    private readonly options: TOpt
-  ) {
+  constructor(adapter: (options: TOpt) => FactoryOpts, options: TOpt) {
+    this.#adapter = adapter;
     this.#options = { ...options };
   }
 
@@ -44,7 +44,7 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
     return !!this.#mask?.masked?.isComplete;
   }
 
-  readonly valueChanges = this.#init$.pipe(
+  readonly valueChanges = this.#initialized.pipe(
     switchMap(() => {
       return new Observable<TModel>(subscriber => {
         const updateFn = () => subscriber.next(this.modelValue);
@@ -54,23 +54,23 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
     }),
     distinctUntilChanged(),
     filter(() => this.shouldPropagateChanges),
-    takeUntil(this.#destroy$)
+    takeUntil(this.#destroyed)
   );
 
   init(el: HTMLElement): void {
     try {
-      this.#mask = IMask(el, this.adapter(this.options));
+      this.#mask = IMask(el, this.#adapter(this.#options));
     } catch (cause) {
       throw new Error(ngDevMode ? 'Mask initialization failed.' : '', { cause });
     }
 
-    const updateOptions = this.#mask.updateOptions.bind(this.#mask);
+    const updateOptions = this.#mask.updateOptions;
 
     // fix the issue with updating options when the mask type changes
     this.#mask.updateOptions = (options: FactoryOpts) => {
       const maskEquals = this.#mask?.maskEquals(options.mask);
 
-      updateOptions(options);
+      updateOptions.call(this.#mask, options);
 
       if (!maskEquals) {
         this.#mask?.masked.updateOptions(options as object);
@@ -78,15 +78,13 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
       }
     };
 
-    this.#init$.next();
+    this.#initialized.next();
   }
 
   setValue(value: TModel): void {
-    this.handleModelUpdate(() => {
+    this.handleExternalUpdate(() => {
       if (!this.#mask) {
-        if (ngDevMode) {
-          console.warn('Trying to set value to an uninitialized mask.');
-        }
+        ngDevMode && console.warn('Trying to set value to an uninitialized mask.');
         return;
       }
 
@@ -101,18 +99,18 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
   updateOptions(options: Partial<TOpt>): void {
     this.handleOptionsUpdate(() => {
       this.#options = { ...this.#options, ...options };
-      this.#mask?.updateOptions(this.adapter(this.#options));
+      this.#mask?.updateOptions(this.#adapter(this.#options));
     });
   }
 
   destroy(): void {
-    this.#destroy$.next();
+    this.#destroyed.next();
     this.#mask?.destroy();
     this.#mask = null;
   }
 
   private get shouldPropagateChanges(): boolean {
-    if (this.#modelUpdating) {
+    if (this.#externalUpdating) {
       return false;
     }
 
@@ -128,12 +126,12 @@ export class IMaskImpl<TModel, TOpt extends Record<string, any>> implements XMas
     return true;
   }
 
-  private handleModelUpdate(fn: () => void): void {
-    this.#modelUpdating = true;
+  private handleExternalUpdate(fn: () => void): void {
+    this.#externalUpdating = true;
     try {
       fn();
     } finally {
-      this.#modelUpdating = false;
+      this.#externalUpdating = false;
     }
   }
 
