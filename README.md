@@ -35,7 +35,7 @@ The Mixin UI libraries require the following minimum versions for proper install
 
 | Tool        | Minimum Version |
 |-------------|-----------------|
-| **Angular** | `v19.2.0`       |
+| **Angular** | `v19.0.0`       |
 
 #### 💻 Development Environment
 
