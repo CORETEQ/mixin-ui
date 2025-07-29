@@ -33,9 +33,9 @@ Read the docs here: <a href="https://mixin-ui.dev/installation" rel="noopener no
 
 ## Environment Support
 
-The Mixin UI libraries are built with the following minimum environment versions:
+The Mixin UI libraries require the following minimum versions for proper installation and usage.
 
-#### Framework Requirements
+#### Framework Compatibility
 
 | Tool        | Minimum Version |
 |-------------|-----------------|
