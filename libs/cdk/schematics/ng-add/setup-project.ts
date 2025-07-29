@@ -1,6 +1,6 @@
 import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { getProjectFromWorkspace, getProjectStyleFile } from '@angular/cdk/schematics';
-import { readWorkspace } from '@schematics/angular/utility';
+import { readWorkspace, updateWorkspace } from '@schematics/angular/utility';
 import { ProjectType } from '@schematics/angular/utility/workspace-models';
 import { Schema } from './schema';
 
@@ -10,7 +10,7 @@ export default function (options: Schema): Rule {
     const project = getProjectFromWorkspace(workspace, options.project);
 
     if (project.extensions['projectType'] === ProjectType.Application) {
-      return chain([addStyles(options)]);
+      return chain([addGlobalStylesToWorkspace(options), addAppStyles(options)]);
     }
 
     context.logger.warn(
@@ -23,7 +23,36 @@ export default function (options: Schema): Rule {
   };
 }
 
-function addStyles(options: Schema) {
+function addGlobalStylesToWorkspace(options: Schema): Rule {
+  return updateWorkspace(workspace => {
+    const project = workspace.projects.get(options.project);
+    if (!project) {
+      throw new Error(`Project ${options.project} not found`);
+    }
+
+    const buildTarget = project.targets.get('build');
+    if (!buildTarget || !buildTarget.options) {
+      throw new Error(`Cannot find build options for project ${options.project}`);
+    }
+
+    const styles = (buildTarget.options.styles ?? []) as Array<string>;
+
+    const stylePathsToAdd = [
+      'node_modules/@angular/cdk/overlay-prebuilt.css',
+      'node_modules/@mixin-ui/kit/styles/index.scss',
+    ];
+
+    stylePathsToAdd.forEach(path => {
+      if (!styles.includes(path)) {
+        styles.push(path);
+      }
+    });
+
+    buildTarget.options.styles = styles;
+  });
+}
+
+function addAppStyles(options: Schema) {
   return async (host: Tree, context: SchematicContext) => {
     const workspace = (await readWorkspace(host)) as any;
     const project = getProjectFromWorkspace(workspace, options.project);
