@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "ng-add",
+  "title": "Add mixin-ui",
+  "description": "Adds mixin-ui library to an Angular project with required dependencies",
+  "type": "object",
+  "properties": {}
+}

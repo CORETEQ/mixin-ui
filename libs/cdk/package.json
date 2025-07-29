@@ -11,9 +11,14 @@
     "kit"
   ],
   "homepage": "https://mixin-ui.dev",
+  "schematics": "./schematics/collection.json",
   "dependencies": {
     "imask": "^7.5.0",
     "date-fns": "^4.0.0"
+  },
+  "optionalDependencies": {
+    "@angular-devkit/schematics": ">=19.2.0",
+    "@schematics/angular": ">=19.2.0"
   },
   "peerDependencies": {
     "@angular/common": ">=19.2.0",

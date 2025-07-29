@@ -1,0 +1,8 @@
+{
+  "schematics": {
+    "ng-add": {
+      "description": "Add mixin-ui to your project",
+      "factory": "./ng-add/index#ngAdd"
+    }
+  }
+}
