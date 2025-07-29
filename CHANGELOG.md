@@ -1,3 +1,18 @@
+## 0.0.1-alpha.19 (2025-07-29)
+
+### 🚀 Features
+
+- **cdk:** update `watch` fn ([d18e79d](https://github.com/CORETEQ/mixin-ui/commit/d18e79d))
+- **cdk:** `XDateMaskOptions` remove `autofix` property from public interface ([cc787c0](https://github.com/CORETEQ/mixin-ui/commit/cc787c0))
+- **kit:** expose `enabledTabIndex` input for `XSelect` ([6ae895b](https://github.com/CORETEQ/mixin-ui/commit/6ae895b))
+- **kit:** remove `value` input from `XCheckbox` ([5964812](https://github.com/CORETEQ/mixin-ui/commit/5964812))
+
+### 🩹 Fixes
+
+- update APP_NAME in Argo CD sync job to hetzner-mixin-ui ([b76f04c](https://github.com/CORETEQ/mixin-ui/commit/b76f04c))
+- **kit:** schedule mask value update as microtask to fix reactive form directives interop ([b83f4b1](https://github.com/CORETEQ/mixin-ui/commit/b83f4b1))
+- **kit:** fix `provideSelectOptions` ([edd51e9](https://github.com/CORETEQ/mixin-ui/commit/edd51e9))
+
 ## 0.0.1-alpha.18 (2025-07-25)
 
 ### 🚀 Features
