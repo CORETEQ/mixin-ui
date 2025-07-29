@@ -14,39 +14,42 @@ const MIXIN_UI_KIT = '@mixin-ui/kit';
 const ANGULAR_CDK = '@angular/cdk';
 
 function addDependencies(tree: Tree, context: SchematicContext): void {
-  const cdkDependency = getPackageJsonDependency(tree, ANGULAR_CDK);
+  const ngCdk = getPackageJsonDependency(tree, ANGULAR_CDK);
 
-  if (!cdkDependency) {
+  if (!ngCdk) {
     const dependency: NodeDependency = {
       type: NodeDependencyType.Default,
       name: ANGULAR_CDK,
       version: CDK_PEER_VERSION,
       overwrite: false,
     };
+
     addPackageJsonDependency(tree, dependency);
   }
 
-  const mixinUiCdkDependency = getPackageJsonDependency(tree, MIXIN_UI_CDK);
+  const mixinCdk = getPackageJsonDependency(tree, MIXIN_UI_CDK);
 
-  if (!mixinUiCdkDependency) {
+  if (!mixinCdk) {
     const dependency: NodeDependency = {
       type: NodeDependencyType.Default,
       name: MIXIN_UI_CDK,
       version: 'latest',
       overwrite: false,
     };
+
     addPackageJsonDependency(tree, dependency);
   }
 
-  const mixinUiKitDependency = getPackageJsonDependency(tree, MIXIN_UI_KIT);
+  const mixinKit = getPackageJsonDependency(tree, MIXIN_UI_KIT);
 
-  if (!mixinUiKitDependency) {
+  if (!mixinKit) {
     const dependency: NodeDependency = {
       type: NodeDependencyType.Default,
       name: MIXIN_UI_KIT,
       version: 'latest',
       overwrite: false,
     };
+
     addPackageJsonDependency(tree, dependency);
   }
 

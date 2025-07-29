@@ -1,29 +1,12 @@
-import { chain, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
-import { getProjectFromWorkspace, getProjectStyleFile } from '@angular/cdk/schematics';
-import { readWorkspace, updateWorkspace } from '@schematics/angular/utility';
-import { ProjectType } from '@schematics/angular/utility/workspace-models';
+import { chain, Rule } from '@angular-devkit/schematics';
+import { updateWorkspace } from '@schematics/angular/utility';
 import { Schema } from './schema';
 
 const NG_CDK_STYLES_PATH = 'node_modules/@angular/cdk/overlay-prebuilt.css';
 const MIXIN_STYLES_PATH = 'node_modules/@mixin-ui/kit/styles/index.scss';
 
 export default function (options: Schema): Rule {
-  return async (host: Tree, context: SchematicContext) => {
-    const workspace = (await readWorkspace(host)) as any;
-    const project = getProjectFromWorkspace(workspace, options.project);
-
-    if (project.extensions['projectType'] === ProjectType.Application) {
-      return chain([addGlobalStylesToWorkspace(options), addAppStyles(options)]);
-    }
-
-    context.logger.warn(
-      'Mixin UI has been set up in your workspace. There is no additional setup ' +
-        'required for consuming Mixin UI in your library project.\n\n' +
-        'If you intended to run the schematic on a different project, pass the `--project` ' +
-        'option.'
-    );
-    return;
-  };
+  return chain([addGlobalStylesToWorkspace(options)]);
 }
 
 function addGlobalStylesToWorkspace(options: Schema): Rule {
@@ -52,45 +35,4 @@ function addGlobalStylesToWorkspace(options: Schema): Rule {
 
     buildTarget.options.styles = styles;
   });
-}
-
-function addAppStyles(options: Schema) {
-  return async (host: Tree, context: SchematicContext) => {
-    const workspace = (await readWorkspace(host)) as any;
-    const project = getProjectFromWorkspace(workspace, options.project);
-    const styleFilePath = getProjectStyleFile(project);
-    const logger = context.logger;
-
-    if (!styleFilePath) {
-      logger.error(`Could not find the default style file for this project.`);
-      logger.info(`Consider manually adding the Inter font to your CSS.`);
-      logger.info(`More information at https://fonts.google.com/specimen/Inter`);
-      return;
-    }
-
-    const buffer = host.read(styleFilePath);
-
-    if (!buffer) {
-      logger.error(
-        `Could not read the default style file within the project ` + `(${styleFilePath})`
-      );
-      logger.info(`Please consider manually setting up the Inter font.`);
-      return;
-    }
-
-    const htmlContent = buffer.toString();
-    const insertion =
-      '\n' +
-      `html, body { height: 100%; }\n` +
-      `body { margin: 0; font-family: Inter, "Helvetica Neue", sans-serif; }\n`;
-
-    if (htmlContent.includes(insertion)) {
-      return;
-    }
-
-    const recorder = host.beginUpdate(styleFilePath);
-
-    recorder.insertLeft(htmlContent.length, insertion);
-    host.commitUpdate(recorder);
-  };
 }
