@@ -11,28 +11,56 @@ export default function (options: Schema): Rule {
 
 function addGlobalStylesToWorkspace(options: Schema): Rule {
   return updateWorkspace(workspace => {
-    const project = workspace.projects.get(options.project);
+    const projectsToProcess = getProjectsToProcess(workspace, options);
 
-    if (!project) {
-      throw new Error(`Project ${options.project} not found`);
+    if (projectsToProcess.length === 0) {
+      throw new Error('No application projects found to process');
     }
 
-    const buildTarget = project.targets.get('build');
+    projectsToProcess.forEach(projectName => {
+      const project = workspace.projects.get(projectName);
 
-    if (!buildTarget || !buildTarget.options) {
-      throw new Error(`Cannot find build options for project ${options.project}`);
-    }
-
-    const styles = (buildTarget.options.styles ?? []) as Array<string>;
-
-    const stylePathsToAdd = [NG_CDK_STYLES_PATH, MIXIN_STYLES_PATH];
-
-    stylePathsToAdd.forEach(path => {
-      if (!styles.includes(path)) {
-        styles.push(path);
+      if (!project) {
+        throw new Error(`Project ${projectName} not found`);
       }
-    });
 
-    buildTarget.options.styles = styles;
+      const buildTarget = project.targets.get('build');
+
+      if (!buildTarget || !buildTarget.options) {
+        throw new Error(`Cannot find build options for project ${projectName}`);
+      }
+
+      const styles = (buildTarget.options.styles ?? []) as Array<string>;
+
+      const stylePathsToAdd = [NG_CDK_STYLES_PATH, MIXIN_STYLES_PATH];
+
+      stylePathsToAdd.forEach(path => {
+        if (!styles.includes(path)) {
+          styles.push(path);
+        }
+      });
+
+      buildTarget.options.styles = styles;
+    });
   });
+}
+
+function getProjectsToProcess(workspace: any, options: Schema): string[] {
+  if (options.project) {
+    return [options.project];
+  }
+
+  if (workspace.extensions?.defaultProject) {
+    return [workspace.extensions.defaultProject];
+  }
+
+  const applicationProjects: string[] = [];
+
+  workspace.projects.forEach((project: any, projectName: string) => {
+    if (project.projectType === 'application') {
+      applicationProjects.push(projectName);
+    }
+  });
+
+  return applicationProjects;
 }
