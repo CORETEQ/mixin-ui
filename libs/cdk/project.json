@@ -29,8 +29,8 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/libs/{projectRoot}"],
       "options": {
-        "parallel": false,
-        "commands": ["nx package {projectName}", "nx schematics {projectName}"]
+        "commands": ["nx package {projectName}", "nx schematics {projectName}"],
+        "parallel": false
       }
     }
   }
