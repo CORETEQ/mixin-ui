@@ -27,42 +27,42 @@
 > Mixin UI is currently in **alpha stage**. Expect breaking changes as we iterate and improve the API.
 > Use with caution in production environments.
 
-## Environment
+## 🌍 Environment
 
-The Mixin UI libraries require the following minimum versions for proper installation and usage.
+The Mixin UI libraries require the following minimum versions for proper installation and usage:
 
-#### Framework Compatibility
+#### 🧩 Framework Compatibility
 
 | Tool        | Minimum Version |
 |-------------|-----------------|
 | **Angular** | `v19.2.0`       |
 
-#### Development Environment
+#### 💻 Development Environment
 
-| Tool           | Minimum Version  | Notes                                                  |
-|----------------|------------------|--------------------------------------------------------|
-| **Node.js**    | `v20.19.0`       | Aligns with active LTS versions used in CI             |
-| **npm**        | Not supported    | Please use **pnpm** instead (see below)                |
-| **pnpm**       | `v9.12.0`        | Preferred package manager                              |
+| Tool           | Minimum Version  | Notes                                      |
+|----------------|------------------|--------------------------------------------|
+| **Node.js**    | `v20.19.0`       | Aligns with active LTS versions used in CI |
+| **npm**        | Not supported    | ❌ Please use **pnpm** instead (see below)  |
+| **pnpm**       | `v9.12.0`        | ✅ Preferred package manager                |
 
-## Installation
+## 📦 Installation
 #### Automatic (recommended)
 ```bash
 ng add mixin-ui
 ```
 
-## Usage
+## 📚 Usage
 
 Read the docs here: <a href="https://mixin-ui.dev/installation" rel="noopener noreferrer">https://mixin-ui.dev/installation</a>.
 
-## Releases
+## 📝 Releases
 
 For changelogs, refer to the [automatically generated changelog](/CHANGELOG.md).
 
-## Contributing
+## 🤝 Contributing
 
 Please follow our [contributing guidelines](/CONTRIBUTING.md).
 
-## License
+## 📄 License
 
 Licensed under the [Apache 2.0](/LICENSE) License, Copyright © 2025-present.
