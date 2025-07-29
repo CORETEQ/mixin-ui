@@ -1,8 +1,10 @@
 {
+  "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
   "schematics": {
     "ng-add": {
       "description": "Add mixin-ui to your project",
-      "factory": "./ng-add/index#ngAdd"
+      "factory": "./ng-add/index#ngAdd",
+      "schema": "./ng-add/schema.json"
     }
   }
 }
