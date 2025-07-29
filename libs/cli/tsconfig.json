@@ -1,12 +1,12 @@
 {
-  "extends": "../../../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../../dist/libs/cdk/schematics",
+    "outDir": "../../dist/libs/cli",
     "declaration": true,
     "module": "CommonJS",
     "target": "es2022",
     "types": ["node"],
     "resolveJsonModule": true
   },
-  "include": ["./**/*", "./collection.json", "./**/schema.json"]
+  "include": ["./**/*", "./collection.json", "./package.json", "./**/schema.json"]
 }

@@ -1,1 +1,1 @@
-ng add @mixin-ui/cdk
+ng add @mixin-ui/cli

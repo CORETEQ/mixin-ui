@@ -32,6 +32,7 @@ module.exports = {
         // Projects
         'cdk',
         'kit',
+        'cli',
         'web',
 
         // Release
