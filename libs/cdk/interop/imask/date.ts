@@ -4,7 +4,7 @@ import 'imask/masked/date';
 import { MaskedDate } from 'imask';
 import { IMaskImpl } from './base';
 
-import { X_DATE_MASK_OPTIONS, XDateMaskOptions } from '@mixin-ui/cdk/providers';
+import { X_DATE_MASK_OPTIONS, XDateMaskOptions, XMaskFactory } from '@mixin-ui/cdk/providers';
 
 type Block = {
   [token: string]: {
@@ -80,6 +80,11 @@ const adapter = (options: XDateMaskOptions) => {
   };
 };
 
-export const X_DATE_MASK_FACTORY = new InjectionToken('DATE_MASK_FACTORY', {
-  factory: () => () => new IMaskImpl(adapter, inject(X_DATE_MASK_OPTIONS)),
-});
+export const X_DATE_MASK_FACTORY = new InjectionToken<XMaskFactory<Date | null, XDateMaskOptions>>(
+  'DATE_MASK_FACTORY',
+  {
+    factory: (options = inject(X_DATE_MASK_OPTIONS)) => {
+      return () => new IMaskImpl(adapter, options);
+    },
+  }
+);

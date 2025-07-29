@@ -60,6 +60,8 @@ export interface XMask<TModel, TOpt extends Record<string, any>> {
   get completed(): boolean;
 }
 
+export type XMaskFactory<TModel, TOpt extends Record<string, any>> = () => XMask<TModel, TOpt>;
+
 export const X_MASK = new InjectionToken<XMask<any, Record<string, any>>>('MASK');
 
 /**
@@ -77,7 +79,7 @@ class NoopMask implements XMask<any, Record<string, any>> {
 }
 
 export function provideMask<TModel, TOpt extends Record<string, any>>(
-  token: ProviderToken<() => XMask<TModel, TOpt>>
+  token: ProviderToken<XMaskFactory<TModel, TOpt>>
 ): FactoryProvider {
   return {
     provide: X_MASK,

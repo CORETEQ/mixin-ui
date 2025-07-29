@@ -2,7 +2,7 @@ import { inject, InjectionToken } from '@angular/core';
 import 'imask/masked/function';
 import { IMaskImpl } from './base';
 
-import { X_PATTERN_MASK_OPTIONS, XPatternMaskOptions } from '@mixin-ui/cdk/providers';
+import { X_PATTERN_MASK_OPTIONS, XMaskFactory, XPatternMaskOptions } from '@mixin-ui/cdk/providers';
 
 const adapter = ({ pattern, showFiller, fillerChar }: XPatternMaskOptions) => {
   const options = {
@@ -17,6 +17,11 @@ const adapter = ({ pattern, showFiller, fillerChar }: XPatternMaskOptions) => {
   }
 };
 
-export const X_PATTERN_MASK_FACTORY = new InjectionToken('PATTERN_MASK_FACTORY', {
-  factory: () => () => new IMaskImpl(adapter, inject(X_PATTERN_MASK_OPTIONS)),
-});
+export const X_PATTERN_MASK_FACTORY = new InjectionToken<XMaskFactory<string, XPatternMaskOptions>>(
+  'PATTERN_MASK_FACTORY',
+  {
+    factory: (options = inject(X_PATTERN_MASK_OPTIONS)) => {
+      return () => new IMaskImpl(adapter, options);
+    },
+  }
+);

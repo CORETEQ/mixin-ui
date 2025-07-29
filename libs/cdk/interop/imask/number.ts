@@ -5,9 +5,9 @@ import 'imask/masked/pattern';
 import type { MaskedNumber } from 'imask';
 import { IMaskImpl } from './base';
 
-import { X_NUMBER_MASK_OPTIONS, XNumberMaskOptions } from '@mixin-ui/cdk/providers';
+import { X_NUMBER_MASK_OPTIONS, XMaskFactory, XNumberMaskOptions } from '@mixin-ui/cdk/providers';
 
-const adapter = (options: XNumberMaskOptions) => {
+const adapter = (options: XNumberMaskOptions): Record<string, any> => {
   return {
     mask: [
       { mask: '' },
@@ -26,15 +26,19 @@ const adapter = (options: XNumberMaskOptions) => {
             max: options.max,
           },
         },
-        parse(this: MaskedNumber) {
+        parse(this: MaskedNumber): number | null {
           const value = this.unmaskedValue;
           return value === '' ? null : Number(value);
         },
-      } as object,
+      },
     ],
   };
 };
 
-export const X_NUMBER_MASK_FACTORY = new InjectionToken('NUMBER_MASK_FACTORY', {
-  factory: () => () => new IMaskImpl(adapter, inject(X_NUMBER_MASK_OPTIONS)),
+export const X_NUMBER_MASK_FACTORY = new InjectionToken<
+  XMaskFactory<number | null, XNumberMaskOptions>
+>('NUMBER_MASK_FACTORY', {
+  factory: (options = inject(X_NUMBER_MASK_OPTIONS)) => {
+    return () => new IMaskImpl(adapter, options);
+  },
 });
