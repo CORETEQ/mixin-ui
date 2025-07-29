@@ -1,16 +1,12 @@
 {
+  "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../../dist/libs/cdk/schematics",
-    "lib": ["es2022"],
-    "target": "es2022",
-    "module": "CommonJS",
-    "moduleResolution": "node10",
-    "strict": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
     "declaration": true,
-    "resolveJsonModule": true,
-    "types": ["node"]
+    "module": "CommonJS",
+    "target": "es2022",
+    "types": ["node"],
+    "resolveJsonModule": true
   },
   "include": ["./**/*", "./collection.json", "./**/schema.json"]
 }
