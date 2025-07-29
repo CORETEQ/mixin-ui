@@ -4,6 +4,9 @@ import { readWorkspace, updateWorkspace } from '@schematics/angular/utility';
 import { ProjectType } from '@schematics/angular/utility/workspace-models';
 import { Schema } from './schema';
 
+const NG_CDK_STYLES_PATH = 'node_modules/@angular/cdk/overlay-prebuilt.css';
+const MIXIN_STYLES_PATH = 'node_modules/@mixin-ui/kit/styles/index.scss';
+
 export default function (options: Schema): Rule {
   return async (host: Tree, context: SchematicContext) => {
     const workspace = (await readWorkspace(host)) as any;
@@ -26,21 +29,20 @@ export default function (options: Schema): Rule {
 function addGlobalStylesToWorkspace(options: Schema): Rule {
   return updateWorkspace(workspace => {
     const project = workspace.projects.get(options.project);
+
     if (!project) {
       throw new Error(`Project ${options.project} not found`);
     }
 
     const buildTarget = project.targets.get('build');
+
     if (!buildTarget || !buildTarget.options) {
       throw new Error(`Cannot find build options for project ${options.project}`);
     }
 
     const styles = (buildTarget.options.styles ?? []) as Array<string>;
 
-    const stylePathsToAdd = [
-      'node_modules/@angular/cdk/overlay-prebuilt.css',
-      'node_modules/@mixin-ui/kit/styles/index.scss',
-    ];
+    const stylePathsToAdd = [NG_CDK_STYLES_PATH, MIXIN_STYLES_PATH];
 
     stylePathsToAdd.forEach(path => {
       if (!styles.includes(path)) {
