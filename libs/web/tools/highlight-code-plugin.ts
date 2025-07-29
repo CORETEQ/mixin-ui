@@ -5,19 +5,17 @@ import { Plugin } from 'vite';
 const RAW_LANG_QUERY = /\?raw&lang=[^']+/;
 const LANG_QUERY = /lang=([^']+)/;
 const LINE_SEPARATOR = '\n';
-
-const ALL_LANGUAGES = ['angular-ts', 'angular-html', 'css', 'scss', 'shellscript', 'json'];
+const LANGUAGES = ['angular-ts', 'angular-html', 'css', 'scss', 'shellscript', 'json'];
 const FALLBACK_LANG = 'json';
 const LIGHT_THEME = 'github-light';
 const DARK_THEME = 'github-dark-default';
-
 const SPOTLIGHT_REGEX = /(\/\/ \[!spotlight]|<!-- \[!spotlight] -->)/g;
 const SPOTLIGHT_CLASS = 'spotlight';
 
 export async function highlightCode(): Promise<Plugin> {
   const highlighter = await createHighlighter({
     themes: [LIGHT_THEME, DARK_THEME],
-    langs: ALL_LANGUAGES,
+    langs: LANGUAGES,
     langAlias: {
       ts: 'angular-ts',
       html: 'angular-html',
@@ -74,6 +72,7 @@ function processContent(code: string): {
     }
 
     lines[i] = line.replace(SPOTLIGHT_REGEX, '').trimEnd();
+
     decorations.push({
       start: { line: i, character: 0 },
       end: { line: i, character: lines[i].length },
