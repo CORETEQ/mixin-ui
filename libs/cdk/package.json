@@ -11,7 +11,9 @@
     "kit"
   ],
   "homepage": "https://mixin-ui.dev",
-  "schematics": "./schematics/collection.json",
+  "exports": {
+    "./schematics/*": "./schematics/*"
+  },
   "dependencies": {
     "imask": "^7.5.0",
     "date-fns": "^4.0.0"
@@ -27,5 +29,6 @@
     "@angular/forms": ">=19.2.0",
     "@angular/cdk": ">=19.2.0",
     "rxjs": ">=7.0.0"
-  }
+  },
+  "schematics": "./schematics/collection.json"
 }
