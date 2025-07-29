@@ -2,6 +2,7 @@
   "name": "@mixin/source",
   "version": "0.0.0",
   "license": "Apache-2.0",
+  "private": true,
   "description": "Components and utils for Angular",
   "homepage": "https://github.com/CORETEQ/mixin-ui",
   "repository": "https://github.com/CORETEQ/mixin-ui",
@@ -18,6 +19,7 @@
   ],
   "scripts": {
     "prepare": "husky",
+    "start": "nx serve web",
     "build": "npx nx run-many -t build --all --exclude=web",
     "lint": "eslint .",
     "stylelint": "stylelint '**/*.{scss,css}'",
@@ -25,10 +27,9 @@
     "release": "tsx ./scripts/release.ts && node ./scripts/release.js",
     "ci:publish": "nx release publish"
   },
-  "private": true,
   "packageManager": "pnpm@9.12.0",
   "engines": {
-    "pnpm": "~9.12.0",
+    "pnpm": ">=9.12.0",
     "node": ">=20.19.0",
     "npm": "Please use pnpm instead of NPM to install dependencies. See: https://pnpm.io/"
   },
