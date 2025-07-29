@@ -27,10 +27,6 @@
 > Mixin UI is currently in **alpha stage**. Expect breaking changes as we iterate and improve the API.
 > Use with caution in production environments.
 
-## Usage
-
-Read the docs here: <a href="https://mixin-ui.dev/installation" rel="noopener noreferrer">https://mixin-ui.dev/installation</a>.
-
 ## Environment Support
 
 The Mixin UI libraries require the following minimum versions for proper installation and usage.
@@ -48,6 +44,10 @@ The Mixin UI libraries require the following minimum versions for proper install
 | **Node.js**    | `v20.19.0`       | Aligns with active LTS versions used in CI             |
 | **npm**        | Not supported    | Please use **pnpm** instead (see below)                |
 | **pnpm**       | `v9.12.0`        | Preferred package manager                              |
+
+## Usage
+
+Read the docs here: <a href="https://mixin-ui.dev/installation" rel="noopener noreferrer">https://mixin-ui.dev/installation</a>.
 
 ## Releases
 
