@@ -50,6 +50,36 @@ jobs:
       run: pnpm ci:publish
       shell: bash
 
+    - name: Send email notification
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.office365.com
+        server_port: 587
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: "🚀 Mixin UI ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }} has been released"
+        to: fe-devs@coreteq.sk
+        from: Mixin UI Bot <${{ secrets.SMTP_USERNAME }}>
+        secure: false
+        body: |
+          Hello team,
+
+          We’re excited to announce that a new version of Mixin UI has just been released and published to our private registry.
+
+          🔖 Version: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+          📦 Repository: ${{ github.repository }}
+          🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+
+          📘 Release Notes:
+          https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+
+          🧩 Documentation:
+          https://mixin.coreteq.lan
+
+          Please pull the latest changes and try it out. Let us know if you notice anything unusual.
+
+          — Mixin UI Bot
+
 #    - name: Build webapp
 #      run: pnpm build:web
 
@@ -96,14 +126,14 @@ jobs:
 #        tags: |
 #          ${{ env.DOCKER_REGISTRY }}/mixin-ui-server:latest
 
-  argo_sync:
-    name: Sync Argo CD & Notify
-    needs: version
-    runs-on: self-hosted
-    env:
-      APP_NAME: hetzner-mixin-ui
-      RESOURCE_NAME: mixin-ui-server
-    steps:
+#  argo_sync:
+#    name: Sync Argo CD & Notify
+#    needs: version
+#    runs-on: self-hosted
+#    env:
+#      APP_NAME: hetzner-mixin-ui
+#      RESOURCE_NAME: mixin-ui-server
+#    steps:
 #    - name: Import ArgoCD Secrets
 #      uses: hashicorp/vault-action@v2.4.0
 #      with:
@@ -139,32 +169,32 @@ jobs:
 #          --grpc-web \
 #          app wait $APP_NAME --health --timeout 120
 
-    - name: Send email notification
-      uses: dawidd6/action-send-mail@v3
-      with:
-        server_address: smtp.office365.com
-        server_port: 587
-        username: ${{ secrets.SMTP_USERNAME }}
-        password: ${{ secrets.SMTP_PASSWORD }}
-        subject: "🚀 Mixin UI ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }} has been released"
-        to: fe-devs@coreteq.sk
-        from: Mixin UI Bot <${{ secrets.SMTP_USERNAME }}>
-        secure: false
-        body: |
-          Hello team,
-
-          We’re excited to announce that a new version of Mixin UI has just been released and published to our private registry.
-
-          🔖 Version: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
-          📦 Repository: ${{ github.repository }}
-          🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
-
-          📘 Release Notes:
-          https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
-
-          🧩 Documentation:
-          https://mixin.coreteq.lan
-
-          Please pull the latest changes and try it out. Let us know if you notice anything unusual.
-
-          — Mixin UI Bot
+#    - name: Send email notification
+#      uses: dawidd6/action-send-mail@v3
+#      with:
+#        server_address: smtp.office365.com
+#        server_port: 587
+#        username: ${{ secrets.SMTP_USERNAME }}
+#        password: ${{ secrets.SMTP_PASSWORD }}
+#        subject: "🚀 Mixin UI ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }} has been released"
+#        to: fe-devs@coreteq.sk
+#        from: Mixin UI Bot <${{ secrets.SMTP_USERNAME }}>
+#        secure: false
+#        body: |
+#          Hello team,
+#
+#          We’re excited to announce that a new version of Mixin UI has just been released and published to our private registry.
+#
+#          🔖 Version: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+#          📦 Repository: ${{ github.repository }}
+#          🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+#
+#          📘 Release Notes:
+#          https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+#
+#          🧩 Documentation:
+#          https://mixin.coreteq.lan
+#
+#          Please pull the latest changes and try it out. Let us know if you notice anything unusual.
+#
+#          — Mixin UI Bot
