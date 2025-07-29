@@ -27,7 +27,7 @@
 > Mixin UI is currently in **alpha stage**. Expect breaking changes as we iterate and improve the API.
 > Use with caution in production environments.
 
-## Environment Support
+## Environment
 
 The Mixin UI libraries require the following minimum versions for proper installation and usage.
 
@@ -44,6 +44,12 @@ The Mixin UI libraries require the following minimum versions for proper install
 | **Node.js**    | `v20.19.0`       | Aligns with active LTS versions used in CI             |
 | **npm**        | Not supported    | Please use **pnpm** instead (see below)                |
 | **pnpm**       | `v9.12.0`        | Preferred package manager                              |
+
+## Installation
+#### Automatic (recommended)
+```bash
+ng add mixin-ui
+```
 
 ## Usage
 
