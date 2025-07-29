@@ -17,7 +17,6 @@
     "Michak Hanak <michal.hanak@coreteq.eu>"
   ],
   "scripts": {
-    "build:web": "nx build cdk && nx build kit && nx build web",
     "prepare": "husky",
     "build": "npx nx run-many -t build --all --exclude=web",
     "lint": "eslint .",
@@ -111,8 +110,5 @@
     "vite-plugin-static-copy": "3.0.2",
     "vite-tsconfig-paths": "4.3.2",
     "vitest": "3.1.2"
-  },
-  "nx": {
-    "includedScripts": []
   }
 }
