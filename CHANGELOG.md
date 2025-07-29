@@ -9,7 +9,6 @@
 
 ### 🩹 Fixes
 
-- update APP_NAME in Argo CD sync job to hetzner-mixin-ui ([b76f04c](https://github.com/CORETEQ/mixin-ui/commit/b76f04c))
 - **kit:** schedule mask value update as microtask to fix reactive form directives interop ([b83f4b1](https://github.com/CORETEQ/mixin-ui/commit/b83f4b1))
 - **kit:** fix `provideSelectOptions` ([edd51e9](https://github.com/CORETEQ/mixin-ui/commit/edd51e9))
 
