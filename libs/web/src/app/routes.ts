@@ -121,6 +121,7 @@ export const ROUTES: Route[] = [
               page({
                 path: 'label',
                 title: 'Label',
+                disabled: true,
                 loadComponent: () => import('./pages/components/label'),
               }),
               page({

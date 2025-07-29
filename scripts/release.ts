@@ -41,6 +41,7 @@ export const MIXIN_UI_VERSION = '${newVersion}';
     execSync(`git add ${versionFilePath}`, { stdio: 'inherit' });
     execSync(`git commit -m "chore: update version.ts to ${newVersion}"`, { stdio: 'inherit' });
   }
+
   console.log(`Mixin UI version updated: ${newVersion}`);
 
   const result = await releaseChangelog({
