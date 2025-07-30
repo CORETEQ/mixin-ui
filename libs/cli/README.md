@@ -7,22 +7,7 @@ Command line tools for [Mixin UI](https://github.com/CORETEQ/mixin-ui/) that pro
 > Mixin UI is currently in **alpha stage**. Expect breaking changes as we iterate and improve the API.
 > Use with caution in production environments.
 
-## What it does
-
-The CLI package provides the following schematics:
-
-### ng-add
-Automatically sets up Mixin UI in your Angular project by:
-
-- Installing required dependencies:
-  - `@angular/cdk`
-  - `@mixin-ui/cdk`
-  - `@mixin-ui/kit`
-- Adding necessary global styles to your `angular.json`:
-  - `@angular/cdk/overlay-prebuilt.css`
-  - `@mixin-ui/kit/styles/index.scss`
-
-### Usage
+## Usage
 
 ```bash
 # Add Mixin UI to your project
