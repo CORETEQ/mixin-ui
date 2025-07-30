@@ -5,32 +5,12 @@
   "prefix": "x",
   "projectType": "library",
   "targets": {
-    "package": {
+    "build": {
       "executor": "@angular-devkit/build-angular:ng-packagr",
+      "outputs": ["{workspaceRoot}/dist/libs/{projectRoot}"],
       "options": {
         "tsConfig": "tsconfig.prod.json",
         "project": "{projectRoot}/ng-package.json"
-      },
-      "dependsOn": [
-        {
-          "target": "build",
-          "params": "ignore",
-          "dependencies": true
-        }
-      ]
-    },
-    "schematics": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "tsc -p ./{projectRoot}/schematics/tsconfig.schematics.json"
-      }
-    },
-    "build": {
-      "executor": "nx:run-commands",
-      "outputs": ["{workspaceRoot}/dist/libs/{projectRoot}"],
-      "options": {
-        "commands": ["nx package {projectName}", "nx schematics {projectName}"],
-        "parallel": false
       }
     }
   }

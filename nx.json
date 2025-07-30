@@ -6,7 +6,7 @@
     "sharedGlobals": []
   },
   "release": {
-    "projects": ["cdk", "kit"],
+    "projects": ["cdk", "kit", "cli"],
     "releaseTagPattern": "v{version}",
     "changelog": {
       "automaticFromRef": true,
@@ -73,7 +73,7 @@
         },
         "build": {
           "targetName": "build",
-          "configName": "tsconfig.lib.json",
+          "configName": "tsconfig.json",
           "buildDepsName": "build-deps",
           "watchDepsName": "watch-deps"
         }

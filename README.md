@@ -48,7 +48,7 @@ The Mixin UI libraries require the following minimum versions for proper install
 ## Installation
 #### Automatic (recommended)
 ```bash
-ng add @mixin-ui/cdk
+ng add @mixin-ui/cli
 ```
 
 ## Usage
