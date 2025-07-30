@@ -57,3 +57,7 @@ jobs:
 
       - name: Run prettier
         run: pnpm prettier
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
