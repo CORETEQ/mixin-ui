@@ -171,7 +171,6 @@ export const MIXIN_UI_VERSION = '${newVersion}';
       execSync('git add .', { stdio: 'inherit' });
       execSync(`git commit -m "chore(release): ${newVersion}"`, { stdio: 'inherit' });
 
-      // Извлекаем release notes из сгенерированного changelog
       const changelogPath = path.join(__dirname, '../CHANGELOG.md');
       const releaseNotes = extractReleaseNotes(changelogPath, newVersion!);
 
