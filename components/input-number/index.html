@@ -1,0 +1,707 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8">
+  <title>Mixin UI: Input Number</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=Kumbh+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <link rel="icon" href="/favicon-light.svg" media="(prefers-color-scheme: light)">
+  <link rel="icon" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)">
+  <script type="module" crossorigin="" src="/assets/index-pC03vmOC.js"></script>
+  <link rel="stylesheet" crossorigin="" href="/assets/style-CCBqCvu5.css">
+<style ng-app-id="ng">.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  inline-size: 100%;
+  background: hsla(0, 0%, 100%, 0.8);
+  border-style: solid;
+  border-color: #e5e5e5;
+  border-bottom-width: 1px;
+  backdrop-filter: saturate(180%) blur(5px);
+  /* stylelint-disable-next-line */
+  -webkit-backdrop-filter: saturate(180%) blur(5px); /* Safari */
+}
+
+.app-header-version {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  block-size: 1.75rem;
+  padding: 0 0.75rem;
+  color: var(--x-neutral-600);
+  font-size: 13.5px;
+  font-weight: 500;
+  background-color: #fff;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
+  border-radius: var(--x-radius-full);
+  cursor: default;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-shadow: 0 1px 1px 0.5px rgb(51 51 51 / 4%), 0 3px 3px -1.5px rgb(51 51 51 / 2%),
+    0 6px 6px -3px rgb(51 51 51 / 4%), 0 12px 12px -6px rgb(51 51 51 / 4%),
+    0 24px 24px -12px rgb(51 51 51 / 4%), 0 48px 48px -24px rgb(51 51 51 / 4%),
+    0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
+}
+.app-header-version:hover {
+  color: #09090b;
+}</style><style ng-app-id="ng">.x-icon {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--x-icon-size, 1em);
+  block-size: var(--x-icon-size, 1em);
+  background: var(--x-icon-color, currentcolor);
+}</style><style ng-app-id="ng">.docs-snippet {
+  display: flex;
+  flex-direction: column;
+}
+
+.docs-snippet-header {
+  display: flex;
+  column-gap: 0.25rem;
+  align-items: center;
+  min-block-size: 2.75rem;
+  margin-bottom: -1px;
+  padding: 0.5rem;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-top-left-radius: 0.625rem;
+  border-top-right-radius: 0.625rem;
+}
+
+.docs-snippet-tab {
+  display: inline-flex;
+  gap: 0.375rem;
+  align-items: center;
+  justify-content: center;
+  block-size: 1.75rem;
+  padding: 0 0.625rem;
+  color: #52525b;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+}
+.docs-snippet-tab:hover, .docs-snippet-tab.active {
+  color: #09090b;
+  background: #f0f0f0;
+}
+.docs-snippet-tab.active {
+  font-weight: 500;
+}
+.docs-snippet-tab .x-icon {
+  margin-left: -0.125rem;
+}
+
+.docs-snippet-dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.375rem;
+}
+.docs-snippet-dots div {
+  display: block;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  background: #e5e5e5;
+  border-radius: 50%;
+}
+.docs-snippet-dots div:nth-child(1) {
+  background: #ff5f57;
+}
+.docs-snippet-dots div:nth-child(2) {
+  background: #ffbc2e;
+}
+.docs-snippet-dots div:nth-child(3) {
+  background: #2bc840;
+}
+
+.docs-snippet-content {
+  position: relative;
+  display: flex;
+  block-size: 100%;
+  padding: 1.5rem 1rem;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 0.625rem;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+.docs-snippet-content.min-height {
+  min-block-size: 12rem;
+}
+.docs-snippet-content:has(.docs-code) {
+  min-block-size: auto;
+  padding: 0;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+.docs-snippet-content:not(:first-child) {
+  border-top: 1px dashed #e6e6e6;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.docs-snippet-content .docs-code {
+  border: none;
+}
+
+.cdk-overlay-container {
+  -webkit-font-smoothing: subpixel-antialiased;
+}</style><style ng-app-id="ng">.docs-code {
+  display: block;
+  inline-size: 100%;
+  padding: 0.875rem 0;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 0.625rem;
+}
+.docs-code pre {
+  background: transparent !important;
+}
+.docs-code code {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--docs-code-font-family), monospace;
+  font-size: 14px;
+}
+.docs-code code .line {
+  display: block;
+  height: 22px;
+  padding: 0 1.125rem;
+  line-height: 22px;
+}
+.docs-code.with-numbers pre {
+  counter-reset: codeblock-line;
+}
+.docs-code.with-numbers pre .line {
+  counter-increment: codeblock-line;
+}
+.docs-code.with-numbers pre .line::before {
+  display: inline-block;
+  inline-size: 1rem;
+  margin-left: -0.125rem;
+  color: #b8b8b8;
+  text-align: end;
+  content: counter(codeblock-line);
+}
+.docs-code.with-numbers pre .line > span:first-child {
+  margin-left: 1rem;
+}</style><style ng-app-id="ng">.x-input-placeholder, .x-input select:has(option[value=""]:checked), .x-input input::placeholder,
+.x-input textarea::placeholder,
+.x-input select::placeholder, .x-input:where(textarea)::placeholder {
+  color: var(--x-placeholder-color);
+  opacity: 1;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.x-input {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: var(--x-size);
+  padding: 0 var(--x-side);
+  color: var(--x-text-color);
+  background-color: var(--x-bg-color);
+  outline: none;
+  border-radius: var(--x-radius);
+  cursor: text;
+}
+.x-input:not(textarea)::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  box-shadow: inset 0 0 0 var(--x-border-width, 1px) var(--x-border-color);
+  border-radius: inherit;
+  transition-timing-function: ease-in-out;
+  transition-duration: 100ms;
+  transition-property: box-shadow;
+  content: "";
+  pointer-events: none;
+}
+.x-input:where(.x-variant-outline) {
+  --x-text-color: var(--x-neutral-900);
+  --x-bg-color: var(--x-white);
+  --x-border-color: var(--x-neutral-400);
+  --x-placeholder-color: var(--x-neutral-600);
+  --x-spinner-color: var(--x-main-600);
+  --x-autofill-color: var(--x-main-200);
+  --x-selection-color: var(--x-main-200);
+  transition-timing-function: ease-in-out;
+  transition-duration: 150ms;
+  transition-property: background-color;
+}
+.x-input:where(.x-variant-outline):where(.x-focused, .x-overlay-opened) {
+  --x-bg-color: var(--x-white);
+  --x-border-color: var(--x-main-500);
+  --x-border-width: 1.5px;
+}
+.x-input:where(.x-variant-outline):where(.x-invalid) {
+  --x-bg-color: var(--x-error-50);
+  --x-border-color: var(--x-error-500);
+  --x-selection-color: var(--x-error-200);
+}
+.x-input:where(.x-variant-outline):where(.x-invalid):where(.x-focused, .x-overlay-opened) {
+  --x-bg-color: var(--x-white);
+  --x-border-color: var(--x-error-500);
+  --x-border-width: 1.5px;
+}
+.x-input:where(.x-variant-outline):where(.x-readonly, :has(> input:read-only)) {
+  --x-bg-color: var(--x-neutral-50);
+}
+.x-input:where(.x-variant-outline):where(.x-disabled) {
+  opacity: 0.6;
+  cursor: var(--x-cursor-disabled);
+}
+.x-input:where(.x-size-md) {
+  --x-size: var(--x-size-md);
+  --x-side: 0.5rem;
+  --x-icon-size: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.x-input:where(.x-size-lg) {
+  --x-size: var(--x-size-lg);
+  --x-side: 0.625rem;
+  font-size: 0.935rem;
+  line-height: 1.25rem;
+}
+.x-input:where(.x-size-xl) {
+  --x-size: var(--x-size-xl);
+  --x-side: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+.x-input:where(.x-radius-none) {
+  --x-radius: var(--x-radius-none);
+}
+.x-input:where(.x-radius-sm) {
+  --x-radius: var(--x-radius-sm);
+}
+.x-input:where(.x-radius-md) {
+  --x-radius: var(--x-radius-md);
+}
+.x-input:where(.x-radius-lg) {
+  --x-radius: var(--x-radius-lg);
+}
+.x-input:where(.x-radius-full) {
+  --x-radius: var(--x-radius-full);
+}
+.x-input:where(textarea) {
+  --x-thumb-color: rgb(0 0 0 / 20%);
+  padding-block: 0.325rem;
+  overflow: auto;
+  overscroll-behavior: none;
+  white-space: pre-wrap;
+  vertical-align: top;
+  word-wrap: break-word;
+  word-break: normal;
+  outline: var(--x-border-width, 1px) solid var(--x-border-color);
+  outline-offset: calc(var(--x-border-width, 1px) * -1);
+  transition-timing-function: ease-in-out;
+  transition-duration: 100ms;
+  transition-property: outline-color;
+  resize: none;
+  -webkit-overflow-scrolling: touch;
+  text-size-adjust: none;
+  /* stylelint-disable-next-line */
+}
+.x-input:where(textarea)::-webkit-scrollbar {
+  width: 14px;
+  height: 6px;
+}
+.x-input:where(textarea)::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 12px 12px transparent;
+  border: solid 4px transparent;
+}
+.x-input:where(textarea)::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 12px 12px var(--x-thumb-color);
+  border: solid 4px transparent;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.x-input:where(textarea)::-webkit-scrollbar-thumb:hover {
+  --x-thumb-color: rgb(0 0 0 / 30%);
+}
+.x-input:where(textarea)::-webkit-scrollbar-thumb:active {
+  --x-thumb-color: rgb(0 0 0 / 40%);
+}
+.x-input:where(textarea)::-webkit-scrollbar-corner {
+  background: transparent;
+}
+@-moz-document url-prefix() {
+  .x-input:where(textarea) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--x-thumb-color) transparent;
+  }
+}
+.x-input:where(:has(.x-input-prefix)) {
+  padding-inline-start: 0;
+}
+.x-input:where(:has(.x-input-suffix)) {
+  padding-inline-end: 0;
+}
+.x-input:has(select) {
+  cursor: pointer;
+}
+.x-input:has(:-webkit-autofill) {
+  background-color: var(--x-autofill-color);
+}
+.x-input input,
+.x-input textarea,
+.x-input select {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  text-transform: inherit;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  appearance: none;
+  transition: none;
+  cursor: inherit;
+  -webkit-tap-highlight-color: transparent;
+  /* stylelint-disable-next-line */
+  display: flex;
+  inline-size: 100%;
+}
+.x-input input::selection,
+.x-input textarea::selection,
+.x-input select::selection {
+  background: var(--x-selection-color);
+}
+.x-input input::-moz-selection,
+.x-input textarea::-moz-selection,
+.x-input select::-moz-selection {
+  background: var(--x-selection-color);
+}
+.x-input input:invalid,
+.x-input textarea:invalid,
+.x-input select:invalid {
+  box-shadow: none;
+}
+.x-input input:-webkit-autofill, .x-input input:-webkit-autofill:hover, .x-input input:-webkit-autofill:focus,
+.x-input textarea:-webkit-autofill,
+.x-input textarea:-webkit-autofill:hover,
+.x-input textarea:-webkit-autofill:focus,
+.x-input select:-webkit-autofill,
+.x-input select:-webkit-autofill:hover,
+.x-input select:-webkit-autofill:focus {
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 600000s 0s;
+}
+.x-input input::-ms-expand,
+.x-input textarea::-ms-expand,
+.x-input select::-ms-expand {
+  display: none;
+}
+.x-input input::-webkit-calendar-picker-indicator,
+.x-input textarea::-webkit-calendar-picker-indicator,
+.x-input select::-webkit-calendar-picker-indicator {
+  display: none;
+}
+.x-input input:where([type=password]:not(:placeholder-shown)) {
+  font-weight: 700;
+}
+.x-input select {
+  cursor: pointer;
+}
+.x-input select:focus {
+  outline: none;
+}
+.x-input select option {
+  color: initial;
+  background: initial;
+}
+
+.x-input-prefix,
+.x-input-suffix {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-inline-size: var(--x-size);
+  overflow: hidden;
+  color: var(--x-icon-color);
+  cursor: inherit;
+}
+
+.x-input-prefix {
+  order: -1;
+  border-start-start-radius: var(--x-radius);
+  border-end-start-radius: var(--x-radius);
+}
+
+.x-input-suffix {
+  border-start-end-radius: var(--x-radius);
+  border-end-end-radius: var(--x-radius);
+}</style><style ng-app-id="ng">.x-btn {
+  box-sizing: border-box;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  border: none;
+  appearance: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--x-gap, 0.5rem);
+  align-items: center;
+  justify-content: center;
+  block-size: var(--x-size);
+  padding: 0 var(--x-side);
+  font: var(--x-font);
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+  border-radius: var(--x-radius);
+}
+.x-btn:where(.x-variant-solid) {
+  color: var(--x-white);
+  background-color: var(--x-color-600);
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-solid):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-700);
+  }
+}
+.x-btn:where(.x-variant-outline) {
+  color: var(--x-color-900);
+  background-color: var(--x-white);
+  box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-outline):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-100);
+  }
+}
+.x-btn:where(.x-variant-outline):where(:active:not(:disabled), .x-active:not(:disabled)) {
+  background-color: var(--x-color-200);
+}
+.x-btn:where(.x-variant-outline):where([aria-pressed=true], .x-overlay-opened) {
+  background-color: var(--x-color-200);
+  filter: brightness(0.98) saturate(1.1);
+}
+.x-btn:where(.x-variant-surface) {
+  color: var(--x-color-900);
+  background-color: var(--x-color-100);
+  box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-surface):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-200);
+  }
+}
+.x-btn:where(.x-variant-surface):where(:active:not(:disabled), .x-active:not(:disabled)) {
+  background-color: var(--x-color-300);
+}
+.x-btn:where(.x-variant-subtle) {
+  color: var(--x-color-900);
+  background-color: var(--x-color-200);
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-subtle):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-300);
+  }
+}
+.x-btn:where(.x-variant-ghost) {
+  color: var(--x-color-900);
+  background-color: transparent;
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-ghost):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-200);
+  }
+}
+.x-btn:where(.x-variant-ghost):where(:active:not(:disabled), .x-active:not(:disabled)) {
+  background-color: var(--x-color-300);
+}
+.x-btn:where(.x-variant-plain) {
+  color: var(--x-color-900);
+}
+.x-btn:where(.x-size-xs) {
+  --x-font: var(--x-text-xs);
+  --x-size: var(--x-size-xs);
+  --x-side: 0.5rem;
+  --x-gap: 0.375rem;
+}
+.x-btn:where(.x-size-sm) {
+  --x-font: var(--x-text-sm);
+  --x-size: var(--x-size-sm);
+  --x-side: 0.625rem;
+}
+.x-btn:where(.x-size-md) {
+  --x-font: var(--x-text-sm);
+  --x-size: var(--x-size-md);
+  --x-side: 0.75rem;
+}
+.x-btn:where(.x-size-lg) {
+  --x-font: var(--x-text-md);
+  --x-size: var(--x-size-lg);
+  --x-side: 0.75rem;
+}
+.x-btn:where(.x-size-xl) {
+  --x-font: var(--x-text-md);
+  --x-size: var(--x-size-xl);
+  --x-side: 0.875rem;
+}
+.x-btn:where(.x-radius-none) {
+  --x-radius: var(--x-radius-none);
+}
+.x-btn:where(.x-radius-sm) {
+  --x-radius: var(--x-radius-sm);
+}
+.x-btn:where(.x-radius-md) {
+  --x-radius: var(--x-radius-md);
+}
+.x-btn:where(.x-radius-lg) {
+  --x-radius: var(--x-radius-lg);
+}
+.x-btn:where(.x-radius-full) {
+  --x-radius: var(--x-radius-full);
+}
+.x-btn:where(button) {
+  cursor: pointer;
+}
+.x-btn:where(:disabled) {
+  opacity: 0.6;
+  cursor: var(--x-cursor-disabled);
+}
+.x-btn:where(.x-loading) {
+  opacity: 0.9;
+  cursor: var(--x-cursor-loading);
+}
+.x-btn:where(.x-loading):where(:has(.x-btn-spinner.x-full)) {
+  -webkit-text-fill-color: transparent;
+}
+.x-btn:where(.x-loading):where(:has(.x-btn-spinner.x-full)) .x-icon {
+  opacity: 0;
+}
+.x-btn:where(.x-block) {
+  display: flex;
+  inline-size: 100%;
+}
+.x-btn:where(.x-vertical) {
+  flex-direction: column;
+  block-size: auto;
+  padding: calc(var(--x-side) / 1.5) var(--x-side);
+}
+.x-btn:where(.x-icon-only) {
+  inline-size: var(--x-size);
+  min-inline-size: var(--x-size);
+  padding: 0;
+}
+
+.x-btn-spinner {
+  display: grid;
+  place-items: center;
+}
+.x-btn-spinner:where(.x-full) {
+  position: absolute;
+  inset: 0;
+}</style><style ng-app-id="ng">.x-group {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+}
+.x-group:where(.x-orientation-horizontal) {
+  flex-direction: row;
+}
+.x-group:where(.x-orientation-horizontal):where(.x-attached) > *:first-child {
+  border-radius: var(--x-radius) 0 0 var(--x-radius);
+}
+.x-group:where(.x-orientation-horizontal):where(.x-attached) > *:last-child {
+  border-radius: 0 var(--x-radius) var(--x-radius) 0;
+}
+.x-group:where(.x-orientation-horizontal):where(.x-attached) > *:not(:first-child, :last-child) {
+  border-radius: 0;
+}
+.x-group:where(.x-orientation-horizontal):where(.x-attached) > *:only-child {
+  border-radius: var(--x-radius);
+}
+.x-group:where(.x-orientation-horizontal):where(.x-attached) > *:not(:last-child) {
+  margin-inline-end: -1px;
+}
+.x-group:where(.x-orientation-vertical) {
+  flex-direction: column;
+}
+.x-group:where(.x-orientation-vertical):where(.x-attached) > *:first-child {
+  border-radius: var(--x-radius) var(--x-radius) 0 0;
+}
+.x-group:where(.x-orientation-vertical):where(.x-attached) > *:last-child {
+  border-radius: 0 0 var(--x-radius) var(--x-radius);
+}
+.x-group:where(.x-orientation-vertical):where(.x-attached) > *:not(:first-child, :last-child) {
+  border-radius: 0;
+}
+.x-group:where(.x-orientation-vertical):where(.x-attached) > *:only-child {
+  border-radius: var(--x-radius);
+}
+.x-group:where(.x-orientation-vertical):where(.x-attached) > *:not(:last-child) {
+  margin-block-end: -1px;
+}
+.x-group:where(.x-orientation-vertical):where(.x-attached) > .x-group:first-child > * {
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+.x-group:where(.x-orientation-vertical):where(.x-attached) > .x-group:last-child > * {
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+}
+.x-group:where(.x-orientation-vertical):where(.x-attached) > .x-group:not(:first-child, :last-child) > * {
+  border-radius: 0;
+}
+.x-group:where(.x-orientation-vertical):where(.x-attached) > .x-group:not(:first-child, :last-child) .x-group > * {
+  border-radius: 0;
+}
+.x-group:where(.x-attached) > * {
+  z-index: 1;
+}
+.x-group:where(.x-attached) > *:where(.x-invalid) {
+  z-index: 2;
+}
+.x-group:where(.x-attached) > *:where(.x-focused, .x-overlay-opened) {
+  z-index: 3;
+}</style></head>
+<body><!--nghm-->
+<app-root ng-version="19.2.14" class="app-layout" ngh="18" ng-server-context="ssr-analog"><app-header class="app-header" ngh="0"><div class="app-container"><div class="mx-auto px-4 flex items-center justify-between flex-1 h-14"><div class="flex items-center space-x-4"><docs-logo ngh="0"><a routerlink="/" class="flex items-center gap-x-1.5" href="/"><x-icon src="mixin" size="26" raw="" class="x-icon" style="background: url(icons/mixin.svg) no-repeat center / contain; --x-icon-size: 26px;" ngh="0"></x-icon><span class="docs-logo-text">mixin</span></a></docs-logo><div class="app-header-version"> / <span class="text-[#09090B]" style="font-family: ui-monospace, monospace; letter-spacing: -0.5px;"> 0.0.1-alpha.33 </span></div></div><div class="flex items-center"><div class="hidden lg:flex"><nav class="items-center gap-4 text-sm xl:gap-6 hidden md:flex me-6 font-medium"><a routerlink="/installation" class="hover:underline underline-offset-2" href="/installation">Introduction</a><a routerlink="/components" class="hover:underline underline-offset-2" href="/components">Components</a><a routerlink="/colors" class="hover:underline underline-offset-2" href="/colors">Colors</a></nav><div class="flex items-center space-x-0"><a href="https://x.com/" aria-label="Follow me on X formerly known as Twitter" rel="noopener noreferrer" target="_blank" class="flex items-center docs-primary-focus docs-nav__link--base h-8 justify-center w-8"><svg height="1em" width="1em" data-icon="tabler/brand-x" class="h-4.5 w-4.5"><symbol id="ai:local:tabler/brand-x" viewBox="0 0 24 24"><path d="m4 4 11.733 16H20L8.267 4zm0 16 6.768-6.768m2.46-2.46L20 4" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></symbol><use href="#ai:local:tabler/brand-x"></use></svg></a><a href="https://github.com/CORETEQ/mixin-ui" aria-label="Follow me on GitHub" rel="noopener noreferrer" target="_blank" class="flex items-center docs-primary-focus docs-nav__link--base h-8 justify-center w-8"><svg height="1em" width="1em" data-icon="mdi/github" class="h-4.5 w-4.5"><symbol id="ai:local:mdi/github" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" fill="currentColor"></path></symbol><use href="#ai:local:mdi/github"></use></svg></a></div></div></div></div></div></app-header><router-outlet></router-outlet><docs-wrapper class="app-container" ngh="17"><div class="docs-content"><docs-sidebar class="docs-sidebar" ngh="1"><div class="docs-sidebar-gradient-top"></div><div class="docs-sidebar-wrapper"><div class="docs-sidebar-nav"><div class=""><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Documentation</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/installation"><span class="docs-sidebar-item-text">Installation</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/changelog"><span class="docs-sidebar-item-text">Changelog</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Customization</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/colors"><span class="docs-sidebar-item-text">Color palette</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Components</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/accordion"><span class="docs-sidebar-item-text">Accordion</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/button"><span class="docs-sidebar-item-text">Button</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/calendar"><span class="docs-sidebar-item-text">Calendar</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/checkbox"><span class="docs-sidebar-item-text">Checkbox</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/collapsible"><span class="docs-sidebar-item-text">Collapsible</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/combobox"><span class="docs-sidebar-item-text">Combobox</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/comparable"><span class="docs-sidebar-item-text">Comparable</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/group"><span class="docs-sidebar-item-text">Group</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/icon"><span class="docs-sidebar-item-text">Icon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-date"><span class="docs-sidebar-item-text">Input Date</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-mask"><span class="docs-sidebar-item-text">Input Mask</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item active" href="/components/input-number" aria-current="page"><span class="docs-sidebar-item-text">Input Number</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-text"><span class="docs-sidebar-item-text">Input Text</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Label</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/listbox"><span class="docs-sidebar-item-text">Listbox</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/select"><span class="docs-sidebar-item-text">Select</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/spinner"><span class="docs-sidebar-item-text">Spinner</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/switch"><span class="docs-sidebar-item-text">Switch</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Textarea</span><span class="docs-sidebar-badge">soon</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Directives</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/directives/popover"><span class="docs-sidebar-item-text">Popover</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Separator</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/directives/slot"><span class="docs-sidebar-item-text">Slot</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/directives/tooltip"><span class="docs-sidebar-item-text">Tooltip</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Services</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Dialog</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Theme</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Toaster</span><span class="docs-sidebar-badge">soon</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Pipes</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/pipes/map"><span class="docs-sidebar-item-text">Map</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/pipes/typed-outlet"><span class="docs-sidebar-item-text">Typed Outlet</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Utils</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/utils/operators"><span class="docs-sidebar-item-text">Operators</span><!----></a></li><!----></ul></div><!----></div></div><div class="docs-sidebar-gradient-bottom"></div></docs-sidebar><article class="docs-root"><router-outlet></router-outlet><app-input-number ngh="15"><docs-page class="docs-page" ngh="3"><div class="docs-page-content"><span class="flex mb-2 text-sm font-medium text-[#FB6513]"> Components </span><h1>Input Number</h1><!----><p>Used to enter a number, and increment or decrement the value using stepper buttons.</p><div class="docs-separator"></div><docs-snippet withheader="" class="docs-snippet" ngh="5"><div class="docs-snippet-header"><div class="docs-snippet-dots"><div></div><div></div><div></div></div><!----><div class="flex items-center gap-0.5 ml-auto"><!----><button x-icon="" x-tooltip="Very soon..." size="sm" color="neutral" variant="ghost" class="!text-[#52525B] !cursor-not-allowed hover:!text-[#09090B] x-btn x-radius-md x-size-sm x-variant-ghost x-icon-only" data-color="neutral" type="button" ngh="4"><!----><!----><x-icon src="stackblitz" size="16" class="x-icon" style="mask: url(icons/stackblitz.svg) no-repeat center / contain; --x-icon-size: 16px;" ngh="0"></x-icon><!----></button><!----><button x-icon="" x-tooltip="Very soon..." size="sm" color="neutral" variant="ghost" class="!text-[#52525B] !cursor-not-allowed hover:!text-[#09090B] x-btn x-radius-md x-size-sm x-variant-ghost x-icon-only" data-color="neutral" type="button" ngh="4"><!----><!----><x-icon src="sun-medium" size="16" class="x-icon" style="mask: url(icons/sun-medium.svg) no-repeat center / contain; --x-icon-size: 16px;" ngh="0"></x-icon><!----></button><!----></div><!----></div><!----><div class="docs-snippet-content min-height" style="align-items: center; justify-content: center;"><app-input-number-basic-example class="block w-[274px]" ngh="7"><x-number prefix="$ " class="x-input-number x-input x-radius-md x-size-md x-variant-outline" ngh="6"><input type="text" x-control="" autocomplete="off" inputmode="numeric" class="ng-untouched ng-pristine ng-valid"><x-group role="group" class="x-input-suffix x-number-spin-buttons x-group x-orientation-horizontal x-attached" ngh="0"><button x-icon="" tabindex="-1" data-color="neutral" type="button" class="x-btn x-radius-none x-size-md x-variant-outline x-icon-only" ngh="4"><!----><!----><x-icon src="minus" class="x-icon" style="mask: url(icons/minus.svg) no-repeat center / contain;" ngh="0"></x-icon><!----></button><button x-icon="" tabindex="-1" data-color="neutral" type="button" class="x-btn x-radius-none x-size-md x-variant-outline x-icon-only" ngh="4"><!----><!----><x-icon src="plus" class="x-icon" style="mask: url(icons/plus.svg) no-repeat center / contain;" ngh="0"></x-icon><!----></button></x-group><!----></x-number></app-input-number-basic-example></div></docs-snippet><h2 id="import" data-text="Import" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#import"><!---->Import</a></h2><docs-code class="docs-code with-numbers" ngh="0"><div><pre class="shiki shiki-themes github-light github-dark-default" style="background-color:#fff;--shiki-dark-bg:#0d1117;color:#24292e;--shiki-dark:#e6edf3" tabindex="0"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#FF7B72">import</span><span style="color:#24292E;--shiki-dark:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">  XInputNumber,</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">  XControl</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">} </span><span style="color:#D73A49;--shiki-dark:#FF7B72">from</span><span style="color:#032F62;--shiki-dark:#A5D6FF"> '@mixin-ui/kit'</span><span style="color:#24292E;--shiki-dark:#E6EDF3">;</span></span></code></pre></div></docs-code><h2 id="usage" data-text="Usage" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#usage"><!---->Usage</a></h2><docs-code class="docs-code with-numbers" ngh="0"><div><pre class="shiki shiki-themes github-light github-dark-default" style="background-color:#fff;--shiki-dark-bg:#0d1117;color:#24292e;--shiki-dark:#e6edf3" tabindex="0"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">@</span><span style="color:#6F42C1;--shiki-dark:#D2A8FF">Component</span><span style="color:#24292E;--shiki-dark:#E6EDF3">({</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">  template: </span><span style="color:#032F62;--shiki-dark:#A5D6FF">`</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">    &lt;</span><span style="color:#22863A;--shiki-dark:#7EE787">x-input-number</span><span style="color:#24292E;--shiki-dark:#E6EDF3">&gt;</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">      &lt;</span><span style="color:#22863A;--shiki-dark:#7EE787">input</span><span style="color:#6F42C1;--shiki-dark:#79C0FF"> x-control</span><span style="color:#6F42C1;--shiki-dark:#79C0FF"> [(ngModel)]</span><span style="color:#24292E;--shiki-dark:#E6EDF3">=</span><span style="color:#032F62;--shiki-dark:#A5D6FF">"value"</span><span style="color:#24292E;--shiki-dark:#E6EDF3">&gt;</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">    &lt;/</span><span style="color:#22863A;--shiki-dark:#7EE787">x-input-number</span><span style="color:#24292E;--shiki-dark:#E6EDF3">&gt;</span></span>
+<span class="line"><span style="color:#032F62;--shiki-dark:#A5D6FF">  `</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">})</span></span>
+<span class="line"><span style="color:#D73A49;--shiki-dark:#FF7B72">export</span><span style="color:#D73A49;--shiki-dark:#FF7B72"> class</span><span style="color:#6F42C1;--shiki-dark:#FFA657"> Usage</span><span style="color:#24292E;--shiki-dark:#E6EDF3"> {</span></span>
+<span class="line"><span style="color:#D73A49;--shiki-dark:#FF7B72">  readonly</span><span style="color:#E36209;--shiki-dark:#FFA657"> value</span><span style="color:#D73A49;--shiki-dark:#FF7B72"> =</span><span style="color:#6F42C1;--shiki-dark:#D2A8FF"> signal</span><span style="color:#24292E;--shiki-dark:#E6EDF3">(</span><span style="color:#005CC5;--shiki-dark:#79C0FF">0</span><span style="color:#24292E;--shiki-dark:#E6EDF3">);</span></span>
+<span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">}</span></span></code></pre></div></docs-code><h2 id="examples" data-text="Examples" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#examples"><!---->Examples</a></h2><h3 id="decimal" data-text="Decimal" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#decimal"><!---->Decimal</a></h3><docs-snippet class="docs-snippet" ngh="9"><!----><div class="docs-snippet-content min-height" style="align-items: center; justify-content: center;"><app-input-number-decimal-example class="d-block min-w-[20rem]" ngh="11"><div class="flex gap-3"><div class="flex flex-col flex-1 gap-1"><label for="with-fraction" class="text-sm font-medium">With fractional part</label><x-number decimalscale="2" class="x-input-number x-input x-radius-md x-size-md x-variant-outline" ngh="10"><input type="text" x-control="" id="with-fraction" autocomplete="off" inputmode="decimal" class="ng-untouched ng-pristine ng-valid"><!----></x-number></div><div class="flex flex-col flex-1 gap-1"><label for="without-fraction" class="text-sm font-medium">Without fractional part</label><x-number decimalscale="2" class="x-input-number x-input x-radius-md x-size-md x-variant-outline" ngh="10"><input type="text" x-control="" id="without-fraction" autocomplete="off" inputmode="decimal" class="ng-untouched ng-pristine ng-valid"><!----></x-number></div><div class="flex flex-col flex-1 gap-1"><label for="with-separator" class="text-sm font-medium">Custom separator</label><x-number decimalseparator="." decimalscale="2" class="x-input-number x-input x-radius-md x-size-md x-variant-outline" ngh="10"><input type="text" x-control="" id="with-separator" autocomplete="off" inputmode="decimal" class="ng-untouched ng-pristine ng-valid"><!----></x-number></div></div></app-input-number-decimal-example></div></docs-snippet><h3 id="affixes" data-text="Affixes" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#affixes"><!---->Affixes</a></h3><docs-snippet class="docs-snippet" ngh="9"><!----><div class="docs-snippet-content min-height" style="align-items: center; justify-content: center;"><app-input-number-affixes-example class="d-block min-w-[20rem]" ngh="7"><x-number prefix="~ " suffix=" °F" class="x-input-number x-input x-radius-md x-size-md x-variant-outline" ngh="10"><input type="text" x-control="" autocomplete="off" inputmode="numeric" class="ng-untouched ng-pristine ng-valid"><!----></x-number></app-input-number-affixes-example></div></docs-snippet><h3 id="separators" data-text="Separators" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#separators"><!---->Separators</a></h3><docs-snippet class="docs-snippet" ngh="9"><!----><div class="docs-snippet-content min-height" style="align-items: center; justify-content: center;"><app-input-number-separators-example class="d-block min-w-[20rem]" ngh="7"><x-number thousandsseparator="." decimalseparator="," decimalscale="2" class="x-input-number x-input x-radius-md x-size-md x-variant-outline" ngh="10"><input type="text" x-control="" autocomplete="off" inputmode="decimal" class="ng-untouched ng-pristine ng-valid"><!----></x-number></app-input-number-separators-example></div></docs-snippet><h3 id="state" data-text="State" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#state"><!---->State</a></h3><docs-snippet class="docs-snippet" ngh="9"><!----><div class="docs-snippet-content min-height" style="align-items: center; justify-content: center;"><app-input-number-states-example class="d-block min-w-[20rem]" ngh="11"><div class="flex gap-3"><div class="flex flex-col flex-1 gap-1"><label for="readonly" class="text-sm font-medium">Readonly</label><x-number class="x-input-number x-input x-radius-md x-size-md x-variant-outline" ngh="10"><input type="text" x-control="" readonly="" id="readonly" autocomplete="off" inputmode="numeric" class="ng-untouched ng-pristine ng-valid"><!----></x-number></div><div class="flex flex-col flex-1 gap-1"><label for="disabled" class="text-sm font-medium">Disabled</label><x-number class="x-input-number x-input x-radius-md x-size-md x-variant-outline x-disabled" ngh="10"><input type="text" x-control="" id="disabled" autocomplete="off" inputmode="numeric" class="ng-untouched ng-pristine" disabled=""><!----></x-number></div><div class="flex flex-col flex-1 gap-1"><label for="invalid" class="text-sm font-medium">Invalid</label><x-number class="x-input-number x-input x-radius-md x-size-md x-variant-outline x-invalid" ngh="10"><input type="text" x-control="" id="invalid" placeholder="XXX" autocomplete="off" inputmode="numeric" class="ng-touched ng-pristine ng-invalid"><!----></x-number></div></div></app-input-number-states-example></div></docs-snippet><h3 id="customization" data-text="Customization" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#customization"><!---->Customization</a></h3><docs-snippet class="docs-snippet" ngh="9"><!----><div class="docs-snippet-content min-height" style="align-items: center; justify-content: center;"><app-input-number-custom-example class="d-block min-w-[20rem]" ngh="13"><x-number color="indigo" size="xl" radius="none" suffix=" mm" class="x-input-number x-input x-radius-none x-size-xl x-variant-outline" ngh="12"><input type="text" x-control="" autocomplete="off" inputmode="numeric" class="ng-untouched ng-pristine ng-valid"><span class="x-input-prefix"><x-icon src="ruler-dimension-line" size="18" class="x-icon" style="mask: url(icons/ruler-dimension-line.svg) no-repeat center / contain; --x-icon-size: 18px;" ngh="0"></x-icon></span><span class="x-input-suffix gap-1 pr-1.5"><button x-btn="" size="sm" radius="none" color="warn" class="font-medium x-btn x-radius-none x-size-sm x-variant-surface" data-color="warn" type="button" ngh="4"><!----><!----> +5 <!----></button><button x-btn="" size="sm" radius="none" color="error" class="font-medium x-btn x-radius-none x-size-sm x-variant-surface" data-color="error" type="button" ngh="4"><!----><!----> +10 <!----></button></span><!----></x-number></app-input-number-custom-example></div></docs-snippet><h2 id="api" data-text="API" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#api"><!---->API</a></h2><h3 id="inputs" data-text="Inputs" class="" ngh="8"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/components/input-number#inputs"><!---->Inputs</a></h3><docs-api-table class="docs-api-table" ngh="14"><table class="docs-table"><thead><tr><th style="width: 30%;">Name</th><th style="width: 35%;">Type</th><th>Default</th><!----></tr></thead><tbody><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">variant</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>enum</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">outline</span></div><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">size</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>enum</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">md</span></div><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">radius</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>enum</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">md</span></div><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">step</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>number</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">0</span></div><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">min</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>number</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER" target="_blank" class="flex items-center gap-1.5 hover:underline"> Number.MIN_SAFE_INTEGER <x-icon src="arrow-up-right" class="x-icon" style="mask: url(icons/arrow-up-right.svg) no-repeat center / contain;" ngh="0"></x-icon></a><!----><!----><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">max</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>number</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER" target="_blank" class="flex items-center gap-1.5 hover:underline"> Number.MAX_SAFE_INTEGER <x-icon src="arrow-up-right" class="x-icon" style="mask: url(icons/arrow-up-right.svg) no-repeat center / contain;" ngh="0"></x-icon></a><!----><!----><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">prefix</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>string</code></div><!----></div></td><td class="empty"><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"></div><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">suffix</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>string</code></div><!----></div></td><td class="empty"><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"></div><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">thousandsSeparator</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>string</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">" "</span></div><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">decimalSeparator</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>string</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">","</span></div><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">decimalScale</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>number</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">0</span></div><!----></div></td><!----></tr><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">padDecimals</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>boolean</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">true</span></div><!----></div></td><!----></tr><!----></tbody></table></docs-api-table></div><docs-page-pagination ngh="2"><div class="flex justify-between mt-8 border-t border-dashed border-[#E5E5E5] pt-6.5"><div class="flex flex-col gap-1"><div class="flex items-center gap-1 text-sm leading-5 text-[#52525B]"> Previous </div><a class="text-lg leading-6 font-medium text-[#09090B] hover:underline" href="/components/input-mask"> Input Mask </a></div><!----><div class="flex flex-col gap-1 ml-auto"><div class="flex items-center gap-1 text-sm leading-5 text-[#52525B] self-end"> Next </div><a class="text-lg leading-6 font-medium text-[#09090B] hover:underline" href="/components/input-text"> Input Text </a></div><!----></div></docs-page-pagination></docs-page></app-input-number><!----><docs-footer class="docs-footer" ngh="0"><div class="flex justify-between pt-6 pb-10"><div class="flex items-center gap-1.5 text-sm text-[#52525B]"> Licensed under <a href="https://opensource.org/license/apache-2-0" target="_blank" class="hover:text-[#09090B] inline-flex items-center gap-1"><x-icon src="scale" size="15" class="x-icon" style="mask: url(icons/scale.svg) no-repeat center / contain; --x-icon-size: 15px;" ngh="0"></x-icon><span class="hover:underline">Apache 2.0</span></a></div><div class="flex flex-col gap-8"><span class="text-sm text-[#52525B]"> Copyright © 2025 Mixin. Made with <span class="inline-block mx-0.5">❤️</span> by <a href="https://coreteq.sk" target="_blank" class="font-medium text-[#1470EF] hover:underline">CoreTEQ</a></span></div></div></docs-footer></article><div class="docs-nav"><div class="docs-nav-inner"><docs-page-nav ngh="16"><h5 class="text-sm mb-2 font-semibold leading-5">On this page</h5><ol><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/components/input-number#import"> Import </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/components/input-number#usage"> Usage </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/components/input-number#examples"> Examples </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B] ml-4" href="/components/input-number#decimal"> Decimal </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B] ml-4" href="/components/input-number#affixes"> Affixes </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B] ml-4" href="/components/input-number#separators"> Separators </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B] ml-4" href="/components/input-number#state"> State </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B] ml-4" href="/components/input-number#customization"> Customization </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/components/input-number#api"> API </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B] ml-4" href="/components/input-number#inputs"> Inputs </a></li><!----></ol><div class="flex flex-col border-t mt-3 pt-3 border-dashed border-[#E5E5E5]"><docs-edit-page ngh="0"><a target="_blank" class="flex items-center gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="https://github.com/CORETEQ/mixin-ui/edit/main/libs/web/src/app/pages/components/input-number/index.html"> Edit this page <x-icon src="arrow-up-right" class="x-icon mt-0.5" style="mask: url(icons/arrow-up-right.svg) no-repeat center / contain;" ngh="0"></x-icon></a></docs-edit-page><docs-source-code ngh="0"><a target="_blank" class="flex items-center gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="https://github.com/CORETEQ/mixin-ui/tree/main/libs/kit/components/input-number"> Source code <x-icon src="arrow-up-right" class="x-icon mt-0.5" style="mask: url(icons/arrow-up-right.svg) no-repeat center / contain;" ngh="0"></x-icon></a></docs-source-code><docs-scroll-top class="transition-opacity opacity-0 pointer-events-none" ngh="0"><button type="button" class="flex items-center cursor-pointer gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]"> Scroll to top </button></docs-scroll-top></div><!----></docs-page-nav></div></div></div></docs-wrapper><!----></app-root>
+  
+
+
+<script id="ng-state" type="application/json">{"__nghData__":[{},{"t":{"4":"t4"},"c":{"4":[{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":2}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]}}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":13},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]}},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":4},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]}}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]}},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]}},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":2}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]},"x":3}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":2}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]}}]}}]}},{"t":{"1":"t8","2":"t9"},"c":{"1":[{"i":"t8","r":1}],"2":[{"i":"t9","r":1}]}},{"t":{"6":"t7"},"c":{"6":[]}},{"t":{"0":"t17","1":"t18","2":"t19"},"c":{"0":[],"1":[],"2":[{"i":"t19","r":1}]}},{"t":{"0":"t13"},"c":{"0":[{"i":"t13","r":1,"t":{"6":"t14","7":"t15"},"c":{"6":[],"7":[{"i":"t15","r":1,"t":{"1":"t16"},"c":{"1":[],"2":[],"4":[]},"n":{"3":"2fn2","5":"4fn2"}}]}}]}},{"n":{"2":"hfn"},"t":{"2":"t40"},"c":{"2":[{"i":"t40","r":1,"n":{"1":"0f","2":"1fn2","4":"3fn2"}}]}},{"n":{"1":"0f"}},{"t":{"2":"t10"},"c":{"2":[]}},{"t":{"0":"t13"},"c":{"0":[]}},{"n":{"2":"hfn"},"t":{"2":"t40"},"c":{"2":[]}},{"n":{"5":"4f","10":"9f","15":"14f"}},{"n":{"2":"hfn3"},"t":{"2":"t40"},"c":{"2":[]}},{"n":{"3":"0fn","5":"0f","6":"0fn2","8":"7fn2","10":"9fn2"}},{"t":{"4":"t20","7":"t21"},"c":{"4":[{"i":"t20","r":1,"x":3}],"7":[{"i":"t21","r":1,"t":{"2":"t22"},"c":{"2":[{"i":"t22","r":1,"n":{"4":"1f"},"t":{"4":"t23","5":"t24"},"c":{"4":[],"5":[{"i":"t24","r":1}]},"x":3}]},"x":4},{"i":"t21","r":1,"t":{"2":"t22"},"c":{"2":[{"i":"t22","r":1,"n":{"4":"1f"},"t":{"4":"t23","5":"t24"},"c":{"4":[],"5":[{"i":"t24","r":1}]},"x":2},{"i":"t22","r":1,"n":{"4":"1f"},"t":{"4":"t23","5":"t24"},"c":{"4":[{"i":"t23","r":2,"t":{"0":"t41"},"c":{"0":[{"i":"t42","r":1}]}}],"5":[]}}]}},{"i":"t21","r":1,"t":{"2":"t22"},"c":{"2":[{"i":"t22","r":1,"n":{"4":"1f"},"t":{"4":"t23","5":"t24"},"c":{"4":[],"5":[{"i":"t24","r":1}]},"x":2},{"i":"t22","r":1,"n":{"4":"1f"},"t":{"4":"t23","5":"t24"},"c":{"4":[{"i":"t23","r":2,"t":{"0":"t41"},"c":{"0":[{"i":"t43","r":1}]}}],"5":[]}}]}},{"i":"t21","r":1,"t":{"2":"t22"},"c":{"2":[{"i":"t22","r":1,"n":{"4":"1f"},"t":{"4":"t23","5":"t24"},"c":{"4":[],"5":[{"i":"t24","r":1}]},"x":3}]},"x":6}]}},{"n":{"1":"0f2n3","5":"4fn2f","7":"6f2n","10":"9f2n","13":"12f2n","15":"14f2n","17":"16fnf","19":"18f2n","21":"20fnf","23":"22f2n","25":"24fnf","27":"26f2n","29":"28fnf","31":"30f2n","33":"32fnf","35":"34f2n","37":"36f2n"},"d":[39,40,41,42,43,44,46,47,49,50,51,52,53,54]},{"t":{"0":"t11"},"c":{"0":[{"i":"t11","r":3,"t":{"4":"t12"},"c":{"4":[{"i":"t12","r":1,"x":10}]}}]}},{"c":{"3":[{"i":"c1590454514","r":1}]}},{"c":{"1":[{"i":"c277522020","r":1}]}}]}</script></body></html>
