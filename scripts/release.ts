@@ -42,10 +42,12 @@ import { execSync } from 'child_process';
       const currentBranch = execSync('git branch --show-current', { encoding: 'utf8' }).trim();
 
       if (currentBranch !== 'main') {
+        console.log('Switching to main branch...');
         execSync('git checkout main', { stdio: 'inherit' });
         execSync('git pull origin main', { stdio: 'inherit' });
       }
 
+      console.log(`Creating release branch: ${releaseBranch}`);
       execSync(`git checkout -b ${releaseBranch}`, { stdio: 'inherit' });
 
       const versionFilePath = path.join(__dirname, '../libs/web/src/app/core/version.ts');
@@ -67,7 +69,10 @@ export const MIXIN_UI_VERSION = '${newVersion}';
 
       execSync('git add .', { stdio: 'inherit' });
       execSync(`git commit -m "chore(release): ${newVersion}"`, { stdio: 'inherit' });
+      execSync(`git tag -a v${newVersion} -m "Release v${newVersion}"`, { stdio: 'inherit' });
       execSync(`git push origin ${releaseBranch}`, { stdio: 'inherit' });
+      execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
+
       process.exit(Object.values(result).every(result => result.code === 0) ? 0 : 1);
     } catch (error) {
       console.error('❌ Error during release process:', error);
@@ -85,6 +90,7 @@ export const MIXIN_UI_VERSION = '${newVersion}';
     });
 
     console.log(`🔍 DRY RUN: Would create release branch: release/${newVersion}`);
+
     process.exit(Object.values(result).every(result => result.code === 0) ? 0 : 1);
   }
 })();
