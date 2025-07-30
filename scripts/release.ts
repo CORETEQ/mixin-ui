@@ -33,12 +33,7 @@ import { execSync } from 'child_process';
   const { newVersion } = projectsVersionData.kit;
 
   if (!options.dryRun) {
-    const versionFilePath = path.join(__dirname, '../libs/web/src/app/core/version.ts');
-    const content = `// This file is generated automatically. Do not edit manually!
-export const MIXIN_UI_VERSION = '${newVersion}';
-`;
-    fs.writeFileSync(versionFilePath, content);
-    execSync(`git add ${versionFilePath}`, { stdio: 'inherit' });
+    updateVersionFile(newVersion);
   }
 
   const result = await releaseChangelog({
@@ -50,3 +45,14 @@ export const MIXIN_UI_VERSION = '${newVersion}';
 
   process.exit(Object.values(result).every(result => result.code === 0) ? 0 : 1);
 })();
+
+function updateVersionFile(version: string): void {
+  const versionFilePath = path.join(__dirname, '../libs/web/src/app/core/version.ts');
+  const content = `// This file is generated automatically. Do not edit manually!
+export const MIXIN_UI_VERSION = '${version}';
+`;
+
+  fs.writeFileSync(versionFilePath, content);
+
+  execSync(`git add ${versionFilePath}`, { stdio: 'inherit' });
+}
