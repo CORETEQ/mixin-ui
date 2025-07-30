@@ -1,3 +1,9 @@
+## 0.0.1-alpha.33 (2025-07-30)
+
+### 🚀 Features
+
+- **cli:** test schematics ([c12f75b](https://github.com/CORETEQ/mixin-ui/commit/c12f75b))
+
 ## 0.0.1-alpha.32 (2025-07-30)
 
 ### 🚀 Features
