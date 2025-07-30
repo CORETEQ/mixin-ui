@@ -1,4 +1,4 @@
-name: Release & Publish
+name: 📦 Release & Publish
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
         with:
           source_branch: ${{ steps.extract_version.outputs.branch_name }}
           destination_branch: "main"
-          pr_title: "🚀 Release ${{ steps.extract_version.outputs.version }}"
+          pr_title: "chore(release): ${{ steps.extract_version.outputs.version }}"
           pr_body: |
             ## Release ${{ steps.extract_version.outputs.version }}
 

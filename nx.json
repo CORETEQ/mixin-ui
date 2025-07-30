@@ -16,8 +16,7 @@
       "workspaceChangelog": {
         "renderOptions": {
           "authors": false
-        },
-        "createRelease": "github"
+        }
       }
     }
   },

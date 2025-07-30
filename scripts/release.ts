@@ -4,6 +4,37 @@ import path from 'path';
 import fs from 'fs';
 import { execSync } from 'child_process';
 
+function extractReleaseNotes(changelogPath: string, version: string): string {
+  try {
+    if (!fs.existsSync(changelogPath)) {
+      return `Release v${version}`;
+    }
+
+    const changelogContent = fs.readFileSync(changelogPath, 'utf8');
+
+    const versionRegex = new RegExp(
+      `## \\[?${version.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\]?.*?\\n([\\s\\S]*?)(?=\\n## |$)`,
+      'i'
+    );
+    const match = changelogContent.match(versionRegex);
+
+    if (match && match[1]) {
+      const releaseNotes = match[1]
+        .trim()
+        .replace(/\n{3,}/g, '\n\n')
+        .replace(/^\s*\n/gm, '')
+        .substring(0, 1000);
+
+      return releaseNotes || `Release v${version}`;
+    }
+
+    return `Release v${version}`;
+  } catch (error) {
+    console.warn('⚠️ Could not extract release notes from changelog:', error);
+    return `Release v${version}`;
+  }
+}
+
 (async () => {
   const options = await yargs
     .version(false)
@@ -67,7 +98,28 @@ export const MIXIN_UI_VERSION = '${newVersion}';
 
       execSync('git add .', { stdio: 'inherit' });
       execSync(`git commit -m "chore(release): ${newVersion}"`, { stdio: 'inherit' });
-      execSync(`git tag -a v${newVersion} -m "Release v${newVersion}"`, { stdio: 'inherit' });
+
+      // Извлекаем release notes из сгенерированного changelog
+      const changelogPath = path.join(__dirname, '../CHANGELOG.md');
+      const releaseNotes = extractReleaseNotes(changelogPath, newVersion!);
+
+      console.log(`Creating tag: v${newVersion} with release notes`);
+
+      // Создаем тег с release notes
+      // Используем временный файл для сообщения тега, чтобы избежать проблем с кавычками
+      const tagMessageFile = path.join(__dirname, '../temp-tag-message.txt');
+      const tagMessage = `Release v${newVersion}\n\n${releaseNotes}`;
+      fs.writeFileSync(tagMessageFile, tagMessage);
+
+      try {
+        execSync(`git tag -a v${newVersion} -F "${tagMessageFile}"`, { stdio: 'inherit' });
+      } finally {
+        // Удаляем временный файл
+        if (fs.existsSync(tagMessageFile)) {
+          fs.unlinkSync(tagMessageFile);
+        }
+      }
+
       execSync(`git push origin ${releaseBranch}`, { stdio: 'inherit' });
       execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
 
