@@ -177,8 +177,6 @@ export const MIXIN_UI_VERSION = '${newVersion}';
 
       console.log(`Creating tag: v${newVersion} with release notes`);
 
-      // Создаем тег с release notes
-      // Используем временный файл для сообщения тега, чтобы избежать проблем с кавычками
       const tagMessageFile = path.join(__dirname, '../temp-tag-message.txt');
       const tagMessage = `Release v${newVersion}\n\n${releaseNotes}`;
       fs.writeFileSync(tagMessageFile, tagMessage);
@@ -186,7 +184,6 @@ export const MIXIN_UI_VERSION = '${newVersion}';
       try {
         execSync(`git tag -a v${newVersion} -F "${tagMessageFile}"`, { stdio: 'inherit' });
       } finally {
-        // Удаляем временный файл
         if (fs.existsSync(tagMessageFile)) {
           fs.unlinkSync(tagMessageFile);
         }
