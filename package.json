@@ -37,7 +37,7 @@
     "*.{scss,css}": [
       "stylelint --fix"
     ],
-    "*.{js,ts,scss,css,json}": [
+    "*.{js,ts,css,scss}": [
       "prettier --write"
     ]
   },

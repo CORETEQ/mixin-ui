@@ -1,7 +1,9 @@
-# Add files here to ignore them from prettier formatting
-/dist
-/coverage
-.nx
-.angular
+dist
+coverage
+nx
+angular
+*.md
+*.yml
+*.yaml
 *.html
-/libs/web/src/app/pages/**/examples/**
+**/pages/**/examples/**
