@@ -28,25 +28,60 @@ import { execSync } from 'child_process';
     specifier: options.version,
     dryRun: options.dryRun,
     verbose: options.verbose,
+    gitCommit: false,
+    gitTag: false,
   });
 
   const { newVersion } = projectsVersionData.kit;
 
   if (!options.dryRun) {
-    const versionFilePath = path.join(__dirname, '../libs/web/src/app/core/version.ts');
-    const content = `// This file is generated automatically. Do not edit manually!
+    const releaseBranch = `release/${newVersion}`;
+
+    try {
+      const currentBranch = execSync('git branch --show-current', { encoding: 'utf8' }).trim();
+
+      if (currentBranch !== 'main') {
+        execSync('git checkout main', { stdio: 'inherit' });
+        execSync('git pull origin main', { stdio: 'inherit' });
+      }
+
+      execSync(`git checkout -b ${releaseBranch}`, { stdio: 'inherit' });
+
+      const versionFilePath = path.join(__dirname, '../libs/web/src/app/core/version.ts');
+      const content = `// This file is generated automatically. Do not edit manually!
 export const MIXIN_UI_VERSION = '${newVersion}';
 `;
-    fs.writeFileSync(versionFilePath, content);
-    execSync(`git add ${versionFilePath}`, { stdio: 'inherit' });
+      fs.writeFileSync(versionFilePath, content);
+      execSync(`git add ${versionFilePath}`, { stdio: 'inherit' });
+
+      const result = await releaseChangelog({
+        versionData: projectsVersionData,
+        version: workspaceVersion,
+        dryRun: options.dryRun,
+        verbose: options.verbose,
+        gitCommit: false,
+        gitTag: false,
+      });
+
+      execSync('git add .', { stdio: 'inherit' });
+      execSync(`git commit -m "chore(release): ${newVersion}"`, { stdio: 'inherit' });
+      execSync(`git push origin ${releaseBranch}`, { stdio: 'inherit' });
+      process.exit(Object.values(result).every(result => result.code === 0) ? 0 : 1);
+    } catch (error) {
+      console.error('❌ Error during release process:', error);
+      process.exit(1);
+    }
+  } else {
+    const result = await releaseChangelog({
+      versionData: projectsVersionData,
+      version: workspaceVersion,
+      dryRun: options.dryRun,
+      verbose: options.verbose,
+      gitCommit: false,
+      gitTag: false,
+    });
+
+    console.log(`🔍 DRY RUN: Would create release branch: release/${newVersion}`);
+    process.exit(Object.values(result).every(result => result.code === 0) ? 0 : 1);
   }
-
-  const result = await releaseChangelog({
-    versionData: projectsVersionData,
-    version: workspaceVersion,
-    dryRun: options.dryRun,
-    verbose: options.verbose,
-  });
-
-  process.exit(Object.values(result).every(result => result.code === 0) ? 0 : 1);
 })();

@@ -6,7 +6,10 @@
     "sharedGlobals": []
   },
   "release": {
-    "projects": ["cdk", "kit", "cli"],
+    "projects": ["libs/*", "!web"],
+    "version": {
+      "preVersionCommand": "pnpm build"
+    },
     "releaseTagPattern": "v{version}",
     "changelog": {
       "automaticFromRef": true,
@@ -15,39 +18,6 @@
           "authors": false
         },
         "createRelease": "github"
-      }
-    },
-    "conventionalCommits": {
-      "docs": {
-        "semverBump": "none",
-        "changelog": {
-          "title": "📚 Documentation",
-          "hidden": true
-        }
-      },
-      "style": {
-        "semverBump": "none",
-        "changelog": {
-          "hidden": true
-        }
-      },
-      "refactor": {
-        "semverBump": "none",
-        "changelog": {
-          "hidden": true
-        }
-      },
-      "test": {
-        "semverBump": "none",
-        "changelog": {
-          "hidden": true
-        }
-      },
-      "chore": {
-        "semverBump": "none",
-        "changelog": {
-          "hidden": true
-        }
       }
     }
   },
@@ -63,20 +33,6 @@
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "eslint:lint"
-      }
-    },
-    {
-      "plugin": "@nx/js/typescript",
-      "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        },
-        "build": {
-          "targetName": "build",
-          "configName": "tsconfig.json",
-          "buildDepsName": "build-deps",
-          "watchDepsName": "watch-deps"
-        }
       }
     }
   ]
