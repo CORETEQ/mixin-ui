@@ -3,60 +3,75 @@ import { NodePackageInstallTask, RunSchematicTask } from '@angular-devkit/schema
 import {
   addPackageJsonDependency,
   getPackageJsonDependency,
-  NodeDependency,
   NodeDependencyType,
   removePackageJsonDependency,
 } from '@schematics/angular/utility/dependencies';
 import { Schema } from './schema';
 
-const ANGULAR_CDK_VERSION = '>=19.2.0';
-const MIXIN_UI_CDK = '@mixin-ui/cdk';
-const MIXIN_UI_KIT = '@mixin-ui/kit';
-const ANGULAR_CDK = '@angular/cdk';
+const CORE = '@angular/core';
+const CDK = '@angular/cdk';
+const MIXIN_CDK = '@mixin-ui/cdk';
+const MIXIN_KIT = '@mixin-ui/kit';
+const MIXIN_CLI = '@mixin-ui/cli';
 
 function addDependencies(tree: Tree): void {
-  const ngCdk = getPackageJsonDependency(tree, ANGULAR_CDK);
+  addAngularCdk(tree);
+  addMixinCdk(tree);
+  addMixinKit(tree);
 
-  if (!ngCdk) {
-    const dependency: NodeDependency = {
+  try {
+    if (getPackageJsonDependency(tree, MIXIN_CLI)?.version) {
+      removePackageJsonDependency(tree, MIXIN_CLI);
+    }
+  } catch {
+    /* empty */
+  }
+}
+
+function addAngularCdk(tree: Tree): void {
+  const coreVersion = getPackageJsonDependency(tree, CORE)?.version;
+
+  if (!coreVersion) {
+    return;
+  }
+
+  const [majorVersion] = coreVersion.match(/\d+/) || [];
+
+  if (majorVersion !== null) {
+    addPackageJsonDependency(tree, {
+      name: CDK,
+      version: `^${majorVersion}.0.0`,
       type: NodeDependencyType.Default,
-      name: ANGULAR_CDK,
-      version: ANGULAR_CDK_VERSION,
-      overwrite: false,
-    };
+    });
+  }
+}
 
-    addPackageJsonDependency(tree, dependency);
+function addMixinCdk(tree: Tree): void {
+  const existing = getPackageJsonDependency(tree, MIXIN_CDK);
+
+  if (existing) {
+    return;
   }
 
-  const mixinCdk = getPackageJsonDependency(tree, MIXIN_UI_CDK);
+  addPackageJsonDependency(tree, {
+    type: NodeDependencyType.Default,
+    name: MIXIN_CDK,
+    version: 'latest',
+  });
+}
 
-  if (!mixinCdk) {
-    const dependency: NodeDependency = {
-      type: NodeDependencyType.Default,
-      name: MIXIN_UI_CDK,
-      version: 'latest',
-      overwrite: false,
-    };
+function addMixinKit(tree: Tree): void {
+  const existing = getPackageJsonDependency(tree, MIXIN_KIT);
 
-    addPackageJsonDependency(tree, dependency);
+  if (existing) {
+    return;
   }
 
-  const mixinKit = getPackageJsonDependency(tree, MIXIN_UI_KIT);
-
-  if (!mixinKit) {
-    const dependency: NodeDependency = {
-      type: NodeDependencyType.Default,
-      name: MIXIN_UI_KIT,
-      version: 'latest',
-      overwrite: false,
-    };
-
-    addPackageJsonDependency(tree, dependency);
-  }
-
-  if (getPackageJsonDependency(tree, '@mixin-ui/cli')?.version) {
-    removePackageJsonDependency(tree, '@mixin-ui/cli');
-  }
+  addPackageJsonDependency(tree, {
+    type: NodeDependencyType.Default,
+    name: MIXIN_KIT,
+    version: 'latest',
+  });
 }
 
 export default function (options: Schema): Rule {
