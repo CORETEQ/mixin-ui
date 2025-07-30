@@ -19,10 +19,6 @@
         },
         "createRelease": "github"
       }
-    },
-    "git": {
-      "tag": false,
-      "commit": false
     }
   },
   "targetDefaults": {

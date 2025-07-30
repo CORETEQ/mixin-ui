@@ -30,6 +30,7 @@ import { execSync } from 'child_process';
     verbose: options.verbose,
     gitCommit: false,
     gitTag: false,
+    gitPush: false,
   });
 
   const { newVersion } = projectsVersionData.kit;
@@ -61,6 +62,7 @@ export const MIXIN_UI_VERSION = '${newVersion}';
         verbose: options.verbose,
         gitCommit: false,
         gitTag: false,
+        gitPush: false,
       });
 
       execSync('git add .', { stdio: 'inherit' });
@@ -79,6 +81,7 @@ export const MIXIN_UI_VERSION = '${newVersion}';
       verbose: options.verbose,
       gitCommit: false,
       gitTag: false,
+      gitPush: false,
     });
 
     console.log(`🔍 DRY RUN: Would create release branch: release/${newVersion}`);
