@@ -73,6 +73,7 @@ Include the following styles in your root stylesheet (e.g., `styles.scss` or `an
 +   "@mixin-ui/kit/styles/index.scss"
   ]
 }
+```
 
 ## Usage
 
