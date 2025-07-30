@@ -65,7 +65,7 @@ npm i @mixin-ui/{cdk,kit}
 ```
 
 #### 3. Import global styles
-Include the following styles in your root stylesheet (e.g., `styles.scss` or `angular.json`):
+Include the following styles in your root stylesheet (e.g., `styles.scss`) or `angular.json`:
 ```diff
 {
   "styles": [
