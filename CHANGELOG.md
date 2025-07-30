@@ -1,3 +1,9 @@
+## 0.0.1-alpha.30 (2025-07-30)
+
+### 🚀 Features
+
+- **cli:** introduce `cli` project ([74f0739](https://github.com/CORETEQ/mixin-ui/commit/74f0739))
+
 ## 0.0.1-alpha.29 (2025-07-29)
 
 ### 🚀 Features
