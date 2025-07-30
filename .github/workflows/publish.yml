@@ -8,7 +8,7 @@ on:
 jobs:
   version:
     name: Publish new version
-    timeout-minutes: 15
+    timeout-minutes: 5
     runs-on: self-hosted
     permissions:
       contents: write
@@ -23,7 +23,7 @@ jobs:
       - name: Install
         uses: ./.github/workflows/composite
 
-      - name: Build libraries
+      - name: Build packages
         run: pnpm build
 
       - name: Set up npm auth for Nexus (basic auth)
