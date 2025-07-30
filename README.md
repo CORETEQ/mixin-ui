@@ -46,9 +46,29 @@ The Mixin UI libraries require the following minimum versions for proper install
 | **pnpm**       | `v9.12.0`        | ✅ Preferred package manager                |
 
 ## Installation
-#### Automatic (recommended)
+### Automatic (recommended)
 ```bash
 ng add @mixin-ui/cli
+```
+
+### Manual
+#### 1. Install CDK
+Mixin UI builds on top of `@angular/cdk`. To install it run the following command:
+```bash
+npm i @angular/cdk
+```
+
+#### 2. Install packages
+Install the packages from your command line:
+```bash
+npm i @mixin-ui/{cdk,kit}
+```
+
+#### 3. Install packages
+Import the global styles at the root of your application:
+```scss
+@import '@angular/cdk/overlay-prebuilt.css';
+@import '@mixin-ui/kit/styles/index.scss';
 ```
 
 ## Usage
