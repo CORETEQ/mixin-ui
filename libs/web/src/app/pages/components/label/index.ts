@@ -4,12 +4,11 @@ import { DocsPage } from '@/docs/components';
 import imp from './examples/import?raw&lang=ts';
 import usage from './examples/usage?raw&lang=ts';
 import { LabelBasicExample } from './examples/basic/basic';
-import { LabelSwitchExample } from './examples/switch/switch';
 
 @Component({
   selector: 'app-input-text',
   templateUrl: './index.html',
-  imports: [DocsPage, LabelBasicExample, LabelSwitchExample],
+  imports: [DocsPage, LabelBasicExample],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

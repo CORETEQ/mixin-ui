@@ -27,7 +27,7 @@
         "main": "libs/web/src/main.ts",
         "configFile": "libs/web/vite.config.ts",
         "outputPath": "dist/libs/web/client",
-        "tsConfig": "libs/web/tsconfig.prod.json"
+        "tsConfig": "libs/web/tsconfig.app.json"
       }
     },
     "serve": {

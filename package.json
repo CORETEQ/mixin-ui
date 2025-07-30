@@ -21,6 +21,7 @@
     "prepare": "husky",
     "start": "nx serve web",
     "build": "npx nx run-many -t build --all --exclude=web",
+    "build:web": "nx build web",
     "lint": "eslint .",
     "stylelint": "stylelint '**/*.{scss,css}'",
     "prettier": "prettier --check libs --cache",
