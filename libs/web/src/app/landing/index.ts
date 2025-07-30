@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Footer } from './footer';
 import { Hero } from './hero';
-import { Features } from './features';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -9,6 +8,6 @@ import { Features } from './features';
   selector: 'app-landing',
   styleUrl: './index.scss',
   templateUrl: './index.html',
-  imports: [Footer, Hero, Features],
+  imports: [Footer, Hero],
 })
 export default class Landing {}

@@ -2,7 +2,6 @@ import {
   afterNextRender,
   ChangeDetectionStrategy,
   Component,
-  signal,
   ViewEncapsulation,
 } from '@angular/core';
 import { XIcon } from '@mixin-ui/kit';
@@ -18,17 +17,6 @@ import gsap from 'gsap';
   imports: [XIcon, RouterLink],
 })
 export class Hero {
-  readonly showPreview = signal(false);
-  readonly loading = signal(false);
-
-  show(): void {
-    this.loading.set(true);
-    setTimeout(() => {
-      this.showPreview.set(true);
-      this.loading.set(false);
-    }, 800);
-  }
-
   constructor() {
     afterNextRender(() => {
       const circle = document.getElementById('mixin-circle');

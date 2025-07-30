@@ -32,37 +32,4 @@
       </button>
     </div>
   </div>
-
-  <div class="relative block w-full h-full">
-    <div id="demo" class="app-hero-preview">
-      <div class="app-hero-preview-header">
-        <div class="app-hero-preview-dots">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-      <div class="app-hero-preview-content">
-        @if (showPreview()) {
-          <iframe src="https://mixin-preview.coreteq.cloud/" class="animate__animated animate__fadeIn" title="Preview"
-                  loading="lazy">
-          </iframe>
-        }
-        @if (!showPreview()) {
-          <button type="button"
-                  class="app-primary-btn app-hero-preview-play-btn"
-                  [class.loading]="loading()"
-                  (click)="show()">
-            @if (loading()) {
-              <x-icon src="mixin" class="app-btn-loader" size="32" raw />
-            } @else {
-              <x-icon src="play" />
-              Try the demo
-            }
-          </button>
-        }
-      </div>
-    </div>
-    <div class="app-hero-preview-shadow"></div>
-  </div>
 </div>
