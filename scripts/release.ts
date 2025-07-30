@@ -47,7 +47,6 @@ import { execSync } from 'child_process';
         execSync('git pull origin main', { stdio: 'inherit' });
       }
 
-      console.log(`Creating release branch: ${releaseBranch}`);
       execSync(`git checkout -b ${releaseBranch}`, { stdio: 'inherit' });
 
       const versionFilePath = path.join(__dirname, '../libs/web/src/app/core/version.ts');
@@ -55,7 +54,6 @@ import { execSync } from 'child_process';
 export const MIXIN_UI_VERSION = '${newVersion}';
 `;
       fs.writeFileSync(versionFilePath, content);
-      execSync(`git add ${versionFilePath}`, { stdio: 'inherit' });
 
       const result = await releaseChangelog({
         versionData: projectsVersionData,

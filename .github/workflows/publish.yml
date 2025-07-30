@@ -2,8 +2,7 @@ name: 📦 Publish
 
 on:
   push:
-    tags:
-      - v*.*.*
+    branches: ['release/*']
 
 jobs:
   version:
