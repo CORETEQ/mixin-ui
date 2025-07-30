@@ -36,3 +36,28 @@ jobs:
       - name: Publish packages
         run: pnpm ci:publish
         shell: bash
+
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.office365.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "🚀 Mixin UI ${{ github.ref_name }} has been released"
+          to: fe-devs@coreteq.sk
+          from: <${{ secrets.SMTP_USERNAME }}>
+          secure: false
+          body: |
+            New release available!
+
+            🔖 Version: ${{ github.ref_name }}
+            🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+
+            📘 Release Notes:
+            https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.ref_name }}
+
+            🧩 Documentation:
+            https://mixin-ui.dev
+
+            — Mixin UI Bot
