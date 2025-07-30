@@ -33,7 +33,7 @@ import { execSync } from 'child_process';
   const { newVersion } = projectsVersionData.kit;
 
   if (!options.dryRun) {
-    updateVersionFile(newVersion);
+    updateVersionFile(newVersion!);
   }
 
   const result = await releaseChangelog({
