@@ -5,22 +5,23 @@ import {
   getPackageJsonDependency,
   NodeDependency,
   NodeDependencyType,
+  removePackageJsonDependency,
 } from '@schematics/angular/utility/dependencies';
 import { Schema } from './schema';
 
-const CDK_PEER_VERSION = '^19.2.0';
+const ANGULAR_CDK_VERSION = '>=19.2.0';
 const MIXIN_UI_CDK = '@mixin-ui/cdk';
 const MIXIN_UI_KIT = '@mixin-ui/kit';
 const ANGULAR_CDK = '@angular/cdk';
 
-function addDependencies(tree: Tree, context: SchematicContext): void {
+function addDependencies(tree: Tree): void {
   const ngCdk = getPackageJsonDependency(tree, ANGULAR_CDK);
 
   if (!ngCdk) {
     const dependency: NodeDependency = {
       type: NodeDependencyType.Default,
       name: ANGULAR_CDK,
-      version: CDK_PEER_VERSION,
+      version: ANGULAR_CDK_VERSION,
       overwrite: false,
     };
 
@@ -53,12 +54,14 @@ function addDependencies(tree: Tree, context: SchematicContext): void {
     addPackageJsonDependency(tree, dependency);
   }
 
-  context.addTask(new NodePackageInstallTask());
+  if (getPackageJsonDependency(tree, '@mixin-ui/cli')?.version) {
+    removePackageJsonDependency(tree, '@mixin-ui/cli');
+  }
 }
 
 export default function (options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
-    addDependencies(tree, context);
+    addDependencies(tree);
     const installTaskId = context.addTask(new NodePackageInstallTask());
     context.addTask(new RunSchematicTask('ng-add-setup-project', options), [installTaskId]);
   };
