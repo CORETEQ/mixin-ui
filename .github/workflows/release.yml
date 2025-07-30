@@ -39,10 +39,6 @@ jobs:
             - Updated CHANGELOG.md
             - Ready for release
 
-            ### After merge
-            - [ ] Tag will be created automatically
-            - [ ] GitHub release will be published
-
             ---
 
             **This PR was created automatically by the release workflow** 🤖
