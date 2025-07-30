@@ -1,0 +1,60 @@
+// states
+@mixin active {
+  &:where(.x-active:not([aria-disabled='true'])) {
+    @content;
+  }
+}
+
+@mixin selected {
+  &:where([aria-selected='true']) {
+    @content;
+  }
+}
+
+@mixin disabled {
+  &:where([aria-disabled='true']) {
+    @content;
+  }
+}
+
+.x-option {
+  position: relative;
+  display: flex;
+  column-gap: 0.375rem;
+  align-items: center;
+  inline-size: 100%;
+  min-block-size: var(--x-option-block-size);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  background-color: var(--x-bg);
+  outline: none;
+  border-radius: 4px;
+  cursor: default;
+
+  @include active {
+    --x-bg: var(--x-neutral-200);
+  }
+
+  @include selected {
+    > .x-option-checkmark {
+      display: inline-flex;
+    }
+  }
+
+  @include disabled {
+    opacity: 0.6;
+    cursor: var(--x-cursor-disabled);
+  }
+}
+
+.x-option-arrow {
+  margin-inline-start: auto;
+}
+
+.x-option-checkmark {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: auto;
+}

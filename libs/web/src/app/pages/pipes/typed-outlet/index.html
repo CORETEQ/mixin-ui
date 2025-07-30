@@ -1,0 +1,21 @@
+<docs-page>
+  <p>
+    Transforms a union type representing dynamic content into a discriminated structure that enables precise rendering
+    via Angular’s built-in structural directives — directly in the template.
+  </p>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Purpose</h2>
+
+  <p>
+    Use <code>typedOutlet</code> when your input may be a component type (Type), a template (TemplateRef), a string, or
+    null/undefined, and you want to narrow its type within the template to render it using <a
+    href="https://angular.dev/api/common/NgComponentOutlet" target="_blank">*ngComponentOutlet</a>,
+    <a href="https://angular.io/api/common/NgTemplateOutlet" target="_blank">*ngTemplateOutlet</a>, or text interpolation accordingly.
+  </p>
+</docs-page>

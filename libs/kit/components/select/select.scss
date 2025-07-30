@@ -1,0 +1,25 @@
+.x-select:not(.x-disabled) {
+  cursor: pointer;
+}
+
+.x-select-box {
+  display: grid;
+  align-items: center;
+  inline-size: 100%;
+}
+
+.x-select-arrow {
+  transition: transform 100ms ease-in-out;
+
+  &.x-opened {
+    transform: rotate(180deg);
+  }
+}
+
+.x-select-value {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}

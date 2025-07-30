@@ -1,0 +1,26 @@
+@let $ = slots() | asRecord;
+
+<span class="x-select-box">
+  @if (placeholderShown()) {
+    <span class="x-input-placeholder">
+      {{ placeholder() }}
+    </span>
+  } @else if (hasValue()) {
+    <span class="x-select-value">
+      @if ($.value) {
+        <ng-container *ngTemplateOutlet="$.value; context: { $implicit: selection() }" />
+      } @else {
+        {{ valueAsString() }}
+      }
+    </span>
+  }
+</span>
+
+<ng-content />
+
+<span class="x-input-suffix">
+  <x-icon class="x-select-arrow"
+          src="chevron-down"
+          [class.x-opened]="open()">
+  </x-icon>
+</span>

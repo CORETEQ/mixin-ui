@@ -1,0 +1,44 @@
+body {
+  font-family: var(--x-font-family), sans-serif;
+  font-optical-sizing: auto;
+  letter-spacing: -0.25px;
+}
+
+.x-scrollable {
+  --x-thumb-color: rgb(0 0 0 / 20%);
+
+  &::-webkit-scrollbar {
+    width: 14px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 14px 14px transparent;
+    border: solid 4px transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 14px 14px var(--x-thumb-color);
+    border: solid 3px transparent;
+    border-radius: 14px;
+    cursor: pointer;
+
+    &:hover {
+      --x-thumb-color: rgb(0 0 0 / 30%);
+    }
+
+    &:active {
+      --x-thumb-color: rgb(0 0 0 / 40%);
+    }
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* stylelint-disable-next-line */
+  @-moz-document url-prefix() {
+    scrollbar-width: thin;
+    scrollbar-color: var(--x-thumb-color) transparent;
+  }
+}

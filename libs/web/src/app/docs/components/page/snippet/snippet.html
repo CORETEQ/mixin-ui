@@ -1,0 +1,63 @@
+@if (withHeader()) {
+  <div class="docs-snippet-header">
+    <div class="docs-snippet-dots">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    @for (tab of tabs(); track $index; let index = $index) {
+      <button type="button"
+              class="docs-snippet-tab"
+              [class.active]="index === activeIndex()"
+              (click)="setActiveIndex(index)"
+      >
+        {{ tab.name() }}
+      </button>
+    }
+
+    @if (showButtons()) {
+      <div class="flex items-center gap-0.5 ml-auto">
+        @if (figmaUrl()) {
+          <a x-icon
+             target="_blank"
+             size="sm"
+             color="neutral"
+             variant="ghost"
+             class="!text-[#52525B] hover:!text-[#09090B]"
+             [href]="figmaUrl()"
+          >
+            <x-icon src="figma-color" size="15" raw />
+          </a>
+
+          <div class="h-[1rem] w-[1px] mx-1.5 block bg-[#E2E2E2]"></div>
+        }
+
+        <button x-icon
+                x-tooltip="Very soon..."
+                size="sm"
+                color="neutral"
+                variant="ghost"
+                class="!text-[#52525B] !cursor-not-allowed hover:!text-[#09090B]">
+          <x-icon src="stackblitz" size="16" />
+        </button>
+
+        <button x-icon
+                x-tooltip="Very soon..."
+                size="sm"
+                color="neutral"
+                variant="ghost"
+                class="!text-[#52525B] !cursor-not-allowed hover:!text-[#09090B]">
+          <x-icon src="sun-medium" size="16" />
+        </button>
+      </div>
+    }
+  </div>
+}
+
+<div class="docs-snippet-content"
+     [class.min-height]="height() === 'min'"
+     [style.align-items]="align()"
+     [style.justify-content]="justify()">
+  <ng-content />
+</div>

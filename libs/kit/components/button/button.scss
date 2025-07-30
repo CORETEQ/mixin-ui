@@ -1,0 +1,243 @@
+// options
+@mixin variant($variant) {
+  &:where(.x-variant-#{$variant}) {
+    @content;
+  }
+}
+
+@mixin size($size) {
+  &:where(.x-size-#{$size}) {
+    @content;
+  }
+}
+
+@mixin radius($radius) {
+  &:where(.x-radius-#{$radius}) {
+    @content;
+  }
+}
+
+// states
+@mixin hover {
+  @media (hover: hover) {
+    &:where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+      @content;
+    }
+  }
+}
+
+@mixin active {
+  &:where(:active:not(:disabled), .x-active:not(:disabled)) {
+    @content;
+  }
+}
+
+@mixin pressed {
+  &:where([aria-pressed='true'], .x-overlay-opened) {
+    @content;
+  }
+}
+
+@mixin focus-visible {
+  &:where(:focus-visible) {
+    @content;
+  }
+}
+
+@mixin reset {
+  box-sizing: border-box;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  border: none;
+  appearance: none;
+  touch-action: manipulation;
+
+  // Removes blue tap highlight on iOS/Safari
+  -webkit-tap-highlight-color: transparent;
+}
+
+.x-btn {
+  @include reset;
+
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--x-gap, 0.5rem);
+  align-items: center;
+  justify-content: center;
+  block-size: var(--x-size);
+  padding: 0 var(--x-side);
+  font: var(--x-font);
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+  border-radius: var(--x-radius);
+
+  @include variant(solid) {
+    color: var(--x-white);
+    background-color: var(--x-color-600);
+
+    @include hover {
+      background-color: var(--x-color-700);
+    }
+  }
+
+  @include variant(outline) {
+    color: var(--x-color-900);
+    background-color: var(--x-white);
+    box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
+
+    @include hover {
+      background-color: var(--x-color-100);
+    }
+
+    @include active {
+      background-color: var(--x-color-200);
+    }
+
+    @include pressed {
+      background-color: var(--x-color-200);
+      filter: brightness(0.98) saturate(1.1);
+    }
+  }
+
+  @include variant(surface) {
+    color: var(--x-color-900);
+    background-color: var(--x-color-100);
+    box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
+
+    @include hover {
+      background-color: var(--x-color-200);
+    }
+
+    @include active {
+      background-color: var(--x-color-300);
+    }
+  }
+
+  @include variant(subtle) {
+    color: var(--x-color-900);
+    background-color: var(--x-color-200);
+
+    @include hover {
+      background-color: var(--x-color-300);
+    }
+  }
+
+  @include variant(ghost) {
+    color: var(--x-color-900);
+    background-color: transparent;
+
+    @include hover {
+      background-color: var(--x-color-200);
+    }
+
+    @include active {
+      background-color: var(--x-color-300);
+    }
+  }
+
+  @include variant(plain) {
+    color: var(--x-color-900);
+  }
+
+  @include size(xs) {
+    --x-font: var(--x-text-xs);
+    --x-size: var(--x-size-xs);
+    --x-side: 0.5rem;
+    --x-gap: 0.375rem;
+  }
+
+  @include size(sm) {
+    --x-font: var(--x-text-sm);
+    --x-size: var(--x-size-sm);
+    --x-side: 0.625rem;
+  }
+
+  @include size(md) {
+    --x-font: var(--x-text-sm);
+    --x-size: var(--x-size-md);
+    --x-side: 0.75rem;
+  }
+
+  @include size(lg) {
+    --x-font: var(--x-text-md);
+    --x-size: var(--x-size-lg);
+    --x-side: 0.75rem;
+  }
+
+  @include size(xl) {
+    --x-font: var(--x-text-md);
+    --x-size: var(--x-size-xl);
+    --x-side: 0.875rem;
+  }
+
+  @include radius(none) {
+    --x-radius: var(--x-radius-none);
+  }
+
+  @include radius(sm) {
+    --x-radius: var(--x-radius-sm);
+  }
+
+  @include radius(md) {
+    --x-radius: var(--x-radius-md);
+  }
+
+  @include radius(lg) {
+    --x-radius: var(--x-radius-lg);
+  }
+
+  @include radius(full) {
+    --x-radius: var(--x-radius-full);
+  }
+
+  &:where(button) {
+    cursor: pointer;
+  }
+
+  &:where(:disabled) {
+    opacity: 0.6;
+    cursor: var(--x-cursor-disabled);
+  }
+
+  &:where(.x-loading) {
+    opacity: 0.9;
+    cursor: var(--x-cursor-loading);
+
+    &:where(:has(.x-btn-spinner.x-full)) {
+      -webkit-text-fill-color: transparent;
+
+      .x-icon {
+        opacity: 0;
+      }
+    }
+  }
+
+  &:where(.x-block) {
+    display: flex;
+    inline-size: 100%;
+  }
+
+  &:where(.x-vertical) {
+    flex-direction: column;
+    block-size: auto;
+    padding: calc(var(--x-side) / 1.5) var(--x-side);
+  }
+
+  &:where(.x-icon-only) {
+    inline-size: var(--x-size);
+    min-inline-size: var(--x-size);
+    padding: 0;
+  }
+}
+
+.x-btn-spinner {
+  display: grid;
+  place-items: center;
+
+  &:where(.x-full) {
+    position: absolute;
+    inset: 0;
+  }
+}

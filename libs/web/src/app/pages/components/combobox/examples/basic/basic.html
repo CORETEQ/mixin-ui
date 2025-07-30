@@ -1,0 +1,11 @@
+<x-combobox>
+  <input x-control
+         placeholder="Start typing..."
+         [formControl]="control"
+         (input)="query.set(el.value)" #el />
+  <x-listbox *x-popover>
+    @for (option of filteredOptions(); track option) {
+      <x-option [disabled]="option === 'React'" [value]="option">{{ option }}</x-option>
+    }
+  </x-listbox>
+</x-combobox>

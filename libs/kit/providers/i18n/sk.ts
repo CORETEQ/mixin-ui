@@ -1,0 +1,35 @@
+import { XDictionary } from './i18n';
+
+export const X_I18N_SK: Readonly<XDictionary> = {
+  dayNames: ['Nedeľa', 'Pondelok', 'Utorok', 'Streda', 'Štvrtok', 'Piatok', 'Sobota'],
+  dayNamesShort: ['Ned', 'Pon', 'Uto', 'Str', 'Štv', 'Pia', 'Sob'],
+  dayNamesMin: ['Ne', 'Po', 'Ut', 'St', 'Št', 'Pi', 'So'],
+  monthNames: [
+    'Január',
+    'Február',
+    'Marec',
+    'Apríl',
+    'Máj',
+    'Jún',
+    'Júl',
+    'August',
+    'September',
+    'Október',
+    'November',
+    'December',
+  ],
+  monthNamesShort: [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'Máj',
+    'Jún',
+    'Júl',
+    'Aug',
+    'Sep',
+    'Okt',
+    'Nov',
+    'Dec',
+  ],
+};

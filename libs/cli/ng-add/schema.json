@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "mixin-ui-ng-add",
+  "title": "Add mixin-ui",
+  "description": "Adds mixin-ui library to an Angular project with required dependencies",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "Name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    }
+  }
+}

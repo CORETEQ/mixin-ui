@@ -1,0 +1,45 @@
+<docs-page>
+  <p>Used to pick a value from predefined options.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet withHeader>
+    <app-select-objects-example class="block w-[18rem]" />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Examples</h2>
+  <h3>Multiple</h3>
+  <docs-snippet>
+    <app-select-multiple-example class="block w-[18rem]" />
+  </docs-snippet>
+
+  <h3>Popover</h3>
+  <docs-snippet>
+    <app-select-popover-example />
+  </docs-snippet>
+
+  <h2>API</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="variant" type="enum" default="outline" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+    <docs-input name="placeholder" type="string" />
+    <docs-input name="multiple" type="boolean" default="false" />
+    <docs-input name="popoverFixed" type="boolean" default="false" />
+    <docs-input name="popoverStretch" type="enum" default="fit" />
+    <docs-input name="popoverMinWidth" type="number" />
+    <docs-input name="popoverMaxWidth" type="number" />
+  </docs-api-table>
+
+  <h3>Slots</h3>
+  <docs-api-table>
+    <docs-slot name="value" context="let-value: T" />
+  </docs-api-table>
+</docs-page>

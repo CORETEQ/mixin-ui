@@ -1,0 +1,144 @@
+// options
+@mixin size($size) {
+  &:where(.x-size-#{$size}) {
+    @content;
+  }
+}
+
+@mixin radius($radius) {
+  &:where(.x-radius-#{$radius}) {
+    @content;
+  }
+}
+
+// states
+@mixin hover {
+  @media (hover: hover) {
+    &:where(:hover:not(:disabled)) {
+      @content;
+    }
+  }
+}
+
+@mixin active {
+  &:where(:active:not(:disabled)) {
+    @content;
+  }
+}
+
+@mixin checked {
+  &:where([data-state='checked']) {
+    @content;
+  }
+}
+
+@mixin disabled {
+  &:where(:disabled) {
+    @content;
+  }
+}
+
+@mixin invalid {
+  &:where(.ng-invalid.ng-touched) {
+    @content;
+  }
+}
+
+.x-switch {
+  --x-track-bg: var(--x-neutral-400);
+  --t-thumb-bg: var(--x-white);
+
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  inline-size: calc(var(--x-size) * 2);
+  block-size: var(--x-size);
+  overflow: hidden;
+  vertical-align: middle;
+  background-color: var(--x-track-bg);
+  outline: 0.125rem solid transparent;
+  outline-offset: 0.125rem;
+  border-radius: var(--x-radius);
+  transition: background-color 150ms ease-in-out;
+  cursor: pointer;
+
+  @include active {
+    --x-track-bg: var(--x-neutral-500);
+  }
+
+  @include invalid {
+    outline-color: var(--x-error-600);
+  }
+
+  @include disabled {
+    opacity: 0.6;
+    cursor: var(--x-cursor-disabled);
+  }
+
+  @include checked {
+    --x-track-bg: var(--x-main-600);
+    --x-track-offset: calc(var(--x-size) / 2);
+
+    @include hover {
+      --x-track-bg: var(--x-main-700);
+    }
+  }
+
+  @include size(sm) {
+    --x-size: 1rem;
+  }
+
+  @include size(md) {
+    --x-size: 1.25rem;
+  }
+
+  @include size(lg) {
+    --x-size: 1.5rem;
+  }
+
+  @include radius(none) {
+    --x-radius: var(--x-radius-none);
+  }
+
+  @include radius(sm) {
+    --x-radius: var(--x-radius-sm);
+  }
+
+  @include radius(md) {
+    --x-radius: var(--x-radius-md);
+  }
+
+  @include radius(lg) {
+    --x-radius: var(--x-radius-lg);
+  }
+
+  @include radius(full) {
+    --x-radius: var(--x-radius-full);
+  }
+}
+
+.x-switch-track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 100%;
+  block-size: 100%;
+  translate: var(--x-track-offset, -25%) 0;
+  transition: translate 150ms ease-in-out;
+}
+
+.x-switch-thumb {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  block-size: 100%;
+  aspect-ratio: 1 / 1;
+  scale: 0.75;
+  color: var(--x-track-bg);
+  font-size: 1.25rem;
+  background-color: var(--t-thumb-bg);
+  border-radius: var(--x-radius);
+}

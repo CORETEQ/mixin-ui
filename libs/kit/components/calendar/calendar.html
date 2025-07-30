@@ -1,0 +1,58 @@
+@let $ = slots() | asRecord;
+
+<x-calendar-nav [month]="visibleMonth()"
+                [monthFormat]="monthFormat()"
+                [mode]="mode()"
+                [radius]="radius()"
+                (monthChange)="updateVisibleMonth($event)"
+                (modeChange)="updateMode($event)">
+</x-calendar-nav>
+
+<div class="x-calendar-content">
+  @switch (mode()) {
+    @case ('days') {
+      <x-days [date]="visibleMonth()"
+              [value]="value()"
+              [min]="min()"
+              [max]="max()"
+              [startOfWeek]="startOfWeek()"
+              [format]="weekdayFormat()"
+              [disabledMapper]="disabled()"
+              [detailMapper]="detail()"
+              (dateChange)="updateDay($event)">
+        @if ($.day) {
+          <ng-template x-slot="item" let-ctx>
+            <ng-container *ngTemplateOutlet="$.day; context: { $implicit: ctx }"/>
+          </ng-template>
+        }
+      </x-days>
+    }
+    @case ('months') {
+      <x-months [date]="visibleMonth()"
+                [value]="value()"
+                [min]="min()"
+                [max]="max()"
+                [format]="monthFormat()"
+                (dateChange)="updateMonth($event)">
+        @if ($.month) {
+          <ng-template x-slot="item" let-ctx>
+            <ng-container *ngTemplateOutlet="$.month; context: { $implicit: ctx }"/>
+          </ng-template>
+        }
+      </x-months>
+    }
+    @case ('years') {
+      <x-years [date]="visibleMonth()"
+               [value]="value()"
+               [min]="min()"
+               [max]="max()"
+               (dateChange)="updateYear($event)">
+        @if ($.year) {
+          <ng-template x-slot="item" let-ctx>
+            <ng-container *ngTemplateOutlet="$.year; context: { $implicit: ctx }"/>
+          </ng-template>
+        }
+      </x-years>
+    }
+  }
+</div>
