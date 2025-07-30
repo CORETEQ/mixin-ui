@@ -52,20 +52,20 @@ ng add @mixin-ui/cli
 ```
 
 ### Manual
-#### 1. Install CDK
-Mixin UI builds on top of `@angular/cdk`. To install it run the following command:
+#### 1. Install Angular CDK (if not yet installed)
+Mixin UI builds on top of `@angular/cdk`. If it's not already part of your project, install it with:
 ```bash
 npm i @angular/cdk
 ```
 
-#### 2. Install packages
-Install the packages from your command line:
+#### 2. Install Mixin UI packages
+Install the core libraries:
 ```bash
 npm i @mixin-ui/{cdk,kit}
 ```
 
-#### 3. Install packages
-Import the global styles at the root of your application:
+#### 3. Import global styles
+Include the following styles in your root stylesheet (e.g., `styles.scss`):
 ```scss
 @import '@angular/cdk/overlay-prebuilt.css';
 @import '@mixin-ui/kit/styles/index.scss';
