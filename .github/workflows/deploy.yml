@@ -3,7 +3,7 @@ name: 🚀 Deploy
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: [ 'Publish' ]
+    workflows: [ '📦 Publish' ]
     types:
       - completed
 
