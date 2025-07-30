@@ -1,6 +1,6 @@
 # @mixin-ui/cli
 
-Command line tools for [Mixin UI](https://github.com/CORETEQ/mixin-ui/) that provide Angular Schematics for easy project setup and configuration. This package automates the installation and configuration of Mixin UI libraries in Angular projects.
+Command line tools for [Mixin UI](https://github.com/CORETEQ/mixin-ui/) that provide Angular Schematics for easy project setup and configuration.
 
 > ⚠️ **Alpha Notice**
 >
