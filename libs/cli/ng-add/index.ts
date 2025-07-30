@@ -18,14 +18,6 @@ function addDependencies(tree: Tree): void {
   addAngularCdk(tree);
   addMixinCdk(tree);
   addMixinKit(tree);
-
-  try {
-    if (getPackageJsonDependency(tree, MIXIN_CLI)?.version) {
-      removePackageJsonDependency(tree, MIXIN_CLI);
-    }
-  } catch {
-    /* empty */
-  }
 }
 
 function addAngularCdk(tree: Tree): void {
@@ -79,5 +71,13 @@ export default function (options: Schema): Rule {
     addDependencies(tree);
     const installTaskId = context.addTask(new NodePackageInstallTask());
     context.addTask(new RunSchematicTask('ng-add-setup-project', options), [installTaskId]);
+
+    try {
+      if (getPackageJsonDependency(tree, MIXIN_CLI)?.version) {
+        removePackageJsonDependency(tree, MIXIN_CLI);
+      }
+    } catch {
+      /* empty */
+    }
   };
 }
