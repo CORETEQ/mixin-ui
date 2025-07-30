@@ -104,7 +104,3 @@ jobs:
                 body: `✅ **Packages published successfully!**\n\nVersion \`${{ needs.create-pr.outputs.version }}\` has been published to the registry.`
               });
             }
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
