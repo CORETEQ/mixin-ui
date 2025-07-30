@@ -1,18 +1,67 @@
-name: 📦 Publish
+name: Release & Publish
 
 on:
   push:
-    branches: ['release/*']
+    branches:
+      - 'release/*'
 
 jobs:
-  version:
-    name: Publish new version
+  create-pr:
+    name: Create Release PR
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.extract_version.outputs.version }}
+      branch_name: ${{ steps.extract_version.outputs.branch_name }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract version from branch name
+        id: extract_version
+        run: |
+          BRANCH_NAME=${GITHUB_REF#refs/heads/}
+          VERSION=${BRANCH_NAME#release/}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ steps.extract_version.outputs.branch_name }}
+          destination_branch: "main"
+          pr_title: "🚀 Release ${{ steps.extract_version.outputs.version }}"
+          pr_body: |
+            ## Release ${{ steps.extract_version.outputs.version }}
+
+            This PR contains the release changes for version `${{ steps.extract_version.outputs.version }}`.
+
+            ### Changes
+            - Updated version files
+            - Updated CHANGELOG.md
+            - Ready for release
+
+            ---
+
+            **This PR was created automatically by the release workflow** 🤖
+          pr_reviewer: "vs-borodin"
+          pr_assignee: "vs-borodin"
+          pr_label: "release,automated"
+          pr_draft: false
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    name: Publish packages
+    needs: create-pr
     timeout-minutes: 5
     runs-on: self-hosted
     permissions:
       contents: write
       packages: write
       pull-requests: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -35,3 +84,23 @@ jobs:
       - name: Publish packages
         run: pnpm ci:publish
         shell: bash
+
+      - name: Comment on PR about successful publish
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.repo.owner}:${context.ref.replace('refs/heads/', '')}`,
+              state: 'open'
+            });
+
+            if (prs.length > 0) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prs[0].number,
+                body: `✅ **Packages published successfully!**\n\nVersion \`${{ needs.create-pr.outputs.version }}\` has been published to the registry.`
+              });
+            }
