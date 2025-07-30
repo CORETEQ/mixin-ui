@@ -4,11 +4,10 @@
     "paths": {
       "@mixin-ui/cdk": ["dist/libs/cdk"],
       "@mixin-ui/cdk/*": ["dist/libs/cdk/*"],
-      "@mixin-ui/kit": ["dist/libs/kit"],
-      "@mixin-ui/kit/*": ["dist/libs/kit/*"],
       "@mixin-ui/cli": ["dist/libs/cli"],
       "@mixin-ui/cli/*": ["dist/libs/cli/*"],
-      "@/docs/*": ["libs/web/src/app/docs/*"]
+      "@mixin-ui/kit": ["dist/libs/kit"],
+      "@mixin-ui/kit/*": ["dist/libs/kit/*"]
     }
   },
   "exclude": ["node_modules", "tmp"],
