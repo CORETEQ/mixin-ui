@@ -46,7 +46,7 @@ The Mixin UI libraries require the following minimum versions for proper install
 | **pnpm**       | `v9.12.0`        | ✅ Preferred package manager                |
 
 ## Installation
-### Automatic (recommended)
+### Automatic
 ```bash
 ng add @mixin-ui/cli
 ```
