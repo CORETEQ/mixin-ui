@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { VERSION } from '@mixin-ui/cli';
 import { DocsLogo } from './logo';
-import { MIXIN_UI_VERSION } from '../version';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -13,5 +13,5 @@ import { MIXIN_UI_VERSION } from '../version';
   host: { class: 'app-header' },
 })
 export class Header {
-  readonly version = MIXIN_UI_VERSION;
+  readonly version = VERSION;
 }

@@ -25,7 +25,9 @@
       "@mixin-ui/cdk": ["libs/cdk"],
       "@mixin-ui/cdk/*": ["libs/cdk/*"],
       "@mixin-ui/kit": ["libs/kit"],
-      "@mixin-ui/kit/*": ["libs/kit/*"]
+      "@mixin-ui/kit/*": ["libs/kit/*"],
+      "@mixin-ui/cli": ["libs/cli"],
+      "@mixin-ui/cli/*": ["libs/cli/*"]
     }
   },
   "angularCompilerOptions": {

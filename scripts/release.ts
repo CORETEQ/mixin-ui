@@ -47,9 +47,9 @@ import { execSync } from 'child_process';
 })();
 
 function updateVersionFile(version: string): void {
-  const versionFilePath = path.join(__dirname, '../libs/web/src/app/core/version.ts');
+  const versionFilePath = path.join(__dirname, '../libs/cli/version.ts');
   const content = `// This file is generated automatically. Do not edit manually!
-export const MIXIN_UI_VERSION = '${version}';
+export const VERSION = '${version}';
 `;
 
   fs.writeFileSync(versionFilePath, content);
