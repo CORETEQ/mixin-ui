@@ -39,11 +39,11 @@ The Mixin UI libraries require the following minimum versions for proper install
 
 #### 💻 Development Environment
 
-| Tool           | Minimum Version  | Notes                                      |
-|----------------|------------------|--------------------------------------------|
-| **Node.js**    | `v20.19.0`       | Aligns with active LTS versions used in CI |
-| **npm**        | Not supported    | ❌ Please use **pnpm** instead (see below)  |
-| **pnpm**       | `v9.12.0`        | ✅ Preferred package manager                |
+| Tool           | Minimum Version | Notes                                      |
+|----------------|-----------------|--------------------------------------------|
+| **Node.js**    | `v21.0.0`       | Aligns with active LTS versions used in CI |
+| **npm**        | Not supported   | ❌ Please use **pnpm** instead (see below)  |
+| **pnpm**       | `v9.12.0`       | ✅ Preferred package manager                |
 
 ## Installation
 ### Automatic
