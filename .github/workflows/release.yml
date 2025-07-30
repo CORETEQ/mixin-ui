@@ -46,8 +46,8 @@ jobs:
             ---
 
             **This PR was created automatically by the release workflow** 🤖
-          pr_reviewer: "your-github-username" # Замените на ваш GitHub username
-          pr_assignee: "your-github-username" # Замените на ваш GitHub username
+          pr_reviewer: "vs-borodin"
+          pr_assignee: "vs-borodin"
           pr_label: "release,automated"
           pr_draft: false
           github_token: ${{ secrets.GITHUB_TOKEN }}
