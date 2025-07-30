@@ -6,9 +6,8 @@
   "keywords": [
     "mixin",
     "angular",
-    "component",
-    "development",
-    "kit"
+    "schematics",
+    "cli"
   ],
   "homepage": "https://mixin-ui.dev",
   "dependencies": {
