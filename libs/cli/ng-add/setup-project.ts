@@ -47,7 +47,7 @@ function getProjectsToProcess(
 ): ProjectDefinition[] {
   const { projects, extensions } = workspace;
 
-  const project = projects.get(options.project || String(extensions.defaultProject));
+  const project = projects.get(options.project || String(extensions.defaultProject || ''));
 
   if (project) {
     return [project];
