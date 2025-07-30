@@ -1,3 +1,7 @@
+## 0.0.1-alpha.40 (2025-07-30)
+
+This was a version bump only, there were no code changes.
+
 ## 0.0.1-alpha.39 (2025-07-30)
 
 This was a version bump only, there were no code changes.
