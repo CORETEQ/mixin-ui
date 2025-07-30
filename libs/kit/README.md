@@ -8,6 +8,7 @@ A collection of reusable UI components for Angular, built on top of [@mixin-ui/c
 > Use with caution in production environments.
 
 ## How to install
+
 This package builds on top of [`@angular/cdk`](https://www.npmjs.com/package/@angular/cdk) and [`@mixin-ui/cdk`](https://www.npmjs.com/package/@mixin-ui/cdk). Make sure to install both:
 
 ```
