@@ -35,6 +35,31 @@ function extractReleaseNotes(changelogPath: string, version: string): string {
   }
 }
 
+function createGitHubRelease(version: string, releaseNotes: string): void {
+  try {
+    console.log(`Creating GitHub release for v${version}`);
+
+    const releaseBody = releaseNotes.replace(/"/g, '\\"');
+
+    execSync(
+      `gh release create v${version} --title "Release v${version}" --notes "${releaseBody}"`,
+      {
+        stdio: 'inherit',
+      }
+    );
+
+    console.log(`✅ GitHub release v${version} created successfully!`);
+  } catch (error) {
+    console.warn(
+      '⚠️ Could not create GitHub release (gh CLI might not be installed or authenticated):',
+      error
+    );
+    console.log(
+      '💡 You can create the release manually at: https://github.com/your-repo/releases/new'
+    );
+  }
+}
+
 (async () => {
   const options = await yargs
     .version(false)
@@ -122,6 +147,8 @@ export const MIXIN_UI_VERSION = '${newVersion}';
 
       execSync(`git push origin ${releaseBranch}`, { stdio: 'inherit' });
       execSync(`git push origin v${newVersion}`, { stdio: 'inherit' });
+
+      createGitHubRelease(newVersion!, releaseNotes);
 
       process.exit(Object.values(result).every(result => result.code === 0) ? 0 : 1);
     } catch (error) {
