@@ -21,7 +21,7 @@ jobs:
         uses: hashicorp/vault-action@v3.4.0
         with:
           url: ${{ secrets.VAULT_ADDRESS }}
-          caCertificate: ${{ secrets.VAULT_CA_CERT }}
+          tlsSkipVerify: true
           method: jwt
           role: github-actions-role
           jwtGithubAudience: https://github.com/CORETEQ
