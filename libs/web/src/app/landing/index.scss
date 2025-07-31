@@ -95,3 +95,127 @@
     background-position: 200%;
   }
 }
+
+.app-hero-section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 4.5rem 4rem;
+}
+
+.app-hero-title {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.app-hero-subtitle {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  height: 2.25rem;
+  margin-block-end: 2rem;
+  padding: 0 1.125rem 0 1rem;
+  color: #5c5c5c;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 2rem;
+  letter-spacing: -0.01em;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgb(0 0 0 / 0%)),
+    var(--tw-ring-shadow, 0 0 rgb(0 0 0 / 0%)), var(--tw-shadow);
+  border-radius: 1rem;
+
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-shadow: 0 1px 1px 0.5px rgb(51 51 51 / 4%), 0 3px 3px -1.5px rgb(51 51 51 / 2%),
+    0 6px 6px -3px rgb(51 51 51 / 4%), 0 12px 12px -6px rgb(51 51 51 / 4%),
+    0 24px 24px -12px rgb(51 51 51 / 4%), 0 48px 48px -24px rgb(51 51 51 / 4%),
+    0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
+}
+
+.app-hero-subtitle-link {
+  margin-inline-start: -0.2rem;
+  text-decoration: underline;
+  text-decoration-color: #b3b3b3;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  text-decoration-style: dotted;
+
+  &:hover {
+    color: #09090b;
+  }
+}
+
+.app-hero-h1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 4rem;
+  font-weight: 600;
+  line-height: 4.75rem;
+}
+
+.app-hero-h1-decoration {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  inline-size: 4.5rem;
+  block-size: 4.5rem;
+  border: 1px solid #e0e1e7;
+  border-radius: 1rem;
+
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-shadow: 0 1px 1px 0.5px rgb(51 51 51 / 4%), 0 3px 3px -1.5px rgb(51 51 51 / 2%),
+    0 6px 6px -3px rgb(51 51 51 / 4%), 0 12px 12px -6px rgb(51 51 51 / 4%),
+    0 24px 24px -12px rgb(51 51 51 / 4%), 0 48px 48px -24px rgb(51 51 51 / 4%),
+    0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
+}
+
+.app-hero-description {
+  max-inline-size: 40rem;
+  margin-top: 2.5rem;
+  color: #5c5c5c;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.typed-out {
+  inline-size: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 1s forwards 150ms;
+}
+
+@keyframes typing {
+  from {
+    inline-size: 0;
+  }
+
+  to {
+    inline-size: 100%;
+  }
+}
+
+@keyframes wheel-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  37.5% {
+    transform: rotate(1800deg);
+    animation-timing-function: ease-out;
+  }
+
+  100% {
+    transform: rotate(1800deg);
+  }
+}

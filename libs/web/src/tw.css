@@ -1,0 +1,6 @@
+/* stylelint-disable */
+@import 'tailwindcss';
+
+@theme {
+  --font-kumbh: 'Kumbh Sans', sans-serif;
+}
