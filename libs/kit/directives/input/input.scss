@@ -193,6 +193,7 @@
   @include size(lg) {
     --x-size: var(--x-size-lg);
     --x-side: 0.625rem;
+    --x-icon-size: 1.125rem;
 
     font-size: 0.935rem;
     line-height: 1.25rem;
@@ -201,6 +202,7 @@
   @include size(xl) {
     --x-size: var(--x-size-xl);
     --x-side: 0.75rem;
+    --x-icon-size: 1.25rem;
 
     font-size: 1rem;
     line-height: 1.5rem;

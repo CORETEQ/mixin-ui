@@ -1,12 +1,6 @@
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  Component,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { XIcon } from '@mixin-ui/kit';
 import { RouterLink } from '@angular/router';
-import gsap from 'gsap';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -14,7 +8,7 @@ import gsap from 'gsap';
   selector: 'app-hero',
   imports: [XIcon, RouterLink],
   template: `
-    <div class="app-container">
+    <div class="app-container h-full">
       <div class="app-hero-section">
         <div class="app-hero-title animate__animated animate__fadeIn">
           <div class="app-hero-subtitle">
@@ -25,11 +19,11 @@ import gsap from 'gsap';
           </div>
 
           <div class="app-hero-h1">
-            <div class="typed-out">Build Reliable Interfaces —</div>
+            <div>Build Reliable Interfaces —</div>
             <div class="inline-flex items-center gap-4">
               with
               <div class="app-hero-h1-decoration">
-                <x-icon size="46" src="angular" raw />
+                <x-icon size="46" src="icons/app/angular.svg" raw />
               </div>
               Angular &
               <div class="app-hero-h1-decoration">
@@ -37,7 +31,7 @@ import gsap from 'gsap';
                   id="mixin-circle"
                   class="app-hero-animated-decor"
                   size="56"
-                  src="mixin"
+                  src="icons/app/mixin.svg"
                   raw
                 />
               </div>
@@ -62,16 +56,4 @@ import gsap from 'gsap';
     </div>
   `,
 })
-export class Hero {
-  constructor() {
-    afterNextRender(() => {
-      const circle = document.getElementById('mixin-circle');
-
-      gsap.to(circle, {
-        rotation: 1800,
-        duration: 2,
-        ease: 'power2.out',
-      });
-    });
-  }
-}
+export class Hero {}

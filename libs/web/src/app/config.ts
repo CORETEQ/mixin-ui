@@ -11,6 +11,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideMarkdown } from 'ngx-markdown';
 import { ROUTES } from './routes';
 import { DocsTitleStrategy } from './docs/services';
+import { provideIconSourceMapper } from '@mixin-ui/kit';
 
 const OFFSET_TOP = 74;
 

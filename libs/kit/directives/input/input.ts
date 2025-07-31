@@ -23,7 +23,7 @@ import {
   startWith,
   switchMap,
 } from 'rxjs';
-import { fromMutationObserver, isMatchingTarget, loadStyles } from '@mixin-ui/cdk';
+import { fromMutationObserver, isElement, isMatchingTarget, loadStyles } from '@mixin-ui/cdk';
 import { X_INPUT_OPTIONS } from './options';
 
 const EDITABLE = 'input, textarea, select, [contenteditable]';
@@ -110,8 +110,9 @@ export class XInputBase {
 
   handlePointerDown(e: PointerEvent): void {
     const focusableEl = this.#el.querySelector(FOCUSABLE);
+    const shouldSkipFocus = isElement(e.target) && !!e.target.closest(INTERACTIVE);
 
-    if (!focusableEl || isMatchingTarget(e, INTERACTIVE)) {
+    if (!focusableEl || shouldSkipFocus) {
       return;
     }
 

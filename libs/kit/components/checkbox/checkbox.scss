@@ -116,23 +116,18 @@
     outline-color: var(--x-main-600);
   }
 
-  // sizes
   @include size(sm) {
     --x-size: 1rem;
-    --x-icon-size: 0.875rem;
   }
 
   @include size(md) {
     --x-size: 1.25rem;
-    --x-icon-size: 1rem;
   }
 
   @include size(lg) {
     --x-size: 1.5rem;
-    --x-icon-size: 1.125rem;
   }
 
-  // sizes
   @include radius(none) {
     --x-radius: var(--x-radius-none);
   }
@@ -161,6 +156,7 @@
   place-items: center;
   inline-size: 100%;
   block-size: 100%;
+  font-size: var(--x-size);
   transform: scale(0);
   transition: transform 150ms ease-in-out;
 }

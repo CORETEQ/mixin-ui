@@ -6,8 +6,13 @@ import { Hero } from './hero';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-landing',
-  styleUrl: './index.scss',
-  templateUrl: './index.html',
   imports: [Footer, Hero],
+  host: { class: 'app-landing' },
+  template: `
+    <div class="app-landing-content">
+      <app-hero />
+      <app-footer />
+    </div>
+  `,
 })
 export default class Landing {}

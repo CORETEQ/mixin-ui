@@ -9,7 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [FormsModule, XControl, XInputDate, XCalendar, XPopover, ReactiveFormsModule],
 })
 export class InputDateBasicExample {
-  readonly control = new FormControl(null, { validators: Validators.required });
+  readonly control = new FormControl(new Date(), { validators: Validators.required });
 
   constructor() {
     this.control.events.pipe(takeUntilDestroyed()).subscribe(console.log);

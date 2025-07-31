@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { VERSION } from '@mixin-ui/cli';
-import { XIcon } from '@mixin-ui/kit';
+import { XButton, XIcon } from '@mixin-ui/kit';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -21,7 +21,7 @@ import { XIcon } from '@mixin-ui/kit';
         <div class="mx-auto px-4 flex items-center justify-between flex-1 h-14">
           <div class="flex items-center space-x-4">
             <a routerLink="/" class="flex items-center gap-x-1.5">
-              <x-icon src="mixin" size="27" raw />
+              <x-icon src="icons/app/mixin.svg" size="27" raw />
 
               <span
                 class="h-[30px] text-[#09090b] text-[30px] leading-[26px] font-kumbh font-normal"
@@ -42,7 +42,7 @@ import { XIcon } from '@mixin-ui/kit';
           </div>
 
           <div class="flex items-center">
-            <nav class="items-center gap-6 text-sm flex me-6 font-medium">
+            <nav class="items-center gap-6 text-sm flex font-medium me-6">
               <a routerLink="/installation" class="hover:underline underline-offset-2"
                 >Introduction</a
               >
@@ -50,7 +50,20 @@ import { XIcon } from '@mixin-ui/kit';
               <a routerLink="/colors" class="hover:underline underline-offset-2">Colors</a>
             </nav>
 
-            <div class="flex items-center space-x-0"></div>
+            <div class="h-[1.125rem] w-[1px] bg-gray-300"></div>
+
+            <div class="flex items-center gap-1 ms-3.5">
+              <a
+                x-icon
+                href="https://github.com/CORETEQ/mixin-ui"
+                target="_blank"
+                color="neutral"
+                variant="ghost"
+                size="md"
+              >
+                <x-icon src="icons/app/github.svg" size="18" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -58,7 +71,7 @@ import { XIcon } from '@mixin-ui/kit';
 
     <router-outlet />
   `,
-  imports: [RouterOutlet, RouterLink, XIcon],
+  imports: [RouterOutlet, RouterLink, XIcon, XButton],
   host: { class: 'app-layout' },
 })
 export class App {
