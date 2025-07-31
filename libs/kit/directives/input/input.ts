@@ -27,7 +27,7 @@ import { fromMutationObserver, isElement, isMatchingTarget, loadStyles } from '@
 import { X_INPUT_OPTIONS } from './options';
 
 const EDITABLE = 'input, textarea, select, [contenteditable]';
-const FOCUSABLE = `${EDITABLE} [tabindex]`;
+const FOCUSABLE = `${EDITABLE}, [tabindex]`;
 const INTERACTIVE = `${FOCUSABLE}, button, a`;
 
 @Component({
