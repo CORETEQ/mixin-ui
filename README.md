@@ -64,10 +64,17 @@ Install the core libraries:
 npm i @mixin-ui/{cdk,kit}
 ```
 
-#### 3. Import global styles
-Include the following styles in your root stylesheet (e.g., `styles.scss`) or `angular.json`:
+#### 3. Import assets & styles
+Include the following assets and styles in `angular.json`:
 ```diff
 {
+  "assets": [
++   {
++     "glob": "**/*",
++     "input": "node_modules/@mixin-ui/kit/icons",
++     "output": "assets/icons"
++   }
+  ],
   "styles": [
 +   "@angular/cdk/overlay-prebuilt.css",
 +   "@mixin-ui/kit/styles/index.scss"
