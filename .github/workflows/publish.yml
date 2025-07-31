@@ -6,6 +6,10 @@ on:
     tags:
       - v*.*.*
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   version:
     name: Publish new version
@@ -16,21 +20,25 @@ jobs:
       packages: write
       pull-requests: write
     steps:
-
-    
       - name: Authenticate and retrieve secrets from Vault
         uses: hashicorp/vault-action@v3.4.0
         with:
           url: ${{ secrets.VAULT_ADDRESS }}
+          caCertificate: ${{ secrets.VAULT_CA_CERT }}
           method: jwt
           role: github-actions-role
+          jwtGithubAudience: https://github.com/CORETEQ
           secrets: |
             secrets/data/prod/mixin-ui NPM_EMAIL | NPM_EMAIL ;
             secrets/data/prod/mixin-ui NPM_PASSWORD | NPM_PASSWORD ;
             secrets/data/prod/mixin-ui NPM_USERNAME | NPM_USERNAME ;
             secrets/data/prod/mixin-ui SMTP_PASSWORD | SMTP_PASSWORD ;
             secrets/data/prod/mixin-ui SMTP_USERNAME | SMTP_USERNAME
-            
+      
+      - name: Debug secret
+        run: |
+          echo "Using email: ${{ env.SMTP_USERNAME }}"            
+      
       - name: Checkout repository
         uses: actions/checkout@v4
 
