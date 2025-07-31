@@ -16,10 +16,12 @@ jobs:
       packages: write
       pull-requests: write
     steps:
+
+    
       - name: Authenticate and retrieve secrets from Vault
         uses: hashicorp/vault-action@v3.4.0
         with:
-          url: "{{ secrets.VAULT_ADDRESS }}"
+          url: ${{ secrets.VAULT_ADDRESS }}
           method: jwt
           role: github-actions-role
           secrets: |
