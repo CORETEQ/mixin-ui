@@ -72,7 +72,7 @@ Include the following assets and styles in `angular.json`:
 +   {
 +     "glob": "**/*",
 +     "input": "node_modules/@mixin-ui/kit/icons",
-+     "output": "assets/icons"
++     "output": "icons/mixin"
 +   }
   ],
   "styles": [
