@@ -1,6 +1,7 @@
 name: 📦 Publish
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - v*.*.*
@@ -14,11 +15,29 @@ jobs:
       contents: write
       packages: write
       pull-requests: write
+      id-token: write
     steps:
+      - name: Authenticate and retrieve secrets from Vault
+        uses: hashicorp/vault-action@v3.4.0
+        with:
+          url: ${{ secrets.VAULT_ADDRESS }}
+          caCertificate: ${{ secrets.VAULT_CA_CERT }}
+          method: jwt
+          role: github-actions-role
+          jwtGithubAudience: https://github.com/CORETEQ
+          secrets: |
+            secrets/data/prod/mixin-ui NPM_EMAIL | NPM_EMAIL ;
+            secrets/data/prod/mixin-ui NPM_PASSWORD | NPM_PASSWORD ;
+            secrets/data/prod/mixin-ui NPM_USERNAME | NPM_USERNAME ;
+            secrets/data/prod/mixin-ui SMTP_PASSWORD | SMTP_PASSWORD ;
+            secrets/data/prod/mixin-ui SMTP_USERNAME | SMTP_USERNAME
+      
+      - name: Debug secret
+        run: |
+          echo "Using email: ${{ env.SMTP_USERNAME }}"            
+      
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Install
         uses: ./.github/workflows/composite
@@ -36,3 +55,28 @@ jobs:
       - name: Publish packages
         run: pnpm ci:publish
         shell: bash
+
+      - name: Send email notification
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.office365.com
+          server_port: 587
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "🚀 Mixin UI ${{ github.ref_name }} has been released"
+          to: fe-devs@coreteq.sk
+          from: <${{ secrets.SMTP_USERNAME }}>
+          secure: false
+          body: |
+            New release available!
+
+            🔖 Version: ${{ github.ref_name }}
+            🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+
+            📘 Release Notes:
+            https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.ref_name }}
+
+            🧩 Documentation:
+            https://mixin-ui.dev
+
+            — Mixin UI Bot
