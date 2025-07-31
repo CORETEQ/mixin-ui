@@ -17,26 +17,21 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
-      - name: Debug GitHub OIDC token
-        id: debug-token
-        run: |
-          echo "Requesting OIDC token..."
-          curl -sH "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https://github.com/CORETEQ" | jq .
-        env:
-          ACTIONS_ID_TOKEN_REQUEST_TOKEN: ${{ steps.get-token.outputs.token }}
-          ACTIONS_ID_TOKEN_REQUEST_URL: ${{ steps.get-token.outputs.url }}
-    
       - name: Get GitHub OIDC token
         id: get-token
         uses: actions/github-script@v7
         with:
           script: |
-            const core = require('@actions/core');
             core.exportVariable('ACTIONS_ID_TOKEN_REQUEST_URL', process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
             core.exportVariable('ACTIONS_ID_TOKEN_REQUEST_TOKEN', process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN);
             core.setOutput('url', process.env.ACTIONS_ID_TOKEN_REQUEST_URL);
             core.setOutput('token', process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN);
+      
+      - name: Debug GitHub OIDC token
+        run: |
+          echo "Requesting OIDC token from GitHub..."
+          curl -s -H "Authorization: Bearer ${{ steps.get-token.outputs.token }}" \
+            "${{ steps.get-token.outputs.url }}&audience=https://github.com/CORETEQ" | jq .
 
       - name: Authenticate and retrieve secrets from Vault
         uses: hashicorp/vault-action@v3.4.0
