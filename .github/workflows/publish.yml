@@ -6,10 +6,6 @@ on:
     tags:
       - v*.*.*
 
-permissions:
-  contents: read
-  id-token: write
-
 jobs:
   version:
     name: Publish new version
@@ -19,6 +15,7 @@ jobs:
       contents: write
       packages: write
       pull-requests: write
+      id-token: write
     steps:
       - name: Authenticate and retrieve secrets from Vault
         uses: hashicorp/vault-action@v3.4.0
