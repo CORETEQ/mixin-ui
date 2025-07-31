@@ -30,11 +30,19 @@ jobs:
       - name: Inspect OIDC token claims
         run: |
           echo "Fetching GitHub OIDC token and decoding claims..."
+      
           ID_TOKEN=$(curl -sH "Authorization: Bearer ${{ steps.get-token.outputs.token }}" \
-            "${{ steps.get-token.outputs.url }}&audience=https://github.com/CORETEQ")
-          echo "$ID_TOKEN" | jq -r .value > id_token.jwt
+            "${{ steps.get-token.outputs.url }}&audience=https://github.com/CORETEQ" | jq -r .value)
+      
+          echo "$ID_TOKEN" > id_token.jwt
+      
           echo "Decoded JWT claims:"
-          cut -d '.' -f2 id_token.jwt | base64 -d | jq .
+          PAYLOAD=$(echo "$ID_TOKEN" | awk -F '.' '{print $2}')
+      
+          PADDED=$(printf "%s" "$PAYLOAD" | sed -E 's/-/+/g; s/_/\//g')
+          while [ $(( ${#PADDED} % 4 )) -ne 0 ]; do PADDED="${PADDED}="; done
+      
+          echo "$PADDED" | base64 -d | jq .
 
       - name: Authenticate and retrieve secrets from Vault
         uses: hashicorp/vault-action@v3.4.0
