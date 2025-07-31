@@ -9,7 +9,15 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
       <div class="app-container">
         <div class="flex items-center justify-center py-6 px-4">
           <div class="flex flex-col gap-8">
-            <span class="text-sm text-[#52525B]"> Copyright © 2025 Mixin UI </span>
+            <span class="text-sm text-[#52525B]">
+              Licensed under the
+              <a
+                class="font-medium text-[#1470EF] hover:underline"
+                href="https://opensource.org/license/apache-2-0"
+                target="_blank"
+                >Apache 2.0</a
+              >, Copyright © 2025-present.
+            </span>
           </div>
         </div>
       </div>

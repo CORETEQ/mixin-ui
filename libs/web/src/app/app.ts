@@ -21,7 +21,7 @@ import { XButton, XIcon } from '@mixin-ui/kit';
         <div class="mx-auto px-4 flex items-center justify-between flex-1 h-14">
           <div class="flex items-center space-x-4">
             <a routerLink="/" class="flex items-center gap-x-1.5">
-              <x-icon src="icons/app/mixin.svg" size="27" raw />
+              <x-icon src="icons/app/mixin.svg" size="28" raw />
 
               <span
                 class="h-[30px] text-[#09090b] text-[30px] leading-[26px] font-kumbh font-normal"
