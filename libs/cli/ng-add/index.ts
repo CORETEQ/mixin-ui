@@ -5,6 +5,7 @@ import {
   getPackageJsonDependency,
   NodeDependencyType,
 } from '@schematics/angular/utility/dependencies';
+import { VERSION } from '../version';
 import { Schema } from './schema';
 
 const CORE = '@angular/core';
@@ -46,7 +47,7 @@ function addMixinCdk(tree: Tree): void {
   addPackageJsonDependency(tree, {
     type: NodeDependencyType.Default,
     name: MIXIN_CDK,
-    version: 'latest',
+    version: VERSION,
   });
 }
 
@@ -60,7 +61,7 @@ function addMixinKit(tree: Tree): void {
   addPackageJsonDependency(tree, {
     type: NodeDependencyType.Default,
     name: MIXIN_KIT,
-    version: 'latest',
+    version: VERSION,
   });
 }
 

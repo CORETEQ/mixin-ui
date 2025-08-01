@@ -25,7 +25,9 @@ const HEADERS: Record<DocsApiKind, ReadonlyArray<string>> = {
   selector: 'docs-api-table',
   imports: [TitleCasePipe, XMapPipe, XTypedOutletPipe, NgTemplateOutlet],
   templateUrl: './api-table.html',
-  host: { class: 'docs-api-table' },
+  host: {
+    class: 'docs-api-table',
+  },
 })
 export class DocsApiTable {
   protected readonly items = contentChildren(DocsAbstractApiItem);

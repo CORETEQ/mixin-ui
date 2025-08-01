@@ -536,13 +536,6 @@ markdown {
     0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
 }
 
-.typed-out {
-  inline-size: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 1s forwards 150ms;
-}
-
 @media (width <= 1280px) {
   .docs-content {
     grid-template-columns: 15rem minmax(0, 1fr) 0;
@@ -572,16 +565,6 @@ markdown {
   }
 }
 
-@keyframes typing {
-  from {
-    inline-size: 0;
-  }
-
-  to {
-    inline-size: 100%;
-  }
-}
-
 .app-hero-animated-decor {
   animation: wheel-spin 5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
@@ -602,7 +585,7 @@ markdown {
 
 /* stylelint-disable */
 .docs-api-table {
-  display: block;
+  display: grid;
   overflow: hidden;
   border: 1px solid #e2e2e2;
   border-radius: 0.5rem;
