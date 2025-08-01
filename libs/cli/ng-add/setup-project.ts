@@ -9,17 +9,19 @@ import { Schema } from './schema';
 const NG_CDK_STYLES_PATH = '@angular/cdk/overlay-prebuilt.css';
 const MIXIN_STYLES_PATH = '@mixin-ui/kit/styles/index.scss';
 
+const MIXIN_ICONS_ASSETS = {
+  glob: '**/*',
+  input: 'node_modules/@mixin-ui/kit/icons',
+  output: 'icons/mixin',
+};
+
 export default function (options: Schema): Rule {
-  return chain([addGlobalStylesToWorkspace(options)]);
+  return chain([addGlobalStylesToWorkspace(options), addAssetsToWorkspace(options)]);
 }
 
 function addGlobalStylesToWorkspace(options: Schema): Rule {
   return updateWorkspace(workspace => {
     const projects = getProjectsToProcess(workspace, options);
-
-    if (projects.length === 0) {
-      throw new Error('No application projects found to process');
-    }
 
     projects.forEach(project => {
       const buildTarget = project.targets.get('build');
@@ -37,6 +39,35 @@ function addGlobalStylesToWorkspace(options: Schema): Rule {
       });
 
       buildTarget.options.styles = styles;
+    });
+  });
+}
+
+function addAssetsToWorkspace(options: Schema): Rule {
+  return updateWorkspace(workspace => {
+    const projects = getProjectsToProcess(workspace, options);
+
+    projects.forEach(project => {
+      const buildTarget = project.targets.get('build');
+
+      if (!buildTarget || !buildTarget.options) {
+        throw new Error(`Cannot find build options for project ${project}`);
+      }
+
+      const assets = (buildTarget.options.assets ?? []) as Array<any>;
+
+      const alreadyExists = assets.some(
+        asset =>
+          typeof asset === 'object' &&
+          asset.input === MIXIN_ICONS_ASSETS.input &&
+          asset.output === MIXIN_ICONS_ASSETS.output
+      );
+
+      if (!alreadyExists) {
+        assets.push(MIXIN_ICONS_ASSETS);
+      }
+
+      buildTarget.options.assets = assets;
     });
   });
 }
