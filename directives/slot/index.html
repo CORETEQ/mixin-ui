@@ -9,48 +9,13 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.3.2/css/flag-icons.min.css">
+
   <link rel="icon" href="/favicon-light.svg" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)">
-  <script type="module" crossorigin="" src="/assets/index-CjNzUg7D.js"></script>
-  <link rel="stylesheet" crossorigin="" href="/assets/style-CCBqCvu5.css">
-<style ng-app-id="ng">.app-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  inline-size: 100%;
-  background: hsla(0, 0%, 100%, 0.8);
-  border-style: solid;
-  border-color: #e5e5e5;
-  border-bottom-width: 1px;
-  backdrop-filter: saturate(180%) blur(5px);
-  /* stylelint-disable-next-line */
-  -webkit-backdrop-filter: saturate(180%) blur(5px); /* Safari */
-}
-
-.app-header-version {
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  justify-content: center;
-  block-size: 1.75rem;
-  padding: 0 0.75rem;
-  color: var(--x-neutral-600);
-  font-size: 13.5px;
-  font-weight: 500;
-  background-color: #fff;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-ring-shadow, 0 0 rgba(0, 0, 0, 0)), var(--tw-shadow);
-  border-radius: var(--x-radius-full);
-  cursor: default;
-  --tw-ring-shadow: 0 0 #0000;
-  --tw-ring-offset-shadow: 0 0 #0000;
-  --tw-shadow: 0 1px 1px 0.5px rgb(51 51 51 / 4%), 0 3px 3px -1.5px rgb(51 51 51 / 2%),
-    0 6px 6px -3px rgb(51 51 51 / 4%), 0 12px 12px -6px rgb(51 51 51 / 4%),
-    0 24px 24px -12px rgb(51 51 51 / 4%), 0 48px 48px -24px rgb(51 51 51 / 4%),
-    0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
-}
-.app-header-version:hover {
-  color: #09090b;
-}</style><style ng-app-id="ng">.x-icon {
+  <script type="module" crossorigin="" src="/assets/index-D4DTjVS4.js"></script>
+  <link rel="stylesheet" crossorigin="" href="/assets/style-DZmaimgx.css">
+<style ng-app-id="ng">.x-icon {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
@@ -59,14 +24,183 @@
   inline-size: var(--x-icon-size, 1em);
   block-size: var(--x-icon-size, 1em);
   background: var(--x-icon-color, currentcolor);
-}</style><style ng-app-id="ng">.docs-code {
-  display: block;
+}</style><style ng-app-id="ng">.x-btn {
+  box-sizing: border-box;
+  text-decoration: none;
+  text-indent: 0;
+  text-transform: none;
+  border: none;
+  appearance: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: var(--x-gap, 0.5rem);
+  align-items: center;
+  justify-content: center;
+  block-size: var(--x-size);
+  padding: 0 var(--x-side);
+  font: var(--x-font);
+  outline: 2px solid transparent;
+  outline-offset: 1px;
+  border-radius: var(--x-radius);
+}
+.x-btn:where(.x-variant-solid) {
+  color: var(--x-white);
+  background-color: var(--x-color-600);
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-solid):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-700);
+  }
+}
+.x-btn:where(.x-variant-outline) {
+  color: var(--x-color-900);
+  background-color: var(--x-white);
+  box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-outline):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-100);
+  }
+}
+.x-btn:where(.x-variant-outline):where(:active:not(:disabled), .x-active:not(:disabled)) {
+  background-color: var(--x-color-200);
+}
+.x-btn:where(.x-variant-outline):where([aria-pressed=true], .x-overlay-opened) {
+  background-color: var(--x-color-200);
+  filter: brightness(0.98) saturate(1.1);
+}
+.x-btn:where(.x-variant-surface) {
+  color: var(--x-color-900);
+  background-color: var(--x-color-100);
+  box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-surface):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-200);
+  }
+}
+.x-btn:where(.x-variant-surface):where(:active:not(:disabled), .x-active:not(:disabled)) {
+  background-color: var(--x-color-300);
+}
+.x-btn:where(.x-variant-subtle) {
+  color: var(--x-color-900);
+  background-color: var(--x-color-200);
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-subtle):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-300);
+  }
+}
+.x-btn:where(.x-variant-ghost) {
+  color: var(--x-color-900);
+  background-color: transparent;
+}
+@media (hover: hover) {
+  .x-btn:where(.x-variant-ghost):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
+    background-color: var(--x-color-200);
+  }
+}
+.x-btn:where(.x-variant-ghost):where(:active:not(:disabled), .x-active:not(:disabled)) {
+  background-color: var(--x-color-300);
+}
+.x-btn:where(.x-variant-plain) {
+  color: var(--x-color-900);
+}
+.x-btn:where(.x-size-xs) {
+  --x-font: var(--x-text-xs);
+  --x-size: var(--x-size-xs);
+  --x-side: 0.5rem;
+  --x-gap: 0.375rem;
+}
+.x-btn:where(.x-size-sm) {
+  --x-font: var(--x-text-sm);
+  --x-size: var(--x-size-sm);
+  --x-side: 0.625rem;
+}
+.x-btn:where(.x-size-md) {
+  --x-font: var(--x-text-sm);
+  --x-size: var(--x-size-md);
+  --x-side: 0.75rem;
+}
+.x-btn:where(.x-size-lg) {
+  --x-font: var(--x-text-md);
+  --x-size: var(--x-size-lg);
+  --x-side: 0.75rem;
+}
+.x-btn:where(.x-size-xl) {
+  --x-font: var(--x-text-md);
+  --x-size: var(--x-size-xl);
+  --x-side: 0.875rem;
+}
+.x-btn:where(.x-radius-none) {
+  --x-radius: var(--x-radius-none);
+}
+.x-btn:where(.x-radius-sm) {
+  --x-radius: var(--x-radius-sm);
+}
+.x-btn:where(.x-radius-md) {
+  --x-radius: var(--x-radius-md);
+}
+.x-btn:where(.x-radius-lg) {
+  --x-radius: var(--x-radius-lg);
+}
+.x-btn:where(.x-radius-full) {
+  --x-radius: var(--x-radius-full);
+}
+.x-btn:where(button) {
+  cursor: pointer;
+}
+.x-btn:where(:disabled) {
+  opacity: 0.6;
+  cursor: var(--x-cursor-disabled);
+}
+.x-btn:where(.x-loading) {
+  opacity: 0.9;
+  cursor: var(--x-cursor-loading);
+}
+.x-btn:where(.x-loading):where(:has(.x-btn-spinner.x-full)) {
+  -webkit-text-fill-color: transparent;
+}
+.x-btn:where(.x-loading):where(:has(.x-btn-spinner.x-full)) .x-icon {
+  opacity: 0;
+}
+.x-btn:where(.x-block) {
+  display: flex;
   inline-size: 100%;
-  padding: 0.875rem 0;
+}
+.x-btn:where(.x-vertical) {
+  flex-direction: column;
+  block-size: auto;
+  padding: calc(var(--x-side) / 1.5) var(--x-side);
+}
+.x-btn:where(.x-icon-only) {
+  inline-size: var(--x-size);
+  min-inline-size: var(--x-size);
+  padding: 0;
+}
+
+.x-btn-spinner {
+  display: grid;
+  place-items: center;
+}
+.x-btn-spinner:where(.x-full) {
+  position: absolute;
+  inset: 0;
+}</style><style ng-app-id="ng">.docs-code {
+  display: grid;
+  inline-size: 100%;
   overflow: auto;
   background: #fff;
   border: 1px solid #e2e2e2;
   border-radius: 0.625rem;
+}
+.docs-code .docs-code-inner {
+  display: block;
+  padding: 0.875rem 1rem;
+  overflow: hidden;
 }
 .docs-code pre {
   background: transparent !important;
@@ -74,13 +208,11 @@
 .docs-code code {
   display: flex;
   flex-direction: column;
+  overflow-x: auto;
   font-family: var(--docs-code-font-family), monospace;
   font-size: 14px;
 }
 .docs-code code .line {
-  display: block;
-  height: 22px;
-  padding: 0 1.125rem;
   line-height: 22px;
 }
 .docs-code.with-numbers pre {
@@ -101,7 +233,7 @@
   margin-left: 1rem;
 }</style></head>
 <body><!--nghm-->
-<app-root ng-version="19.2.14" class="app-layout" ngh="9" ng-server-context="ssr-analog"><app-header class="app-header" ngh="0"><div class="app-container"><div class="mx-auto px-4 flex items-center justify-between flex-1 h-14"><div class="flex items-center space-x-4"><docs-logo ngh="0"><a routerlink="/" class="flex items-center gap-x-1.5" href="/"><x-icon src="mixin" size="26" raw="" class="x-icon" style="background: url(icons/mixin.svg) no-repeat center / contain; --x-icon-size: 26px;" ngh="0"></x-icon><span class="docs-logo-text">mixin</span></a></docs-logo><div class="app-header-version"> / <span class="text-[#09090B]" style="font-family: ui-monospace, monospace; letter-spacing: -0.5px;"> 0.0.1-alpha.2 </span></div></div><div class="flex items-center"><div class="hidden lg:flex"><nav class="items-center gap-4 text-sm xl:gap-6 hidden md:flex me-6 font-medium"><a routerlink="/installation" class="hover:underline underline-offset-2" href="/installation">Introduction</a><a routerlink="/components" class="hover:underline underline-offset-2" href="/components">Components</a><a routerlink="/colors" class="hover:underline underline-offset-2" href="/colors">Colors</a></nav><div class="flex items-center space-x-0"><a href="https://x.com/" aria-label="Follow me on X formerly known as Twitter" rel="noopener noreferrer" target="_blank" class="flex items-center docs-primary-focus docs-nav__link--base h-8 justify-center w-8"><svg height="1em" width="1em" data-icon="tabler/brand-x" class="h-4.5 w-4.5"><symbol id="ai:local:tabler/brand-x" viewBox="0 0 24 24"><path d="m4 4 11.733 16H20L8.267 4zm0 16 6.768-6.768m2.46-2.46L20 4" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></symbol><use href="#ai:local:tabler/brand-x"></use></svg></a><a href="https://github.com/CORETEQ/mixin-ui" aria-label="Follow me on GitHub" rel="noopener noreferrer" target="_blank" class="flex items-center docs-primary-focus docs-nav__link--base h-8 justify-center w-8"><svg height="1em" width="1em" data-icon="mdi/github" class="h-4.5 w-4.5"><symbol id="ai:local:mdi/github" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" fill="currentColor"></path></symbol><use href="#ai:local:mdi/github"></use></svg></a></div></div></div></div></div></app-header><router-outlet></router-outlet><docs-wrapper class="app-container" ngh="8"><div class="docs-content"><docs-sidebar class="docs-sidebar" ngh="1"><div class="docs-sidebar-gradient-top"></div><div class="docs-sidebar-wrapper"><div class="docs-sidebar-nav"><div class=""><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Documentation</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/installation"><span class="docs-sidebar-item-text">Installation</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/changelog"><span class="docs-sidebar-item-text">Changelog</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Customization</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/colors"><span class="docs-sidebar-item-text">Color palette</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Components</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/accordion"><span class="docs-sidebar-item-text">Accordion</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/button"><span class="docs-sidebar-item-text">Button</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/calendar"><span class="docs-sidebar-item-text">Calendar</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/checkbox"><span class="docs-sidebar-item-text">Checkbox</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/collapsible"><span class="docs-sidebar-item-text">Collapsible</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/combobox"><span class="docs-sidebar-item-text">Combobox</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/comparable"><span class="docs-sidebar-item-text">Comparable</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/group"><span class="docs-sidebar-item-text">Group</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/icon"><span class="docs-sidebar-item-text">Icon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-date"><span class="docs-sidebar-item-text">Input Date</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-mask"><span class="docs-sidebar-item-text">Input Mask</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-number"><span class="docs-sidebar-item-text">Input Number</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-text"><span class="docs-sidebar-item-text">Input Text</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Label</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/listbox"><span class="docs-sidebar-item-text">Listbox</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/select"><span class="docs-sidebar-item-text">Select</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/spinner"><span class="docs-sidebar-item-text">Spinner</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/switch"><span class="docs-sidebar-item-text">Switch</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Textarea</span><span class="docs-sidebar-badge">soon</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Directives</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/directives/popover"><span class="docs-sidebar-item-text">Popover</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Separator</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item active" href="/directives/slot" aria-current="page"><span class="docs-sidebar-item-text">Slot</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/directives/tooltip"><span class="docs-sidebar-item-text">Tooltip</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Services</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Dialog</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Theme</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Toaster</span><span class="docs-sidebar-badge">soon</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Pipes</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/pipes/map"><span class="docs-sidebar-item-text">Map</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/pipes/typed-outlet"><span class="docs-sidebar-item-text">Typed Outlet</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Utils</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/utils/operators"><span class="docs-sidebar-item-text">Operators</span><!----></a></li><!----></ul></div><!----></div></div><div class="docs-sidebar-gradient-bottom"></div></docs-sidebar><article class="docs-root"><router-outlet></router-outlet><app-slot ngh="6"><docs-page class="docs-page" ngh="3"><div class="docs-page-content"><span class="flex mb-2 text-sm font-medium text-[#FB6513]"> Directives </span><h1>Slot</h1><!----><p>Unified definition of template fragments.</p><h2 id="import" data-text="Import" class="" ngh="4"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/directives/slot#import"><!---->Import</a></h2><docs-code class="docs-code with-numbers" ngh="0"><div><pre class="shiki shiki-themes github-light github-dark-default" style="background-color:#fff;--shiki-dark-bg:#0d1117;color:#24292e;--shiki-dark:#e6edf3" tabindex="0"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#FF7B72">import</span><span style="color:#24292E;--shiki-dark:#E6EDF3"> { XSlot } </span><span style="color:#D73A49;--shiki-dark:#FF7B72">from</span><span style="color:#032F62;--shiki-dark:#A5D6FF"> '@mixin-ui/kit'</span><span style="color:#24292E;--shiki-dark:#E6EDF3">;</span></span></code></pre></div></docs-code><h2 id="usage" data-text="Usage" class="" ngh="4"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/directives/slot#usage"><!---->Usage</a></h2><docs-code class="docs-code with-numbers" ngh="0"><div><pre class="shiki shiki-themes github-light github-dark-default" style="background-color:#fff;--shiki-dark-bg:#0d1117;color:#24292e;--shiki-dark:#e6edf3" tabindex="0"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">@</span><span style="color:#6F42C1;--shiki-dark:#D2A8FF">Component</span><span style="color:#24292E;--shiki-dark:#E6EDF3">({</span></span>
+<app-root ng-version="19.2.14" class="app-layout" ngh="10" ng-server-context="ssr-analog"><div class="docs-banner"><div class="docs-banner-container"><div class="docs-banner-content"><span class="docs-banner-text"> ⚠️ Mixin UI is currently in alpha stage </span></div></div></div><div class="app-header"><div class="app-container"><div class="mx-auto px-4 flex items-center justify-between flex-1 h-14"><div class="flex items-center space-x-4"><a routerlink="/" class="flex items-center gap-x-1.5" href="/"><x-icon src="icons/app/mixin.svg" size="28" raw="" class="x-icon" style="background: url(icons/app/mixin.svg) no-repeat center / contain; --x-icon-size: 28px;" ngh="0"></x-icon><span class="h-[30px] text-[#09090b] text-[30px] leading-[26px] font-kumbh font-normal" style="-webkit-font-smoothing: subpixel-antialiased;"> mixin </span></a><div class="app-header-version"><a target="_blank" class="text-[#09090B] decoration-gray-400 underline-offset-1 hover:underline" style="font-family: ui-monospace, monospace; letter-spacing: -0.5px;" href="https://github.com/CORETEQ/mixin-ui/releases/tag/v0.0.1-alpha.2"> v0.0.1-alpha.2 </a></div></div><div class="hidden md:flex items-center"><nav class="items-center gap-6 text-sm flex font-medium me-6"><a routerlink="/installation" class="hover:underline underline-offset-2" href="/installation">Introduction</a><a routerlink="/components" class="hover:underline underline-offset-2" href="/components">Components</a><a routerlink="/colors" class="hover:underline underline-offset-2" href="/colors">Colors</a></nav><div class="h-[1.125rem] w-[1px] bg-gray-300"></div><div class="flex items-center gap-1 ms-3.5"><a x-icon="" href="https://github.com/CORETEQ/mixin-ui" target="_blank" color="neutral" variant="ghost" size="md" data-color="neutral" class="x-btn x-radius-md x-size-md x-variant-ghost x-icon-only" ngh="1"><!----><!----><x-icon src="icons/app/github.svg" size="18" class="x-icon" style="mask: url(icons/app/github.svg) no-repeat center / contain; --x-icon-size: 18px;" ngh="0"></x-icon><!----></a></div></div><button aria-label="Toggle menu" class="md:hidden relative w-8 h-8 flex items-center justify-center"><span class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out translate-y-2"></span><span class="absolute w-5 h-0.5 right-1 bg-gray-500 transition duration-300 ease-in-out opacity-100"></span><span class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out -translate-y-2"></span></button></div></div></div><!----><router-outlet></router-outlet><docs-wrapper class="app-container" ngh="9"><div class="docs-content"><docs-sidebar class="docs-sidebar" ngh="2"><div class="docs-sidebar-gradient-top"></div><div class="docs-sidebar-wrapper"><div class="docs-sidebar-nav"><div class=""><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Documentation</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/installation"><span class="docs-sidebar-item-text">Installation</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/changelog"><span class="docs-sidebar-item-text">Changelog</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Customization</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/colors"><span class="docs-sidebar-item-text">Color palette</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Components</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/accordion"><span class="docs-sidebar-item-text">Accordion</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/button"><span class="docs-sidebar-item-text">Button</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/calendar"><span class="docs-sidebar-item-text">Calendar</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/checkbox"><span class="docs-sidebar-item-text">Checkbox</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/collapsible"><span class="docs-sidebar-item-text">Collapsible</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/combobox"><span class="docs-sidebar-item-text">Combobox</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/comparable"><span class="docs-sidebar-item-text">Comparable</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/group"><span class="docs-sidebar-item-text">Group</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/icon"><span class="docs-sidebar-item-text">Icon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-date"><span class="docs-sidebar-item-text">Input Date</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-mask"><span class="docs-sidebar-item-text">Input Mask</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-number"><span class="docs-sidebar-item-text">Input Number</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/input-text"><span class="docs-sidebar-item-text">Input Text</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Label</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/listbox"><span class="docs-sidebar-item-text">Listbox</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/select"><span class="docs-sidebar-item-text">Select</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/spinner"><span class="docs-sidebar-item-text">Spinner</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/components/switch"><span class="docs-sidebar-item-text">Switch</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Textarea</span><span class="docs-sidebar-badge">soon</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Directives</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/directives/popover"><span class="docs-sidebar-item-text">Popover</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Separator</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item active" href="/directives/slot" aria-current="page"><span class="docs-sidebar-item-text">Slot</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/directives/tooltip"><span class="docs-sidebar-item-text">Tooltip</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Services</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Dialog</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Theme</span><span class="docs-sidebar-badge">soon</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item disabled"><span class="docs-sidebar-item-text">Toaster</span><span class="docs-sidebar-badge">soon</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Pipes</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/pipes/map"><span class="docs-sidebar-item-text">Map</span><!----></a></li><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/pipes/typed-outlet"><span class="docs-sidebar-item-text">Typed Outlet</span><!----></a></li><!----></ul></div><div class="mt-6"><h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">Utils</h5><ul><li><a routerlinkactive="active" ariacurrentwhenactive="page" class="docs-sidebar-item" href="/utils/operators"><span class="docs-sidebar-item-text">Operators</span><!----></a></li><!----></ul></div><!----></div></div><div class="docs-sidebar-gradient-bottom"></div></docs-sidebar><article class="docs-root"><router-outlet></router-outlet><app-slot ngh="7"><docs-page class="docs-page" ngh="4"><div class="docs-page-content"><span class="flex mb-2 text-sm font-medium text-[#FB6513]"> Directives </span><h1>Slot</h1><!----><p>Unified definition of template fragments.</p><h2 id="import" data-text="Import" class="" ngh="5"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/directives/slot#import"><!---->Import</a></h2><docs-code class="docs-code with-numbers" ngh="0"><div class="docs-code-inner"><pre class="shiki shiki-themes github-light github-dark-default" style="background-color:#fff;--shiki-dark-bg:#0d1117;color:#24292e;--shiki-dark:#e6edf3" tabindex="0"><code><span class="line"><span style="color:#D73A49;--shiki-dark:#FF7B72">import</span><span style="color:#24292E;--shiki-dark:#E6EDF3"> { XSlot } </span><span style="color:#D73A49;--shiki-dark:#FF7B72">from</span><span style="color:#032F62;--shiki-dark:#A5D6FF"> '@mixin-ui/kit'</span><span style="color:#24292E;--shiki-dark:#E6EDF3">;</span></span></code></pre></div></docs-code><h2 id="usage" data-text="Usage" class="" ngh="5"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/directives/slot#usage"><!---->Usage</a></h2><docs-code class="docs-code with-numbers" ngh="0"><div class="docs-code-inner"><pre class="shiki shiki-themes github-light github-dark-default" style="background-color:#fff;--shiki-dark-bg:#0d1117;color:#24292e;--shiki-dark:#e6edf3" tabindex="0"><code><span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">@</span><span style="color:#6F42C1;--shiki-dark:#D2A8FF">Component</span><span style="color:#24292E;--shiki-dark:#E6EDF3">({</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">  template: </span><span style="color:#032F62;--shiki-dark:#A5D6FF">`</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">    &lt;</span><span style="color:#22863A;--shiki-dark:#7EE787">ng-template</span><span style="color:#6F42C1;--shiki-dark:#79C0FF"> x-slot</span><span style="color:#24292E;--shiki-dark:#E6EDF3">=</span><span style="color:#032F62;--shiki-dark:#A5D6FF">"name"</span><span style="color:#24292E;--shiki-dark:#E6EDF3">&gt;</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">      &lt;</span><span style="color:#22863A;--shiki-dark:#7EE787">span</span><span style="color:#24292E;--shiki-dark:#E6EDF3">&gt;Content&lt;/</span><span style="color:#22863A;--shiki-dark:#7EE787">span</span><span style="color:#24292E;--shiki-dark:#E6EDF3">&gt;</span></span>
@@ -112,8 +244,8 @@
 <span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">    &lt;</span><span style="color:#22863A;--shiki-dark:#7EE787">span</span><span style="color:#6F42C1;--shiki-dark:#79C0FF"> *x-slot</span><span style="color:#24292E;--shiki-dark:#E6EDF3">=</span><span style="color:#032F62;--shiki-dark:#A5D6FF">"'name'"</span><span style="color:#24292E;--shiki-dark:#E6EDF3">&gt;Content&lt;/</span><span style="color:#22863A;--shiki-dark:#7EE787">span</span><span style="color:#24292E;--shiki-dark:#E6EDF3">&gt;</span></span>
 <span class="line"><span style="color:#032F62;--shiki-dark:#A5D6FF">  `</span></span>
 <span class="line"><span style="color:#24292E;--shiki-dark:#E6EDF3">})</span></span>
-<span class="line"><span style="color:#D73A49;--shiki-dark:#FF7B72">export</span><span style="color:#D73A49;--shiki-dark:#FF7B72"> class</span><span style="color:#6F42C1;--shiki-dark:#FFA657"> Usage</span><span style="color:#24292E;--shiki-dark:#E6EDF3"> {}</span></span></code></pre></div></docs-code><h2 id="api" data-text="API" class="" ngh="4"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/directives/slot#api"><!---->API</a></h2><h3 id="inputs" data-text="Inputs" class="" ngh="4"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/directives/slot#inputs"><!---->Inputs</a></h3><docs-api-table class="docs-api-table" ngh="5"><table class="docs-table"><thead><tr><th style="width: 30%;">Name</th><th style="width: 35%;">Type</th><th>Default</th><!----></tr></thead><tbody><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">x-slot</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>string</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">""</span></div><!----></div></td><!----></tr><!----></tbody></table></docs-api-table></div><docs-page-pagination ngh="2"><div class="flex justify-between mt-8 border-t border-dashed border-[#E5E5E5] pt-6.5"><div class="flex flex-col gap-1"><div class="flex items-center gap-1 text-sm leading-5 text-[#52525B]"> Previous </div><a class="text-lg leading-6 font-medium text-[#09090B] hover:underline" href="/directives/separator"> Separator </a></div><!----><div class="flex flex-col gap-1 ml-auto"><div class="flex items-center gap-1 text-sm leading-5 text-[#52525B] self-end"> Next </div><a class="text-lg leading-6 font-medium text-[#09090B] hover:underline" href="/directives/tooltip"> Tooltip </a></div><!----></div></docs-page-pagination></docs-page></app-slot><!----><docs-footer class="docs-footer" ngh="0"><div class="flex justify-between pt-6 pb-10"><div class="flex items-center gap-1.5 text-sm text-[#52525B]"> Licensed under <a href="https://opensource.org/license/apache-2-0" target="_blank" class="hover:text-[#09090B] inline-flex items-center gap-1"><x-icon src="scale" size="15" class="x-icon" style="mask: url(icons/scale.svg) no-repeat center / contain; --x-icon-size: 15px;" ngh="0"></x-icon><span class="hover:underline">Apache 2.0</span></a></div><div class="flex flex-col gap-8"><span class="text-sm text-[#52525B]"> Copyright © 2025 Mixin. Made with <span class="inline-block mx-0.5">❤️</span> by <a href="https://coreteq.sk" target="_blank" class="font-medium text-[#1470EF] hover:underline">CoreTEQ</a></span></div></div></docs-footer></article><div class="docs-nav"><div class="docs-nav-inner"><docs-page-nav ngh="7"><h5 class="text-sm mb-2 font-semibold leading-5">On this page</h5><ol><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/directives/slot#import"> Import </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/directives/slot#usage"> Usage </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/directives/slot#api"> API </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B] ml-4" href="/directives/slot#inputs"> Inputs </a></li><!----></ol><div class="flex flex-col border-t mt-3 pt-3 border-dashed border-[#E5E5E5]"><docs-edit-page ngh="0"><a target="_blank" class="flex items-center gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="https://github.com/CORETEQ/mixin-ui/edit/main/libs/web/src/app/pages/directives/slot/index.html"> Edit this page <x-icon src="arrow-up-right" class="x-icon mt-0.5" style="mask: url(icons/arrow-up-right.svg) no-repeat center / contain;" ngh="0"></x-icon></a></docs-edit-page><docs-source-code ngh="0"><a target="_blank" class="flex items-center gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="https://github.com/CORETEQ/mixin-ui/tree/main/libs/kit/directives/slot"> Source code <x-icon src="arrow-up-right" class="x-icon mt-0.5" style="mask: url(icons/arrow-up-right.svg) no-repeat center / contain;" ngh="0"></x-icon></a></docs-source-code><docs-scroll-top class="transition-opacity opacity-0 pointer-events-none" ngh="0"><button type="button" class="flex items-center cursor-pointer gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]"> Scroll to top </button></docs-scroll-top></div><!----></docs-page-nav></div></div></div></docs-wrapper><!----></app-root>
+<span class="line"><span style="color:#D73A49;--shiki-dark:#FF7B72">export</span><span style="color:#D73A49;--shiki-dark:#FF7B72"> class</span><span style="color:#6F42C1;--shiki-dark:#FFA657"> Usage</span><span style="color:#24292E;--shiki-dark:#E6EDF3"> {}</span></span></code></pre></div></docs-code><h2 id="api" data-text="API" class="" ngh="5"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/directives/slot#api"><!---->API</a></h2><h3 id="inputs" data-text="Inputs" class="" ngh="5"><a routerlink="." class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]" href="/directives/slot#inputs"><!---->Inputs</a></h3><docs-api-table class="docs-api-table" ngh="6"><table class="docs-table"><thead><tr><th style="width: 30%;">Name</th><th style="width: 35%;">Type</th><th>Default</th><!----></tr></thead><tbody><tr><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code class="white">x-slot</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><code>string</code></div><!----></div></td><td class=""><div class="d-inline-flex flex-items-center gap-x-1"><!----><div class="d-block"><span class="muted">""</span></div><!----></div></td><!----></tr><!----></tbody></table></docs-api-table></div><docs-page-pagination ngh="3"><div class="flex justify-between mt-8 border-t border-dashed border-[#E5E5E5] pt-6 pb-10"><div class="flex flex-col gap-1"><div class="flex items-center gap-1 text-sm leading-5 text-[#52525B]"> Previous </div><a class="text-lg leading-6 font-medium text-[#09090B] hover:underline" href="/directives/separator"> Separator </a></div><!----><div class="flex flex-col gap-1 ml-auto"><div class="flex items-center gap-1 text-sm leading-5 text-[#52525B] self-end"> Next </div><a class="text-lg leading-6 font-medium text-[#09090B] hover:underline" href="/directives/tooltip"> Tooltip </a></div><!----></div></docs-page-pagination></docs-page></app-slot><!----></article><div class="docs-nav"><div class="docs-nav-inner"><docs-page-nav ngh="8"><h5 class="text-sm mb-2 font-semibold leading-5">On this page</h5><ol><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/directives/slot#import"> Import </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/directives/slot#usage"> Usage </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="/directives/slot#api"> API </a></li><li><a routerlinkactive="active" class="text-sm leading-8 text-[#52525B] hover:text-[#09090B] ml-4" href="/directives/slot#inputs"> Inputs </a></li><!----></ol><div class="flex flex-col border-t mt-3 pt-3 border-dashed border-[#E5E5E5]"><docs-edit-page ngh="0"><a target="_blank" class="flex items-center gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="https://github.com/CORETEQ/mixin-ui/edit/main/libs/web/src/app/pages/directives/slot/index.html"> Edit this page <x-icon size="13" src="arrow-up-right" class="x-icon mt-0.5" style="mask: url(icons/arrow-up-right.svg) no-repeat center / contain; --x-icon-size: 13px;" ngh="0"></x-icon></a></docs-edit-page><docs-source-code ngh="0"><a target="_blank" class="flex items-center gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]" href="https://github.com/CORETEQ/mixin-ui/tree/main/libs/kit/directives/slot"> Source code <x-icon size="13" src="arrow-up-right" class="x-icon mt-0.5" style="mask: url(icons/arrow-up-right.svg) no-repeat center / contain; --x-icon-size: 13px;" ngh="0"></x-icon></a></docs-source-code><docs-scroll-top class="transition-opacity opacity-0 pointer-events-none" ngh="0"><button type="button" class="flex items-center cursor-pointer gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]"> Scroll to top </button></docs-scroll-top></div><!----></docs-page-nav></div></div></div></docs-wrapper><!----></app-root>
   
 
 
-<script id="ng-state" type="application/json">{"__nghData__":[{},{"t":{"4":"t4"},"c":{"4":[{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":2}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]}}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":13},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]}},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":4},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]}}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]}},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]}},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":2}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]},"x":3}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":2}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]}}]}}]}},{"t":{"1":"t8","2":"t9"},"c":{"1":[{"i":"t8","r":1}],"2":[{"i":"t9","r":1}]}},{"t":{"6":"t7"},"c":{"6":[]}},{"t":{"2":"t10"},"c":{"2":[]}},{"t":{"4":"t20","7":"t21"},"c":{"4":[{"i":"t20","r":1,"x":3}],"7":[{"i":"t21","r":1,"t":{"2":"t22"},"c":{"2":[{"i":"t22","r":1,"n":{"4":"1f"},"t":{"4":"t23","5":"t24"},"c":{"4":[],"5":[{"i":"t24","r":1}]},"x":3}]}}]}},{"n":{"1":"0f2n3","4":"3f2n","7":"6f2n","10":"9f2n","12":"11f2n"},"d":[14]},{"t":{"0":"t11"},"c":{"0":[{"i":"t11","r":3,"t":{"4":"t12"},"c":{"4":[{"i":"t12","r":1,"x":4}]}}]}},{"c":{"3":[{"i":"c1332334148","r":1}]}},{"c":{"1":[{"i":"c277522020","r":1}]}}]}</script></body></html>
+<script id="ng-state" type="application/json">{"__nghData__":[{},{"t":{"0":"t0","1":"t1","2":"t2"},"c":{"0":[],"1":[],"2":[{"i":"t2","r":1}]}},{"t":{"4":"t4"},"c":{"4":[{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":2}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]}}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":13},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]}},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":4},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]}}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]}},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]}},{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":2}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[{"i":"t6","r":1}]},"x":3}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]},"x":2}]}},{"i":"t4","r":1,"t":{"5":"t5"},"c":{"5":[{"i":"t5","r":1,"t":{"4":"t6"},"c":{"4":[]}}]}}]}},{"t":{"1":"t8","2":"t9"},"c":{"1":[{"i":"t8","r":1}],"2":[{"i":"t9","r":1}]}},{"t":{"6":"t7"},"c":{"6":[]}},{"t":{"2":"t10"},"c":{"2":[]}},{"t":{"4":"t16","7":"t17"},"c":{"4":[{"i":"t16","r":1,"x":3}],"7":[{"i":"t17","r":1,"t":{"2":"t18"},"c":{"2":[{"i":"t18","r":1,"n":{"4":"1f"},"t":{"4":"t19","5":"t20"},"c":{"4":[],"5":[{"i":"t20","r":1}]},"x":3}]}}]}},{"n":{"1":"0f2n3","4":"3f2n","7":"6f2n","10":"9f2n","12":"11f2n"},"d":[14]},{"t":{"0":"t11"},"c":{"0":[{"i":"t11","r":3,"t":{"4":"t12"},"c":{"4":[{"i":"t12","r":1,"x":4}]}}]}},{"c":{"3":[{"i":"c1332334148","r":1}]}},{"n":{"27":"26fn2"},"t":{"32":"t3"},"c":{"32":[],"33":[{"i":"c1978262499","r":1}]}}]}</script></body></html>
