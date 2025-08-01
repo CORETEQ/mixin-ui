@@ -14,7 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   encapsulation: ViewEncapsulation.None,
   selector: 'docs-code',
   styleUrl: './code.scss',
-  template: ` <div [innerHTML]="html()"></div> `,
+  template: ` <div class="docs-code-inner" [innerHTML]="html()"></div> `,
   host: {
     class: 'docs-code',
     '[class.with-numbers]': 'withNumbers()',

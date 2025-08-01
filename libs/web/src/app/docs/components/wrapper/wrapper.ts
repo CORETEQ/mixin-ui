@@ -8,7 +8,7 @@ import { DocsFooter } from '@/docs/components/footer';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   templateUrl: './wrapper.html',
-  imports: [RouterOutlet, DocsPageNav, DocsSidebar, DocsFooter],
+  imports: [RouterOutlet, DocsPageNav, DocsSidebar],
   selector: 'docs-wrapper',
   host: { class: 'app-container' },
 })

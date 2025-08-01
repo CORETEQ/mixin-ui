@@ -20,7 +20,6 @@ import { XButton, XIcon, XTooltip } from '@mixin-ui/kit';
   encapsulation: ViewEncapsulation.None,
   selector: 'docs-snippet',
   imports: [XIcon, XButton, XTooltip],
-  styleUrl: './snippet.scss',
   templateUrl: './snippet.html',
   host: {
     class: 'docs-snippet',
