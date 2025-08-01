@@ -88,7 +88,7 @@ Read the docs here: <a href="https://mixin-ui.dev/installation" rel="noopener no
 
 ## Releases
 
-For changelogs, refer to the [automatically generated changelog](/CHANGELOG.md).
+For changelog, refer to the [automatically generated changelog](/CHANGELOG.md).
 
 ## Contributing
 
