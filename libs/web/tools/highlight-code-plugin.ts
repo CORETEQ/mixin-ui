@@ -39,6 +39,7 @@ export async function highlightCode(): Promise<Plugin> {
       const content = readFileSync(path).toString().trimEnd();
 
       const { result, decorations } = processContent(content);
+
       const html = highlighter.codeToHtml(result, {
         themes: {
           light: LIGHT_THEME,
@@ -67,7 +68,7 @@ function processContent(code: string): {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    if (!line.match(SPOTLIGHT_REGEX)) {
+    if (!line.match(SPOTLIGHT_REGEX)?.length) {
       continue;
     }
 

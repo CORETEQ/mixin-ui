@@ -17,7 +17,7 @@ import { XIcon } from '@mixin-ui/kit';
       [attr.href]="href()"
     >
       Edit this page
-      <x-icon src="arrow-up-right" class="mt-0.5" />
+      <x-icon size="13" src="arrow-up-right" class="mt-0.5" />
     </a>
   `,
 })

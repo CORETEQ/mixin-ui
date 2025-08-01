@@ -1,11 +1,16 @@
 .docs-code {
-  display: block;
+  display: grid;
   inline-size: 100%;
-  padding: 0.875rem 0;
   overflow: auto;
   background: #fff;
   border: 1px solid #e2e2e2;
   border-radius: 0.625rem;
+
+  .docs-code-inner {
+    display: block;
+    padding: 0.875rem 1rem;
+    overflow: hidden;
+  }
 
   pre {
     background: transparent !important;
@@ -14,13 +19,11 @@
   code {
     display: flex;
     flex-direction: column;
+    overflow-x: auto;
     font-family: var(--docs-code-font-family), monospace;
     font-size: 14px;
 
     .line {
-      display: block;
-      height: 22px;
-      padding: 0 1.125rem;
       line-height: 22px;
     }
   }
