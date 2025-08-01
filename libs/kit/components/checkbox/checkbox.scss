@@ -63,7 +63,7 @@
   background-color: var(--x-bg, var(--x-white));
   outline: 0.125rem solid transparent;
   outline-offset: 0.125rem;
-  box-shadow: inset 0 0 0 1px var(--x-neutral-400), rgb(27 31 35 / 4%) 0 1px 0;
+  box-shadow: inset 0 0 0 1px var(--x-neutral-300), rgb(27 31 35 / 4%) 0 1px 0;
   border-radius: var(--x-radius);
   transition-timing-function: ease-in-out;
   transition-duration: 100ms;
@@ -73,7 +73,7 @@
   // states
   @include hover {
     background-color: var(--x-neutral-100);
-    box-shadow: inset 0 0 0 1px var(--x-neutral-500);
+    box-shadow: inset 0 0 0 1px var(--x-neutral-400);
   }
 
   @include active {

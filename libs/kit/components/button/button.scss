@@ -85,7 +85,26 @@
   @include variant(outline) {
     color: var(--x-color-900);
     background-color: var(--x-white);
-    box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
+    box-shadow: inset 0 0 0 1px var(--x-color-300), 0 1px 1px #f1f1f1;
+
+    @include hover {
+      background-color: var(--x-color-50);
+    }
+
+    @include active {
+      background-color: var(--x-color-100);
+    }
+
+    @include pressed {
+      background-color: var(--x-color-100);
+      filter: brightness(0.98) saturate(1.1);
+    }
+  }
+
+  @include variant(surface) {
+    color: var(--x-color-900);
+    background-color: var(--x-color-50);
+    box-shadow: inset 0 0 0 1px var(--x-color-300), 0 1px 1px #f1f1f1;
 
     @include hover {
       background-color: var(--x-color-100);
@@ -94,33 +113,14 @@
     @include active {
       background-color: var(--x-color-200);
     }
-
-    @include pressed {
-      background-color: var(--x-color-200);
-      filter: brightness(0.98) saturate(1.1);
-    }
-  }
-
-  @include variant(surface) {
-    color: var(--x-color-900);
-    background-color: var(--x-color-100);
-    box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
-
-    @include hover {
-      background-color: var(--x-color-200);
-    }
-
-    @include active {
-      background-color: var(--x-color-300);
-    }
   }
 
   @include variant(subtle) {
     color: var(--x-color-900);
-    background-color: var(--x-color-200);
+    background-color: var(--x-color-100);
 
     @include hover {
-      background-color: var(--x-color-300);
+      background-color: var(--x-color-200);
     }
   }
 
@@ -129,11 +129,11 @@
     background-color: transparent;
 
     @include hover {
-      background-color: var(--x-color-200);
+      background-color: var(--x-color-100);
     }
 
     @include active {
-      background-color: var(--x-color-300);
+      background-color: var(--x-color-200);
     }
   }
 
