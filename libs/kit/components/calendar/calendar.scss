@@ -66,6 +66,7 @@
 .x-calendar {
   display: block;
   padding: 0.75rem;
+  background: var(--x-white);
 
   @include size(xs) {
     --x-size: var(--x-size-xs);

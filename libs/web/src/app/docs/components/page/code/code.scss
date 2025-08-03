@@ -19,6 +19,7 @@
   code {
     display: flex;
     flex-direction: column;
+    max-block-size: 32rem;
     overflow-x: auto;
     font-family: var(--docs-code-font-family), monospace;
     font-size: 14px;
