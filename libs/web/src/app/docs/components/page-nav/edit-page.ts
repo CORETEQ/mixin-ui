@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { map, startWith } from 'rxjs';
 import { fromRouterEvent } from '@mixin-ui/cdk';
 import { XIcon } from '@mixin-ui/kit';
+import { environment } from '../../../env';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,7 +13,7 @@ import { XIcon } from '@mixin-ui/kit';
   imports: [XIcon],
   template: `
     <a
-      class="flex items-center gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]"
+      class="flex items-center gap-1 text-sm leading-8 text-gray-600 hover:text-gray-950"
       target="_blank"
       [attr.href]="href()"
     >
@@ -23,7 +24,7 @@ import { XIcon } from '@mixin-ui/kit';
 })
 export class DocsEditPage {
   readonly #router = inject(Router);
-  readonly #pagesUrl = 'https://github.com/CORETEQ/mixin-ui/edit/main/libs/web/src/app/pages';
+  readonly #pagesUrl = `${environment.githubUrl}/edit/main/libs/web/src/app/pages`;
 
   readonly href = toSignal(
     fromRouterEvent(NavigationEnd).pipe(

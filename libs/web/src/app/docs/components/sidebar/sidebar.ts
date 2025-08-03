@@ -17,7 +17,9 @@ import { DOCS_NAV_ITEMS } from '../../providers';
   templateUrl: './sidebar.html',
   imports: [RouterLinkActive, RouterLink],
   selector: 'docs-sidebar',
-  host: { class: 'docs-sidebar' },
+  host: {
+    class: 'docs-sidebar',
+  },
 })
 export class DocsSidebar {
   readonly items = inject(DOCS_NAV_ITEMS);

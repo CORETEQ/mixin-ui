@@ -2,13 +2,13 @@
   display: grid;
   inline-size: 100%;
   overflow: auto;
-  background: #fff;
-  border: 1px solid #e2e2e2;
+  background: var(--x-white);
+  border: 1px solid var(--x-neutral-200);
   border-radius: 0.625rem;
 
   .docs-code-inner {
     display: block;
-    padding: 0.875rem 1rem;
+    padding: 1rem 1.125rem;
     overflow: hidden;
   }
 
@@ -39,8 +39,9 @@
           display: inline-block;
           inline-size: 1rem;
           margin-left: -0.125rem;
-          color: #b8b8b8;
+          color: var(--x-neutral-400);
           text-align: end;
+          opacity: 0.9;
           content: counter(codeblock-line);
         }
 

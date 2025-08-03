@@ -24,7 +24,7 @@ import { X_SLOT } from '@mixin-ui/kit/directives';
   host: {
     role: 'region',
     class: 'x-collapsible',
-    '[class.x-opened]': 'open()',
+    '[attr.data-state]': 'open() ? "open" : "closed"',
   },
 })
 export class XCollapsible {

@@ -8,17 +8,19 @@
         }
       </tr>
       </thead>
+
       <tbody>
         @for (item of items(); track $index) {
           <tr>
             @for (member of item.members(); track $index) {
               <td [class.empty]="!member.content">
                 <div class="d-inline-flex flex-items-center gap-x-1">
-                  @let $ = member.content | typedOutlet; @if ($.type === 'template') {
-                  <ng-container *ngTemplateOutlet="$.outlet" />
-                } @else {
-                  <div class="d-block" [innerHTML]="member.content"></div>
-                }
+                  @let $ = member.content | typedOutlet;
+                  @if ($.type === 'template') {
+                    <ng-container *ngTemplateOutlet="$.outlet" />
+                  } @else {
+                    <div class="d-block" [innerHTML]="member.content"></div>
+                  }
                 </div>
               </td>
             }

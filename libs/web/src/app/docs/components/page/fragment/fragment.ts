@@ -31,7 +31,7 @@ import { toKebab } from '@/docs/utils';
   template: `
     <a
       routerLink="."
-      class="hover:underline decoration-1 underline-offset-4 decoration-[#E2E2E2]"
+      class="hover:underline decoration-1 underline-offset-4 decoration-gray-200"
       [fragment]="fragment()"
     >
       <ng-content>Heading {{ level }}</ng-content>

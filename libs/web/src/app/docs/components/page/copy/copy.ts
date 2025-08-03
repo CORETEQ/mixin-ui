@@ -23,7 +23,9 @@ import { XIcon } from '@mixin-ui/kit';
     <x-icon src="copy" />
     }
   `,
-  host: { type: 'button' },
+  host: {
+    type: 'button',
+  },
 })
 export class DocsCopy {
   readonly #clipboard = inject(Clipboard);

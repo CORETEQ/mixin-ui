@@ -16,7 +16,9 @@ import { DocsPagePagination } from './pagination';
   templateUrl: './root.html',
   imports: [DocsPagePagination],
   providers: [DocsFragmentsService],
-  host: { class: 'docs-page' },
+  host: {
+    class: 'flex flex-col h-full',
+  },
 })
 export class DocsPageRoot {
   readonly #snapshot = inject(ActivatedRoute).snapshot;

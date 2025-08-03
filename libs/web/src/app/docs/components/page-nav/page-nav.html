@@ -4,7 +4,7 @@
   <ol>
     @for (url of page().fragments; track url.fragment) {
       <li>
-        <a class="text-sm leading-8 text-[#52525B] hover:text-[#09090B]"
+        <a class="text-sm leading-8 text-gray-600 hover:text-gray-950"
            routerLinkActive="active"
            [class.ml-4]="url.level === 3"
            [routerLinkActiveOptions]="rlaOptions"

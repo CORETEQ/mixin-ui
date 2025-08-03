@@ -1,15 +1,17 @@
 .x-collapsible {
   display: grid;
   grid-template-rows: 0fr;
+  overflow: hidden;
   opacity: 0;
   transition: grid-template-rows 200ms ease-in-out 1ms, opacity 200ms ease-in-out;
 
-  &.x-opened {
+  &:where([data-state='open']) {
     grid-template-rows: 1fr;
     opacity: 1;
   }
 }
 
 .x-collapsible-content {
+  min-block-size: 0;
   overflow: hidden;
 }
