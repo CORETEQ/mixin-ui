@@ -38,9 +38,8 @@
     content: none;
   }
 
-  &:hover,
-  details[open] & {
-    background-color: var(--x-neutral-100);
+  &:hover {
+    background-color: var(--x-neutral-50);
   }
 }
 
@@ -72,4 +71,5 @@
 .x-accordion-content {
   display: block;
   padding: var(--x-padding, 1rem);
+  background-color: var(--x-neutral-50);
 }
