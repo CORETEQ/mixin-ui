@@ -42,31 +42,23 @@
       "prettier --write"
     ]
   },
-  "dependencies": {
+  "devDependencies": {
+    "@analogjs/platform": "1.14.0",
     "@analogjs/router": "1.18.0",
+    "@analogjs/vite-plugin-angular": "1.14.0",
+    "@angular-devkit/build-angular": "19.2.9",
+    "@angular-devkit/schematics": "19.2.14",
     "@angular/animations": "19.2.14",
     "@angular/cdk": "19.2.14",
     "@angular/common": "19.2.14",
     "@angular/compiler": "19.2.14",
+    "@angular/compiler-cli": "19.2.14",
     "@angular/core": "19.2.14",
     "@angular/forms": "19.2.14",
     "@angular/platform-browser": "19.2.14",
     "@angular/platform-browser-dynamic": "19.2.14",
     "@angular/platform-server": "19.2.14",
     "@angular/router": "19.2.14",
-    "date-fns": "4.1.0",
-    "gsap": "3.13.0",
-    "imask": "7.6.1",
-    "ngx-markdown": "20.0.0",
-    "rxjs": "7.8.1",
-    "zone.js": "0.15.0"
-  },
-  "devDependencies": {
-    "@analogjs/platform": "1.14.0",
-    "@analogjs/vite-plugin-angular": "1.14.0",
-    "@angular-devkit/build-angular": "19.2.9",
-    "@angular-devkit/schematics": "19.2.14",
-    "@angular/compiler-cli": "19.2.14",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
     "@nx/angular": "20.8.1",
@@ -86,15 +78,20 @@
     "@types/yargs": "17.0.33",
     "@typescript-eslint/utils": "8.31.0",
     "angular-eslint": "19.3.0",
+    "date-fns": "4.1.0",
     "eslint": "9.25.1",
     "eslint-config-prettier": "10.1.2",
     "glob": "11.0.0",
+    "gsap": "3.13.0",
     "husky": "9.1.7",
+    "imask": "7.6.1",
     "jsonc-eslint-parser": "2.4.0",
     "lint-staged": "16.1.2",
     "ng-packagr": "19.2.2",
+    "ngx-markdown": "20.0.0",
     "nx": "20.8.1",
     "prettier": "2.8.8",
+    "rxjs": "7.8.1",
     "shiki": "1.22.2",
     "stylelint": "16.19.1",
     "stylelint-config-recommended-scss": "14.1.0",
@@ -109,6 +106,7 @@
     "vite-plugin-devtools-json": "0.2.0",
     "vite-plugin-static-copy": "3.0.2",
     "vite-tsconfig-paths": "4.3.2",
-    "vitest": "3.1.2"
+    "vitest": "3.1.2",
+    "zone.js": "0.15.0"
   }
 }
