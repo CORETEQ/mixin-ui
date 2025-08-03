@@ -137,7 +137,7 @@
   justify-content: center;
   inline-size: var(--x-size);
   block-size: var(--x-size);
-  color: var(--x-neutral-500);
+  color: var(--x-neutral-500); // @TODO: replace with semantic token
   font: var(--x-text-xs);
   font-weight: 500;
 }
@@ -151,7 +151,7 @@
   justify-content: center;
   inline-size: var(--x-size);
   block-size: var(--x-size);
-  color: var(--x-neutral-900);
+  color: var(--x-neutral-900); // @TODO: replace with semantic token
   font: var(--x-text-sm);
   background-color: transparent;
   border-radius: var(--x-radius);

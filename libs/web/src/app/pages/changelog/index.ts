@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { DocsPage } from '@/docs/components';
 import { MarkdownComponent } from 'ngx-markdown';
 
-import data from '../../../../../../CHANGELOG.md?raw&lang=markdown';
+import changelog from '../../../../../../CHANGELOG.md?raw&lang=markdown';
 
 @Component({
   selector: 'app-changelog',
@@ -12,5 +12,5 @@ import data from '../../../../../../CHANGELOG.md?raw&lang=markdown';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Changelog {
-  data = data;
+  readonly changelog = changelog;
 }

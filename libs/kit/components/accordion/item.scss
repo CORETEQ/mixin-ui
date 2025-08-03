@@ -3,8 +3,8 @@
   display: block;
   margin-block-end: -1px;
   overflow: hidden;
-  color: var(--x-neutral-900);
-  border: 1px solid var(--x-neutral-300);
+  color: var(--x-neutral-900); // @TODO: replace with semantic token
+  border: 1px solid var(--x-neutral-300); // @TODO: replace with semantic token
 
   &:first-of-type {
     border-top-left-radius: var(--x-radius);

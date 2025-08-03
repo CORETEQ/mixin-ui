@@ -1,7 +1,6 @@
 <docs-page>
   <p class="mb-8">
-    This article presents several color palettes used in the design system, including base, accent, and semantic
-    variations. These palettes ensure consistent theming, support for dark and light modes, and flexibility for
+    Mixin UI currently relies on several low-level color palettes that provide the ability for global overrides and
     customization.
   </p>
 
@@ -13,8 +12,7 @@
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           @for (step of steps; track step) {
             <div
-              class="rounded-md overflow-hidden border bg-white"
-              style="border-color: #dedede"
+              class="rounded-md overflow-hidden border border-gray-200 bg-white"
             >
               <div
                 class="h-16"
