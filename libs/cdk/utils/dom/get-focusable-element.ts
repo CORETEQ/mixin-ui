@@ -1,18 +1,47 @@
 import { isHTMLElement } from './is-element';
 
-// @TODO: complete
-export function getFocusableElement(root: Node): HTMLElement | null {
+export function getFocusableElement(root: Node, fromEnd = false): HTMLElement | null {
+  if (isHTMLElement(root) && isFocusable(root) === NodeFilter.FILTER_ACCEPT) {
+    return root;
+  }
+
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT, {
     acceptNode: isFocusable,
   });
 
-  const currentNode = walker.nextNode();
+  if (fromEnd) {
+    let lastFocusable: HTMLElement | null = null;
 
-  if (isHTMLElement(currentNode)) {
-    return currentNode;
+    if (isHTMLElement(root) && isFocusable(root) === NodeFilter.FILTER_ACCEPT) {
+      lastFocusable = root;
+    }
+
+    let currentNode = walker.lastChild();
+
+    while (currentNode) {
+      currentNode = walker.nextNode();
+    }
+
+    currentNode = walker.previousNode();
+
+    while (currentNode) {
+      if (isHTMLElement(currentNode)) {
+        return currentNode;
+      }
+
+      currentNode = walker.previousNode();
+    }
+
+    return lastFocusable;
+  } else {
+    const currentNode = walker.nextNode();
+
+    if (isHTMLElement(currentNode)) {
+      return currentNode;
+    }
+
+    return null;
   }
-
-  return null;
 }
 
 const isFocusable = (node: Node) => {

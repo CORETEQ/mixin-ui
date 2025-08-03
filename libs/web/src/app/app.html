@@ -9,7 +9,7 @@
 <div class="app-header">
   <div class="app-container">
     <div class="mx-auto px-4 flex items-center justify-between flex-1 h-14">
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-4 -ms-0.5 lg:ms-0">
         <a routerLink="/" class="flex items-center gap-x-1.5">
           <x-icon src="icons/app/mixin.svg" size="28" raw />
           <span class="h-[30px] text-[#09090b] text-[30px] leading-[26px] font-kumbh font-normal"
@@ -76,7 +76,7 @@
 </div>
 
 @if (menuOpen()) {
-  <docs-sidebar class="fixed left-0 z-[1000] bg-white" />
+  <docs-sidebar class="!fixed !left-0 !z-[1000] bg-white"/>
 }
 
 <router-outlet />
