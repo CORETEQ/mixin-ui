@@ -3,8 +3,8 @@
 
   <div class="docs-separator"></div>
 
-  <docs-snippet withHeader>
-    <app-select-objects-example class="block w-[18rem]" />
+  <docs-snippet [code]="basicTs">
+    <app-select-basic-example class="block w-[18rem]" />
   </docs-snippet>
 
   <h2>Import</h2>
@@ -15,12 +15,17 @@
 
   <h2>Examples</h2>
   <h3>Multiple</h3>
-  <docs-snippet>
+  <docs-snippet [code]="multipleTs">
     <app-select-multiple-example class="block w-[18rem]" />
   </docs-snippet>
 
+  <h3>Objects</h3>
+  <docs-snippet [code]="objectsTs">
+    <app-select-objects-example class="block w-[18rem]" />
+  </docs-snippet>
+
   <h3>Popover</h3>
-  <docs-snippet>
+  <docs-snippet [code]="popoverTs">
     <app-select-popover-example />
   </docs-snippet>
 

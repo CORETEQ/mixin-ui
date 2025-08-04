@@ -4,8 +4,26 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-select-objects-example',
-  templateUrl: './objects.html',
   imports: [XSelect, FormsModule, XPopover, XOption, XListbox, XValue],
+  template: `
+    <x-select placeholder="Select" key="value" [(ngModel)]="value">
+      <span *x-value="let value" class="flex items-center gap-2">
+        <span class="fi fi-{{value.value}}"></span>
+        {{ value.label }}
+      </span>
+
+      <x-listbox *x-popover>
+        @for (option of options; track option.value) {
+          <x-option [value]="option">
+            <span class="flex items-center gap-2">
+              <span class="fi fi-{{option.value}}"></span>
+              {{ option.label }}
+            </span>
+          </x-option>
+        }
+      </x-listbox>
+    </x-select>
+  `,
 })
 export class SelectObjectsExample {
   value = { value: 'us', label: 'United States' };

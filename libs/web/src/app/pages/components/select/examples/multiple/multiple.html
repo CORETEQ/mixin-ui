@@ -1,3 +1,9 @@
 <x-select placeholder="Multiple" multiple [(ngModel)]="value">
-  <app-frameworks *x-popover />
+  <x-listbox *x-popover>
+    @for (option of options(); track option) {
+      <x-option [value]="option">
+        {{ option }}
+      </x-option>
+    }
+  </x-listbox>
 </x-select>
