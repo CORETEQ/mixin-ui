@@ -1,17 +1,23 @@
 <div class="docs-snippet-container">
   <div class="docs-snippet-tabs">
-    <button class="docs-snippet-tab" size="sm" x-btn variant="ghost" color="neutral"
-            [class.active]="activeIndex() === 0"
-            (click)="setActiveIndex(0)">
-      <x-icon src="eye" size="14" />
-      Preview
-    </button>
+    <div class="flex items-center gap-1">
+      <button class="docs-snippet-tab" size="sm" x-btn variant="ghost" color="neutral"
+              [class.active]="activeIndex() === 0"
+              (click)="setActiveIndex(0)">
+        <x-icon src="eye" size="14" />
+        Preview
+      </button>
 
-    <button class="docs-snippet-tab" x-btn size="sm" variant="ghost" color="neutral"
-            [class.active]="activeIndex() === 1"
-            (click)="setActiveIndex(1)">
-      <x-icon src="code" size="14" />
-      Code
+      <button class="docs-snippet-tab" x-btn size="sm" variant="ghost" color="neutral"
+              [class.active]="activeIndex() === 1"
+              (click)="setActiveIndex(1)">
+        <x-icon src="code" size="14" />
+        Code
+      </button>
+    </div>
+
+    <button x-tooltip="Soon" class="docs-snippet-tab !cursor-not-allowed" x-icon size="sm" variant="ghost" color="neutral">
+      <x-icon src="icons/app/stackblitz.svg" size="16" raw />
     </button>
   </div>
 

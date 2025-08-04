@@ -8,14 +8,14 @@ import {
   model,
   ViewEncapsulation,
 } from '@angular/core';
-import { XButton, XIcon } from '@mixin-ui/kit';
+import { XButton, XIcon, XTooltip } from '@mixin-ui/kit';
 import { DocsCode } from '../code';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   selector: 'docs-snippet',
-  imports: [XButton, XIcon, DocsCode],
+  imports: [XButton, XIcon, DocsCode, XTooltip],
   styleUrl: './snippet.scss',
   templateUrl: './snippet.html',
   host: {

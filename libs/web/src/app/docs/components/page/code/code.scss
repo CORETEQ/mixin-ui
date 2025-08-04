@@ -1,4 +1,5 @@
 .docs-code {
+  position: relative;
   display: grid;
   inline-size: 100%;
   overflow: auto;
@@ -55,5 +56,19 @@
         }
       }
     }
+  }
+}
+
+.docs-copy {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  z-index: 1;
+  color: var(--x-neutral-600);
+  background-color: var(--x-white);
+
+  &:hover,
+  &:active {
+    color: var(--x-neutral-900);
   }
 }
