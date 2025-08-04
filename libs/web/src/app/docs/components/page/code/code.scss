@@ -26,6 +26,10 @@
 
     .line {
       line-height: 22px;
+
+      &.spotlight {
+        background: var(--x-neutral-100);
+      }
     }
   }
 
