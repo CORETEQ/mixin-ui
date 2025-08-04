@@ -4,7 +4,11 @@ import { XControl, XInputNumber } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-input-number-affixes-example',
-  templateUrl: './affixes.html',
   imports: [FormsModule, XControl, XInputNumber],
+  template: `
+    <x-number prefix="~ " suffix=" °F" [step]="0">
+      <input x-control [ngModel]="1000" />
+    </x-number>
+  `
 })
 export class InputNumberAffixesExample {}

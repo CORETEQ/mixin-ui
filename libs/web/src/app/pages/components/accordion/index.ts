@@ -4,6 +4,9 @@ import { DocsPage } from '@/docs/components';
 import imp from './examples/import?raw&lang=ts';
 import usage from './examples/usage?raw&lang=ts';
 import basicTs from './examples/basic/basic?raw&lang=ts';
+import multipleTs from './examples/multiple/multiple?raw&lang=ts';
+import radiiTs from './examples/radii/radii?raw&lang=ts';
+import sizesTs from './examples/sizes/sizes?raw&lang=ts';
 import { AccordionBasicExample } from './examples/basic/basic';
 import { AccordionMultipleExample } from './examples/multiple/multiple';
 import { AccordionSizesExample } from './examples/sizes/sizes';
@@ -26,4 +29,7 @@ export default class Accordion {
   imp = imp;
   usage = usage;
   basicTs = basicTs;
+  multipleTs = multipleTs;
+  radiiTs = radiiTs;
+  sizesTs = sizesTs;
 }

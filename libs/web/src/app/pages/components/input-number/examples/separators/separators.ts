@@ -4,7 +4,14 @@ import { XControl, XInputNumber } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-input-number-separators-example',
-  templateUrl: './separators.html',
   imports: [FormsModule, XControl, XInputNumber],
+  template: `
+    <x-number thousandsSeparator="."
+              decimalSeparator=","
+              decimalScale="2"
+              [step]="0">
+      <input x-control [ngModel]="999999" />
+    </x-number>
+  `
 })
 export class InputNumberSeparatorsExample {}

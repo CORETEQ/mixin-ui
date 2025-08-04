@@ -3,6 +3,9 @@ import { DocsPage } from '@/docs/components';
 
 import imp from './examples/import?raw&lang=ts';
 import usage from './examples/usage?raw&lang=ts';
+import basicTs from './examples/basic/basic?raw&lang=ts';
+import radiiTs from './examples/radii/radii?raw&lang=ts';
+import sizesTs from './examples/sizes/sizes?raw&lang=ts';
 import { InputTextBasicExample } from './examples/basic/basic';
 import { InputTextSizesExample } from './examples/sizes/sizes';
 import { InputTextRadiiExample } from './examples/radii/radii';
@@ -17,4 +20,7 @@ import { InputTextRadiiExample } from './examples/radii/radii';
 export default class InputText {
   imp = imp;
   usage = usage;
+  basicTs = basicTs;
+  radiiTs = radiiTs;
+  sizesTs = sizesTs;
 }

@@ -3,7 +3,9 @@ import { XIcon } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-icon-basic-example',
-  templateUrl: './basic.html',
   imports: [XIcon],
+  template: `
+    <x-icon src="sun" size="24" />
+  `
 })
 export class IconBasicExample {}

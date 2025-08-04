@@ -70,7 +70,7 @@ export class XTooltip {
 
       untracked(() => {
         if (content) {
-          this.updatePosition(position, offset);
+          Promise.resolve().then(() => this.updatePosition(position, offset));
         } else {
           this.toggle(false);
         }
@@ -104,15 +104,15 @@ export class XTooltip {
     switch (event) {
       case 'hover':
         return merge(
-          fromEvent(this.#el, 'mouseenter').pipe(map(() => true)),
-          fromEvent<MouseEvent>(this.#el, 'mouseleave').pipe(
+          fromEvent(this.#el, 'pointerenter').pipe(map(() => true)),
+          fromEvent<MouseEvent>(this.#el, 'pointerleave').pipe(
             filter(e => !relatedTo(e, this.#overlay.element)),
             map(() => false)
           ),
           this.#overlay.openChanges.pipe(
             switchMap(open =>
               open && this.#overlay.element
-                ? fromEvent<MouseEvent>(this.#overlay.element, 'mouseleave')
+                ? fromEvent<MouseEvent>(this.#overlay.element, 'pointerleave')
                 : EMPTY
             ),
             filter(e => !relatedTo(e, this.#el)),

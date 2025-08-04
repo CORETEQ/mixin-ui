@@ -3,6 +3,7 @@ import { DocsPage } from '@/docs/components';
 
 import imp from './examples/import?raw&lang=ts';
 import usage from './examples/usage?raw&lang=ts';
+import basicTs from './examples/basic/basic?raw&lang=ts';
 import { LabelBasicExample } from './examples/basic/basic';
 
 @Component({
@@ -13,6 +14,7 @@ import { LabelBasicExample } from './examples/basic/basic';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class Label {
-  protected readonly imp = imp;
-  protected readonly usage = usage;
+  imp = imp;
+  usage = usage;
+  basicTs = basicTs;
 }

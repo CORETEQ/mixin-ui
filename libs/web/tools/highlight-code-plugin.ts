@@ -7,7 +7,7 @@ const LANG_QUERY = /lang=([^']+)/;
 const LINE_SEPARATOR = '\n';
 const LANGUAGES = ['angular-ts', 'angular-html', 'css', 'scss', 'shellscript', 'json'];
 const FALLBACK_LANG = 'json';
-const LIGHT_THEME = 'github-light';
+const LIGHT_THEME = 'aurora-x';
 const DARK_THEME = 'github-dark-default';
 const SPOTLIGHT_REGEX = /(\/\/ \[!spotlight]|<!-- \[!spotlight] -->)/g;
 const SPOTLIGHT_CLASS = 'spotlight';

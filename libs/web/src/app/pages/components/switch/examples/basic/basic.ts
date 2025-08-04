@@ -4,7 +4,12 @@ import { XSwitch } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-switch-basic-example',
-  templateUrl: './basic.html',
   imports: [XSwitch, FormsModule],
+  template: `
+    <div class="flex gap-3">
+      <button x-switch [ngModel]="false"></button>
+      <button x-switch [ngModel]="true"></button>
+    </div>
+  `
 })
 export class SwitchBasicExample {}

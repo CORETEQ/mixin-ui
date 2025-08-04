@@ -3,6 +3,7 @@ import { DocsPage } from '@/docs/components';
 
 import imp from './examples/import?raw&lang=ts';
 import usage from './examples/usage?raw&lang=ts';
+import basicTs from './examples/basic/basic?raw&lang=ts';
 import { GroupBasicExample } from './examples/basic/basic';
 
 @Component({
@@ -15,4 +16,5 @@ import { GroupBasicExample } from './examples/basic/basic';
 export default class Group {
   imp = imp;
   usage = usage;
+  basicTs = basicTs;
 }

@@ -18,7 +18,7 @@ export class DocsCopy {
   readonly copied = toSignal(
     fromEvent(inject(ElementRef).nativeElement, 'click').pipe(
       exhaustMap(() => {
-        this.#clipboard.copy(this.text());
+        // this.#clipboard.copy(this.text());
         return timer(2000).pipe(
           map(() => false),
           startWith(true)

@@ -13,7 +13,7 @@ import { XCalendar } from '@mixin-ui/kit';
   `,
   template: `
     <x-calendar [(ngModel)]="value" />
-  `,
+  `
 })
 export class CalendarBasicExample {
   value = new Date();

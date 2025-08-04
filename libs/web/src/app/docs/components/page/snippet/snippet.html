@@ -15,6 +15,7 @@
         class="docs-snippet-tab"
         [class.active]="activeIndex() === 1"
         (click)="setActiveIndex(1)">
+        <x-icon src="code" size="14" />
         Code
       </button>
     </div>
@@ -22,9 +23,11 @@
     <div class="flex items-center gap-2">
       @if (clipboardText()) {
         <button x-icon
-                class="docs-snippet-tab me-0.25"
+                class="docs-snippet-tab me-0.5"
                 #clipboard="clipboard"
-                [clipboard]="clipboardText()">
+                [x-tooltip]="clipboard.copied() ? 'Copied!' : 'Copy to clipboard'"
+                [clipboard]="clipboardText()"
+                (pointerdown)="$event.preventDefault()">
           @if (clipboard.copied()) {
             <x-icon src="check" size="14" />
           } @else {
@@ -50,6 +53,8 @@
   }
 
   @if (activeIndex() === 1) {
-    <docs-code class="docs-snippet-code" [src]="code()" />
+    <div class="pt-2">
+      <docs-code [src]="code()" />
+    </div>
   }
 </div>

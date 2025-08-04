@@ -4,11 +4,21 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-listbox-basic-example',
-  templateUrl: './basic.html',
   imports: [
+    FormsModule,
     XListbox,
     XOption,
-    FormsModule,
   ],
+  template: `
+    <div class="flex flex-col gap-4">
+      <x-listbox class="rounded-lg border-1 border-gray-200"></x-listbox>
+
+      <x-listbox class="rounded-lg border-1 border-gray-200" [ngModel]="1">
+        <x-option [value]="1">Option 1</x-option>
+        <x-option [value]="2">Option 2</x-option>
+        <x-option [value]="3">Option 3</x-option>
+      </x-listbox>
+    </div>
+  `,
 })
 export class InputTextBasicExample {}

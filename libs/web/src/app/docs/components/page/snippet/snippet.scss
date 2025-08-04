@@ -13,7 +13,7 @@
   overflow: hidden;
   background: var(--x-white);
   border: 1px solid var(--x-neutral-200);
-  border-radius: 9px;
+  border-radius: 8px;
 }
 
 .docs-snippet-tab {
@@ -34,18 +34,4 @@
   min-block-size: 10rem;
   padding: 1.5rem 1rem;
   border-top-left-radius: 0;
-}
-
-.docs-snippet-code {
-  border: none !important;
-
-  .docs-code-container {
-    padding: 0.5rem 0.25rem 0.25rem;
-  }
-
-  .docs-code-content {
-    code {
-      padding: 0.25rem 1.5rem 0.2rem 0.5rem;
-    }
-  }
 }

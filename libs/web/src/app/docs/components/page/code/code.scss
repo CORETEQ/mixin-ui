@@ -3,9 +3,8 @@
   display: grid;
   inline-size: 100%;
   overflow: auto;
-  background: var(--x-white);
-  border: 1px solid var(--x-neutral-200);
-  border-radius: 0.625rem;
+  background: #18181b;
+  border-radius: 0.5rem;
 
   pre {
     background: transparent !important;
@@ -15,7 +14,7 @@
     display: flex;
     flex-direction: column;
     font-family: var(--docs-code-font-family), monospace;
-    font-size: 14px;
+    font-size: 13.5px;
 
     .line {
       line-height: 22px;
@@ -31,23 +30,21 @@
   pre {
     counter-reset: codeblock-line;
 
-    &:has(.line:nth-child(10)) {
-      .line {
-        counter-increment: codeblock-line;
+    .line {
+      counter-increment: codeblock-line;
 
-        &::before {
-          display: inline-block;
-          inline-size: 1rem;
-          margin-left: -0.125rem;
-          color: var(--x-neutral-400);
-          text-align: end;
-          opacity: 0.9;
-          content: counter(codeblock-line);
-        }
+      &::before {
+        display: inline-block;
+        inline-size: 1rem;
+        margin-left: -0.125rem;
+        color: var(--x-neutral-400);
+        text-align: end;
+        opacity: 0.6;
+        content: counter(codeblock-line);
+      }
 
-        > span:first-child {
-          margin-left: 1rem;
-        }
+      > span:first-child {
+        margin-left: 1rem;
       }
     }
   }
@@ -61,10 +58,10 @@
 
 .docs-code-content {
   display: grid;
-  max-block-size: 33rem;
   overflow: auto;
 
   code {
+    max-block-size: 33rem;
     padding: 0.25rem 0.75rem;
   }
 }
