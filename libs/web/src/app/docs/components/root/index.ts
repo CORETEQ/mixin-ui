@@ -1,2 +1,2 @@
-export * from './docs';
+export * from './root';
 export * from './page-nav';

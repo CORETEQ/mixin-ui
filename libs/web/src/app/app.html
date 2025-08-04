@@ -3,7 +3,7 @@
     <div class="flex flex-1 items-center justify-center min-w-0">
       <span
         class="block min-w-0 overflow-hidden text-white text-sm font-medium leading-6 whitespace-nowrap text-ellipsis">
-        ⚠️ Mixin UI is currently in alpha stage
+        ⚠️ {{ orgName }} is currently in alpha stage
       </span>
     </div>
   </div>
@@ -54,24 +54,22 @@
       </div>
 
       <button
+        type="button"
         aria-label="Toggle menu"
         class="md:hidden relative w-8 h-8 flex items-center justify-center"
         (click)="menuOpen.set(!menuOpen())"
       >
         <span
           class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out"
-          [class.translate-y-2]="!menuOpen()"
-          [class.rotate-45]="menuOpen()">
+          [class]="{ 'translate-y-2': !menuOpen(), 'rotate-45': menuOpen() }">
         </span>
         <span
           class="absolute w-5 h-0.5 right-1 bg-gray-500 transition duration-300 ease-in-out"
-          [class.opacity-100]="!menuOpen()"
-          [class.opacity-0]="menuOpen()">
+          [class]="{ 'opacity-100': !menuOpen(), 'opacity-0': menuOpen() }">
         </span>
         <span
           class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out"
-          [class.-translate-y-2]="!menuOpen()"
-          [class.-rotate-45]="menuOpen()">
+          [class]="{ '-translate-y-2': !menuOpen(), '-rotate-45': menuOpen() }">
         </span>
       </button>
     </div>

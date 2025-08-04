@@ -4,7 +4,13 @@ import { XCheckbox } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-checkbox-basic-example',
-  templateUrl: './basic.html',
   imports: [XCheckbox, FormsModule],
+  template: `
+    <div class="flex gap-3">
+      <button x-checkbox [ngModel]="false"></button>
+      <button x-checkbox [indeterminate]="true" [ngModel]="false"></button>
+      <button x-checkbox [ngModel]="true"></button>
+    </div>
+  `,
 })
 export class CheckboxBasicExample {}

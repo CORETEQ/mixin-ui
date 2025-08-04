@@ -7,12 +7,6 @@
   border: 1px solid var(--x-neutral-200);
   border-radius: 0.625rem;
 
-  .docs-code-inner {
-    display: block;
-    padding: 1rem 1.125rem;
-    overflow: hidden;
-  }
-
   pre {
     background: transparent !important;
   }
@@ -20,8 +14,6 @@
   code {
     display: flex;
     flex-direction: column;
-    max-block-size: 32rem;
-    overflow-x: auto;
     font-family: var(--docs-code-font-family), monospace;
     font-size: 14px;
 
@@ -33,11 +25,13 @@
       }
     }
   }
+}
 
-  &.with-numbers {
-    pre {
-      counter-reset: codeblock-line;
+.docs-code.with-numbers {
+  pre {
+    counter-reset: codeblock-line;
 
+    &:has(.line:nth-child(10)) {
       .line {
         counter-increment: codeblock-line;
 
@@ -56,5 +50,21 @@
         }
       }
     }
+  }
+}
+
+.docs-code-container {
+  display: block;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+.docs-code-content {
+  display: grid;
+  max-block-size: 33rem;
+  overflow: auto;
+
+  code {
+    padding: 0.25rem 0.75rem;
   }
 }

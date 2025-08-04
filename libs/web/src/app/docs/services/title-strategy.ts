@@ -1,8 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterStateSnapshot, TitleStrategy } from '@angular/router';
-
-const ORG_NAME = 'Mixin UI';
+import { environment } from '../../env';
 
 @Injectable()
 export class DocsTitleStrategy extends TitleStrategy {
@@ -10,9 +9,9 @@ export class DocsTitleStrategy extends TitleStrategy {
 
   updateTitle(snapshot: RouterStateSnapshot): void {
     if (snapshot.url === '/') {
-      this.#title.setTitle(ORG_NAME);
+      this.#title.setTitle(environment.orgName);
     } else {
-      this.#title.setTitle(`${ORG_NAME}: ${this.buildTitle(snapshot)}`);
+      this.#title.setTitle(`${environment.orgName}: ${this.buildTitle(snapshot)}`);
     }
   }
 }

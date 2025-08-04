@@ -30,6 +30,6 @@ import { XAccordion, XAccordionItem, XSlot } from '@mixin-ui/kit';
         </ng-template>
       </x-accordion-item>
     </x-accordion>
-  `
+  `,
 })
 export class AccordionBasicExample {}

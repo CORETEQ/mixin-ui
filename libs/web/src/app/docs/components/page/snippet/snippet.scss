@@ -39,8 +39,13 @@
 .docs-snippet-code {
   border: none !important;
 
-  .docs-code-inner {
-    padding: 0.825rem 0.75rem !important;
-    padding-bottom: 0.5rem !important;
+  .docs-code-container {
+    padding: 0.5rem 0.25rem 0.25rem;
+  }
+
+  .docs-code-content {
+    code {
+      padding: 0.25rem 1.5rem 0.2rem 0.5rem;
+    }
   }
 }
