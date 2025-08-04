@@ -1,0 +1,24 @@
+{
+  "name": "kit",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/{projectName}",
+  "prefix": "x",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:ng-packagr",
+      "outputs": ["{workspaceRoot}/dist/libs/{projectRoot}"],
+      "options": {
+        "tsConfig": "tsconfig.prod.json",
+        "project": "{projectRoot}/ng-package.json"
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "params": "ignore",
+          "dependencies": true
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,34 @@
+// options
+@mixin size($size) {
+  &:where(.x-size-#{$size}) {
+    @content;
+  }
+}
+
+@mixin radius($radius) {
+  &:where(.x-radius-#{$radius}) {
+    @content;
+  }
+}
+
+.x-listbox {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  padding: 0.25rem;
+  outline: none;
+
+  @include size(md) {
+    --x-option-block-size: var(--x-size-md);
+  }
+}
+
+.x-listbox-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 2.5rem;
+  color: var(--x-neutral-500); // @TODO: replace with semantic token
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}

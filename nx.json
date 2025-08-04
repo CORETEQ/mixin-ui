@@ -1,0 +1,39 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": ["default"],
+    "sharedGlobals": []
+  },
+  "release": {
+    "projects": ["libs/*", "!web"],
+    "version": {
+      "preVersionCommand": "pnpm build"
+    },
+    "releaseTagPattern": "v{version}",
+    "changelog": {
+      "automaticFromRef": true,
+      "workspaceChangelog": {
+        "renderOptions": {
+          "authors": false
+        },
+        "createRelease": "github"
+      }
+    }
+  },
+  "targetDefaults": {
+    "nx-release-publish": {
+      "options": {
+        "packageRoot": "dist/libs/{projectName}"
+      }
+    }
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "eslint:lint"
+      }
+    }
+  ]
+}

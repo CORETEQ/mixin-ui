@@ -1,0 +1,34 @@
+<docs-page>
+  <p class="mb-8">
+    Mixin UI currently relies on several low-level color palettes that provide the ability for global overrides and
+    customization.
+  </p>
+
+  <div class="flex flex-col gap-10">
+    @for (palette of palettes; track palette) {
+      <section class="space-y-4">
+        <h2 class="text-xl font-semibold">{{ palette | titlecase }}</h2>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          @for (step of steps; track step) {
+            <div
+              class="rounded-md overflow-hidden border border-gray-200 bg-white"
+            >
+              <div
+                class="h-16"
+                [style.background-color]="'var(--x-' + palette + '-' + step + ')'"
+              ></div>
+
+              <div class="text-sm p-2 text-gray-700">
+                {{ step }}<br />
+                <span class="text-[10px] text-gray-500">
+                var(--x-{{ palette }}-{{ step }})
+              </span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+  </div>
+</docs-page>

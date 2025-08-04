@@ -1,0 +1,8 @@
+<ng-content select="input" />
+<ng-content />
+
+<span class="x-input-suffix">
+  <button x-icon [disabled]="disabled()" (click)="togglePopover(!open())">
+    <x-icon src="calendar" />
+  </button>
+</span>

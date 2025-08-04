@@ -1,0 +1,41 @@
+<docs-page>
+  <p>Represents a binary choice, such as enabled or disabled.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet [code]="basicTs">
+    <app-switch-basic-example />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Examples</h2>
+  <h3>Sizes</h3>
+  <docs-snippet [code]="sizesTs">
+    <app-switch-sizes-example />
+  </docs-snippet>
+
+  <h3>Radii</h3>
+  <docs-snippet [code]="radiiTs">
+    <app-switch-radii-example />
+  </docs-snippet>
+
+  <h3>States</h3>
+  <docs-snippet [code]="statesTs">
+    <app-switch-states-example />
+  </docs-snippet>
+
+  <h2>API</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="value" type="string" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+    <docs-input name="iconChecked" type="string" />
+    <docs-input name="iconUnchecked" type="string" />
+  </docs-api-table>
+</docs-page>

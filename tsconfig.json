@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "esModuleInterop": true,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": false,
+    "strictNullChecks": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "useUnknownInCatchVariables": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "strictFunctionTypes": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
+    "moduleResolution": "node",
+    "target": "es2022",
+    "module": "esnext",
+    "lib": ["es2023", "dom"],
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/docs/*": ["libs/web/src/app/docs/*"],
+      "@mixin-ui/cdk": ["libs/cdk"],
+      "@mixin-ui/cdk/*": ["libs/cdk/*"],
+      "@mixin-ui/cli": ["libs/cli"],
+      "@mixin-ui/cli/*": ["libs/cli/*"],
+      "@mixin-ui/kit": ["libs/kit"],
+      "@mixin-ui/kit/*": ["libs/kit/*"]
+    }
+  },
+  "angularCompilerOptions": {
+    "strictStandalone": true,
+    "strictTemplates": true,
+    "extendedDiagnostics": {
+      "defaultCategory": "error"
+    }
+  },
+  "include": ["libs/**/*.ts"],
+  "exclude": ["node_modules", "tmp", "dist"]
+}

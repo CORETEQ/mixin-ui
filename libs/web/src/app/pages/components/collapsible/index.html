@@ -1,0 +1,26 @@
+<docs-page>
+  <p>Used to expand and collapse additional content.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet height="auto" align="start" [code]="basicTs">
+    <app-collapsible-basic-example class="block w-full" />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Api</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="open" type="boolean" default="false" />
+  </docs-api-table>
+
+  <h3>Slots</h3>
+  <docs-api-table>
+    <docs-slot />
+  </docs-api-table>
+</docs-page>

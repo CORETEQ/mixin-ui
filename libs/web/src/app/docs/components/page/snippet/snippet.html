@@ -1,0 +1,60 @@
+<div class="docs-snippet-container">
+  <div class="flex items-center justify-between gap-1 pb-2 bg-white border-b border-[#e9e9ec]">
+    <div class="flex items-center gap-1">
+      <button
+        x-btn
+        class="docs-snippet-tab"
+        [class.active]="activeIndex() === 0"
+        (click)="setActiveIndex(0)">
+        <x-icon src="eye" size="14" />
+        Preview
+      </button>
+
+      <button
+        x-btn
+        class="docs-snippet-tab"
+        [class.active]="activeIndex() === 1"
+        (click)="setActiveIndex(1)">
+        <x-icon src="code" size="14" />
+        Code
+      </button>
+    </div>
+
+    <div class="flex items-center gap-2">
+      @if (clipboardText()) {
+        <button x-icon
+                class="docs-snippet-tab me-0.5"
+                #clipboard="clipboard"
+                [x-tooltip]="clipboard.copied() ? 'Copied!' : 'Copy to clipboard'"
+                [clipboard]="clipboardText()"
+                (pointerdown)="$event.preventDefault()">
+          @if (clipboard.copied()) {
+            <x-icon src="check" size="14" />
+          } @else {
+            <x-icon src="clipboard" size="14" />
+          }
+        </button>
+
+        <span class="h-[1rem] w-[1px] bg-gray-300"></span>
+      }
+
+      <button x-icon
+              x-tooltip="Soon"
+              class="docs-snippet-tab !cursor-not-allowed">
+        <x-icon src="icons/app/stackblitz.svg" size="16" raw />
+      </button>
+    </div>
+  </div>
+
+  @if (activeIndex() === 0) {
+    <div class="docs-snippet-content">
+      <ng-content />
+    </div>
+  }
+
+  @if (activeIndex() === 1) {
+    <div class="pt-2">
+      <docs-code [src]="code()" />
+    </div>
+  }
+</div>

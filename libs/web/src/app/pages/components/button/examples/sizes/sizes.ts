@@ -1,0 +1,17 @@
+import { Component } from '@angular/core';
+import { XButton } from '@mixin-ui/kit';
+
+@Component({
+  selector: 'app-button-sizes-example',
+  imports: [XButton],
+  template: `
+    <div class="flex items-center flex-wrap gap-4">
+      <button x-btn size="xs">Extra Small</button>
+      <button x-btn size="sm">Small</button>
+      <button x-btn size="md">Medium</button>
+      <button x-btn size="lg">Large</button>
+      <button x-btn size="xl">Extra Large</button>
+    </div>
+  `
+})
+export class SizesExample {}

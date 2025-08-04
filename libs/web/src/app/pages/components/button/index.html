@@ -1,0 +1,61 @@
+<docs-page>
+  <p>Initiate an action or event, like submitting a form or opening a dialog.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet [code]="basicTs">
+    <app-button-basic-example />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Examples</h2>
+  <h3>Variants</h3>
+  <docs-snippet [code]="variantsTs">
+    <app-button-variants-example />
+  </docs-snippet>
+
+  <h3>Sizes</h3>
+  <docs-snippet [code]="sizesTs">
+    <app-button-sizes-example />
+  </docs-snippet>
+
+  <h3>Radii</h3>
+  <docs-snippet [code]="radiiTs">
+    <app-button-radii-example />
+  </docs-snippet>
+
+  <h3>Colors</h3>
+  <docs-snippet [code]="colorsTs">
+    <app-button-colors-example />
+  </docs-snippet>
+
+  <h3>With icon</h3>
+  <docs-snippet [code]="iconTs">
+    <app-button-icon-example />
+  </docs-snippet>
+
+  <h3>Loading</h3>
+  <docs-snippet [code]="loadingTs">
+    <app-button-loading-example />
+  </docs-snippet>
+
+  <h2>Api</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="type" type="enum" default="button" />
+    <docs-input name="variant" type="enum" default="solid" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+    <docs-input name="color" type="enum" />
+    <docs-input name="loading" type="boolean" default="false" />
+    <docs-input name="loadingText" type="string" />
+    <docs-input name="contrast" type="boolean" default="false" />
+    <docs-input name="vertical" type="boolean" default="false" />
+    <docs-input name="block" type="boolean" default="false" />
+  </docs-api-table>
+</docs-page>

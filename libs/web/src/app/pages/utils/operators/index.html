@@ -1,0 +1,18 @@
+<docs-page>
+  <p>
+    Custom RxJS operators that provide declarative access to browser APIs and framework environment features. These
+    operators allow you to compose and transform data streams while working with browser and Angular functionality in a
+    reactive way.
+  </p>
+
+  <h2>Examples</h2>
+  <h3>Router API</h3>
+  <p>Creates an observable that emits specific Angular Router events of the provided type:</p>
+  <docs-code [src]="router" />
+
+  <h3>Render API</h3>
+  <p>Creates an Observable that emits and completes next time the application finishes rendering. This operator utilizes
+    Angular's afterNextRender api:
+  </p>
+  <docs-code [src]="render" />
+</docs-page>

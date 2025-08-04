@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/libs/cli",
+    "declaration": true,
+    "module": "CommonJS",
+    "target": "es2022",
+    "types": ["node"],
+    "resolveJsonModule": true
+  },
+  "include": ["./**/*", "./collection.json", "./package.json", "./**/schema.json"]
+}

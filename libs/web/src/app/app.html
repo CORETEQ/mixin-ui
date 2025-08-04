@@ -1,0 +1,83 @@
+<div class="fixed top-0 left-0 z-[1000] w-full h-[var(--docs-banner-height)] px-8 bg-gray-900">
+  <div class="flex items-center justify-between w-full h-full">
+    <div class="flex flex-1 items-center justify-center min-w-0">
+      <span
+        class="block min-w-0 overflow-hidden text-white text-sm font-medium leading-6 whitespace-nowrap text-ellipsis">
+        ⚠️ {{ orgName }} is currently in alpha stage
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="app-header">
+  <div class="app-container">
+    <div class="mx-auto px-4 flex items-center justify-between flex-1 h-14">
+      <div class="flex items-center space-x-4 -ms-0.5 lg:ms-0">
+        <a routerLink="/" class="flex items-center gap-x-1.5">
+          <x-icon src="icons/app/mixin.svg" size="28" raw />
+          <span class="h-[30px] text-[#09090b] text-[30px] leading-[26px] font-kumbh font-normal"
+                style="-webkit-font-smoothing: subpixel-antialiased">
+                mixin
+          </span>
+        </a>
+        <div class="app-header-version">
+          <a href="{{releaseUrl}}"
+             target="_blank"
+             class="text-gray-950 font-mono decoration-gray-400 underline-offset-1 hover:underline"
+             style="letter-spacing: -0.5px"
+          >
+            v{{ version }}
+          </a>
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center">
+        <nav class="items-center gap-6 text-sm flex font-medium me-6">
+          <a routerLink="/installation" class="hover:underline underline-offset-2">Introduction</a>
+          <a routerLink="/components" class="hover:underline underline-offset-2">Components</a>
+          <a routerLink="/colors" class="hover:underline underline-offset-2">Colors</a>
+        </nav>
+
+        <div class="h-[1.125rem] w-[1px] bg-gray-300"></div>
+
+        <div class="flex items-center gap-1 ms-3.5">
+          <a x-icon
+             href="{{githubUrl}}"
+             target="_blank"
+             color="neutral"
+             variant="ghost"
+             size="md"
+          >
+            <x-icon src="icons/app/github.svg" size="18" />
+          </a>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        aria-label="Toggle menu"
+        class="md:hidden relative w-8 h-8 flex items-center justify-center"
+        (click)="menuOpen.set(!menuOpen())"
+      >
+        <span
+          class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out"
+          [class]="{ 'translate-y-2': !menuOpen(), 'rotate-45': menuOpen() }">
+        </span>
+        <span
+          class="absolute w-5 h-0.5 right-1 bg-gray-500 transition duration-300 ease-in-out"
+          [class]="{ 'opacity-100': !menuOpen(), 'opacity-0': menuOpen() }">
+        </span>
+        <span
+          class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out"
+          [class]="{ '-translate-y-2': !menuOpen(), '-rotate-45': menuOpen() }">
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+@if (menuOpen()) {
+  <docs-sidebar class="!fixed !left-0 !z-[1000] bg-white" />
+}
+
+<router-outlet />

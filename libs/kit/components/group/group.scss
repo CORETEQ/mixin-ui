@@ -1,0 +1,116 @@
+// options
+@mixin orientation($orientation) {
+  &:where(.x-orientation-#{$orientation}) {
+    @content;
+  }
+}
+
+@mixin attached {
+  &:where(.x-attached) {
+    @content;
+  }
+}
+
+.x-group {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+
+  @include orientation(horizontal) {
+    flex-direction: row;
+
+    @include attached {
+      > * {
+        &:first-child {
+          border-radius: var(--x-radius) 0 0 var(--x-radius);
+        }
+
+        &:last-child {
+          border-radius: 0 var(--x-radius) var(--x-radius) 0;
+        }
+
+        &:not(:first-child, :last-child) {
+          border-radius: 0;
+        }
+
+        &:only-child {
+          border-radius: var(--x-radius);
+        }
+
+        &:not(:last-child) {
+          margin-inline-end: -1px;
+        }
+      }
+    }
+  }
+
+  @include orientation(vertical) {
+    flex-direction: column;
+
+    @include attached {
+      > * {
+        &:first-child {
+          border-radius: var(--x-radius) var(--x-radius) 0 0;
+        }
+
+        &:last-child {
+          border-radius: 0 0 var(--x-radius) var(--x-radius);
+        }
+
+        &:not(:first-child, :last-child) {
+          border-radius: 0;
+        }
+
+        &:only-child {
+          border-radius: var(--x-radius);
+        }
+
+        &:not(:last-child) {
+          margin-block-end: -1px;
+        }
+      }
+
+      > .x-group {
+        &:first-child {
+          > * {
+            border-end-start-radius: 0;
+            border-end-end-radius: 0;
+          }
+        }
+
+        &:last-child {
+          > * {
+            border-start-start-radius: 0;
+            border-start-end-radius: 0;
+          }
+        }
+
+        &:not(:first-child, :last-child) {
+          > * {
+            border-radius: 0;
+          }
+
+          .x-group {
+            > * {
+              border-radius: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @include attached {
+    > * {
+      z-index: 1;
+
+      &:where(.x-invalid) {
+        z-index: 2;
+      }
+
+      &:where(.x-focused, .x-overlay-opened) {
+        z-index: 3;
+      }
+    }
+  }
+}

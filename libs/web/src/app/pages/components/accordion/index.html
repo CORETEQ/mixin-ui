@@ -1,0 +1,44 @@
+<docs-page>
+  <p>
+    Collapsible panel component for structured content organization, supporting single and multiple expanded
+    sections.
+  </p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet
+    [code]="basicTs">
+    <app-accordion-basic-example class="d-block w-[24rem]" />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Examples</h2>
+  <h3>Multiple</h3>
+  <docs-snippet height="auto" [code]="multipleTs">
+    <app-accordion-multiple-example class="d-block w-[24rem]" />
+  </docs-snippet>
+
+  <h3>Sizes</h3>
+  <docs-snippet height="auto" [code]="sizesTs">
+    <app-accordion-sizes-example class="d-block w-[24rem]" />
+  </docs-snippet>
+
+  <h3>Radii</h3>
+  <docs-snippet height="auto" [code]="radiiTs">
+    <app-accordion-radii-example class="d-block w-[24rem]" />
+  </docs-snippet>
+
+  <h2>Api</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="id" type="string" />
+    <docs-input name="multiple" type="boolean" default="false" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+  </docs-api-table>
+</docs-page>

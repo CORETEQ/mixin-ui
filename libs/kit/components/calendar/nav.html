@@ -1,0 +1,35 @@
+<button
+  x-icon
+  [radius]="radius()"
+  [disabled]="monthsShown()"
+  (click)="back()"
+>
+  <x-icon src="chevron-left" />
+</button>
+
+<x-group class="x-calendar-nav-group">
+  <button x-btn
+          variant="outline"
+          [radius]="radius()"
+          [attr.aria-pressed]="monthsShown()"
+          (click)="modeChange.emit('months')">
+    {{ monthName() }}
+  </button>
+
+  <button x-btn
+          variant="outline"
+          [radius]="radius()"
+          [attr.aria-pressed]="yearsShown()"
+          (click)="modeChange.emit('years')">
+    {{ year() }}
+  </button>
+</x-group>
+
+<button
+  x-icon
+  [radius]="radius()"
+  [disabled]="monthsShown()"
+  (click)="forth()"
+>
+  <x-icon src="chevron-right" />
+</button>

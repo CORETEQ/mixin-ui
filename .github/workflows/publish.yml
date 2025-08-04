@@ -1,0 +1,58 @@
+name: 📦 Publish
+
+on:
+  push:
+    tags:
+      - v*.*.*
+
+jobs:
+  version:
+    name: Publish new version
+    timeout-minutes: 5
+    runs-on: self-hosted
+    permissions:
+      contents: write
+      packages: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install
+        uses: ./.github/workflows/composite
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Set up npm auth for npmjs.org
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+
+      - name: Publish packages
+        run: pnpm ci:publish
+        shell: bash
+
+      # - name: Send email notification
+      #   uses: dawidd6/action-send-mail@v3
+      #   with:
+      #     server_address: smtp.office365.com
+      #     server_port: 587
+      #     username: ${{ secrets.SMTP_USERNAME }}
+      #     password: ${{ secrets.SMTP_PASSWORD }}
+      #     subject: "🚀 Mixin UI ${{ github.ref_name }} has been released"
+      #     to: fe-devs@coreteq.sk
+      #     from: <${{ secrets.SMTP_USERNAME }}>
+      #     secure: false
+      #     body: |
+      #       New release available!
+
+      #       🔖 Version: ${{ github.ref_name }}
+      #       🔗 Commit: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+
+      #       📘 Release Notes:
+      #       https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.ref_name }}
+
+      #       🧩 Documentation:
+      #       https://mixin-ui.dev
+
+      #       — Mixin UI Bot

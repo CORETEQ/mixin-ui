@@ -1,0 +1,27 @@
+<docs-page>
+  <p>Used to enter input in a certain format such as numeric, date, currency or phone.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet [code]="basicTs">
+    <app-input-mask-basic-example class="block w-[274px]" />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>API</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="variant" type="enum" default="outline" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+    <docs-input name="pattern" type="string" />
+    <docs-input name="showFiller" type="boolean" default="true" />
+    <docs-input name="fillerChar" type="string" default="_" />
+    <docs-input name="strict" type="boolean" default="true"></docs-input>
+  </docs-api-table>
+</docs-page>

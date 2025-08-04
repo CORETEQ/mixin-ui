@@ -1,0 +1,76 @@
+<docs-page>
+  <p>Used to enter a number, and increment or decrement the value using stepper buttons.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet [code]="basicTs">
+    <app-input-number-basic-example class="block w-[274px]" />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Examples</h2>
+  <h3>Decimal</h3>
+  <docs-snippet [code]="decimalTs">
+    <app-input-number-decimal-example class="d-block min-w-[20rem]" />
+  </docs-snippet>
+
+  <h3>Affixes</h3>
+  <docs-snippet [code]="affixesTs">
+    <app-input-number-affixes-example class="d-block min-w-[20rem]" />
+  </docs-snippet>
+
+  <h3>Separators</h3>
+  <docs-snippet [code]="separatorsTs">
+    <app-input-number-separators-example class="d-block min-w-[20rem]" />
+  </docs-snippet>
+
+  <h3>States</h3>
+  <docs-snippet [code]="statesTs">
+    <app-input-number-states-example class="d-block min-w-[20rem]" />
+  </docs-snippet>
+
+  <h3>Customization</h3>
+  <docs-snippet [code]="customTs">
+    <app-input-number-custom-example class="d-block min-w-[20rem]" />
+  </docs-snippet>
+
+  <h2>API</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="variant" type="enum" default="outline" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+    <docs-input name="step" type="number" default="0" />
+    <docs-input name="min" type="number" [default]="min" />
+    <ng-template #min>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MIN_SAFE_INTEGER"
+         class="flex items-center gap-1.5 hover:underline"
+         target="_blank">
+        Number.MIN_SAFE_INTEGER
+
+        <x-icon src="arrow-up-right" />
+      </a>
+    </ng-template>
+    <docs-input name="max" type="number" [default]="max" />
+    <ng-template #max>
+      <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER"
+         class="flex items-center gap-1.5 hover:underline"
+         target="_blank">
+        Number.MAX_SAFE_INTEGER
+
+        <x-icon src="arrow-up-right" />
+      </a>
+    </ng-template>
+    <docs-input name="prefix" type="string" />
+    <docs-input name="suffix" type="string" />
+    <docs-input name="thousandsSeparator" type="string" default=" " />
+    <docs-input name="decimalSeparator" type="string" default="," />
+    <docs-input name="decimalScale" type="number" default="0" />
+    <docs-input name="padDecimals" type="boolean" default="true" />
+  </docs-api-table>
+</docs-page>

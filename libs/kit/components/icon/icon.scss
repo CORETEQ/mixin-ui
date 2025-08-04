@@ -1,0 +1,10 @@
+.x-icon {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--x-icon-size, 1em);
+  block-size: var(--x-icon-size, 1em);
+  background: var(--x-icon-color, currentcolor);
+}

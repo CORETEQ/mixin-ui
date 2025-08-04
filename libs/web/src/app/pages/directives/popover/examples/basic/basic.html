@@ -1,0 +1,17 @@
+<button x-btn
+        #popover="x-popover"
+        x-popover-stretch="auto"
+        x-popover-align="center"
+        [x-popover-min-width]="300"
+        [x-popover-max-width]="300"
+        [x-popover]="content"
+        (click)="popover.toggle(!popover.open())">
+  Show popover
+</button>
+
+<ng-template #content>
+  <div class="flex font-sm p-3">
+    JavaScript was created by Brendan Eich in just 10 days
+    in May 1995 while he was working at Netscape.
+  </div>
+</ng-template>

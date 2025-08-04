@@ -1,0 +1,48 @@
+import { Component } from '@angular/core';
+import { provideButtonOptions, XButton } from '@mixin-ui/kit';
+
+@Component({
+  selector: 'app-button-colors-example',
+  imports: [XButton],
+  providers: [provideButtonOptions({ size: 'xs' })],
+  template: `
+    <div class="grid grid-cols-5 gap-4">
+      <button x-btn color="main">Main</button>
+      <button x-btn color="neutral">Gray</button>
+      <button x-btn color="error">Error</button>
+      <button x-btn color="warn">Warn</button>
+      <button x-btn color="success">Success</button>
+
+      <button x-btn variant="outline" color="main">Main</button>
+      <button x-btn variant="outline" color="neutral">Gray</button>
+      <button x-btn variant="outline" color="error">Error</button>
+      <button x-btn variant="outline" color="warn">Warn</button>
+      <button x-btn variant="outline" color="success">Success</button>
+
+      <button x-btn variant="surface" color="main">Main</button>
+      <button x-btn variant="surface" color="neutral">Gray</button>
+      <button x-btn variant="surface" color="error">Error</button>
+      <button x-btn variant="surface" color="warn">Warn</button>
+      <button x-btn variant="surface" color="success">Success</button>
+
+      <button x-btn variant="subtle" color="main">Main</button>
+      <button x-btn variant="subtle" color="neutral">Gray</button>
+      <button x-btn variant="subtle" color="error">Error</button>
+      <button x-btn variant="subtle" color="warn">Warn</button>
+      <button x-btn variant="subtle" color="success">Success</button>
+
+      <button x-btn variant="ghost" color="main">Main</button>
+      <button x-btn variant="ghost" color="neutral">Gray</button>
+      <button x-btn variant="ghost" color="error">Error</button>
+      <button x-btn variant="ghost" color="warn">Warn</button>
+      <button x-btn variant="ghost" color="success">Success</button>
+
+      <button x-btn variant="plain" color="main">Main</button>
+      <button x-btn variant="plain" color="neutral">Gray</button>
+      <button x-btn variant="plain" color="error">Error</button>
+      <button x-btn variant="plain" color="warn">Warn</button>
+      <button x-btn variant="plain" color="success">Success</button>
+    </div>
+  `
+})
+export class ColorsExample {}

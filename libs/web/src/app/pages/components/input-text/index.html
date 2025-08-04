@@ -1,0 +1,34 @@
+<docs-page>
+  <p>Used to enter a text value.</p>
+
+  <div class="docs-separator"></div>
+
+  <docs-snippet [code]="basicTs">
+    <app-input-text-basic-example class="block w-[274px]" />
+  </docs-snippet>
+
+  <h2>Import</h2>
+  <docs-code [src]="imp" />
+
+  <h2>Usage</h2>
+  <docs-code [src]="usage" />
+
+  <h2>Examples</h2>
+  <h3>Sizes</h3>
+  <docs-snippet [code]="sizesTs">
+    <app-input-text-sizes-example class="d-block w-[40rem]" />
+  </docs-snippet>
+
+  <h3>Radii</h3>
+  <docs-snippet [code]="radiiTs">
+    <app-input-text-radii-example class="d-block w-[40rem]" />
+  </docs-snippet>
+
+  <h2>API</h2>
+  <h3>Inputs</h3>
+  <docs-api-table>
+    <docs-input name="variant" type="enum" default="outline" />
+    <docs-input name="size" type="enum" default="md" />
+    <docs-input name="radius" type="enum" default="md" />
+  </docs-api-table>
+</docs-page>

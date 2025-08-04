@@ -1,0 +1,52 @@
+{
+  "name": "web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "tags": [],
+  "sourceRoot": "./web/src",
+  "targets": {
+    "build": {
+      "executor": "@analogjs/platform:vite",
+      "defaultConfiguration": "production",
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "sourcemap": false,
+          "mode": "production"
+        }
+      },
+      "outputs": [
+        "{options.outputPath}",
+        "{workspaceRoot}/dist/web/.nitro",
+        "{workspaceRoot}/dist/web/ssr",
+        "{workspaceRoot}/dist/web/analog"
+      ],
+      "options": {
+        "main": "libs/web/src/main.ts",
+        "configFile": "libs/web/vite.config.ts",
+        "outputPath": "dist/libs/web/client",
+        "tsConfig": "libs/web/tsconfig.app.json"
+      }
+    },
+    "serve": {
+      "executor": "@analogjs/platform:vite-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "web:build",
+        "port": 3333,
+        "tsConfig": "libs/web/tsconfig.app.json"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "web:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "web:build:production"
+        }
+      }
+    }
+  }
+}

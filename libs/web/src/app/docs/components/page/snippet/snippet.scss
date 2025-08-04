@@ -1,0 +1,37 @@
+.docs-snippet {
+  display: grid;
+}
+
+.docs-snippet-container {
+  display: flex;
+  flex-direction: column;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  block-size: 100%;
+  max-block-size: 100%;
+  padding: 8px;
+  overflow: hidden;
+  background: var(--x-white);
+  border: 1px solid var(--x-neutral-200);
+  border-radius: 8px;
+}
+
+.docs-snippet-tab {
+  color: var(--x-neutral-600);
+
+  &:hover,
+  &:active,
+  &.active {
+    color: var(--x-neutral-900);
+    background-color: #eeeeef;
+  }
+}
+
+.docs-snippet-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 10rem;
+  padding: 1.5rem 1rem;
+  border-top-left-radius: 0;
+}

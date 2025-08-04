@@ -1,0 +1,28 @@
+<div class="x-comparable-start">
+  <ng-content select="img[x-slot='start']" />
+</div>
+
+<div class="x-comparable-end">
+  <ng-content select="img[x-slot='end']" />
+</div>
+
+<div #handle class="x-comparable-handle">
+  <div class="x-comparable-thumb">
+    <ng-content select="[x-slot='icon']">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-4 w-4 text-black">
+        <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+        <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+        <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"></path>
+      </svg>
+    </ng-content>
+  </div>
+</div>
