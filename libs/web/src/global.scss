@@ -257,14 +257,6 @@ markdown {
   border-color: #e5e5e5;
 }
 
-.docs-footer {
-  display: block;
-  margin-block-start: 1.5rem;
-  border-style: solid;
-  border-color: #e5e5e5;
-  border-top-width: 1px;
-}
-
 .docs-sidebar-gradient-top {
   position: sticky;
   top: 0;
@@ -325,45 +317,6 @@ markdown {
   &:hover {
     color: #09090b;
   }
-}
-
-.docs-banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  width: 100%;
-  height: var(--docs-banner-height);
-  padding: 0 2rem;
-  background-color: var(--x-neutral-900);
-}
-
-.docs-banner-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-}
-
-.docs-banner-content {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  min-width: 0;
-}
-
-.docs-banner-text {
-  display: block;
-  min-width: 0;
-  overflow: hidden;
-  color: var(--x-white);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.5;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .app-primary-btn {
@@ -462,10 +415,6 @@ markdown {
   100% {
     background-position: 200%;
   }
-}
-
-.app-landing {
-  padding-top: var(--docs-banner-height);
 }
 
 .app-landing-content {
@@ -632,19 +581,9 @@ markdown {
       background-color: var(--x-success-100);
     }
 
-    &.yellow {
-      color: var(--x-warn-800);
-      background-color: var(--x-warn-100);
-    }
-
     &.orange {
       color: var(--x-main-800);
       background-color: var(--x-main-100);
-    }
-
-    &.rose {
-      color: var(--x-rose-800);
-      background-color: var(--x-rose-100);
     }
 
     &.white {

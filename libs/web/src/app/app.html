@@ -1,7 +1,10 @@
-<div class="docs-banner">
-  <div class="docs-banner-container">
-    <div class="docs-banner-content">
-      <span class="docs-banner-text"> ⚠️ Mixin UI is currently in alpha stage </span>
+<div class="fixed top-0 left-0 z-[1000] w-full h-[var(--docs-banner-height)] px-8 bg-gray-900">
+  <div class="flex items-center justify-between w-full h-full">
+    <div class="flex flex-1 items-center justify-center min-w-0">
+      <span
+        class="block min-w-0 overflow-hidden text-white text-sm font-medium leading-6 whitespace-nowrap text-ellipsis">
+        ⚠️ Mixin UI is currently in alpha stage
+      </span>
     </div>
   </div>
 </div>
@@ -76,7 +79,7 @@
 </div>
 
 @if (menuOpen()) {
-  <docs-sidebar class="!fixed !left-0 !z-[1000] bg-white"/>
+  <docs-sidebar class="!fixed !left-0 !z-[1000] bg-white" />
 }
 
 <router-outlet />

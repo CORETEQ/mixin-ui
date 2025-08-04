@@ -4,17 +4,16 @@ import { Clipboard } from '@angular/cdk/clipboard';
 import { exhaustMap, fromEvent, map, startWith, timer } from 'rxjs';
 
 @Directive({
-  selector: 'button[docsCopy]',
-  exportAs: 'docsCopy',
+  selector: 'button[clipboard]',
+  exportAs: 'clipboard',
   host: {
     type: 'button',
-    class: 'docs-copy',
   },
 })
 export class DocsCopy {
   readonly #clipboard = inject(Clipboard);
 
-  readonly text = input<string>('', { alias: 'docsCopy' });
+  readonly text = input<string>('', { alias: 'clipboard' });
 
   readonly copied = toSignal(
     fromEvent(inject(ElementRef).nativeElement, 'click').pipe(

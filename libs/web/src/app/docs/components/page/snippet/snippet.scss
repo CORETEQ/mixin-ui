@@ -16,20 +16,8 @@
   border-radius: 9px;
 }
 
-.docs-snippet-tabs {
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 8px;
-  background: var(--x-white);
-  border-bottom: 1px solid #e9e9ec;
-}
-
 .docs-snippet-tab {
   color: var(--x-neutral-600);
-  font-weight: 500;
-  border-radius: 6px;
 
   &:hover,
   &:active,

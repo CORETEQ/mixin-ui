@@ -7,7 +7,9 @@ import { Hero } from './hero';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-landing',
   imports: [Footer, Hero],
-  host: { class: 'app-landing' },
+  host: {
+    class: 'pt-[var(--docs-banner-height)]',
+  },
   template: `
     <div class="app-landing-content">
       <app-hero />
