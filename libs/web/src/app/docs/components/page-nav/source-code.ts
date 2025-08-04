@@ -12,7 +12,7 @@ import { XIcon } from '@mixin-ui/kit';
   imports: [XIcon],
   template: `
     <a
-      class="flex items-center gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]"
+      class="flex items-center gap-1 text-sm leading-8 text-gray-600 hover:text-gray-950"
       target="_blank"
       [attr.href]="href()"
     >

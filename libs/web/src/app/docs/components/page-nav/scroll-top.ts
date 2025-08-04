@@ -11,7 +11,7 @@ import { fromAfterNextRender } from '@mixin-ui/cdk';
   template: `
     <button
       type="button"
-      class="flex items-center cursor-pointer gap-1 text-sm leading-8 text-[#52525B] hover:text-[#09090B]"
+      class="flex items-center cursor-pointer gap-1 text-sm leading-8 text-gray-600 hover:text-gray-950"
       (click)="scrollTop()"
     >
       Scroll to top

@@ -66,6 +66,7 @@
 .x-calendar {
   display: block;
   padding: 0.75rem;
+  background: var(--x-white);
 
   @include size(xs) {
     --x-size: var(--x-size-xs);
@@ -137,7 +138,7 @@
   justify-content: center;
   inline-size: var(--x-size);
   block-size: var(--x-size);
-  color: var(--x-neutral-600);
+  color: var(--x-neutral-500); // @TODO: replace with semantic token
   font: var(--x-text-xs);
   font-weight: 500;
 }
@@ -151,18 +152,18 @@
   justify-content: center;
   inline-size: var(--x-size);
   block-size: var(--x-size);
-  color: var(--x-neutral-900);
+  color: var(--x-neutral-900); // @TODO: replace with semantic token
   font: var(--x-text-sm);
   background-color: transparent;
   border-radius: var(--x-radius);
   cursor: pointer;
 
   @include hover {
-    background-color: var(--x-neutral-200);
+    background-color: var(--x-neutral-100);
   }
 
   @include active {
-    background-color: var(--x-neutral-300);
+    background-color: var(--x-neutral-200);
   }
 
   @include actual {

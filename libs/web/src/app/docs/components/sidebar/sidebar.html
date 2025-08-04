@@ -1,30 +1,29 @@
 <div class="docs-sidebar-gradient-top"></div>
 
-<div class="docs-sidebar-wrapper">
-  <div class="docs-sidebar-nav">
-    @for (item of active().children; track item.title; let first = $first) {
-      <div [class.mt-6]="!first">
-        <h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">{{ item.title }}</h5>
-        <ul>
-          @for (child of item.children; track child.title) {
-            <li>
-              <a class="docs-sidebar-item"
-                 routerLinkActive="active"
-                 ariaCurrentWhenActive="page"
-                 [class.disabled]="child.disabled"
-                 [routerLink]="child.disabled ? null : child.routerLink">
-                <span class="docs-sidebar-item-text">{{ child.title }}</span>
+@for (item of active().children; track item.title; let first = $first) {
+  <div [class.mt-6]="!first">
+    <h5 class="text-sm mb-2 ml-2.75 font-semibold leading-5">{{ item.title }}</h5>
 
-                @if (child.disabled) {
-                  <span class="docs-sidebar-badge">soon</span>
-                }
-              </a>
-            </li>
-          }
-        </ul>
-      </div>
-    }
+    <ul>
+      @for (child of item.children; track child.title) {
+        <li>
+          <a class="docs-sidebar-item"
+             routerLinkActive="active"
+             ariaCurrentWhenActive="page"
+             [class.disabled]="child.disabled"
+             [routerLink]="child.disabled ? null : child.routerLink">
+            <span class="docs-sidebar-item-text">{{ child.title }}</span>
+
+            @if (child.disabled) {
+              <span class="px-1 text-[11.5px] font-medium leading-4 capitalize text-white bg-gray-400 rounded">
+                soon
+              </span>
+            }
+          </a>
+        </li>
+      }
+    </ul>
   </div>
-</div>
+}
 
 <div class="docs-sidebar-gradient-bottom"></div>

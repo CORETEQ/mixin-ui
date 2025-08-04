@@ -4,6 +4,7 @@ import { DocsPage } from '@/docs/components';
 import { CalendarBasicExample } from './examples/basic/basic';
 import imp from './examples/import?raw&lang=ts';
 import usage from './examples/usage?raw&lang=ts';
+import basicTs from './examples/basic/basic?raw&lang=ts';
 
 @Component({
   selector: 'app-calendar',
@@ -15,4 +16,5 @@ import usage from './examples/usage?raw&lang=ts';
 export default class Calendar {
   imp = imp;
   usage = usage;
+  basicTs = basicTs;
 }

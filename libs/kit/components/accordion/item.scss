@@ -3,8 +3,8 @@
   display: block;
   margin-block-end: -1px;
   overflow: hidden;
-  color: var(--x-neutral-900);
-  border: 1px solid var(--x-neutral-400);
+  color: var(--x-neutral-900); // @TODO: replace with semantic token
+  border: 1px solid var(--x-neutral-200); // @TODO: replace with semantic token
 
   &:first-of-type {
     border-top-left-radius: var(--x-radius);
@@ -26,7 +26,7 @@
   padding: 0 var(--x-label-padding, 1rem);
   background: transparent;
   outline: none;
-  border-block-end: 1px solid var(--x-neutral-400);
+  border-block-end: 1px solid var(--x-neutral-200);
   user-select: none; // https://github.com/whatwg/html/issues/3191
   cursor: pointer;
 
@@ -40,7 +40,7 @@
 
   &:hover,
   details[open] & {
-    background-color: var(--x-neutral-100);
+    background-color: var(--x-neutral-50);
   }
 }
 
@@ -59,6 +59,7 @@
   display: inline-flex;
   align-items: center;
   margin-inline-start: auto;
+  font-size: 1rem;
 }
 
 .x-accordion-icon-animate {

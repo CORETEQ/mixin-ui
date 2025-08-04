@@ -1,14 +1,15 @@
 .docs-code {
+  position: relative;
   display: grid;
   inline-size: 100%;
   overflow: auto;
-  background: #fff;
-  border: 1px solid #e2e2e2;
+  background: var(--x-white);
+  border: 1px solid var(--x-neutral-200);
   border-radius: 0.625rem;
 
   .docs-code-inner {
     display: block;
-    padding: 0.875rem 1rem;
+    padding: 1rem 1.125rem;
     overflow: hidden;
   }
 
@@ -19,12 +20,17 @@
   code {
     display: flex;
     flex-direction: column;
+    max-block-size: 32rem;
     overflow-x: auto;
     font-family: var(--docs-code-font-family), monospace;
     font-size: 14px;
 
     .line {
       line-height: 22px;
+
+      &.spotlight {
+        background: var(--x-neutral-100);
+      }
     }
   }
 
@@ -39,8 +45,9 @@
           display: inline-block;
           inline-size: 1rem;
           margin-left: -0.125rem;
-          color: #b8b8b8;
+          color: var(--x-neutral-400);
           text-align: end;
+          opacity: 0.9;
           content: counter(codeblock-line);
         }
 
@@ -49,5 +56,19 @@
         }
       }
     }
+  }
+}
+
+.docs-copy {
+  position: absolute;
+  top: 0.625rem;
+  right: 0.625rem;
+  z-index: 1;
+  color: var(--x-neutral-600);
+  background-color: var(--x-white);
+
+  &:hover,
+  &:active {
+    color: var(--x-neutral-900);
   }
 }

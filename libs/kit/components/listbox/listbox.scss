@@ -28,7 +28,7 @@
   align-items: center;
   justify-content: center;
   min-block-size: 2.5rem;
-  color: var(--x-neutral-600);
+  color: var(--x-neutral-500); // @TODO: replace with semantic token
   font-size: 0.875rem;
   line-height: 1.25rem;
 }

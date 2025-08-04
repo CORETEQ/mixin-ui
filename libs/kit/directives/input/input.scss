@@ -140,10 +140,10 @@
   }
 
   @include variant(outline) {
-    --x-text-color: var(--x-neutral-900);
-    --x-bg-color: var(--x-white);
-    --x-border-color: var(--x-neutral-400);
-    --x-placeholder-color: var(--x-neutral-600);
+    --x-text-color: var(--x-neutral-900); // @TODO: replace with semantic token
+    --x-bg-color: var(--x-white); // @TODO: replace with semantic token
+    --x-border-color: var(--x-neutral-300); // @TODO: replace with semantic token
+    --x-placeholder-color: var(--x-neutral-500); // @TODO: replace with semantic token
     --x-spinner-color: var(--x-main-600);
     --x-autofill-color: var(--x-main-200);
     --x-selection-color: var(--x-main-200);

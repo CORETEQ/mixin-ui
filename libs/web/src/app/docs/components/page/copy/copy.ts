@@ -1,29 +1,15 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  inject,
-  input,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Directive, ElementRef, inject, input } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { exhaustMap, fromEvent, map, startWith, timer } from 'rxjs';
-import { XIcon } from '@mixin-ui/kit';
 
-@Component({
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  imports: [XIcon],
+@Directive({
   selector: 'button[docsCopy]',
-  template: `
-    @if (copied()) {
-    <x-icon src="check" />
-    } @else {
-    <x-icon src="copy" />
-    }
-  `,
-  host: { type: 'button' },
+  exportAs: 'docsCopy',
+  host: {
+    type: 'button',
+    class: 'docs-copy',
+  },
 })
 export class DocsCopy {
   readonly #clipboard = inject(Clipboard);

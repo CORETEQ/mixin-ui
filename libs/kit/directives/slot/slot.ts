@@ -11,7 +11,7 @@ import {
   Type,
 } from '@angular/core';
 
-const __DEFAULT_NAME__ = new InjectionToken('', { factory: () => '' });
+const DEFAULT_NAME = new InjectionToken('', { factory: () => '' });
 
 export const X_SLOT = new InjectionToken<XSlot>('SLOT');
 
@@ -26,7 +26,7 @@ export const X_SLOT = new InjectionToken<XSlot>('SLOT');
 })
 export class XSlot {
   readonly t = inject(TemplateRef);
-  readonly n = input(inject(__DEFAULT_NAME__), { alias: 'x-slot' });
+  readonly n = input(inject(DEFAULT_NAME), { alias: 'x-slot' });
 }
 
 @Pipe({ name: 'asRecord' })
@@ -37,7 +37,7 @@ export class XSlotsPipe implements PipeTransform {
 export function provideNamedSlot(name: string, slot: Type<XSlot>): Provider[] {
   return [
     {
-      provide: __DEFAULT_NAME__,
+      provide: DEFAULT_NAME,
       useValue: name,
     },
     {
