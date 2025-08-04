@@ -52,43 +52,6 @@ body {
   border-right-width: 1px;
 }
 
-.docs-sidebar-item {
-  display: flex;
-  column-gap: 0.625rem;
-  align-items: center;
-  padding: 0.375rem 0.75rem;
-  color: #5b5b5b;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: -0.005em;
-  border-radius: 0.375rem;
-  cursor: pointer;
-
-  &.active {
-    color: var(--x-neutral-950);
-    font-weight: 500;
-    background: #eeeeef;
-  }
-
-  &.disabled {
-    cursor: var(--x-cursor-disabled);
-
-    &:hover {
-      background: #f4f4f4;
-    }
-
-    .docs-sidebar-item-text {
-      opacity: 0.8;
-    }
-  }
-
-  &:hover {
-    color: var(--x-neutral-950);
-    background: #eeeeef;
-  }
-}
-
 .docs-content {
   display: grid;
   flex: 1 1 0;
@@ -255,26 +218,6 @@ markdown {
   border-width: 1px 0 0;
   border-style: dashed;
   border-color: #e5e5e5;
-}
-
-.docs-sidebar-gradient-top {
-  position: sticky;
-  top: 0;
-  display: block;
-  inline-size: 100%;
-  block-size: 1.5rem;
-  pointer-events: none;
-}
-
-.docs-sidebar-gradient-bottom {
-  position: sticky;
-  bottom: 0;
-  left: 0;
-  display: block;
-  inline-size: 100%;
-  block-size: 1.5rem;
-  background-image: linear-gradient(to top, rgb(255 255 255), rgb(255 255 255 / 0%));
-  pointer-events: none;
 }
 
 .app-header {
@@ -448,31 +391,6 @@ markdown {
     0 0 0 1px rgb(51 51 51 / 12%), inset 0 -1px 1px -0.5px rgb(51 51 51 / 6%);
 }
 
-@media (width <= 1280px) {
-  .docs-content {
-    grid-template-columns: 15rem minmax(0, 1fr) 0;
-  }
-}
-
-@media (width <= 960px) {
-  .docs-content {
-    grid-template-columns: 1fr;
-    padding: 1.75rem 1.5rem 0;
-
-    .docs-sidebar {
-      display: none;
-    }
-  }
-}
-
-@media (width <= 480px) {
-  .app-hero-subtitle {
-    height: 2rem;
-    padding: 0 0.75rem;
-    font-size: 14px;
-  }
-}
-
 .app-hero-animated-decor {
   animation: wheel-spin 5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
 }
@@ -606,6 +524,27 @@ markdown {
   }
 }
 
-.cdk-overlay-container {
-  -webkit-font-smoothing: subpixel-antialiased;
+@media (width <= 1280px) {
+  .docs-content {
+    grid-template-columns: 15rem minmax(0, 1fr) 0;
+  }
+}
+
+@media (width <= 960px) {
+  .docs-content {
+    grid-template-columns: 1fr;
+    padding: 1.75rem 1.5rem 0;
+
+    .docs-sidebar {
+      display: none;
+    }
+  }
+}
+
+@media (width <= 480px) {
+  .app-hero-subtitle {
+    height: 2rem;
+    padding: 0 0.75rem;
+    font-size: 14px;
+  }
 }

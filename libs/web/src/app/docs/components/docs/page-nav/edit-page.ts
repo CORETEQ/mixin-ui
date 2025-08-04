@@ -4,7 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { map, startWith } from 'rxjs';
 import { fromRouterEvent } from '@mixin-ui/cdk';
 import { XIcon } from '@mixin-ui/kit';
-import { environment } from '../../../env';
+import { environment } from '../../../../env';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,

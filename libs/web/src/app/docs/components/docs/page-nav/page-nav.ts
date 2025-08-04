@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { IsActiveMatchOptions, RouterLink, RouterLinkActive } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { DocsEditPage } from '@/docs/components/page-nav/edit-page';
-import { DocsScrollTop } from '@/docs/components/page-nav/scroll-top';
-import { SourceCode } from '@/docs/components/page-nav/source-code';
+import { DocsEditPage } from '@/docs/components/docs/page-nav/edit-page';
+import { DocsScrollTop } from '@/docs/components/docs/page-nav/scroll-top';
+import { SourceCode } from '@/docs/components/docs/page-nav/source-code';
 import { DocsPageService } from '@/docs/services';
 
 @Component({

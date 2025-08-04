@@ -1,4 +1,4 @@
-<div class="docs-sidebar-gradient-top"></div>
+<div class="sticky top-0 block w-full h-6 pointer-events-none"></div>
 
 @for (item of active().children; track item.title; let first = $first) {
   <div [class.mt-6]="!first">
@@ -7,12 +7,19 @@
     <ul>
       @for (child of item.children; track child.title) {
         <li>
-          <a class="docs-sidebar-item"
-             routerLinkActive="active"
+          <a class="flex gap-[0.625rem] items-center px-3 py-1.5 text-[#5b5b5b] text-sm font-normal
+                    leading-[1.25rem] tracking-[-0.005em] rounded-[0.375rem]
+                    hover:text-gray-950 hover:bg-[#eeeeef]"
+             routerLinkActive
+             #rla="routerLinkActive"
              ariaCurrentWhenActive="page"
-             [class.disabled]="child.disabled"
+             [class.!font-medium]="rla.isActive"
+             [class.text-gray-950]="rla.isActive"
+             [class.bg-[#eeeeef]]="rla.isActive"
+             [class.cursor-not-allowed]="child.disabled"
              [routerLink]="child.disabled ? null : child.routerLink">
-            <span class="docs-sidebar-item-text">{{ child.title }}</span>
+
+            <span [class.opacity-80]="child.disabled">{{ child.title }}</span>
 
             @if (child.disabled) {
               <span class="px-1 text-[11.5px] font-medium leading-4 capitalize text-white bg-gray-400 rounded">
@@ -26,4 +33,6 @@
   </div>
 }
 
-<div class="docs-sidebar-gradient-bottom"></div>
+<div
+  class="sticky bottom-0 left-0 block w-full h-6 bg-gradient-to-t from-white to-[rgb(255_255_255/0%)] pointer-events-none">
+</div>

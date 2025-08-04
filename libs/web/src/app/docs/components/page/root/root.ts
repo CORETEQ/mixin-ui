@@ -24,7 +24,6 @@ export class DocsPageRoot {
   readonly #snapshot = inject(ActivatedRoute).snapshot;
 
   readonly name = input(this.#snapshot.title);
-  readonly status = input(this.#snapshot.data.status);
   readonly groupName = input(this.#snapshot.parent?.title);
   readonly sourcePath = input(this.#snapshot.data.sourcePath);
 }

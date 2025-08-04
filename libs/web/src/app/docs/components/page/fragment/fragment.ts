@@ -47,18 +47,18 @@ import { toKebab } from '@/docs/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DocsFragment implements AfterContentInit {
-  private readonly route = inject(ActivatedRoute);
-  private readonly el = inject(ElementRef<HTMLHeadingElement>).nativeElement;
-  private readonly fragments = inject(DocsFragmentsService);
+  readonly #route = inject(ActivatedRoute);
+  readonly #el = inject(ElementRef<HTMLHeadingElement>).nativeElement;
+  readonly #fragments = inject(DocsFragmentsService);
 
-  id = input<string>();
+  readonly id = input<string>();
 
   readonly textContent = signal('');
   readonly fragment = computed(() => this.id() || toKebab(this.textContent().trim()));
   readonly spotlighted = toSignal(
     fromAfterNextRender().pipe(
       switchMap(() => {
-        if (this.fragment() !== this.route.snapshot.fragment) {
+        if (this.fragment() !== this.#route.snapshot.fragment) {
           return EMPTY;
         }
 
@@ -71,18 +71,18 @@ export class DocsFragment implements AfterContentInit {
   );
 
   ngAfterContentInit(): void {
-    this.textContent.set(this.el.textContent);
+    this.textContent.set(this.#el.textContent);
 
-    this.fragments.next({
+    this.#fragments.next({
       level: this.level,
       title: this.textContent(),
       fragment: this.fragment(),
-      relativeTo: this.route,
+      relativeTo: this.#route,
       routerLink: '.',
     });
   }
 
   protected get level(): number {
-    return Number(this.el.tagName.replace('H', ''));
+    return Number(this.#el.tagName.replace('H', ''));
   }
 }

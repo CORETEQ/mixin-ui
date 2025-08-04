@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { group, page, section } from './docs/providers';
-import { DocsWrapper } from './docs/components';
+import { Docs } from './docs/components';
 import Landing from './landing';
 
 export const ROUTES: Route[] = [
@@ -15,7 +15,7 @@ export const ROUTES: Route[] = [
   },
   {
     path: '',
-    component: DocsWrapper,
+    component: Docs,
     data: { root: true },
     children: [
       section({
