@@ -6,20 +6,20 @@
 
 <h1 align="center">Open source Angular tools ⚡️</h1>
 <p align="center">
-  <a href="https://mixin-ui.dev/">
-    <img alt="NPM Downloads" src="https://img.shields.io/npm/dw/angular?color=blue""></a>
+  <a href="https://www.npmjs.com/package/@mixin-ui/cdk">
+    <img alt="NPM Downloads" src="https://img.shields.io/npm/dw/@mixin-ui/cdk?color=blue""></a>
   
-  <a href="https://mixin-ui.dev/">
+  <a href="/">
     <img alt="NPM Bundle size" src="https://img.shields.io/bundlephobia/minzip/angular?color=green"></a>
 
-  <a href="https://mixin-ui.dev/">
-    <img alt="GitHub License" src="https://img.shields.io/github/license/angular/angular?color=orange"></a>  
+  <a href="https://opensource.org/license/apache-2-0">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/coreteq/mixin-ui?color=orange"></a>  
 
-  <a href="https://mixin-ui.dev/">
-    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/angular/angular?style=flat&logo=github&color=yellow"></a>
+  <a href="/">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/coreteq/mixin-ui?style=flat&logo=github&color=yellow"></a>
 
   <a href="https://discord.gg/y5ASSPw2">
-    <img alt="Discord" src="https://img.shields.io/discord/660863154703695893.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" /></a>
+    <img alt="Discord" src="https://img.shields.io/discord/1401541906663739523?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2" /></a>
 </p>
 
 > [!WARNING]
