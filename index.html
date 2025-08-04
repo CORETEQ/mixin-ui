@@ -2,7 +2,7 @@
   <meta charset="utf-8">
   <title>Mixin UI</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="width=device-width, initial-scale=1, user-scalable=1, maximum-scale=1" name="viewport">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=Kumbh+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
@@ -13,8 +13,8 @@
 
   <link rel="icon" href="/favicon-light.svg" media="(prefers-color-scheme: light)">
   <link rel="icon" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)">
-  <script type="module" crossorigin="" src="/assets/index-ByREDZlR.js"></script>
-  <link rel="stylesheet" crossorigin="" href="/assets/style-DB9HcKuQ.css">
+  <script type="module" crossorigin="" src="/assets/index-DzJclg_8.js"></script>
+  <link rel="stylesheet" crossorigin="" href="/assets/style-CasO3oJP.css">
 <style ng-app-id="ng">.x-icon {
   position: relative;
   display: inline-flex;
@@ -42,6 +42,7 @@
   block-size: var(--x-size);
   padding: 0 var(--x-side);
   font: var(--x-font);
+  font-weight: 500;
   outline: 2px solid transparent;
   outline-offset: 1px;
   border-radius: var(--x-radius);
@@ -58,40 +59,40 @@
 .x-btn:where(.x-variant-outline) {
   color: var(--x-color-900);
   background-color: var(--x-white);
-  box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
+  box-shadow: inset 0 0 0 1px var(--x-color-300), 0 1px 1px #f1f1f1;
 }
 @media (hover: hover) {
   .x-btn:where(.x-variant-outline):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
-    background-color: var(--x-color-100);
+    background-color: var(--x-color-50);
   }
 }
 .x-btn:where(.x-variant-outline):where(:active:not(:disabled), .x-active:not(:disabled)) {
-  background-color: var(--x-color-200);
+  background-color: var(--x-color-100);
 }
 .x-btn:where(.x-variant-outline):where([aria-pressed=true], .x-overlay-opened) {
-  background-color: var(--x-color-200);
+  background-color: var(--x-color-100);
   filter: brightness(0.98) saturate(1.1);
 }
 .x-btn:where(.x-variant-surface) {
   color: var(--x-color-900);
-  background-color: var(--x-color-100);
-  box-shadow: inset 0 0 0 1px var(--x-color-400), 0 1px 1px #f1f1f1;
+  background-color: var(--x-color-50);
+  box-shadow: inset 0 0 0 1px var(--x-color-300), 0 1px 1px #f1f1f1;
 }
 @media (hover: hover) {
   .x-btn:where(.x-variant-surface):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
-    background-color: var(--x-color-200);
+    background-color: var(--x-color-100);
   }
 }
 .x-btn:where(.x-variant-surface):where(:active:not(:disabled), .x-active:not(:disabled)) {
-  background-color: var(--x-color-300);
+  background-color: var(--x-color-200);
 }
 .x-btn:where(.x-variant-subtle) {
   color: var(--x-color-900);
-  background-color: var(--x-color-200);
+  background-color: var(--x-color-100);
 }
 @media (hover: hover) {
   .x-btn:where(.x-variant-subtle):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
-    background-color: var(--x-color-300);
+    background-color: var(--x-color-200);
   }
 }
 .x-btn:where(.x-variant-ghost) {
@@ -100,11 +101,11 @@
 }
 @media (hover: hover) {
   .x-btn:where(.x-variant-ghost):where(:hover:not(:disabled), .x-hover:not(:disabled)) {
-    background-color: var(--x-color-200);
+    background-color: var(--x-color-100);
   }
 }
 .x-btn:where(.x-variant-ghost):where(:active:not(:disabled), .x-active:not(:disabled)) {
-  background-color: var(--x-color-300);
+  background-color: var(--x-color-200);
 }
 .x-btn:where(.x-variant-plain) {
   color: var(--x-color-900);
@@ -191,7 +192,7 @@
   inset: 0;
 }</style></head>
 <body><!--nghm-->
-<app-root ng-version="19.2.14" class="app-layout" ngh="2" ng-server-context="ssr-analog"><div class="docs-banner"><div class="docs-banner-container"><div class="docs-banner-content"><span class="docs-banner-text"> ⚠️ Mixin UI is currently in alpha stage </span></div></div></div><div class="app-header"><div class="app-container"><div class="mx-auto px-4 flex items-center justify-between flex-1 h-14"><div class="flex items-center space-x-4"><a routerlink="/" class="flex items-center gap-x-1.5" href="/"><x-icon src="icons/app/mixin.svg" size="28" raw="" class="x-icon" style="background: url(icons/app/mixin.svg) no-repeat center / contain; --x-icon-size: 28px;" ngh="0"></x-icon><span class="h-[30px] text-[#09090b] text-[30px] leading-[26px] font-kumbh font-normal" style="-webkit-font-smoothing: subpixel-antialiased;"> mixin </span></a><div class="app-header-version"><a target="_blank" class="text-[#09090B] decoration-gray-400 underline-offset-1 hover:underline" style="font-family: ui-monospace, monospace; letter-spacing: -0.5px;" href="https://github.com/CORETEQ/mixin-ui/releases/tag/v0.0.1-alpha.2"> v0.0.1-alpha.2 </a></div></div><div class="hidden md:flex items-center"><nav class="items-center gap-6 text-sm flex font-medium me-6"><a routerlink="/installation" class="hover:underline underline-offset-2" href="/installation">Introduction</a><a routerlink="/components" class="hover:underline underline-offset-2" href="/components">Components</a><a routerlink="/colors" class="hover:underline underline-offset-2" href="/colors">Colors</a></nav><div class="h-[1.125rem] w-[1px] bg-gray-300"></div><div class="flex items-center gap-1 ms-3.5"><a x-icon="" href="https://github.com/CORETEQ/mixin-ui" target="_blank" color="neutral" variant="ghost" size="md" data-color="neutral" class="x-btn x-radius-md x-size-md x-variant-ghost x-icon-only" ngh="1"><!----><!----><x-icon src="icons/app/github.svg" size="18" class="x-icon" style="mask: url(icons/app/github.svg) no-repeat center / contain; --x-icon-size: 18px;" ngh="0"></x-icon><!----></a></div></div><button aria-label="Toggle menu" class="md:hidden relative w-8 h-8 flex items-center justify-center"><span class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out translate-y-2"></span><span class="absolute w-5 h-0.5 right-1 bg-gray-500 transition duration-300 ease-in-out opacity-100"></span><span class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out -translate-y-2"></span></button></div></div></div><!----><router-outlet></router-outlet><app-landing class="app-landing" ngh="0"><div class="app-landing-content"><app-hero ngh="0"><div class="app-container h-full"><div class="flex flex-col items-center justify-center h-full pt-12 pb-16"><div class="flex flex-col items-center justify-center text-center animate__animated animate__fadeIn"><div class="px-7 flex flex-col items-start md:items-center"><div class="app-hero-subtitle mb-6 md:mb-8"><span>🚀</span> Powered by <a href="https://coreteq.sk" target="_blank" class="-ms-[0.2rem] underline decoration-[#b3b3b3] decoration-1 underline-offset-[0.15em] decoration-dotted hover:text-[#09090b]"> CoreTEQ <span class="hidden md:inline">Technology</span></a></div><div class="flex flex-col md:block items-start text-[2.925rem] md:text-[4rem] md:leading-[4.75rem] font-semibold mb-6 md:mb-8 text-left md:text-center"><span class="block md:inline leading-13.5 md:leading-[4.75rem]">Build Reliable</span><span class="block md:inline leading-15 md:leading-[4.75rem]"> Interfaces —</span><div class="inline md:block md:leading-[4.75rem]"><div class="block md:inline leading-15.5 md:leading-[4.75rem] text-left"> with <div class="inline-flex shrink-0 gap-4 items-center justify-center md:mx-0.5 w-[3.5rem] h-[3.5rem] md:w-[4.5rem] md:h-[4.5rem] border border-[#e0e1e7] align-text-bottom rounded-[14px] md:rounded-[16px]"><x-icon src="icons/app/angular.svg" raw="" class="x-icon md:text-[3.5rem]" style="background: url(icons/app/angular.svg) no-repeat center / contain;" ngh="0"></x-icon></div> Angular </div><div class="block md:inline leading-15.5 md:leading-[4.75rem] text-left"> &amp; <div class="inline-flex shrink-0 gap-4 items-center justify-center mx:me-0.5 w-[3.5rem] h-[3.5rem] md:w-[4.5rem] md:h-[4.5rem] border border-[#e0e1e7] align-text-bottom rounded-[14px] md:rounded-[16px]"><x-icon id="mixin-circle" src="icons/app/mixin.svg" raw="" class="x-icon md:text-[3.5rem]" style="background: url(icons/app/mixin.svg) no-repeat center / contain;" ngh="0"></x-icon></div> Mixin UI </div></div></div><p class="max-w-[40rem] text-[#5c5c5c] text-[1rem] md:text-[1.125rem] leading-[1.5rem] md:leading-[1.75rem] text-left md:text-center mb-10"> 25+ lightweight components and tools built with Angular and minimal dependencies. <span class="hidden md:inline"> Build dynamic interfaces, speed up development, and deliver polished UI with a flexible layout system and smart utilities. </span></p><button routerlink="installation" type="button" class="app-primary-btn !w-fit" tabindex="0"> Browse the docs <x-icon src="chevron-right" class="x-icon" style="mask: url(icons/chevron-right.svg) no-repeat center / contain;" ngh="0"></x-icon></button></div></div></div></div></app-hero><app-footer ngh="0"><div class="flex w-full bg-white border-t border-[#e5e5e5]"><div class="app-container"><div class="flex items-center justify-center pt-5 pb-6 md:py-6 px-4"><div class="flex flex-col gap-8"><span class="text-sm text-center leading-6 text-[#52525B]"><span class="block md:inline"> Licensed under the <a href="https://opensource.org/license/apache-2-0" target="_blank" class="font-medium text-[#1470EF] hover:underline">Apache 2.0</a>. </span> Copyright © 2025-present. </span></div></div></div></div></app-footer></div></app-landing><!----></app-root>
+<app-root ng-version="19.2.14" class="flex flex-col bg-white" ngh="2" ng-server-context="ssr-analog"><div class="docs-banner"><div class="docs-banner-container"><div class="docs-banner-content"><span class="docs-banner-text"> ⚠️ Mixin UI is currently in alpha stage </span></div></div></div><div class="app-header"><div class="app-container"><div class="mx-auto px-4 flex items-center justify-between flex-1 h-14"><div class="flex items-center space-x-4 -ms-0.5 lg:ms-0"><a routerlink="/" class="flex items-center gap-x-1.5" href="/"><x-icon src="icons/app/mixin.svg" size="28" raw="" class="x-icon" style="background: url(icons/app/mixin.svg) no-repeat center / contain; --x-icon-size: 28px;" ngh="0"></x-icon><span class="h-[30px] text-[#09090b] text-[30px] leading-[26px] font-kumbh font-normal" style="-webkit-font-smoothing: subpixel-antialiased;"> mixin </span></a><div class="app-header-version"><a target="_blank" class="text-gray-950 font-mono decoration-gray-400 underline-offset-1 hover:underline" style="letter-spacing: -0.5px;" href="https://github.com/CORETEQ/mixin-ui/releases/tag/v0.0.1-alpha.2"> v0.0.1-alpha.2 </a></div></div><div class="hidden md:flex items-center"><nav class="items-center gap-6 text-sm flex font-medium me-6"><a routerlink="/installation" class="hover:underline underline-offset-2" href="/installation">Introduction</a><a routerlink="/components" class="hover:underline underline-offset-2" href="/components">Components</a><a routerlink="/colors" class="hover:underline underline-offset-2" href="/colors">Colors</a></nav><div class="h-[1.125rem] w-[1px] bg-gray-300"></div><div class="flex items-center gap-1 ms-3.5"><a x-icon="" target="_blank" color="neutral" variant="ghost" size="md" href="https://github.com/CORETEQ/mixin-ui" data-color="neutral" class="x-btn x-radius-md x-size-md x-variant-ghost x-icon-only" ngh="1"><!----><!----><x-icon src="icons/app/github.svg" size="18" class="x-icon" style="mask: url(icons/app/github.svg) no-repeat center / contain; --x-icon-size: 18px;" ngh="0"></x-icon><!----></a></div></div><button aria-label="Toggle menu" class="md:hidden relative w-8 h-8 flex items-center justify-center"><span class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out translate-y-2"></span><span class="absolute w-5 h-0.5 right-1 bg-gray-500 transition duration-300 ease-in-out opacity-100"></span><span class="absolute w-6 h-0.5 bg-gray-500 transition duration-300 ease-in-out -translate-y-2"></span></button></div></div></div><!----><router-outlet></router-outlet><app-landing class="app-landing" ngh="0"><div class="app-landing-content"><app-hero ngh="0"><div class="app-container h-full"><div class="flex flex-col items-center justify-center h-full pt-12 pb-16"><div class="flex flex-col items-center justify-center text-center animate__animated animate__fadeIn"><div class="px-7 flex flex-col items-start md:items-center"><div class="app-hero-subtitle mb-6 md:mb-8"><span>🚀</span> Powered by <a href="https://coreteq.sk" target="_blank" class="-ms-[0.2rem] underline decoration-[#b3b3b3] decoration-1 underline-offset-[0.15em] decoration-dotted hover:text-[#09090b]"> CoreTEQ <span class="hidden md:inline">Technology</span></a></div><div class="flex flex-col md:block items-start text-[2.925rem] md:text-[4rem] md:leading-[4.75rem] font-semibold mb-6 md:mb-8 text-left md:text-center"><span class="block md:inline leading-13.5 md:leading-[4.75rem]">Build Reliable</span><span class="block md:inline leading-15 md:leading-[4.75rem]"> Interfaces —</span><div class="inline md:block md:leading-[4.75rem]"><div class="block md:inline leading-15.5 md:leading-[4.75rem] text-left"> with <div class="inline-flex shrink-0 gap-4 items-center justify-center md:mx-0.5 w-[3.5rem] h-[3.5rem] md:w-[4.5rem] md:h-[4.5rem] border border-[#e0e1e7] align-text-bottom rounded-[14px] md:rounded-[16px]"><x-icon src="icons/app/angular.svg" raw="" class="x-icon md:text-[3.5rem]" style="background: url(icons/app/angular.svg) no-repeat center / contain;" ngh="0"></x-icon></div> Angular </div><div class="block md:inline leading-15.5 md:leading-[4.75rem] text-left"> &amp; <div class="inline-flex shrink-0 gap-4 items-center justify-center mx:me-0.5 w-[3.5rem] h-[3.5rem] md:w-[4.5rem] md:h-[4.5rem] border border-[#e0e1e7] align-text-bottom rounded-[14px] md:rounded-[16px]"><x-icon id="mixin-circle" src="icons/app/mixin.svg" raw="" class="x-icon md:text-[3.5rem]" style="background: url(icons/app/mixin.svg) no-repeat center / contain;" ngh="0"></x-icon></div> Mixin UI </div></div></div><p class="max-w-[40rem] text-[#5c5c5c] text-[1rem] md:text-[1.125rem] leading-[1.5rem] md:leading-[1.75rem] text-left md:text-center mb-10"> 25+ lightweight components and tools built with Angular and minimal dependencies. <span class="hidden md:inline"> Build dynamic interfaces, speed up development, and deliver polished UI with a flexible layout system and smart utilities. </span></p><button routerlink="installation" type="button" class="app-primary-btn !w-fit" tabindex="0"> Browse the docs <x-icon src="chevron-right" class="x-icon" style="mask: url(icons/chevron-right.svg) no-repeat center / contain;" ngh="0"></x-icon></button></div></div></div></div></app-hero><app-footer ngh="0"><div class="flex w-full bg-white border-t border-[#e5e5e5]"><div class="app-container"><div class="flex items-center justify-center pt-5 pb-6 md:py-6 px-4"><div class="flex flex-col gap-8"><span class="text-sm text-center leading-6 text-[#52525B]"><span class="block md:inline"> Licensed under the <a href="https://opensource.org/license/apache-2-0" target="_blank" class="font-medium text-[#1470EF] hover:underline">Apache 2.0</a>. </span> Copyright © 2025-present. </span></div></div></div></div></app-footer></div></app-landing><!----></app-root>
   
 
 
