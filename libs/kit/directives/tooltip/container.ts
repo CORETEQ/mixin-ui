@@ -19,7 +19,7 @@ import { XTooltip } from './tooltip';
   host: {
     role: 'tooltip',
     '[class]': '`x-tooltip x-position-${t.position()} x-variant-${t.variant()}`',
-    '[class.x-with-arrow]': 't.withArrow',
+    '[class.x-with-arrow]': 't.withArrow()',
     '[style.--x-offset.px]': 't.offset()',
   },
 })
