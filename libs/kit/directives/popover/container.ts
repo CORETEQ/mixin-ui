@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { NgComponentOutlet, NgTemplateOutlet } from '@angular/common';
 import { filter } from 'rxjs';
-import { getFocusableElement, isPureEscape, observe, typedOutlet } from '@mixin-ui/cdk';
+import { getFocusableElement, isPureEscape, isTabOut, observe, typedOutlet } from '@mixin-ui/cdk';
 import { XPopoverTarget } from './popover';
 import { X_POPOVER } from './providers';
 
@@ -35,7 +35,7 @@ export class XPopoverContainer {
   readonly close = () => this.#target.toggle(false);
 
   readonly #keyboardCloseEvents = this.#popover.keydownEvents.pipe(
-    filter(e => isPureEscape(e) || e.key === 'Tab' || (e.shiftKey && e.key === 'Tab'))
+    filter(e => isPureEscape(e) || isTabOut(e))
   );
 
   constructor() {
