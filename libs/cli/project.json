@@ -7,7 +7,7 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsc -p ./{projectRoot}/tsconfig.json"
+        "command": "tsc -p ./{projectRoot}/tsconfig.json && cp libs/cli/*.md dist/libs/cli/"
       }
     }
   }
