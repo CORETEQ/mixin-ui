@@ -58,7 +58,7 @@ export default defineConfig(({ mode }) => {
         targets: [
           {
             src: '../../libs/kit/icons/**/*',
-            dest: 'icons',
+            dest: 'mixin-ui/icons',
           },
         ],
       }),

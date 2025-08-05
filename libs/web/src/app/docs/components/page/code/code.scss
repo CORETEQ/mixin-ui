@@ -17,10 +17,35 @@
     font-size: 13.5px;
 
     .line {
+      position: relative;
+      z-index: 1;
       line-height: 22px;
 
+      &:not(.spotlight) + .spotlight {
+        &::after {
+          border-top-left-radius: 0.5rem;
+          border-top-right-radius: 0.5rem;
+        }
+      }
+
       &.spotlight {
-        background: var(--x-neutral-100);
+        &::after {
+          position: absolute;
+          right: -0.75rem;
+          left: -0.5rem;
+          z-index: -1;
+          width: calc(100% + 1rem);
+          block-size: 100%;
+          background: var(--color-gray-800);
+          content: '';
+        }
+
+        &:has(+ :not(.spotlight)) {
+          &::after {
+            border-bottom-right-radius: 0.5rem;
+            border-bottom-left-radius: 0.5rem;
+          }
+        }
       }
     }
   }
@@ -52,7 +77,7 @@
 
 .docs-code-container {
   display: block;
-  padding: 0.5rem;
+  padding: 0.75rem 0.5rem;
   overflow: hidden;
 }
 

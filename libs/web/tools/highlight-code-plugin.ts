@@ -1,5 +1,5 @@
 import { readFileSync } from 'fs';
-import { DecorationItem, createHighlighter } from 'shiki';
+import { createHighlighter, DecorationItem } from 'shiki';
 import { Plugin } from 'vite';
 
 const RAW_LANG_QUERY = /\?raw&lang=[^']+/;
@@ -45,17 +45,6 @@ export async function highlightCode(): Promise<Plugin> {
           light: LIGHT_THEME,
           dark: DARK_THEME,
         },
-        transformers: [
-          {
-            code(node) {
-              // if (node.properties.class) {
-              //   node.properties.class += ' x-scrollable'
-              // } else {
-              //   node.properties.class = 'x-scrollable'
-              // }
-            },
-          },
-        ],
         decorations,
         lang,
       });
