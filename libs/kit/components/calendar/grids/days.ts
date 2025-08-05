@@ -41,7 +41,7 @@ export class XDays {
   readonly date = model.required<Date>();
   readonly startOfWeek = input<XStartOfWeek>(1);
   readonly format = input<XWeekdayFormat>('min');
-  readonly disabledMapper = input<XCalendarOptions['disabled']>();
+  readonly disabledMapper = input<XCalendarOptions['disabled']>(() => false);
   readonly detailMapper = input<XCalendarOptions['detail']>();
   readonly value = input<Date | null>(null);
   readonly min = input<Date | null>(null);
@@ -68,12 +68,8 @@ export class XDays {
     return value ? isSameDay(date, value) : false;
   };
 
-  readonly isDisabled = (date: Date, min: Date | null, max: Date | null) => {
-    return (
-      (!!min && isBefore(date, min)) ||
-      (!!max && isAfter(date, max)) ||
-      this.safeDisabledMapper(date)
-    );
+  readonly isOutOfRange = (date: Date, min: Date | null, max: Date | null) => {
+    return (!!min && isBefore(date, min)) || (!!max && isAfter(date, max));
   };
 
   readonly isAdjacent = (date: Date, value: Date | null) => {
@@ -83,10 +79,6 @@ export class XDays {
   readonly mapDetail = (date: Date, mapper?: XCalendarOptions['detail']) => {
     return mapper ? mapper(date) : null;
   };
-
-  private get safeDisabledMapper() {
-    return this.disabledMapper() || (() => false);
-  }
 }
 
 function reorder(tuple: readonly string[], startIndex: number): readonly string[] {

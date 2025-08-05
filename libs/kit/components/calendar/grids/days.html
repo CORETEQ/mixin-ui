@@ -11,7 +11,7 @@
     @let actual = day | map: isActual;
     @let detail = day | map: mapDetail: detailMapper();
     @let selected = day | map: isSelected: value();
-    @let disabled = day | map: isDisabled: min() : max();
+    @let disabled = (day | map: isOutOfRange: min() : max()) || (day | map: disabledMapper());
     @let adjacent = day | map: isAdjacent: date();
 
     <button
