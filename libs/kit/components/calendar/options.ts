@@ -17,8 +17,8 @@ export interface XCalendarOptions {
   readonly radius: XUnion<'none' | 'sm' | 'md' | 'lg' | 'full'>;
   readonly weekdayFormat: XWeekdayFormat;
   readonly monthFormat: XMonthFormat;
+  readonly disabled: Mapper<Date, boolean>;
   readonly detail?: Mapper<Date, any>;
-  readonly disabled?: Mapper<Date, boolean>;
 }
 
 const defaultOptions: XCalendarOptions = {
@@ -30,6 +30,7 @@ const defaultOptions: XCalendarOptions = {
   radius: 'md',
   weekdayFormat: 'min',
   monthFormat: 'short',
+  disabled: () => false,
 };
 
 export const X_CALENDAR_OPTIONS = new InjectionToken<XCalendarOptions>('CALENDAR_OPTIONS', {
