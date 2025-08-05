@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { XIcon } from '@mixin-ui/kit';
 import { DocsPage } from '@/docs/components';
 
 import ng from './examples/angular.md?raw&lang=shellscript';
@@ -9,7 +10,7 @@ import styles from './examples/assets.md?raw&lang=json';
 @Component({
   selector: 'app-installation',
   templateUrl: './index.html',
-  imports: [DocsPage],
+  imports: [DocsPage, XIcon],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

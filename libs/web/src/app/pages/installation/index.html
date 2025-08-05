@@ -1,12 +1,80 @@
 <docs-page>
   <p>Begin your journey in just a few easy steps.</p>
 
+  <h2>Tech stack</h2>
+  <div class="grid grid-cols-1 gap-3 lg:grid-cols-2">
+    <a target="_blank" rel="noopener noreferrer"
+       class="relative flex flex-col items-start hover:bg-gray-50 rounded-xl p-5 ring-1 ring-gray-200 outline-focus-ring transition duration-100 ease-linear ring-inset focus-visible:outline-2 focus-visible:outline-offset-2"
+       href="https://angular.dev/">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+           class="absolute top-4 right-4 size-4">
+        <path d="M7 17 17 7m0 0H7m10 0v10"></path>
+      </svg>
+
+      <div
+        class="h-5 w-max transition-all duration-150">
+        <x-icon src="icons/app/angular.svg" size="24" raw />
+      </div>
+
+      <div class="mt-8 flex flex-col gap-0.5">
+        <p class="text-sm font-semibold text-primary">Angular</p>
+        <p class="text-sm text-tertiary">v19.0</p>
+      </div>
+    </a>
+    <a target="_blank" rel="noopener noreferrer"
+       class="relative flex flex-col items-start hover:bg-gray-50 rounded-xl p-5 ring-1 ring-gray-200 outline-focus-ring transition duration-100 ease-linear ring-inset focus-visible:outline-2 focus-visible:outline-offset-2"
+       href="https://www.typescriptlang.org/">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+           class="absolute top-4 right-4 size-4">
+        <path d="M7 17 17 7m0 0H7m10 0v10"></path>
+      </svg>
+
+      <div
+        class="h-5 w-max transition-all duration-150">
+        <x-icon src="icons/app/typescript.svg" size="20" raw />
+      </div>
+
+      <div class="mt-8 flex flex-col gap-0.5">
+        <p class="text-sm font-semibold text-primary">TypeScript</p>
+        <p class="text-sm text-tertiary">v5.7</p>
+      </div>
+    </a>
+    <a target="_blank" rel="noopener noreferrer"
+       class="relative flex flex-col items-start hover:bg-gray-50 rounded-xl p-5 ring-1 ring-gray-200 outline-focus-ring transition duration-100 ease-linear ring-inset focus-visible:outline-2 focus-visible:outline-offset-2"
+       href="https://rxjs.dev/">
+      <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+           class="absolute top-4 right-4 size-4">
+        <path d="M7 17 17 7m0 0H7m10 0v10"></path>
+      </svg>
+
+      <div
+        class="h-5 w-max transition-all duration-150">
+        <x-icon src="icons/app/rxjs.svg" size="20" raw />
+      </div>
+
+      <div class="mt-8 flex flex-col gap-0.5">
+        <p class="text-sm font-semibold text-primary">RxJS</p>
+        <p class="text-sm text-tertiary">v7.8</p>
+      </div>
+    </a>
+
+    <div class="hidden lg:block rounded-xl overflow-hidden [--pattern-fg:color-mix(in_oklab,#3B3B3B_8%,transparent)]
+                [background-image:repeating-linear-gradient(315deg,var(--pattern-fg)_0,var(--pattern-fg)_1px,transparent_0,transparent_50%)]
+                [background-size:10px_10px]
+                [background-attachment:fixed]">
+    </div>
+  </div>
+
   <h2>Automatic (recommended)</h2>
   <docs-code [src]="ng" />
 
   <h2>Manual</h2>
   <h3>1. Install Angular CDK (if not yet installed)</h3>
-  <p>Mixin UI builds on top of <code>&#64;angular/cdk</code>. If it's not already part of your project, install it with:</p>
+  <p>Mixin UI builds on top of <code>&#64;angular/cdk</code>. If it's not already part of your project, install it with:
+  </p>
   <docs-code [src]="cdk" />
 
   <h3>2. Install Mixin UI packages</h3>
