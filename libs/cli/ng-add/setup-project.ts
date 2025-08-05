@@ -12,7 +12,7 @@ const MIXIN_STYLES_PATH = '@mixin-ui/kit/styles/index.scss';
 const MIXIN_ICONS_ASSETS = {
   glob: '**/*',
   input: 'node_modules/@mixin-ui/kit/icons',
-  output: 'icons/mixin',
+  output: 'mixin-ui/icons',
 };
 
 export default function (options: Schema): Rule {
