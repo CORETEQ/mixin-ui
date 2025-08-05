@@ -33,6 +33,19 @@ jobs:
         run: pnpm ci:publish
         shell: bash
 
+      - name: Send Teams notification
+        run: |
+          curl -H 'Content-Type: application/json' \
+          -d '{
+            "@type": "MessageCard",
+            "@context": "http://schema.org/extensions",
+            "summary": "Mixin UI Release",
+            "themeColor": "0076D7",
+            "title": "🚀 Mixin UI ${{ github.ref_name }} has been released",
+            "text": "🔗 [Commit](https://github.com/${{ github.repository }}/commit/${{ github.sha }})<br>📘 [Release Notes](https://github.com/CORETEQ/mixin-ui/releases/tag/${{ github.ref_name }})<br>🧩 [Documentation](https://mixin-ui.dev)"
+          }' \
+          "https://coreteqsk.webhook.office.com/webhookb2/cbdc01b2-ad9e-4e37-a112-15cd29650424@42020f7a-f307-427f-bb1e-8380101218c1/IncomingWebhook/cc3bc4d9d2124e88a1661d992b6d9301/279cd2cf-fc2b-4325-8f14-50c9eeafc20b/V2HMy3Mwo0tfN38TiL7984iilhQ5qlSQ-JNWciTyiucXQ1"
+
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
         with:
