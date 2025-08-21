@@ -22,6 +22,7 @@ import { X_SWITCH_OPTIONS } from './options';
     type: 'button',
     role: 'switch',
     '[class]': '`x-switch x-size-${size()} x-radius-${radius()}`',
+    '[attr.aria-checked]': 'checked()',
     '[attr.data-state]': 'state()',
     '(click)': 'handleClick()',
     '(blur)': 'handleBlur()',
