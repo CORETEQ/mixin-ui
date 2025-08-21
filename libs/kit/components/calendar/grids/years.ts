@@ -40,6 +40,7 @@ export class XYears {
 
   readonly years = computed(() => {
     const startYear = this.date().getFullYear();
+    // @TODO: refactor hardcode values
     const start = new Date(startYear, 0, 1);
     const end = new Date(startYear + 23, 11, 31);
 
@@ -54,7 +55,7 @@ export class XYears {
     return value ? isSameYear(date, value) : false;
   };
 
-  readonly isDisabled = (date: Date, min: Date | null, max: Date | null) => {
+  readonly isOutOfRange = (date: Date, min: Date | null, max: Date | null) => {
     return (
       (!!min && isBefore(endOfYear(date), startOfYear(min))) ||
       (!!max && isAfter(startOfYear(date), endOfYear(max)))

@@ -81,6 +81,7 @@ export class XDays {
   };
 }
 
+// @TODO: replace to cdk
 function reorder(tuple: readonly string[], startIndex: number): readonly string[] {
   const length = tuple.length;
   const index = ((startIndex % length) + length) % length;

@@ -3,7 +3,7 @@
 @for (year of years(); track year.getTime()) {
   @let actual = year | map: isActual;
   @let selected = year | map: isSelected: value();
-  @let disabled = year | map: isDisabled: min() : max();
+  @let disabled = year | map: isOutOfRange: min() : max();
 
   <button
     type="button"

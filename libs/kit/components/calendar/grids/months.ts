@@ -67,7 +67,7 @@ export class XMonths {
     return value ? isSameMonth(date, value) : false;
   };
 
-  readonly isDisabled = (date: Date, min: Date | null, max: Date | null) => {
+  readonly isOutOfRange = (date: Date, min: Date | null, max: Date | null) => {
     return (
       (!!min && isBefore(endOfMonth(date), startOfMonth(min))) ||
       (!!max && isAfter(startOfMonth(date), endOfMonth(max)))

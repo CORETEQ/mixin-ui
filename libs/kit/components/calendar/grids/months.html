@@ -3,7 +3,7 @@
 @for (month of months(); track month.getTime()) {
   @let actual = month | map: isActual;
   @let selected = month | map: isSelected: value();
-  @let disabled = month | map: isDisabled: min() : max();
+  @let disabled = month | map: isOutOfRange: min() : max();
 
   <button
     type="button"
