@@ -34,9 +34,27 @@ const RANGES = {
   dd: { from: 1, to: 31 },
 } as const;
 
-const TOKEN_REGEX = /yyyy|yy|MM|M|dd|d/g;
+const TOKEN_REGEX = new RegExp(
+  Object.keys(RANGES)
+    .sort((a, b) => b.length - a.length)
+    .join('|'),
+  'g'
+);
 
-// @TODO: normalize pattern with '`' to prevent symbols shift back
+function processPattern(pattern: string): string {
+  let index = 0;
+
+  return pattern.replace(TOKEN_REGEX, match => {
+    if (index++ === 0) {
+      return match;
+    }
+
+    // prevents symbols shift back
+    // https://imask.js.org/guide.html#masked-pattern
+    return '`' + match;
+  });
+}
+
 const adapter = (options: XDateMaskOptions) => {
   const tokens = options.pattern.match(TOKEN_REGEX) || [];
 
@@ -60,7 +78,7 @@ const adapter = (options: XDateMaskOptions) => {
 
   return {
     mask: Date,
-    pattern: options.pattern,
+    pattern: processPattern(options.pattern),
     lazy: !options.showFiller,
     placeholderChar: options.fillerChar,
     min: options.min,
