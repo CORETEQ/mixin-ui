@@ -51,6 +51,9 @@
 }
 
 .x-checkbox {
+  --x-bg-color: var(--x-white);
+  --x-border-color: var(--x-neutral-300);
+
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
@@ -60,45 +63,53 @@
   inline-size: var(--x-size);
   block-size: var(--x-size);
   color: transparent;
-  background-color: var(--x-bg, var(--x-white));
+  background-color: var(--x-bg-color);
   outline: 0.125rem solid transparent;
   outline-offset: 0.125rem;
-  box-shadow: inset 0 0 0 1px var(--x-neutral-300), rgb(27 31 35 / 4%) 0 1px 0; // @TODO: replace with semantic token
+  box-shadow: inset 0 0 0 1px var(--x-border-color), rgb(27 31 35 / 4%) 0 1px 0;
   border-radius: var(--x-radius);
   transition-timing-function: ease-in-out;
   transition-duration: 100ms;
   transition-property: background-color, color, opacity, box-shadow;
   cursor: pointer;
 
-  // states
   @include hover {
-    background-color: var(--x-neutral-100);
-    box-shadow: inset 0 0 0 1px var(--x-neutral-400);
+    --x-bg-color: var(--x-neutral-100);
+    --x-border-color: var(--x-neutral-400);
   }
 
   @include active {
-    background-color: var(--x-neutral-200);
+    --x-bg-color: var(--x-neutral-200);
+    --x-border-color: var(--x-neutral-400);
   }
 
   @include invalid {
-    background-color: var(--x-error-200);
-    box-shadow: inset 0 0 0 1px var(--x-error-600);
+    --x-bg-color: var(--x-error-100);
+    --x-border-color: var(--x-error-600);
+
+    @include hover {
+      --x-bg-color: var(--x-error-200);
+    }
+
+    @include active {
+      --x-bg-color: var(--x-error-300);
+    }
   }
 
   @include disabled {
-    background-color: var(--x-neutral-100);
-    box-shadow: inset 0 0 0 1px var(--x-neutral-300);
+    --x-bg-color: var(--x-neutral-100);
+    --x-border-color: var(--x-neutral-300);
+
     cursor: var(--x-cursor-disabled);
   }
 
   @include checked {
-    color: var(--x-white);
-    background-color: var(--x-main-600);
-    box-shadow: inset 0 0 0 1px var(--x-main-600);
+    --x-bg-color: var(--x-main-600);
+    --x-border-color: var(--x-main-600);
 
     @include active {
-      background-color: var(--x-main-700);
-      box-shadow: inset 0 0 0 1px var(--x-main-700);
+      --x-bg-color: var(--x-main-700);
+      --x-border-color: var(--x-main-700);
     }
 
     @include disabled {
