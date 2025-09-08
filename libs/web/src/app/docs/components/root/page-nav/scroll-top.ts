@@ -1,5 +1,10 @@
-import { DOCUMENT } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  ViewEncapsulation,
+  DOCUMENT,
+} from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { distinctUntilChanged, fromEvent, map, startWith, switchMap } from 'rxjs';
 import { fromAfterNextRender } from '@mixin-ui/cdk';

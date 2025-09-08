@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,6 +8,7 @@ import {
   model,
   viewChild,
   ViewEncapsulation,
+  DOCUMENT,
 } from '@angular/core';
 import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
 import { filter, fromEvent, map, switchMap, takeUntil, tap } from 'rxjs';
