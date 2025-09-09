@@ -7,13 +7,15 @@ import { XCheckbox } from '@mixin-ui/kit';
   imports: [XCheckbox, ReactiveFormsModule, FormsModule],
   template: `
     <div class="flex flex-col items-center gap-4">
-      <button x-checkbox disabled></button>
-      <button x-checkbox disabled [ngModel]="true"></button>
+      <button x-checkbox [formControl]="disabledFalse"></button>
+      <button x-checkbox [formControl]="disabledTrue"></button>
       <button x-checkbox [formControl]="invalidFalse"></button>
     </div>
-  `
+  `,
 })
 export class StatesExample {
+  disabledFalse = new FormControl({ value: false, disabled: true });
+  disabledTrue = new FormControl({ value: true, disabled: true });
   invalidFalse = new FormControl(false, () => ({ invalid: true }));
 
   constructor() {
