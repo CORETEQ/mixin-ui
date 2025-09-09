@@ -10,7 +10,6 @@ jobs:
   version:
     name: Publish new version
     timeout-minutes: 5
-    runs-on: self-hosted
     permissions:
       contents: write
       packages: write
