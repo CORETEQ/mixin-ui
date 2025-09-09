@@ -22,6 +22,7 @@ import { X_SWITCH_OPTIONS } from './options';
     type: 'button',
     role: 'switch',
     '[class]': '`x-switch x-size-${size()} x-radius-${radius()}`',
+    '[disabled]': 'disabled()',
     '[attr.aria-checked]': 'checked()',
     '[attr.data-state]': 'state()',
     '(click)': 'handleClick()',
@@ -40,6 +41,7 @@ export class XSwitch {
   readonly iconUnchecked = input(this.#opt.iconUnchecked);
   readonly checked = this.#cva.value;
   readonly required = this.#cva.required;
+  readonly disabled = this.#cva.disabled;
   readonly state = computed(() => (this.checked() ? 'checked' : 'unchecked'));
   readonly icon = computed(() => (this.checked() ? this.iconChecked() : this.iconUnchecked()));
 

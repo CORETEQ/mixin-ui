@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { XCheckbox } from '@mixin-ui/kit';
 
 @Component({
   selector: 'app-checkbox-states-example',
-  imports: [XCheckbox, ReactiveFormsModule, FormsModule],
+  imports: [XCheckbox, ReactiveFormsModule],
   template: `
     <div class="flex flex-col items-center gap-4">
       <button x-checkbox [formControl]="disabledFalse"></button>
