@@ -9,6 +9,7 @@ on:
 jobs:
   version:
     name: Publish new version
+    runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: write
