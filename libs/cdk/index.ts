@@ -1,3 +1,4 @@
+export * from '@mixin-ui/cdk/directives';
 export * from '@mixin-ui/cdk/interop';
 export * from '@mixin-ui/cdk/pipes';
 export * from '@mixin-ui/cdk/providers';
