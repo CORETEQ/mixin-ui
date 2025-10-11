@@ -1,8 +1,8 @@
 import { inject, InjectionToken } from '@angular/core';
 import { format, isValid, parse } from 'date-fns';
 import 'imask/masked/date';
-import { MaskedDate } from 'imask';
 import { IMaskImpl } from './base';
+import type { MaskedDate } from 'imask';
 
 import { X_DATE_MASK_OPTIONS, XDateMaskOptions, XMaskFactory } from '@mixin-ui/cdk/providers';
 
@@ -14,24 +14,42 @@ type Block = {
   };
 };
 
+/**
+ * Predefined numeric ranges for supported date/time tokens.
+ * These define valid digit ranges for each segment of the date pattern.
+ *
+ * For example:
+ *  - 'dd' → allows 01–31
+ *  - 'MM' → allows 01–12
+ *  - 'yyyy' → allows 0000–9999
+ *
+ * These ranges are used to configure IMask `MaskedRange` blocks,
+ * which restrict user input to valid numeric intervals.
+ */
 const RANGES = {
-  // Numeric: 2 digits + zero padded (02, 20)
+  // Year: 2 digits, zero-padded (e.g. 02, 20)
   yy: { from: 0, to: 99 },
 
-  // Numeric: 4 digits + zero padded (0002, 2024)
+  // Year: 4 digits, zero-padded (e.g. 0002, 2024)
   yyyy: { from: 0, to: 9999 },
 
-  // Numeric: 1 digit (9, 12)
+  // Month: 1–12 (non-padded)
   M: { from: 1, to: 12 },
 
-  // Numeric: 2 digits + zero padded (09, 12)
+  // Month: 01–12 (zero-padded)
   MM: { from: 1, to: 12 },
 
-  // Numeric: minimum digits (1)
+  // Day: 1–31 (non-padded)
   d: { from: 1, to: 31 },
 
-  // Numeric: 2 digits + zero padded (01)
+  // Day: 01–31 (zero-padded)
   dd: { from: 1, to: 31 },
+
+  // Hours: 00–23 (24-hour format)
+  HH: { from: 0, to: 23 },
+
+  // Minutes: 00–59
+  mm: { from: 0, to: 59 },
 } as const;
 
 const TOKEN_REGEX = new RegExp(
