@@ -3,7 +3,7 @@ import { X_COMPARATOR, XComparator } from '@mixin-ui/kit/providers';
 
 export interface XSelectOptions<T = any> {
   readonly comparator: XComparator;
-  readonly stringify: (value: T | string | null) => string;
+  readonly stringify: (value: T | readonly T[] | string | null) => string;
 }
 
 const defaultOptionsFactory = (): XSelectOptions => ({
