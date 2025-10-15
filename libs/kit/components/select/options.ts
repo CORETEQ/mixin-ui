@@ -1,12 +1,14 @@
 import { FactoryProvider, inject, InjectionToken } from '@angular/core';
 import { X_COMPARATOR, XComparator } from '@mixin-ui/kit/providers';
 
-export interface XSelectOptions {
+export interface XSelectOptions<T = any> {
   readonly comparator: XComparator;
+  readonly stringify: (value: T | readonly T[] | string | null) => string;
 }
 
-const defaultOptionsFactory = () => ({
+const defaultOptionsFactory = (): XSelectOptions => ({
   comparator: inject(X_COMPARATOR),
+  stringify: value => (Array.isArray(value) ? value.join(', ') : value ?? ''),
 });
 
 export const X_SELECT_OPTIONS = new InjectionToken<XSelectOptions>('SELECT_OPTIONS', {
