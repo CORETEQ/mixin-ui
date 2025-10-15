@@ -6,9 +6,9 @@ import { XControl, XInputNumber } from '@mixin-ui/kit';
   selector: 'app-input-number-basic-example',
   imports: [FormsModule, XControl, XInputNumber],
   template: `
-    <x-number prefix="$ ">
+    <x-input-number prefix="$ ">
       <input x-control [ngModel]="1000000" />
-    </x-number>
+    </x-input-number>
   `
 })
 export class InputNumberBasicExample {}

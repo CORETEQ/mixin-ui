@@ -13,6 +13,7 @@ import {
   Renderer2,
   ViewEncapsulation,
 } from '@angular/core';
+import { merge, Subject } from 'rxjs';
 import { injectMask, provideMask, X_NUMBER_MASK_FACTORY, XNumberMaskOptions } from '@mixin-ui/cdk';
 import {
   provideControlAccessor,
@@ -28,7 +29,7 @@ import { X_INPUT_NUMBER_OPTIONS } from './options';
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  selector: 'x-number',
+  selector: 'x-input-number',
   templateUrl: './input-number.html',
   imports: [XButton, XIcon, XGroup],
   providers: [
@@ -53,6 +54,7 @@ export class XInputNumber implements XControlAccessor<number | null> {
   readonly #base = inject(XInputBase);
   readonly #mask = injectMask<number | null, XNumberMaskOptions>();
   readonly #r2 = inject(Renderer2);
+  readonly #spinChanges = new Subject<number>();
 
   readonly size = this.#base.size;
   readonly input = contentChild.required(XControl, { read: ElementRef });
@@ -88,10 +90,11 @@ export class XInputNumber implements XControlAccessor<number | null> {
   readonly step = input(this.#opt.step, { transform: numberAttribute });
 
   readonly disabled = computed(() => this.#base.state()?.disabled || this.#base.state()?.readOnly);
-  readonly plusDisabled = computed(() => this.disabled() || this.normalizedValue >= this.max());
-  readonly minusDisabled = computed(() => this.disabled() || this.normalizedValue <= this.min());
+  readonly normalizedValue = computed(() => this.#base.state()?.value || 0);
+  readonly plusDisabled = computed(() => this.disabled() || this.normalizedValue() >= this.max());
+  readonly minusDisabled = computed(() => this.disabled() || this.normalizedValue() <= this.min());
 
-  readonly valueChanges = this.#mask.valueChanges;
+  readonly valueChanges = merge(this.#mask.valueChanges, this.#spinChanges);
 
   constructor() {
     effect(() => {
@@ -123,19 +126,21 @@ export class XInputNumber implements XControlAccessor<number | null> {
     });
   }
 
-  get normalizedValue(): number {
-    return this.#mask.modelValue || 0;
-  }
-
   plus(step = 1): void {
     if (!this.disabled()) {
-      this.#mask.setValue(Math.min(this.max(), this.normalizedValue + step));
+      const value = Math.min(this.max(), this.normalizedValue() + step);
+
+      this.#mask.setValue(value);
+      this.#spinChanges.next(value);
     }
   }
 
   minus(step = 1): void {
     if (!this.disabled()) {
-      this.#mask.setValue(Math.max(this.min(), this.normalizedValue - step));
+      const value = Math.max(this.min(), this.normalizedValue() - step);
+
+      this.#mask.setValue(value);
+      this.#spinChanges.next(value);
     }
   }
 
