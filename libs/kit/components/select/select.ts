@@ -60,6 +60,7 @@ export class XSelect<T> implements XListboxAccessor<T> {
   readonly slots = contentChildren(X_SLOT);
   readonly placeholder = input<string>();
   readonly multiple = input(false, { transform: booleanAttribute });
+  readonly stringify = input(this.#opt.stringify);
   readonly _comparator = input(this.#opt.comparator, { alias: 'comparator' });
   readonly key = input<PropertyKey>();
   readonly enabledTabIndex = input(0, { transform: numberAttribute });
@@ -81,11 +82,7 @@ export class XSelect<T> implements XListboxAccessor<T> {
     return Array.isArray(value) ? value.length > 0 : !!value;
   });
 
-  readonly valueAsString = computed(() => {
-    const value = this.selection();
-    return Array.isArray(value) ? value.join(', ') : value ?? '';
-  });
-
+  readonly valueAsString = computed(() => this.stringify()(this.selection()));
   readonly placeholderShown = computed(() => !!this.placeholder() && !this.hasValue());
 
   constructor() {
