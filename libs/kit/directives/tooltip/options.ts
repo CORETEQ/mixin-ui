@@ -9,6 +9,7 @@ export interface XTooltipOptions {
   readonly variant: 'dark' | 'light';
   readonly withArrow: boolean;
   readonly offset: number;
+  readonly fixed: boolean;
   readonly openDelay: number;
   readonly closeDelay: number;
 }
@@ -19,6 +20,7 @@ const defaultOptions: XTooltipOptions = {
   withArrow: true,
   position: 'top',
   offset: 8,
+  fixed: false,
   openDelay: 300,
   closeDelay: 100,
 };
