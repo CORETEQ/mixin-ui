@@ -1,3 +1,19 @@
+## 0.0.1-alpha.4 (2025-10-15)
+
+### 🚀 Features
+
+- **cdk:** add `XAutofocus` directive ([abee79b](https://github.com/CORETEQ/mixin-ui/commit/abee79b))
+- **cdk:** add `findFirstInvalidControl` utility ([b6a999f](https://github.com/CORETEQ/mixin-ui/commit/b6a999f))
+- **cdk:** add `XInvalidSubmit` directive for handling invalid form submissions ([3fc3cfc](https://github.com/CORETEQ/mixin-ui/commit/3fc3cfc))
+- **cdk:** add configurable options for `XInvalidSubmit` directive ([3e50f41](https://github.com/CORETEQ/mixin-ui/commit/3e50f41))
+- **kit:** add support for fixed positioning in the tooltip ([2698cdd](https://github.com/CORETEQ/mixin-ui/commit/2698cdd))
+- **kit:** rename `x-number` to `x-input-number`, enhance spin button handling ([3fb32b7](https://github.com/CORETEQ/mixin-ui/commit/3fb32b7))
+- **kit:** add `stringify` option to `XSelectOptions` ([613f98e](https://github.com/CORETEQ/mixin-ui/commit/613f98e))
+
+### 🩹 Fixes
+
+- **cdk:** include `HH` and `mm` in ranges to handle datetime masks ([4083a4a](https://github.com/CORETEQ/mixin-ui/commit/4083a4a))
+
 ## 0.0.1-alpha.3 (2025-09-09)
 
 ### 🚀 Features
