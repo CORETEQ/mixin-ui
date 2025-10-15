@@ -1,6 +1,7 @@
-import { Directive, ElementRef, inject, input } from '@angular/core';
+import { Directive, ElementRef, inject } from '@angular/core';
 import { AbstractControl, ControlContainer } from '@angular/forms';
 import { findFirstInvalidControl, getFocusableElement } from '@mixin-ui/cdk/utils';
+import { X_INVALID_SUBMIT_OPTIONS } from './options';
 
 const NG_INVALID_CONTROL = '.ng-invalid:not(form)';
 
@@ -12,13 +13,9 @@ const NG_INVALID_CONTROL = '.ng-invalid:not(form)';
   },
 })
 export class XInvalidSubmit {
-  readonly #container = inject(ControlContainer, { self: true, optional: true });
+  readonly #opt = inject(X_INVALID_SUBMIT_OPTIONS);
   readonly #el = inject(ElementRef<HTMLElement>).nativeElement;
-
-  readonly scrollOptions = input<ScrollIntoViewOptions | null>(
-    { block: 'center', behavior: 'smooth' },
-    { alias: 'x-invalid-submit-scroll-options' }
-  );
+  readonly #container = inject(ControlContainer, { self: true, optional: true });
 
   /** @internal */
   handleSubmit(): void {
@@ -26,20 +23,20 @@ export class XInvalidSubmit {
       return;
     }
 
-    const invalidRootEl = this.#el.querySelector(NG_INVALID_CONTROL);
+    const invalidRoot = this.#el.querySelector(NG_INVALID_CONTROL);
 
-    if (!invalidRootEl) {
+    if (!invalidRoot) {
       return;
     }
 
-    const focusableEl = getFocusableElement(invalidRootEl);
+    const closestFocusable = getFocusableElement(invalidRoot);
 
-    if (focusableEl) {
-      this.focus(focusableEl);
+    if (closestFocusable) {
+      this.focus(closestFocusable);
+    }
 
-      if (this.control) {
-        findFirstInvalidControl(this.control)?.markAsTouched();
-      }
+    if (this.control) {
+      this.markControls(this.control);
     }
   }
 
@@ -48,12 +45,25 @@ export class XInvalidSubmit {
   }
 
   private focus(el: HTMLElement): void {
-    const scrollOptions = this.scrollOptions();
+    const scrollOptions = this.#opt.scrollOptions;
 
     el.focus({ preventScroll: !!scrollOptions });
 
     if (scrollOptions) {
       el.scrollIntoView(scrollOptions);
+    }
+  }
+
+  private markControls(control: AbstractControl): void {
+    switch (this.#opt.markAsTouched) {
+      case 'all':
+        control.markAllAsTouched();
+        break;
+      case 'first':
+        findFirstInvalidControl(control)?.markAsTouched();
+        break;
+      case 'none':
+        break;
     }
   }
 }
