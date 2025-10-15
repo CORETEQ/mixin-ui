@@ -94,6 +94,7 @@ export class XInputBase {
           : EMPTY;
       }),
       map(([control, readOnly]) => ({
+        value: control.value,
         disabled: control.disabled,
         invalid: control.invalid,
         touched: control.touched,

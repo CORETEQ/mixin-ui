@@ -6,9 +6,9 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-input-number-custom-example',
   imports: [XControl, XInputNumber, FormsModule, XIcon, XButton],
   template: `
-    <x-number #number
-              #input="x-input"
-              size="xl" radius="none" suffix=" mm" [step]="0">
+    <x-input-number #number
+                    #input="x-input"
+                    size="xl" radius="none" suffix=" mm" [step]="0">
       <span class="x-input-prefix">
         <x-icon src="package" size="18" />
       </span>
@@ -36,7 +36,7 @@ import { FormsModule } from '@angular/forms';
           +10
         </button>
       </span>
-    </x-number>
+    </x-input-number>
   `
 })
 export class InputNumberCustomExample {}
