@@ -1,8 +1,10 @@
 import { Directive, ElementRef, inject, input, numberAttribute } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { debounceTime, distinctUntilChanged, filter, fromEvent, map, merge, startWith } from 'rxjs';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
+import { debounceTime, distinctUntilChanged, filter, fromEvent, map, merge } from 'rxjs';
 import { fromMutationObserver, fromResizeObserver } from '@mixin-ui/cdk/interop/rxjs';
+
+type ScrollEdge = 'top' | 'bottom' | 'left' | 'right';
 
 @Directive({
   selector: '[x-scroll-threshold]',
@@ -12,10 +14,10 @@ export class XScrollThreshold {
   readonly #doc = inject(DOCUMENT);
   readonly #el = inject(ElementRef).nativeElement;
 
-  readonly direction = input<'top' | 'bottom' | 'left' | 'right'>('bottom');
-  readonly threshold = input(0, { transform: numberAttribute });
+  readonly edge = input<ScrollEdge>('bottom', { alias: 'x-scroll-threshold-edge' });
+  readonly offset = input(0, { alias: 'x-scroll-threshold-offset', transform: numberAttribute });
 
-  readonly isReached = toSignal(
+  readonly reached = outputFromObservable(
     merge(
       fromEvent(this.#el, 'scroll', { passive: true }),
       merge(
@@ -25,10 +27,9 @@ export class XScrollThreshold {
     ).pipe(
       debounceTime(50),
       map(() => this.isScrollAtThreshold()),
-      distinctUntilChanged(),
-      startWith(this.isScrollAtThreshold())
+      distinctUntilChanged()
     ),
-    { requireSync: true }
+    { alias: 'x-scroll-threshold' }
   );
 
   private isScrollAtThreshold(): boolean {
@@ -39,21 +40,21 @@ export class XScrollThreshold {
       return false;
     }
 
-    const direction = this.direction();
-    const threshold = this.threshold();
+    const edge = this.edge();
+    const offset = this.offset();
 
-    switch (direction) {
+    switch (edge) {
       case 'top':
-        return scrollTop <= threshold;
+        return scrollTop <= offset;
 
       case 'bottom':
-        return scrollTop + clientHeight >= scrollHeight - threshold;
+        return scrollTop + clientHeight >= scrollHeight - offset;
 
       case 'left':
-        return scrollLeft <= threshold;
+        return scrollLeft <= offset;
 
       case 'right':
-        return scrollLeft + clientWidth >= scrollWidth - threshold;
+        return scrollLeft + clientWidth >= scrollWidth - offset;
 
       default:
         return false;
