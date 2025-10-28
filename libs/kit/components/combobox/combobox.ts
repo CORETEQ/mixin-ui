@@ -15,7 +15,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
-import { watch } from '@mixin-ui/cdk';
+import { containsFocus, watch } from '@mixin-ui/cdk';
 import {
   provideControlAccessor,
   providePopoverOptions,
@@ -37,7 +37,6 @@ import { X_COMBOBOX_OPTIONS } from './options';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'x-combobox',
-  styleUrl: './combobox.scss',
   templateUrl: './combobox.html',
   providers: [
     provideControlAccessor(forwardRef(() => XCombobox)),
@@ -119,7 +118,13 @@ export class XCombobox<T> implements XControlAccessor<T | string | null>, XListb
     });
 
     watch(this.open, open => {
-      if (!open && this.strict() && this.nativeValue !== '' && !this.hasOption(this.nativeValue)) {
+      if (
+        !open &&
+        this.strict() &&
+        this.nativeValue !== '' &&
+        !this.hasOption(this.nativeValue) &&
+        !containsFocus(this.nativeElement)
+      ) {
         this.updateModelValue(null);
         this.updateSelection(null);
         this.resetNativeValue();
