@@ -1,3 +1,17 @@
+## 0.0.1-alpha.5 (2025-10-28)
+
+### 🚀 Features
+
+- **cdk:** add `XScrollThreshold` directive ([3ed8086](https://github.com/CORETEQ/mixin-ui/commit/3ed8086))
+- **cdk:** enhance `XScrollThreshold` directive with renamed inputs and output ([fb82a8a](https://github.com/CORETEQ/mixin-ui/commit/fb82a8a))
+- **cdk:** add `getActiveElement`, `containsFocus` functions to dom utils ([bfb238b](https://github.com/CORETEQ/mixin-ui/commit/bfb238b))
+- **kit:** add support for reduced motion preference in collapsible styles ([fa96c53](https://github.com/CORETEQ/mixin-ui/commit/fa96c53))
+- **kit:** enhance combobox strict mode to reset value if focus is outside the component ([f9f4498](https://github.com/CORETEQ/mixin-ui/commit/f9f4498))
+
+### 🩹 Fixes
+
+- **kit:** remove prevention of pointerdown events in listbox when `useActiveDescendant` is enabled ([681f8c7](https://github.com/CORETEQ/mixin-ui/commit/681f8c7))
+
 ## 0.0.1-alpha.4 (2025-10-15)
 
 ### 🚀 Features
