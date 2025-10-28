@@ -59,7 +59,6 @@ class ListboxSelectionModel<T> extends SelectionModel<T> {
     '[class]': '`x-listbox x-size-${size()} x-radius-${radius()}`',
     '[attr.tabindex]': 'tabIndex()',
     '(keydown)': 'handleKeydown($event)',
-    '(pointerdown)': 'handlePointerdown($event)',
     '(pointerout)': 'handlePointerout($event)',
   },
 })
@@ -151,19 +150,16 @@ export class XListbox<T> implements OnDestroy {
       return;
     }
 
+    if (!this.options().length) {
+      return;
+    }
+
     if (e.key === 'Enter') {
       e.preventDefault();
       this.updateValue(this.activeOption);
     }
 
     this.#keyManager.onKeydown(e);
-  }
-
-  /** @internal */
-  handlePointerdown(e: PointerEvent): void {
-    if (this.useActiveDescendant()) {
-      e.preventDefault();
-    }
   }
 
   /** @internal */
