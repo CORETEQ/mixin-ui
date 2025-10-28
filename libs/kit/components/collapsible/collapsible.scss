@@ -9,6 +9,10 @@
     grid-template-rows: 1fr;
     opacity: 1;
   }
+
+  @media (prefers-reduced-motion) {
+    transition-duration: 0ms;
+  }
 }
 
 .x-collapsible-content {
